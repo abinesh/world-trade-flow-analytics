@@ -21,10 +21,10 @@ def read_file(file_path):
             continue
         rootdir = 'matlab/'
         subdir = 'in/wtf/' + file_safe(exporter) + '/'
-        filepath = subdir + 'exports-to-' + file_safe(importer) + '.dat'
+        filepath = subdir + 'exports-to-' + file_safe(importer) + '.txt'
 
-        if not os.path.exists(rootdir+subdir):
-            os.makedirs(rootdir+subdir)
+        if not os.path.exists(rootdir + subdir):
+            os.makedirs(rootdir + subdir)
         with open(rootdir + filepath, 'wb') as csvfile:
             writer = csv.writer(csvfile, delimiter='\t')
             for column in YEAR_COLUMNS:
