@@ -1,10 +1,10 @@
-clear\n
+clear
 data = load('in/wtf/USA/exports-to-Afghanistan.txt')
-x = data(:,1)\n")
-y = data(:,2)\n")
-ylinearfit = polyval(polyfit(x,y,1),x)\n")
-yquadfit = polyval(polyfit(x,y,2),x)\n")
-plot(x,y,'k-s',x,ylinearfit,x,yquadfit)\n")
-xlabel('Year')\n")
-ylabel('Export Quantity')\n")
+x = data(:,1)
+y = data(:,2)
+ylinearfit = polyval(polyfit(x,y,1),x)
+yquadfit = polyval(polyfit(x,y,2),x)
+plot(x,y,'k-s',x,ylinearfit,x,yquadfit)
+xlabel('Year')
+ylabel('Export Quantity')
 saveas(gcf,'out/wtf/USA-Afghanistanaaa','jpg')
