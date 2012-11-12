@@ -28,12 +28,6 @@ for year in all_years:
     print year
 
 
-def column_to_year(column):
-    if column == "Value00":
-        return 2000
-    return 1900 + int(column[5:])
-
-
 def export_data_for_a_country(exporter, year):
     country_index = countries.country_to_index_map[exporter]
     return years_map[year][country_index]
