@@ -29,5 +29,5 @@ pip-log.txt
 pip
 out
 dataset
-project/matlab/in
-project/matlab/out
+project/temporal_link_stability/matlab/in/
+project/temporal_link_stability/matlab/out/
