@@ -1,4 +1,4 @@
-from project.traids_vs_degree_plot.export_data import countries
+from project import countries
 
 class Country:
     def __init__(self, name):

@@ -1,6 +1,7 @@
+from project import countries
 from scipy.sparse import csc_matrix
 import scipy
-from project.traids_vs_degree_plot.export_data import exportdata, countries
+from project.traids_vs_degree_plot.export_data import exportdata
 
 def is_there_a_strong_tie_method_B(year, exporter, importer, lower_bound, upper_bound):
     num = exportdata.export_data(year, exporter, importer)

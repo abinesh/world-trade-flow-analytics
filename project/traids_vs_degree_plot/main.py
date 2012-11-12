@@ -1,7 +1,7 @@
 import csv
 from project.traids_vs_degree_plot import config
 from project.traids_vs_degree_plot.export_data import exportdata, strongties
-from project.traids_vs_degree_plot.export_data.countries import is_valid_country
+from project.countries import is_valid_country
 from project.traids_vs_degree_plot.csv_writer.csv_writer import csv_write
 from project.traids_vs_degree_plot.export_data.exportdata import all_years
 
