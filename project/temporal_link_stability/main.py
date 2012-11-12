@@ -16,7 +16,7 @@ def read_file(input_file, output_file):
     for row in reader:
         importer = row.get('Importer')
         exporter = row.get('Exporter')
-        if (importer == 'World' or exporter == 'World') or (importer == exporter):
+        if (importer == 'World' or exporter == 'World') or (importer == exporter) or exporter != 'Armenia':
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue
@@ -44,7 +44,7 @@ def read_file(input_file, output_file):
         out.write("plot(x,y,'k-s',x,ylinearfit,x,yquadfit)\n")
         out.write("xlabel('Year')\n")
         out.write("ylabel('Export Quantity')\n")
-        out.write("saveas(gcf,'out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "','jpg')\n")
+        out.write("saveas(gcf,'out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "','png')\n")
         print i
         i+=1
 
