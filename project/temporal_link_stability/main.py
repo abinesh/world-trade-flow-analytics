@@ -39,7 +39,7 @@ def read_file(file_path):
         print "x = data(:,1)"
         print "y = data(:,2)"
         print "yfit = polyval(polyfit(x,y,1),x)"
-        print "plot(x,y,'o',x,yfit)"
+        print "plot(x,y,'k-s',x,yfit)"
         print "xlabel('Year')"
         print "ylabel('Export Quantity')"
         print "saveas(gcf,'out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "','jpg')"
