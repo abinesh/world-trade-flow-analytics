@@ -9,14 +9,16 @@ def file_safe(country):
     return country.replace(',', '_').replace('.', '_').replace(' ', '_')
 
 
-def read_file(input_file, output_file):
-    i=0
+def read_file(input_file, f1, f2, f3):
+    i = 0
     reader = csv.DictReader(open(input_file, 'rb'), skipinitialspace=True)
-    out = open(output_file, 'w')
+    out1 = open(f1, 'w')
+    out2 = open(f2, 'w')
+    out3 = open(f3, 'w')
     for row in reader:
         importer = row.get('Importer')
         exporter = row.get('Exporter')
-        if (importer == 'World' or exporter == 'World') or (importer == exporter) or exporter != 'Armenia':
+        if importer == exporter:
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue
@@ -35,18 +37,39 @@ def read_file(input_file, output_file):
                 year = column_to_year(column)
                 writer.writerow([year, export_quantity])
 
-        out.write("clear\n")
-        out.write("data = load('" + filepath + "')\n")
-        out.write("x = data(:,1)\n")
-        out.write("y = data(:,2)\n")
-        out.write("ylinearfit = polyval(polyfit(x,y,1),x)\n")
-        out.write("yquadfit = polyval(polyfit(x,y,2),x)\n")
-        out.write("plot(x,y,'k-s',x,ylinearfit,x,yquadfit)\n")
-        out.write("xlabel('Year')\n")
-        out.write("ylabel('Export Quantity')\n")
-        out.write("saveas(gcf,'out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "','png')\n")
+        out1.write(filepath + "\n")
+        out2.write("out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "\n")
         print i
-        i+=1
+        i += 1
+        if i == 1000:
+            break
 
+    out3.write("clear\n")
+    out3.write("total = "+str(i)+"\n")
+    out3.write("inputfile123=textread('input-files.txt','%s',total)\n")
+    out3.write("outputfile123=textread('output-files.txt','%s',total)\n")
+    out3.write("\n")
+    out3.write("for i=1:total,\n")
+    out3.write("    data = load(inputfile123{i})\n")
+    out3.write("    datasize = size(data)\n")
+    out3.write("    isemptyfile = datasize(1) == 0\n")
+    out3.write("    if isemptyfile\n")
+    out3.write("        data = [0 0]\n")
+    out3.write("    end\n")
+    out3.write("    x = data(:,1)\n")
+    out3.write("    y = data(:,2)\n")
+    out3.write("    ylinearfit = polyval(polyfit(x,y,1),x)\n")
+    out3.write("    yquadfit = polyval(polyfit(x,y,2),x)\n")
+    out3.write("    plot(x,y,'k-s',x,ylinearfit,x,yquadfit)\n")
+    out3.write("    if isemptyfile\n")
+    out3.write("        xlabel('No data')\n")
+    out3.write("        ylabel('No data')\n")
+    out3.write("    else\n")
+    out3.write("        xlabel('Year')\n")
+    out3.write("        ylabel('Export Quantity')\n")
+    out3.write("    end\n")
+    out3.write("    saveas(gcf,outputfile123{i},'png')\n")
+    out3.write("    i\n")
+    out3.write("end\n")
 
-read_file(WORLD_TRADE_FLOW_DATA_FILE, 'matlab/generateplots.m')
+read_file(WORLD_TRADE_FLOW_DATA_FILE, 'matlab/input-files.txt', 'matlab/output-files.txt', 'matlab/generateplotsloop.m')
