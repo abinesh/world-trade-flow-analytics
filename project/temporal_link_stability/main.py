@@ -1,5 +1,6 @@
 import csv
 import os
+from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE
 from project.countries import is_valid_country
 from project.util import column_to_year
@@ -38,14 +39,16 @@ def read_file(input_file, f1, f2, f3):
                 writer.writerow([year, export_quantity])
 
         out1.write(filepath + "\n")
-        out2.write("out/wtf/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "\n")
+        out2.write(
+            "out/wtf/" + file_safe(exporter) + "/" + file_safe(exporter) + "-export-to-" + file_safe(importer) + "\n")
         print i
         i += 1
-        if i == 1000:
-            break
+
+    for c in countries.countries:
+        out3.write("mkdir('out/wtf/"+c+"')\n")
 
     out3.write("clear\n")
-    out3.write("total = "+str(i)+"\n")
+    out3.write("total = " + str(i) + "\n")
     out3.write("inputfile123=textread('input-files.txt','%s',total)\n")
     out3.write("outputfile123=textread('output-files.txt','%s',total)\n")
     out3.write("\n")
