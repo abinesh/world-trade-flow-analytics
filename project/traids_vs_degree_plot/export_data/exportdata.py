@@ -42,7 +42,7 @@ def export_data(year, exporter, importer):
     return exporter_data_for_year.get_export_to_country(importer)
 
 
-def load_export_data(file_path):
+def load_export_data(file_path, year_columns=YEAR_COLUMNS):
     reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
 
     for row in reader:
@@ -52,7 +52,7 @@ def load_export_data(file_path):
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue
-        for column in YEAR_COLUMNS:
+        for column in year_columns:
             export_quantity = row.get(column)
             if(export_quantity == 'NaN'):
                 continue

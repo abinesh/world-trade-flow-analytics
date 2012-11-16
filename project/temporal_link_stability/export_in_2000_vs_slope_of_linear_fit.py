@@ -21,7 +21,7 @@ def read_slopes():
         print line
 
 read_slopes()
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE)
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE,["Value00"])
 
 def slope_data(exporter, importer):
     return slopes[file_safe(exporter)][file_safe(importer)]
@@ -35,9 +35,12 @@ def trade_relationship_exists(exporter, importer):
 
 
 def write_data_files_for_slope_vs_export_plots(out_dir):
+    f_countries_list = open(out_dir + '/all-countries.txt', 'w')
+
     for exporter in countries.countries:
         f = open(out_dir + '/' + file_safe(exporter) + '.txt', 'w')
         f_world = open(out_dir + '/' + file_safe(exporter) + '-world.txt', 'w')
+        f_countries_list.write(file_safe(exporter) + '\n')
         for importer in countries.countries:
             if exporter == importer:
                 continue
@@ -52,5 +55,6 @@ def write_data_files_for_slope_vs_export_plots(out_dir):
 
         f.close()
         f_world.close()
+    f_countries_list.close()
 
 write_data_files_for_slope_vs_export_plots('matlab/out/slope-vs-export')
