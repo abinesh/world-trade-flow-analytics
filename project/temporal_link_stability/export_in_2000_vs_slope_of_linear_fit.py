@@ -21,7 +21,7 @@ def read_slopes():
         print line
 
 read_slopes()
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE,["Value00"])
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE, ["Value00"])
 
 def slope_data(exporter, importer):
     return slopes[file_safe(exporter)][file_safe(importer)]
@@ -34,13 +34,19 @@ def trade_relationship_exists(exporter, importer):
     return False
 
 
-def write_data_files_for_slope_vs_export_plots(out_dir):
-    f_countries_list = open(out_dir + '/all-countries.txt', 'w')
+def write_data_files_for_slope_vs_export_plots(root_dir, out_dir):
+    f_countries_list = open(root_dir + '/' + out_dir + '/all-countries.txt', 'w')
 
+    total_countries = 0
     for exporter in countries.countries:
-        f = open(out_dir + '/' + file_safe(exporter) + '.txt', 'w')
-        f_world = open(out_dir + '/' + file_safe(exporter) + '-world.txt', 'w')
-        f_countries_list.write(file_safe(exporter) + '\n')
+        all_countries_file_name = out_dir + '/' + file_safe(exporter) + '.txt'
+        world_file_name = out_dir + '/' + file_safe(exporter) + '-world.txt'
+
+        f = open(root_dir + '/' + all_countries_file_name, 'w')
+        f_world = open(root_dir + '/' + world_file_name, 'w')
+        if not exporter == 'World':
+            f_countries_list.write(file_safe(exporter) + ' ' + all_countries_file_name + ' ' + world_file_name + '\n')
+            total_countries += 1
         for importer in countries.countries:
             if exporter == importer:
                 continue
@@ -56,5 +62,34 @@ def write_data_files_for_slope_vs_export_plots(out_dir):
         f.close()
         f_world.close()
     f_countries_list.close()
+    return total_countries
 
-write_data_files_for_slope_vs_export_plots('matlab/out/slope-vs-export')
+total_countries = write_data_files_for_slope_vs_export_plots('matlab', 'out/slope-vs-export')
+matlab_program_file = open('matlab/slope_vs_export_gen.m', 'w')
+
+matlab_program_file.write("clear" + '\n')
+matlab_program_file.write("total = " + str(total_countries) + '\n')
+matlab_program_file.write(
+    "[country_names,all_countries,only_world]=textread('out/slope-vs-export/all-countries.txt','%s %s %s' ,total)" + '\n')
+matlab_program_file.write("" + '\n')
+matlab_program_file.write("for i=1:total," + '\n')
+matlab_program_file.write("    all_countries{i}" + '\n')
+matlab_program_file.write("    all_data = load(all_countries{i})" + '\n')
+matlab_program_file.write("    world_data = load(only_world{i})" + '\n')
+matlab_program_file.write("" + '\n')
+matlab_program_file.write("    if size(all_data)~=[0,0]" + '\n')
+matlab_program_file.write("        all_slopes = all_data(:,1)" + '\n')
+matlab_program_file.write("        all_exports = all_data(:,2)" + '\n')
+matlab_program_file.write("" + '\n')
+matlab_program_file.write("        world_slope = world_data(:,1)" + '\n')
+matlab_program_file.write("        world_export = world_data(:,2)" + '\n')
+matlab_program_file.write("" + '\n')
+matlab_program_file.write("        plot(all_slopes,all_exports,'o',world_slope,world_export,'*r')" + '\n')
+matlab_program_file.write("        xlabel('Linear regression slope')" + '\n')
+matlab_program_file.write("        ylabel('Export in the year 2000')" + '\n')
+matlab_program_file.write("        graph_file_name = sprintf('out/slope-vs-export-graphs/%s',country_names{i})" + '\n')
+matlab_program_file.write("        saveas(gcf,graph_file_name,'png')" + '\n')
+matlab_program_file.write("    end" + '\n')
+matlab_program_file.write("end" + '\n')
+
+matlab_program_file.close()
