@@ -45,7 +45,7 @@ def read_file(input_file, f1, f2, f3):
         i += 1
 
     for c in countries.countries:
-        out3.write("mkdir('out/wtf/"+c+"')\n")
+        out3.write("mkdir('out/wtf/" + file_safe(c) + "')\n")
 
     out3.write("clear\n")
     out3.write("total = " + str(i) + "\n")

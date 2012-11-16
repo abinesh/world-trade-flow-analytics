@@ -200,6 +200,7 @@ countries = ["USA",
              "Yugoslavia",
              "Zambia",
              "Zimbabwe",
+             "World",
              "China FTZ"]
 
 country_to_index_map = {}
