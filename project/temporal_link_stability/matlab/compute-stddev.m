@@ -3,7 +3,7 @@ total = 23909
 inputfile123=textread('input-files.txt','%s',total)
 outputfile123=textread('output-files.txt','%s',total)
 
-fName = 'r2-and-slopes.txt';         %# A file name
+fName = 'r2-and-slopes-log11.txt';         %# A file name
 fid = fopen(fName,'w');            %# Open the file
 
 
@@ -19,7 +19,7 @@ for i=1:total,
     a=0
     b=0
     c=0
-    [p,s] = polyfit(x,y,1)
+    [p,s] = polyfit(x,log10(y)/log10(1.1),1)
     r2=1 - s.normr^2 / norm(y-mean(y))^2
     fprintf(fid,'%s %g %f\r\n',outputfile123{i},r2,p(1));
     i
@@ -30,9 +30,17 @@ fclose(fid);                     %# Close the file
 they will be run from ~/dataset
 
 
+
+-- Remove out/wtf/
+cat r2-and-slopes-log.txt | sed -f remove-out-wtf.txt | sed -f replace-slash-with-space.txt > r2-and-slopes-log-sane.txt
+cat r2-and-slopes-log11.txt | sed -f remove-out-wtf.txt | sed -f replace-slash-with-space.txt > r2-and-slopes-log11-sane.txt
+
 -- split r2-and-slopes.txt into individual files for each country with graphs sorted
 cat r2-and-slopes-sane.txt| cut -d" " -f 1 | sort | uniq | awk '{print "cat r2-and-slopes-sane.txt | grep \""$1" "$1"\" | sort -k 3 > r2-list/"$1"-r2-list.txt"}'   | sh
+cat r2-and-slopes-log-sane.txt| cut -d" " -f 1 | sort | uniq | awk '{print "cat r2-and-slopes-log-sane.txt | grep \""$1" "$1"\" | sort -k 3 > r2-list-log/"$1"-r2-list.txt"}'   | sh
+cat r2-and-slopes-log11-sane.txt| cut -d" " -f 1 | sort | uniq | awk '{print "cat r2-and-slopes-log11-sane.txt | grep \""$1" "$1"\" | sort -k 3 > r2-list-log11/"$1"-r2-list.txt"}'   | sh
 --
+-- The following step is to reorder graph based on fit determined by R squared
 copy in order all the graphs so that high variance ones are in front of the list
 cat r2-list/USA-r2-list.txt | awk '{print "cp ../project/temporal_link_stability/matlab/out/wtf/"$1"/"$2".png wtf-ordered/"$1"/"NR"-"$2".png"}' | sh
 
