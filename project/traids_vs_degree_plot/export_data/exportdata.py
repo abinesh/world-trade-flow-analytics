@@ -1,4 +1,8 @@
+import csv
 from project import countries
+from project.config import YEAR_COLUMNS
+from project.countries import is_valid_country
+from project.util import column_to_year
 
 class Country:
     def __init__(self, name):
@@ -36,5 +40,24 @@ def export_data_for_a_country(exporter, year):
 def export_data(year, exporter, importer):
     exporter_data_for_year = export_data_for_a_country(exporter, year)
     return exporter_data_for_year.get_export_to_country(importer)
+
+
+def load_export_data(file_path):
+    reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
+
+    for row in reader:
+        importer = row.get('Importer')
+        exporter = row.get('Exporter')
+        if (importer == 'World' or exporter == 'World') or (importer == exporter):
+            continue
+        if not is_valid_country(importer) or not is_valid_country(exporter):
+            continue
+        for column in YEAR_COLUMNS:
+            export_quantity = row.get(column)
+            if(export_quantity == 'NaN'):
+                continue
+            year = column_to_year(column)
+            export_data_for_a_country(exporter, year).set_export_to_country(importer, float(export_quantity))
+            print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
 
 

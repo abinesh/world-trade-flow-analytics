@@ -3,11 +3,7 @@ import os
 from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE
 from project.countries import is_valid_country
-from project.util import column_to_year
-
-
-def file_safe(country):
-    return country.replace(',', '_').replace('.', '_').replace(' ', '_')
+from project.util import column_to_year, file_safe
 
 
 def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
