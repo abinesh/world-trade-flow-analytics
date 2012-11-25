@@ -1,9 +1,9 @@
 clear
-total = 23909
-inputfile123=textread('input-files.txt','%s',total)
-outputfile123=textread('output-files.txt','%s',total)
+total = 23506
+inputfile123=textread('input-files-percent.txt','%s',total)
+outputfile123=textread('output-files-percent.txt','%s',total)
 
-fName = 'r2-and-slopes-log.txt';         %# A file name
+fName = 'r2-and-slopes-percent-log.txt';         %# A file name
 fid = fopen(fName,'w');            %# Open the file
 
 
