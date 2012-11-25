@@ -42,13 +42,16 @@ def export_data(year, exporter, importer):
     return exporter_data_for_year.get_export_to_country(importer)
 
 
-def load_export_data(file_path, year_columns=YEAR_COLUMNS):
+def load_export_data(file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
     reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
 
     for row in reader:
         importer = row.get('Importer')
         exporter = row.get('Exporter')
-        if (importer == 'World' or exporter == 'World') or (importer == exporter):
+        if not should_include_world:
+            if importer == 'World' or exporter == 'World':
+                continue
+        if (importer == exporter):
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue

@@ -3,7 +3,13 @@ import os
 from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE
 from project.countries import is_valid_country
+from project.traids_vs_degree_plot.export_data.exportdata import load_export_data, export_data
 from project.util import column_to_year, file_safe
+
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE, should_include_world=True)
+
+def total_exports(exporter, year):
+    return export_data(year, exporter, 'World')
 
 
 def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
@@ -15,7 +21,7 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
     for row in reader:
         importer = row.get('Importer')
         exporter = row.get('Exporter')
-        if importer == exporter:
+        if importer == exporter or importer == 'World' or exporter == 'World':
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue
@@ -32,7 +38,9 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
                 if(export_quantity == 'NaN'):
                     continue
                 year = column_to_year(column)
-                writer.writerow([year, export_quantity])
+                print exporter + ' ' + importer + ' ' + str(year) + ' ' + (export_quantity) + ' ' + str(total_exports(
+                    exporter, year))
+                writer.writerow([year, float(export_quantity) / total_exports(exporter, year) * 100])
 
         out1.write(filepath + "\n")
         out2.write(
@@ -45,8 +53,8 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
 
     out3.write("clear\n")
     out3.write("total = " + str(i) + "\n")
-    out3.write("inputfile123=textread('input-files.txt','%s',total)\n")
-    out3.write("outputfile123=textread('output-files.txt','%s',total)\n")
+    out3.write("inputfile123=textread('input-files-percent.txt','%s',total)\n")
+    out3.write("outputfile123=textread('output-files-percent.txt','%s',total)\n")
     out3.write("\n")
     out3.write("for i=1:total,\n")
     out3.write("    data = load(inputfile123{i})\n")
@@ -71,4 +79,5 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
     out3.write("    i\n")
     out3.write("end\n")
 
-write_intermediate_data_files_for_matlab_plots(WORLD_TRADE_FLOW_DATA_FILE, 'matlab/input-files.txt', 'matlab/output-files.txt', 'matlab/generateplotsloop.m')
+write_intermediate_data_files_for_matlab_plots(WORLD_TRADE_FLOW_DATA_FILE, 'matlab/input-files-percent.txt',
+    'matlab/output-files-percent.txt', 'matlab/generateplotsloop.m')
