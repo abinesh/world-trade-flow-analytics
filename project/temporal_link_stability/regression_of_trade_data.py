@@ -21,7 +21,7 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
     for row in reader:
         importer = row.get('Importer')
         exporter = row.get('Exporter')
-        if importer == exporter or importer == 'World' or exporter == 'World':
+        if importer == exporter or exporter == 'World':
             continue
         if not is_valid_country(importer) or not is_valid_country(exporter):
             continue
@@ -35,10 +35,10 @@ def write_intermediate_data_files_for_matlab_plots(input_file, f1, f2, f3):
             writer = csv.writer(csvfile, delimiter='\t')
             for column in YEAR_COLUMNS:
                 export_quantity = row.get(column)
-                if(export_quantity == 'NaN'):
+                if export_quantity == 'NaN':
                     continue
                 year = column_to_year(column)
-                print exporter + ' ' + importer + ' ' + str(year) + ' ' + (export_quantity) + ' ' + str(total_exports(
+                print exporter + ' ' + importer + ' ' + str(year) + ' ' + export_quantity + ' ' + str(total_exports(
                     exporter, year))
                 writer.writerow([year, float(export_quantity) / total_exports(exporter, year) * 100])
 

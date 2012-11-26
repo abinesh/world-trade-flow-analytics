@@ -11,16 +11,17 @@ A. To set of linear and quadratic fits ordered alphabetically:
     2. Run matlab/generateplotsloop.m
 
 B. To generate set of linear and quadratic fits ordered by RSquared:
-    1. Do A.1
-    2. Run compute-stddev.m to generate r2-and-slopes-percent-log.txt
-    4. Copy r2-and-slopes-percent-log.txt into dataset
-    3. Remove out/wtf/
-       cat r2-and-slopes-percent-log.txt | sed -f remove-out-wtf.txt | sed -f replace-slash-with-space.txt > r2-and-slopes-percent-log-sane.txt
+    1. Do A
+    2. Update count in compute-stddev.m and run it. It will generate the following:
+        - r2-and-slopes-percent.txt : (output_file_path,Rsquared, linear regression slope)
+    3. Copy r2-and-slopes-percent.txt into dataset
+    4. Remove out/wtf/
+       cat r2-and-slopes-percent.txt | sed -f remove-out-wtf.txt | sed -f replace-slash-with-space.txt > r2-and-slopes-percent-sane.txt
 
-    4. Split r2-and-slopes.txt into individual files for each country with graphs sorted
-       cat r2-and-slopes-percent-log-sane.txt| cut -d" " -f 1 | sort | uniq | awk '{print "cat r2-and-slopes-percent-log-sane.txt | grep \""$1" "$1"\" | sort -k 3 > r2-list/"$1"-r2-list.txt"}'   | sh
+    5. Split r2-and-slopes.txt into individual files for each country with graphs sorted
+       cat r2-and-slopes-percent-sane.txt| cut -d" " -f 1 | sort | uniq | awk '{print "cat r2-and-slopes-percent-sane.txt | grep \""$1" "$1"\" | sort -k 3 > r2-list/"$1"-r2-list.txt"}'   | sh
 
-    5. The following step is to reorder graph based on fit determined by R squared(Use matlab or shell script to create directory for each country)
+    6. The following step is to reorder graph based on fit determined by R squared(Use matlab or shell script to create directory for each country)
        copy in order all the graphs so that high variance ones are in front of the list
        cat r2-list/USA-r2-list.txt | awk '{print "cp ../project/temporal_link_stability/matlab/out/wtf/"$1"/"$2".png wtf-ordered/"$1"/"NR"-"$2".png"}' | sh
 
@@ -231,8 +232,10 @@ B. To generate set of linear and quadratic fits ordered by RSquared:
        cat r2-list/China_FTZ-r2-list.txt | awk '{print "cp ../project/temporal_link_stability/matlab/out/wtf/"$1"/"$2".png wtf-ordered/"$1"/"NR"-"$2".png"}' | sh
 
 C. To generate export in 2000 vs slope of linear fits graph:
-    1. Do A.1
+    1. Do A.1, B.2, B.3, B.4
     2. Run export_in_2000_vs_slope_of_linear_fit.py to generate intermediate files:
-        - matlab/out/slope-log11-vs-export-percent/all-countries.txt
-        - matlab/slope_vs_export_gen.m
-    3. Run slove_export_gen.m
+        - matlab/out/slope-vs-export-percent/COUNTRY.txt : (Linear regression slope,Export in 2000) pairs for each country
+        - matlab/out/slope-vs-export-percent/COUNTRY-world.txt :(Linear regression slope,Export in 2000) pair for World
+        - matlab/out/slope-vs-export-percent/all-countries.txt : (COUNTRY.txt,COUNTRY-world.txt) pairs for each country
+        - matlab/slope_vs_export_gen.m : Matlab code to generate slope vs export in 2000
+    3. Run slope_vs_export_gen.m

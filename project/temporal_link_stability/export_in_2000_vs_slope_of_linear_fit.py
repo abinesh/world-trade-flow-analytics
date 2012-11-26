@@ -13,7 +13,7 @@ def insert_into_slopes(map, exporter, importer, slope):
 slopes = {}
 
 def read_slopes():
-    f = open('../../dataset/r2-and-slopes-log11-sane.txt', 'r')
+    f = open('../../dataset/r2-and-slopes-percent-sane.txt', 'r')
     for line in f:
         [exporter, importer_str, _, slope] = re.split(' ', line)
         importer = importer_str.replace(exporter + '-export-to-', '')
@@ -21,7 +21,7 @@ def read_slopes():
         print line
 
 read_slopes()
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE, ["Value00"])
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE, ["Value00"],should_include_world=True)
 
 def slope_data(exporter, importer):
     return slopes[file_safe(exporter)][file_safe(importer)]
@@ -64,13 +64,13 @@ def write_data_files_for_slope_vs_export_plots(root_dir, out_dir):
     f_countries_list.close()
     return total_countries
 
-total_countries = write_data_files_for_slope_vs_export_plots('matlab', 'out/slope-log11-vs-export')
-matlab_program_file = open('matlab/slope_vs_export_gen.m', 'w')
+total_countries = write_data_files_for_slope_vs_export_plots('matlab', 'out/slope-vs-export-percent')
+matlab_program_file = open('matlab/slope_vs_export_percent_gen.m', 'w')
 
 matlab_program_file.write("clear" + '\n')
 matlab_program_file.write("total = " + str(total_countries) + '\n')
 matlab_program_file.write(
-    "[country_names,all_countries,only_world]=textread('out/slope-log11-vs-export/all-countries.txt','%s %s %s' ,total)" + '\n')
+    "[country_names,all_countries,only_world]=textread('out/slope-vs-export-percent/all-countries.txt','%s %s %s' ,total)" + '\n')
 matlab_program_file.write("" + '\n')
 matlab_program_file.write("for i=1:total," + '\n')
 matlab_program_file.write("    all_countries{i}" + '\n')
@@ -87,7 +87,7 @@ matlab_program_file.write("" + '\n')
 matlab_program_file.write("        plot(all_slopes,all_exports,'o',world_slope,world_export,'*r')" + '\n')
 matlab_program_file.write("        xlabel('Linear regression slope')" + '\n')
 matlab_program_file.write("        ylabel('Export in the year 2000')" + '\n')
-matlab_program_file.write("        graph_file_name = sprintf('out/slope-log11-vs-export-graphs/%s',country_names{i})" + '\n')
+matlab_program_file.write("        graph_file_name = sprintf('out/slope-vs-export-percent-graphs/%s',country_names{i})" + '\n')
 matlab_program_file.write("        saveas(gcf,graph_file_name,'png')" + '\n')
 matlab_program_file.write("    end" + '\n')
 matlab_program_file.write("end" + '\n')
