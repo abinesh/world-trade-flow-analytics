@@ -3,14 +3,14 @@ World trade flow analytics
 
 Link Stability
 
-A. To set of linear and quadratic fits ordered alphabetically:
-    1. Run regression_of_trade_data.py to generate intermediate files:
+A. To generate set of linear and quadratic fits(one way only) ordered alphabetically:
+    1. Run gen_intermediate_data_for_one_way_linear_regression_plot in regression_of_trade_data.py to generate intermediate files:
         - matlab/input-files-percent.txt
         - matlab/output-files-percent.txt
         - matlab/generateplotsloop.m : For each pair of files in input.txt and output.txt, generate linear and quadratic fit. Files are written as specified in output.txt
     2. Run matlab/generateplotsloop.m
 
-B. To generate set of linear and quadratic fits ordered by RSquared:
+B. To generate set of linear and quadratic fits(one way only) ordered by RSquared:
     1. Do A
     2. Update count in compute-stddev.m and run it. It will generate the following:
         - r2-and-slopes-percent.txt : (output_file_path,Rsquared, linear regression slope)
@@ -239,3 +239,9 @@ C. To generate export in 2000 vs slope of linear fits graph:
         - matlab/out/slope-vs-export-percent/all-countries.txt : (COUNTRY.txt,COUNTRY-world.txt) pairs for each country
         - matlab/slope_vs_export_gen.m : Matlab code to generate slope vs export in 2000
     3. Run slope_vs_export_gen.m
+
+D. To generate set of linear and quadratic fits(both ways on same graph) ordered alphabetically
+    1. Run gen_intermediate_data_for_both_way_linear_regression_plot in regression_of_trade_data.py to generate intermediate files:
+        - matlab/input-files-both-ways-percent.txt
+        - matlab/output-files-both-ways-percent.txt
+    2. Find the line count of input file generated above and update the matlab code specified as a multi line string at the end of regression_of_trade_data.py
