@@ -347,11 +347,13 @@ for i=1:total,
     x = data(:,1)
     export = data(:,2)
     exportLinearFit = polyval(polyfit(x,export,1),x)
+    exportMovingAvg = moving(export,5)
 
     exportOtherWay = data(:,3)
     exportOtherWayLinearFit = polyval(polyfit(x,exportOtherWay,1),x)
+    exportOtherWayMovingAvg = moving(exportOtherWay,5)
 
-    plot(x,export,'-or',x,exportLinearFit,'-.r',x,exportOtherWay,'-ob',x,exportOtherWayLinearFit,'-.b')
+    plot(x,export,'-or',x,exportLinearFit,'-.r',x,exportMovingAvg,'-.r',x,exportOtherWay,'-ob',x,exportOtherWayLinearFit,'-.b',x,exportOtherWayMovingAvg,'-.b')
     if isemptyfile
         xlabel('No data')
         ylabel('No data')
