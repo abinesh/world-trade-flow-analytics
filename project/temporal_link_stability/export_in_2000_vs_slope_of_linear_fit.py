@@ -1,6 +1,6 @@
 import re
 from project import countries
-from project.config import WORLD_TRADE_FLOW_DATA_FILE, WRITE_OUT_TO_DIR
+from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, WRITE_OUT_TO_DIR
 from project.traids_vs_degree_plot.export_data.exportdata import  load_export_data, export_data
 from project.util import file_safe
 
@@ -21,7 +21,7 @@ def read_slopes():
         print line
 
 read_slopes()
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE, ["Value00"],should_include_world=True)
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, ["Value00"],should_include_world=True)
 
 def slope_data(exporter, importer):
     return slopes[file_safe(exporter)][file_safe(importer)]

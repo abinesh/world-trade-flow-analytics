@@ -245,3 +245,8 @@ D. To generate set of linear and quadratic fits(both ways on same graph) ordered
         - matlab/input-files-both-ways-percent.txt
         - matlab/output-files-both-ways-percent.txt
     2. Find the line count of input file generated above and update the matlab code specified as a multi line string at the end of regression_of_trade_data.py
+    3. Run regression_of_trade_data.py twice. Once till MATRIX_MAX_DIMENSION then for remaining count.
+
+
+E. To categorize relationship types as specified in google doc.
+    1. Do till D.2

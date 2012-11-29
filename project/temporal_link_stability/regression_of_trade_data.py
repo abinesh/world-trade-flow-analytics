@@ -1,12 +1,12 @@
 import csv
 import os
 from project import countries
-from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE
+from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import is_valid_country
 from project.traids_vs_degree_plot.export_data.exportdata import load_export_data, export_data
 from project.util import column_to_year, file_safe
 
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE, should_include_world=True)
+load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
 def total_exports(exporter, year):
     return export_data(year, exporter, 'World')
@@ -122,7 +122,7 @@ def gen_intermediate_data_for_both_way_linear_regression_plot(f1, f2, f3):
 
     pass
 
-#gen_intermediate_data_for_one_way_linear_regression_plot(WORLD_TRADE_FLOW_DATA_FILE, 'matlab/input-files-percent.txt',
+#gen_intermediate_data_for_one_way_linear_regression_plot(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, 'matlab/input-files-percent.txt',
 #    'matlab/output-files-percent.txt', 'matlab/generateplotsloop.m')
 gen_intermediate_data_for_both_way_linear_regression_plot('matlab/input-files-both-ways-percent.txt',
     'matlab/output-files-both-ways-percent.txt', 'matlab/generateplotsloop.m')
