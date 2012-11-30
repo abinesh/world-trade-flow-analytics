@@ -1,0 +1,10 @@
+Overall:
+http://www.cs.cornell.edu/home/kleinber/networks-book/
+
+Traidic closure
+http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch03.pdf
+
+Structural balance, Cartwright-Harary theorem
+
+http://www.pnas.org/content/early/2010/12/27/1013213108.full.pdf+html
+http://www.infosci.cornell.edu/courses/info204/2007sp/balance.pdf
