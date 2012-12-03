@@ -23,7 +23,7 @@
         }
 
         path.link.resolved {
-            stroke-dasharray: 0, 2 1;
+            stroke-dasharray: 0, 1 10;
         }
 
         circle {
@@ -51,36 +51,36 @@ Modified from http://bl.ocks.org/1153292
 
     // http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
     var links = [
-        {source:"A", target:"B", type:"suit"},
-        {source:"A", target:"C", type:"suit"},
-        {source:"A", target:"D", type:"resolved"},
-        {source:"A", target:"E", type:"resolved"},
+        {source:"USA", target:"Canada", type:"suit"},
+        {source:"USA", target:"UK", type:"suit"},
+        {source:"USA", target:"Iran", type:"resolved"},
+        {source:"USA", target:"Iraq", type:"resolved"},
 
-        {source:"B", target:"A", type:"suit"},
-        {source:"B", target:"C", type:"suit"},
-        {source:"B", target:"D", type:"resolved"},
-        {source:"B", target:"E", type:"resolved"},
+        {source:"Canada", target:"USA", type:"suit"},
+        {source:"Canada", target:"UK", type:"suit"},
+        {source:"Canada", target:"Iran", type:"resolved"},
+        {source:"Canada", target:"Iraq", type:"resolved"},
 
-        {source:"C", target:"A", type:"suit"},
-        {source:"C", target:"B", type:"suit"},
-        {source:"C", target:"D", type:"resolved"},
-        {source:"C", target:"E", type:"resolved"},
+        {source:"UK", target:"USA", type:"suit"},
+        {source:"UK", target:"Canada", type:"suit"},
+        {source:"UK", target:"Iran", type:"resolved"},
+        {source:"UK", target:"Iraq", type:"resolved"},
 
-        {source:"D", target:"A", type:"resolved"},
-        {source:"D", target:"B", type:"resolved"},
-        {source:"D", target:"C", type:"resolved"},
-        {source:"D", target:"E", type:"suit"},
+        {source:"Iran", target:"USA", type:"resolved"},
+        {source:"Iran", target:"Canada", type:"resolved"},
+        {source:"Iran", target:"UK", type:"resolved"},
+        {source:"Iran", target:"Iraq", type:"suit"},
 
-        {source:"E", target:"A", type:"resolved"},
-        {source:"E", target:"B", type:"resolved"},
-        {source:"E", target:"C", type:"resolved"},
-        {source:"E", target:"D", type:"suit"},
+        {source:"Iraq", target:"USA", type:"resolved"},
+        {source:"Iraq", target:"Canada", type:"resolved"},
+        {source:"Iraq", target:"UK", type:"resolved"},
+        {source:"Iraq", target:"Iran", type:"suit"},
 
-        {source:"F", target:"A", type:"resolved"},
-        {source:"F", target:"B", type:"resolved"},
-        {source:"F", target:"C", type:"resolved"},
-        {source:"F", target:"D", type:"resolved"},
-        {source:"F", target:"E", type:"resolved"},
+        {source:"China", target:"USA", type:"resolved"},
+        {source:"China", target:"Canada", type:"resolved"},
+        {source:"China", target:"UK", type:"resolved"},
+        {source:"China", target:"Iran", type:"resolved"},
+        {source:"China", target:"Iraq", type:"resolved"},
 
     ];
 
@@ -122,7 +122,7 @@ Modified from http://bl.ocks.org/1153292
             .attr("markerHeight", 6)
             .attr("orient", "auto")
             .append("svg:path")
-            .attr("d", "M0,-5L10,0L0,5");
+            .attr("Iran", "M0,-5L10,0L0,5");
 
     var path = svg.append("svg:g").selectAll("path")
             .data(force.links())
