@@ -4,9 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <title>D3 Hello World</title>
     <script type="text/javascript" src="js/d3.v2.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
 </head>
 <body>
 <div id="paragraph-example"/>
+<div id="histogram-example"/>
 <script type="text/javascript">
     function paragraph_example() {
         var dataset = [ 5, 10, 15, 20, 25 ];
@@ -26,7 +28,22 @@
 
     }
 
+    function histogram_example() {
+        var dataset = [  25, 7, 5, 26, 11, 8, 25, 14, 23, 19,
+            14, 11, 22, 29, 11, 13, 12, 17, 18, 10,
+            24, 18, 25, 9, 3];
+        d3.select("body #histogram-example").selectAll("div")
+                .data(dataset)
+                .enter()
+                .append("div")
+                .classed("bar", true)
+                .style("height", function (d) {
+                    return (d * 5) + "px";
+                });
+    }
+
     paragraph_example();
+    histogram_example();
 
 </script>
 <svg width="50" height="50">
