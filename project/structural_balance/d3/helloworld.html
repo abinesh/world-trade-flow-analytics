@@ -175,7 +175,9 @@ Examples taken from <a target="_blank"
                 .enter()
                 .append("text");
         texts.text(function (d) {
-            return d[0] + "," + d[1];
+            if (yScale(d[1]) < 100)
+                return d[0] + "," + d[1];
+            else return "";
         }).attr("x", function (d) {
                     return xScale(d[0]);
                 })
