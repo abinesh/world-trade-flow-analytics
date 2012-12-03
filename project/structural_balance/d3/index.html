@@ -6,10 +6,27 @@
     <script type="text/javascript" src="js/d3.v2.js"></script>
 </head>
 <body>
+<div id="paragraph-example"/>
 <script type="text/javascript">
+    function paragraph_example() {
+        var dataset = [ 5, 10, 15, 20, 25 ];
+        d3.select("body #paragraph-example").append("span")
+                .text("Hello, world!");
+        d3.select("body #paragraph-example").selectAll("p")
+                .data(dataset)
+                .enter()
+                .append("p")
+                .text(function (d) {
+                    return d;
+                })
+                .style("color", function (d) {
+                    if (d < 15) return "red";
+                    else return "green"
+                });
 
-    d3.select("body").append("span")
-            .text("Hello, world!");
+    }
+
+    paragraph_example();
 
 </script>
 <svg width="50" height="50">
