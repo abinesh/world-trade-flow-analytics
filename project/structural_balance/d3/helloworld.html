@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="css/base.css">
 </head>
 <body>
+Examples taken from <a target="_blank"
+                       href="http://alignedleft.com/tutorials/d3/">http://alignedleft.com/tutorials/d3/</a>
+
 <div id="paragraph-html-example"></div>
 <div id="histogram-html-example"></div>
 <script type="text/javascript">
@@ -136,6 +139,17 @@
             [85, 21],
             [220, 88]
         ];
+        var xScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function (d) {
+            return d[0];
+        })])
+                .range([0, w]);
+
+        var yScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function (d) {
+            return d[1];
+        })])
+                .range([0, h]);
         var svg = d3.select("body")
                 .append("svg")
                 .attr("width", w)
@@ -145,10 +159,10 @@
                 .enter()
                 .append("circle");
         circles.attr("cx", function (d) {
-            return d[0];
+            return xScale(d[0]);
         })
                 .attr("cy", function (d) {
-                    return d[1];
+                    return yScale(d[1]);
                 })
                 .attr("r", function (d) {
                     return Math.sqrt(h - d[1]);
@@ -158,8 +172,8 @@
                 .enter()
                 .append("text");
         texts.text(function (d) {
-                    return d[0] + "," + d[1];
-                }).attr("x", function (d) {
+            return d[0] + "," + d[1];
+        }).attr("x", function (d) {
                     return d[0];
                 })
                 .attr("y",function (d) {
