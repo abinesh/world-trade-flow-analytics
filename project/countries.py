@@ -1,3 +1,5 @@
+from itertools import combinations
+
 countries = ["USA",
              "Afghanistan",
              "Afr.Other NS",
@@ -214,3 +216,9 @@ for c in countries:
 
 def is_valid_country(importer):
     return country_to_index_map.has_key(importer)
+
+
+def country_pairs():
+    return combinations(countries, 2)
+
+
