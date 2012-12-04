@@ -218,7 +218,9 @@ def is_valid_country(importer):
     return country_to_index_map.has_key(importer)
 
 
-def country_pairs():
-    return combinations(countries, 2)
+def country_pairs(only_these_countries):
+    interested_countries = countries  if only_these_countries is None else only_these_countries
+    return combinations(interested_countries, 2)
+
 
 
