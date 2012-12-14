@@ -58,11 +58,17 @@ class ExportData:
             return None, None
 
         time_period = range(begin_year, end_year + 1)
-        export_quantity_during_this_time_period = [self.export_data(year, exporter, importer) for year in time_period]
-        (slope, intercept) = polyfit(time_period, export_quantity_during_this_time_period, 1)
+        export_quantities = [self.export_data(year, exporter, importer, True) for year in time_period]
+        if len(export_quantities) - export_quantities.count(None) < 3:
+            return None, None
+
+        filtered = [(y, q) for (y, q) in zip(time_period, export_quantities) if q is not None]
+        filtered_time_period, filtered_export_quantities = zip(*filtered)
+
+        (slope, intercept) = polyfit(filtered_time_period, filtered_export_quantities, 1)
 
         predicted_export_quantity = slope * (end_year + 1) + intercept
-        standard_deviation = std(export_quantity_during_this_time_period)
+        standard_deviation = std(filtered_export_quantities)
 
         return predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
 

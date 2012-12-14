@@ -30,6 +30,8 @@ def definition_B(data, year, country_A, country_B, args):
 
     def export_trend_type(data, year, A, B):
         actual_export = data.export_data(year, A, B)
+        if actual_export is None:
+            return CANT_ESTABLISH_TREND
         (lower_limit, upper_limit) = data.expected_export_range(year - args['sliding_window_size'] - 1, year - 1, A, B)
 
         if lower_limit is None or upper_limit is None:
