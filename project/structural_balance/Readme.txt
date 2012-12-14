@@ -17,5 +17,8 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
 
 4. Positive/negative links definitions
     A. If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
-    B. Link between two countries(A,B) in a year(Y) in a year is positive if both A->B trend and B->A trend are positive else it is negative:
-        A trend is positive if export quantity in a year is within one standard deviation considering last 5 years data.
+    B. Link between two countries(A,B) in a year(Y) in a year is positive if both A->B trend and B->A trend are positive/stable else it is either no_trend or negative
+        a trend is stable if export_quantity in a year is within one standard deviation ranges considering last 5 years data
+        a trend is positive if export_quantity is above upper range
+        a trend is negative if export_quantity is below lower range
+        a trend doesn't exist if there is a missing data point in the sliding window period
