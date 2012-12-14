@@ -1,4 +1,5 @@
 from project.export_data.strongties import is_there_a_strong_tie_method_B
+from project.traids_vs_degree_plot import config
 
 NEGATIVE_LINK = "negative"
 POSITIVE_LINK = "positive"
@@ -30,6 +31,9 @@ def definition_B(data, year, country_A, country_B, args):
     CANT_ESTABLISH_TREND = "null"
 
     def export_growth(data, year, A, B):
+        if not is_there_a_strong_tie_method_B(data, year, A, B, config.STRONG_TIES_LOWER_BOUND,
+            config.STRONG_TIES_UPPER_BOUND):
+            return CANT_ESTABLISH_TREND
         actual_export_percentage = data.export_data_as_percentage(year, A, B, True)
         if actual_export_percentage is None:
             return CANT_ESTABLISH_TREND
