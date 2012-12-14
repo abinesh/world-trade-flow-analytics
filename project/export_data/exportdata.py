@@ -59,7 +59,7 @@ class ExportData:
 
         time_period = range(begin_year, end_year + 1)
         export_quantities = [self.export_data(year, exporter, importer, True) for year in time_period]
-        if len(export_quantities) - export_quantities.count(None) < 3:
+        if export_quantities.count(None) > 0:
             return None, None
 
         filtered = [(y, q) for (y, q) in zip(time_period, export_quantities) if q is not None]
