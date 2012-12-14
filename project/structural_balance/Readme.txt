@@ -14,3 +14,6 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
         or (a.year ='Y1999' and a.export_quantity is NULL)
         )
     group by A.exporter,A.importer) A where A.cccc = 3
+
+4. Positive/negative links definition
+    A. If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
