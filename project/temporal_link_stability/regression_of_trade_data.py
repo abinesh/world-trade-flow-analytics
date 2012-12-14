@@ -3,13 +3,10 @@ import os
 from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import is_valid_country
-from project.traids_vs_degree_plot.export_data.exportdata import load_export_data, export_data
+from project.traids_vs_degree_plot.export_data.exportdata import load_export_data, export_data, total_exports
 from project.util import column_to_year, file_safe
 
 load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
-
-def total_exports(exporter, year):
-    return export_data(year, exporter, 'World')
 
 rootdir = 'matlab/'
 

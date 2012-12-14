@@ -7,10 +7,6 @@ from project.traids_vs_degree_plot.export_data.strongties import is_there_a_stro
 
 load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
-def total_exports(exporter, year):
-    return export_data(year, exporter, 'World')
-
-
 def generate_network_graph_data_for_structured_balance(year, only_these_countries, out_file):
     f = open(out_file, 'w')
     for (c1, c2) in country_pairs(only_these_countries):

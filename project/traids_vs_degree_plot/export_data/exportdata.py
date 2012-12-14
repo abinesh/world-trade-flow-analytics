@@ -41,6 +41,8 @@ def export_data(year, exporter, importer):
     exporter_data_for_year = export_data_for_a_country(exporter, year)
     return exporter_data_for_year.get_export_to_country(importer)
 
+def total_exports(exporter, year):
+    return export_data(year, exporter, 'World')
 
 def load_export_data(file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
     reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
