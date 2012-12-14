@@ -52,32 +52,32 @@ Modified from http://bl.ocks.org/1153292
 
 var links = [   {source:"USA", target:"Canada", type:"positive"},
     {source:"USA", target:"UK", type:"positive"},
-    {source:"USA", target:"Iran", type:"resolved"},
-    {source:"USA", target:"Iraq", type:"resolved"},
+    {source:"USA", target:"Iran", type:"negative"},
+    {source:"USA", target:"Iraq", type:"negative"},
 
     {source:"Canada", target:"UK", type:"positive"},
-    {source:"Canada", target:"Iran", type:"resolved"},
-    {source:"Canada", target:"Iraq", type:"resolved"},
+    {source:"Canada", target:"Iran", type:"negative"},
+    {source:"Canada", target:"Iraq", type:"negative"},
 
-    {source:"UK", target:"Iran", type:"resolved"},
-    {source:"UK", target:"Iraq", type:"resolved"},
+    {source:"UK", target:"Iran", type:"negative"},
+    {source:"UK", target:"Iraq", type:"negative"},
 
-    {source:"Iran", target:"UK", type:"resolved"},
+    {source:"Iran", target:"UK", type:"negative"},
     {source:"Iran", target:"Iraq", type:"positive"},
 
-    {source:"Iraq", target:"UK", type:"resolved"},
+    {source:"Iraq", target:"UK", type:"negative"},
 
-    {source:"China", target:"USA", type:"resolved"},
-    {source:"China", target:"Canada", type:"resolved"},
-    {source:"China", target:"UK", type:"resolved"},
-    {source:"China", target:"Iran", type:"resolved"},
-    {source:"China", target:"Iraq", type:"resolved"},
+    {source:"China", target:"USA", type:"negative"},
+    {source:"China", target:"Canada", type:"negative"},
+    {source:"China", target:"UK", type:"negative"},
+    {source:"China", target:"Iran", type:"negative"},
+    {source:"China", target:"Iraq", type:"negative"},
 
-    {source:"Japan", target:"Canada", type:"resolved"},
-    {source:"Japan", target:"UK", type:"resolved"},
-    {source:"Japan", target:"Iran", type:"resolved"},
+    {source:"Japan", target:"Canada", type:"negative"},
+    {source:"Japan", target:"UK", type:"negative"},
+    {source:"Japan", target:"Iran", type:"negative"},
     {source:"Japan", target:"China", type:"positive"},
-    {source:"Japan", target:"Iraq", type:"resolved"},
+    {source:"Japan", target:"Iraq", type:"negative"},
 
 ];
 
@@ -97,7 +97,7 @@ var force = d3.layout.force()
         .links(links)
         .size([w, h])
         .linkDistance(function (n) {
-            if (n.type == "resolved") return 600; else return 1;
+            if (n.type == "negative") return 600; else return 1;
         })
         .charge(-300)
         .on("tick", tick)
@@ -109,7 +109,7 @@ var svg = d3.select("body").append("svg:svg")
 
 // Per-type markers, as they don't inherit styles.
 svg.append("svg:defs").selectAll("marker")
-        .data(["positive", "licensing", "resolved"])
+        .data(["positive", "licensing", "negative"])
         .enter().append("svg:marker")
         .attr("id", String)
         .attr("viewBox", "0 -5 10 10")

@@ -3,4 +3,4 @@ from project.traids_vs_degree_plot.config import STRONG_TIES_LOWER_BOUND, STRONG
 
 def definition_A(c1, c2, data, year):
     return "positive" if is_there_a_strong_tie_method_B(data, year, c1, c2, STRONG_TIES_LOWER_BOUND,
-        STRONG_TIES_UPPER_BOUND) else "resolved"
+        STRONG_TIES_UPPER_BOUND) else "negative"
