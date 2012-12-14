@@ -1,4 +1,5 @@
 import csv
+from numpy import polyfit, std
 from project import countries
 from project.config import YEAR_COLUMNS
 from project.countries import is_valid_country
@@ -48,7 +49,17 @@ class ExportData:
         return self.export_data(year, exporter, 'World')
 
     def expected_export_range(self, begin_year, end_year, exporter, importer):
-        return 100, 200
+        if not begin_year in self.all_years or not end_year in self.all_years:
+            return None, None
+
+        time_period = range(begin_year, end_year + 1)
+        export_quantity_during_this_time_period = [self.export_data(year, exporter, importer) for year in time_period]
+        (slope, intercept) = polyfit(time_period, export_quantity_during_this_time_period, 1)
+
+        predicted_export_quantity = slope * (end_year + 1) + intercept
+        standard_deviation = std(export_quantity_during_this_time_period)
+
+        return predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
