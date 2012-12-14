@@ -1,5 +1,5 @@
 from project.config import  WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
-from project.countries import country_pairs, a_subset_of_countries
+from project.countries import country_pairs, a_subset_of_countries, world_excluded_countries_list
 from project.export_data.exportdata import ExportData
 from project.structural_balance.config import output_file
 from project.structural_balance.definitions import definition_A, NO_LINK, args_for_definition_A, args_for_definition_B, definition_B
@@ -17,8 +17,8 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
 data = ExportData()
 data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
-generate_network_graph_data(data, 2000, a_subset_of_countries, output_file(2000), definition_A,
-    args_for_definition_A(STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND))
+#generate_network_graph_data(data, 2000, a_subset_of_countries, output_file(2000), definition_A,
+#    args_for_definition_A(STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND))
 
-generate_network_graph_data(data, 2000, None, output_file(2000), definition_B, args_for_definition_B())
+generate_network_graph_data(data, 2000, world_excluded_countries_list(), output_file(2000), definition_B, args_for_definition_B(5))
 

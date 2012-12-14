@@ -47,6 +47,8 @@ class ExportData:
     def total_exports(self, exporter, year):
         return self.export_data(year, exporter, 'World')
 
+    def expected_export_range(self, begin_year, end_year, exporter, importer):
+        return 100, 200
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
