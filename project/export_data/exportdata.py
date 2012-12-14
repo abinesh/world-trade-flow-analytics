@@ -53,14 +53,14 @@ class ExportData:
     def total_exports(self, exporter, year):
         return self.export_data(year, exporter, 'World')
 
-    def expected_export_range(self, begin_year, end_year, exporter, importer):
+    def bollinger_band_range(self, begin_year, end_year, exporter, importer):
         if not begin_year in self.all_years or not end_year in self.all_years:
-            return None, None
+            return None, None, None
 
         time_period = range(begin_year, end_year + 1)
         export_quantities = [self.export_data(year, exporter, importer, True) for year in time_period]
         if export_quantities.count(None) > 0:
-            return None, None
+            return None, None, None
 
         filtered = [(y, q) for (y, q) in zip(time_period, export_quantities) if q is not None]
         filtered_time_period, filtered_export_quantities = zip(*filtered)
@@ -70,7 +70,7 @@ class ExportData:
         predicted_export_quantity = slope * (end_year + 1) + intercept
         standard_deviation = std(filtered_export_quantities)
 
-        return predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
+        return slope, predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)

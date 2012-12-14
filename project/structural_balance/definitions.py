@@ -23,36 +23,38 @@ def args_for_definition_B(sliding_window_size):
 
 
 def definition_B(data, year, country_A, country_B, args):
-    DECELERATING = "decelerating"
-    ACCELERATING = "accelerating"
-    STABLE_TREND = "stable"
+    ACCELERATING = "+"
+    DECELERATING = "-"
+    STEADY_RISING = "s+"
+    STEADY_FALLING = "s-"
     CANT_ESTABLISH_TREND = "null"
 
     def export_growth(data, year, A, B):
         actual_export = data.export_data(year, A, B)
         if actual_export is None:
             return CANT_ESTABLISH_TREND
-        (lower_limit, upper_limit) = data.expected_export_range(year - args['sliding_window_size'] - 1, year - 1, A, B)
+        (slope, lower_limit, upper_limit) = data.bollinger_band_range(year - args['sliding_window_size'] - 1, year - 1,
+            A, B)
 
         if lower_limit is None or upper_limit is None:
-            return CANT_ESTABLISH_TREND
+            return None, CANT_ESTABLISH_TREND
         elif actual_export < lower_limit:
             return DECELERATING
-        elif lower_limit <= actual_export <= upper_limit:
-            return STABLE_TREND
-        else:
+        elif actual_export > upper_limit:
             return ACCELERATING
-
-    def combine_trends(A, B):
-        if A == CANT_ESTABLISH_TREND or B == CANT_ESTABLISH_TREND:
-            return NO_LINK
-        elif A == DECELERATING or B == DECELERATING:
-            return NEGATIVE_LINK
         else:
-            return POSITIVE_LINK
+            return STEADY_RISING if slope > 0 else STEADY_FALLING
 
-    A_export_to_B = export_growth(data, year, country_A, country_B)
-    B_export_to_A = export_growth(data, year, country_B, country_A)
-    return combine_trends(A_export_to_B, B_export_to_A)
+    def combine_trends(trend_A, trend_B):
+        if CANT_ESTABLISH_TREND in [trend_A, trend_B]:
+            return NO_LINK
+        elif trend_A in [ACCELERATING, STEADY_RISING] and trend_B in [ACCELERATING, STEADY_RISING]:
+            return POSITIVE_LINK
+        else:
+            return NEGATIVE_LINK
+
+    trend_A = export_growth(data, year, country_A, country_B)
+    trend_B = export_growth(data, year, country_B, country_A)
+    return combine_trends(trend_A, trend_B)
 
 
