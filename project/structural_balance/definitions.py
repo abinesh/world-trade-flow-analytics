@@ -23,12 +23,12 @@ def args_for_definition_B(sliding_window_size):
 
 
 def definition_B(data, year, country_A, country_B, args):
-    DOWNWARD_TREND = "downward"
-    UPWARD_TREND = "upward"
+    DECELERATING = "decelerating"
+    ACCELERATING = "accelerating"
     STABLE_TREND = "stable"
     CANT_ESTABLISH_TREND = "null"
 
-    def export_trend_type(data, year, A, B):
+    def export_growth(data, year, A, B):
         actual_export = data.export_data(year, A, B)
         if actual_export is None:
             return CANT_ESTABLISH_TREND
@@ -37,22 +37,22 @@ def definition_B(data, year, country_A, country_B, args):
         if lower_limit is None or upper_limit is None:
             return CANT_ESTABLISH_TREND
         elif actual_export < lower_limit:
-            return DOWNWARD_TREND
+            return DECELERATING
         elif lower_limit <= actual_export <= upper_limit:
             return STABLE_TREND
         else:
-            return UPWARD_TREND
+            return ACCELERATING
 
     def combine_trends(A, B):
         if A == CANT_ESTABLISH_TREND or B == CANT_ESTABLISH_TREND:
             return NO_LINK
-        elif A == DOWNWARD_TREND or B == DOWNWARD_TREND:
+        elif A == DECELERATING or B == DECELERATING:
             return NEGATIVE_LINK
         else:
             return POSITIVE_LINK
 
-    A_export_to_B = export_trend_type(data, year, country_A, country_B)
-    B_export_to_A = export_trend_type(data, year, country_B, country_A)
+    A_export_to_B = export_growth(data, year, country_A, country_B)
+    B_export_to_A = export_growth(data, year, country_B, country_A)
     return combine_trends(A_export_to_B, B_export_to_A)
 
 
