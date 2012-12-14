@@ -15,5 +15,7 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
         )
     group by A.exporter,A.importer) A where A.cccc = 3
 
-4. Positive/negative links definition
+4. Positive/negative links definitions
     A. If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
+    B. Link between two countries(A,B) in a year(Y) in a year is positive if both A->B trend and B->A trend are positive else it is negative:
+        A trend is positive if export quantity in a year is within one standard deviation considering last 5 years data.
