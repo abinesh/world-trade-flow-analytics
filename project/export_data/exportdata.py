@@ -77,10 +77,10 @@ class ExportData:
 
         (slope, intercept) = polyfit(filtered_time_period, filtered_export_percentages, 1)
 
-        predicted_export_quantity = slope * (end_year + 1) + intercept
+        predicted_export_percentage = slope * (end_year + 1) + intercept
         standard_deviation = std(filtered_export_percentages)
 
-        return slope, predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
+        return slope, predicted_export_percentage - standard_deviation, predicted_export_percentage + standard_deviation
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
