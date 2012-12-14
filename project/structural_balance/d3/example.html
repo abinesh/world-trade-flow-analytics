@@ -50,12 +50,12 @@
 Modified from http://bl.ocks.org/1153292
 <script type="text/javascript">
 
-var links = [   {source:"USA", target:"Canada", type:"suit"},
-    {source:"USA", target:"UK", type:"suit"},
+var links = [   {source:"USA", target:"Canada", type:"positive"},
+    {source:"USA", target:"UK", type:"positive"},
     {source:"USA", target:"Iran", type:"resolved"},
     {source:"USA", target:"Iraq", type:"resolved"},
 
-    {source:"Canada", target:"UK", type:"suit"},
+    {source:"Canada", target:"UK", type:"positive"},
     {source:"Canada", target:"Iran", type:"resolved"},
     {source:"Canada", target:"Iraq", type:"resolved"},
 
@@ -63,7 +63,7 @@ var links = [   {source:"USA", target:"Canada", type:"suit"},
     {source:"UK", target:"Iraq", type:"resolved"},
 
     {source:"Iran", target:"UK", type:"resolved"},
-    {source:"Iran", target:"Iraq", type:"suit"},
+    {source:"Iran", target:"Iraq", type:"positive"},
 
     {source:"Iraq", target:"UK", type:"resolved"},
 
@@ -76,7 +76,7 @@ var links = [   {source:"USA", target:"Canada", type:"suit"},
     {source:"Japan", target:"Canada", type:"resolved"},
     {source:"Japan", target:"UK", type:"resolved"},
     {source:"Japan", target:"Iran", type:"resolved"},
-    {source:"Japan", target:"China", type:"suit"},
+    {source:"Japan", target:"China", type:"positive"},
     {source:"Japan", target:"Iraq", type:"resolved"},
 
 ];
@@ -109,7 +109,7 @@ var svg = d3.select("body").append("svg:svg")
 
 // Per-type markers, as they don't inherit styles.
 svg.append("svg:defs").selectAll("marker")
-        .data(["suit", "licensing", "resolved"])
+        .data(["positive", "licensing", "resolved"])
         .enter().append("svg:marker")
         .attr("id", String)
         .attr("viewBox", "0 -5 10 10")
