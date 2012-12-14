@@ -3,7 +3,7 @@ import os
 from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import is_valid_country
-from project.traids_vs_degree_plot.export_data.exportdata import ExportData
+from project.export_data.exportdata import ExportData
 from project.util import column_to_year, file_safe
 
 rootdir = 'matlab/'

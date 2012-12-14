@@ -1,9 +1,9 @@
 from project.config import  WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import country_pairs
+from project.export_data.exportdata import ExportData
+from project.export_data.strongties import is_there_a_strong_tie_method_B
 from project.structural_balance.config import output_file
 from project.traids_vs_degree_plot.config import STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND
-from project.traids_vs_degree_plot.export_data.exportdata import ExportData
-from project.traids_vs_degree_plot.export_data.strongties import is_there_a_strong_tie_method_B
 
 
 def generate_network_graph_data_for_structured_balance(data,year, only_these_countries, out_file):

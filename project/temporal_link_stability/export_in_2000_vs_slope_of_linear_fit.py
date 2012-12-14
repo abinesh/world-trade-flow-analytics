@@ -1,4 +1,4 @@
-from project.traids_vs_degree_plot.export_data.exportdata import ExportData
+from project.export_data.exportdata import ExportData
 import re
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, WRITE_OUT_TO_DIR

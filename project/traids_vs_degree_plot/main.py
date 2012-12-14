@@ -1,8 +1,8 @@
 from project.config import  WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
+from project.export_data import strongties
+from project.export_data.exportdata import ExportData
 from project.traids_vs_degree_plot import config
-from project.traids_vs_degree_plot.export_data import  strongties
 from project.traids_vs_degree_plot.csv_writer.csv_writer import csv_write
-from project.traids_vs_degree_plot.export_data.exportdata import ExportData
 
 
 def write_out_graph_data_for_traids_vs_degree_plot(data):
