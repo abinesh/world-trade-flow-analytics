@@ -19,6 +19,12 @@
             stroke-width: 0.1px;
         }
 
+        path.link.missing {
+            display:none;
+            /*stroke: #66181f;*/
+            /*stroke-width: 0.1px;*/
+        }
+
         circle {
             fill: #ccc;
             stroke: #333;
@@ -55,7 +61,7 @@ var links = [   {source:"USA", target:"Canada", type:"positive"},
     {source:"UK", target:"Iraq", type:"negative"},
 
     {source:"Iran", target:"UK", type:"negative"},
-    {source:"Iran", target:"Iraq", type:"positive"},
+    {source:"Iran", target:"Iraq", type:"missing"},
 
     {source:"Iraq", target:"UK", type:"negative"},
 
@@ -89,9 +95,12 @@ var force = d3.layout.force()
         .links(links)
         .size([w, h])
         .linkDistance(function (n) {
-            if (n.type == "negative") return 600; else return 1;
+            if (n.type == "negative") return 600;
+            if (n.type == "missing") return 300;
+            else return 1;
         })
         .charge(-300)
+        .gravity(0.1)
         .on("tick", tick)
         .start();
 
@@ -109,9 +118,7 @@ svg.append("svg:defs").selectAll("marker")
         .attr("refY", -1.5)
         .attr("markerWidth", 6)
         .attr("markerHeight", 6)
-        .attr("orient", "auto")
-        .append("svg:path")
-        .attr("Iran", "M0,-5L10,0L0,5");
+        .attr("orient", "auto");
 
 var path = svg.append("svg:g").selectAll("path")
         .data(force.links())

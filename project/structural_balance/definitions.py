@@ -2,7 +2,7 @@ from project.export_data.strongties import is_there_a_strong_tie_method_B
 
 NEGATIVE_LINK = "negative"
 POSITIVE_LINK = "positive"
-NO_LINK = "null"
+NO_LINK = "missing"
 
 def args_for_definition_A(lower_bound, upper_bound):
     return {

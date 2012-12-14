@@ -5202,7 +5202,9 @@ Modified from http://bl.ocks.org/1153292
             .links(links)
             .size([w, h])
             .linkDistance(function (n) {
-                if (n.type == "negative") return 600; else return 1;
+                if (n.type == "negative") return 600;
+                if (n.type == "missing") return 300;
+                else return 1;
             })
             .charge(-300)
             .on("tick", tick)
@@ -5222,9 +5224,7 @@ Modified from http://bl.ocks.org/1153292
             .attr("refY", -1.5)
             .attr("markerWidth", 6)
             .attr("markerHeight", 6)
-            .attr("orient", "auto")
-            .append("svg:path")
-            .attr("Iran", "M0,-5L10,0L0,5");
+            .attr("orient", "auto");
 
     var path = svg.append("svg:g").selectAll("path")
             .data(force.links())
