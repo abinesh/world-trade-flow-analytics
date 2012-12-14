@@ -23,9 +23,11 @@ class Country:
 class ExportData:
     def __init__(self):
         self.years_map = {}
+        self.missing_data_records_map = {}
         self.all_years = range(1963, 2001)
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
+            self.missing_data_records_map[year] = {}
             print "Inited map for year %d " % year
 
     def __empty_data_for_a_year(self):
@@ -35,13 +37,16 @@ class ExportData:
         return list
 
 
-    def export_data_for_a_country(self, exporter, year):
+    def __export_data_for_a_country(self, exporter, year):
         country_index = countries.country_to_index_map[exporter]
         return self.years_map[year][country_index]
 
 
-    def export_data(self, year, exporter, importer):
-        exporter_data_for_year = self.export_data_for_a_country(exporter, year)
+    def export_data(self, year, exporter, importer, respect_missing_points=False):
+        if respect_missing_points:
+            if not self.__data_exists(year, exporter, importer):
+                return None
+        exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         return exporter_data_for_year.get_export_to_country(importer)
 
 
@@ -76,10 +81,23 @@ class ExportData:
                 continue
             for column in year_columns:
                 export_quantity = row.get(column)
-                if export_quantity == 'NaN':
-                    continue
                 year = column_to_year(column)
-                self.export_data_for_a_country(exporter, year).set_export_to_country(importer, float(export_quantity))
+                if export_quantity == 'NaN':
+                    self.__record_missing_data(year, exporter, importer)
+                    continue
+                self.__export_data_for_a_country(exporter, year).set_export_to_country(importer, float(export_quantity))
                 print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
 
+    def __record_missing_data(self, year, exporter, importer):
+        m = self.missing_data_records_map[year]
+        if exporter not in m:
+            m[exporter] = {}
+        m[exporter][importer] = 1
+
+    def __data_exists(self, year, exporter, importer):
+        m = self.missing_data_records_map[year]
+        if exporter in m:
+            if importer in m[exporter]:
+                return False
+        return True
 
