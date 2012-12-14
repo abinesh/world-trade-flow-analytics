@@ -30,7 +30,7 @@ def definition_B(data, year, country_A, country_B, args):
     CANT_ESTABLISH_TREND = "null"
 
     def export_growth(data, year, A, B):
-        actual_export = data.export_data(year, A, B)
+        actual_export = data.export_data(year, A, B,True)
         if actual_export is None:
             return CANT_ESTABLISH_TREND
         (slope, lower_limit, upper_limit) = data.bollinger_band_range(year - args['sliding_window_size'] - 1, year - 1,

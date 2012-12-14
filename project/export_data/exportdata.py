@@ -49,6 +49,16 @@ class ExportData:
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         return exporter_data_for_year.get_export_to_country(importer)
 
+    def export_data_as_percentage(self, year, exporter, importer, respect_missing_points=False):
+        if respect_missing_points:
+            if not self.__data_exists(year, exporter, importer):
+                return None
+        print "%d,%s,%s" % (year, exporter, importer)
+        exports_to_world = self.total_exports(exporter, year)
+        if exports_to_world is None or exports_to_world == 0:
+            return None
+        return self.export_data(year, exporter, importer, respect_missing_points) / exports_to_world
+
 
     def total_exports(self, exporter, year):
         return self.export_data(year, exporter, 'World')
@@ -58,17 +68,17 @@ class ExportData:
             return None, None, None
 
         time_period = range(begin_year, end_year + 1)
-        export_quantities = [self.export_data(year, exporter, importer, True) for year in time_period]
-        if export_quantities.count(None) > 0:
+        export_percentages = [self.export_data_as_percentage(year, exporter, importer, True) for year in time_period]
+        if len(export_percentages) - export_percentages.count(None) < 3:
             return None, None, None
 
-        filtered = [(y, q) for (y, q) in zip(time_period, export_quantities) if q is not None]
-        filtered_time_period, filtered_export_quantities = zip(*filtered)
+        filtered = [(y, q) for (y, q) in zip(time_period, export_percentages) if q is not None]
+        filtered_time_period, filtered_export_percentages = zip(*filtered)
 
-        (slope, intercept) = polyfit(filtered_time_period, filtered_export_quantities, 1)
+        (slope, intercept) = polyfit(filtered_time_period, filtered_export_percentages, 1)
 
         predicted_export_quantity = slope * (end_year + 1) + intercept
-        standard_deviation = std(filtered_export_quantities)
+        standard_deviation = std(filtered_export_percentages)
 
         return slope, predicted_export_quantity - standard_deviation, predicted_export_quantity + standard_deviation
 
