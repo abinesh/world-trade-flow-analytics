@@ -1,7 +1,7 @@
+from project.traids_vs_degree_plot.export_data.exportdata import ExportData
 import re
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, WRITE_OUT_TO_DIR
-from project.traids_vs_degree_plot.export_data.exportdata import  load_export_data, export_data
 from project.util import file_safe
 
 
@@ -21,7 +21,6 @@ def read_slopes():
         print line
 
 read_slopes()
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, ["Value00"],should_include_world=True)
 
 def slope_data(exporter, importer):
     return slopes[file_safe(exporter)][file_safe(importer)]
@@ -34,7 +33,7 @@ def trade_relationship_exists(exporter, importer):
     return False
 
 
-def write_data_files_for_slope_vs_export_plots(root_dir, out_dir):
+def write_data_files_for_slope_vs_export_plots(data,root_dir, out_dir):
     f_countries_list = open(root_dir + '/' + out_dir + '/all-countries.txt', 'w')
 
     total_countries = 0
@@ -53,18 +52,21 @@ def write_data_files_for_slope_vs_export_plots(root_dir, out_dir):
             if not trade_relationship_exists(exporter, importer):
                 continue
             print exporter + ' ' + importer
-            print str(slope_data(exporter, importer)) + ' ' + str(export_data(2000, exporter, importer))
-            f.write(str(slope_data(exporter, importer)) + ' ' + str(export_data(2000, exporter, importer)) + '\n')
+            print str(slope_data(exporter, importer)) + ' ' + str(data.export_data(2000, exporter, importer))
+            f.write(str(slope_data(exporter, importer)) + ' ' + str(data.export_data(2000, exporter, importer)) + '\n')
             if importer == 'World':
                 f_world.write(
-                    str(slope_data(exporter, importer)) + ' ' + str(export_data(2000, exporter, importer)) + '\n')
+                    str(slope_data(exporter, importer)) + ' ' + str(data.export_data(2000, exporter, importer)) + '\n')
 
         f.close()
         f_world.close()
     f_countries_list.close()
     return total_countries
 
-total_countries = write_data_files_for_slope_vs_export_plots('matlab', 'out/slope-vs-export-percent')
+data = ExportData()
+data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, ["Value00"],should_include_world=True)
+
+total_countries = write_data_files_for_slope_vs_export_plots(data,'matlab', 'out/slope-vs-export-percent')
 matlab_program_file = open('matlab/slope_vs_export_percent_gen.m', 'w')
 
 matlab_program_file.write("clear" + '\n')

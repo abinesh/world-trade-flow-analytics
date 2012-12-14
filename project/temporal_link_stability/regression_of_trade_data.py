@@ -3,14 +3,12 @@ import os
 from project import countries
 from project.config import YEAR_COLUMNS, WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import is_valid_country
-from project.traids_vs_degree_plot.export_data.exportdata import load_export_data, export_data, total_exports
+from project.traids_vs_degree_plot.export_data.exportdata import ExportData
 from project.util import column_to_year, file_safe
-
-load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
 rootdir = 'matlab/'
 
-def gen_intermediate_data_for_one_way_linear_regression_plot(input_file, f1, f2, f3):
+def gen_intermediate_data_for_one_way_linear_regression_plot(data,input_file, f1, f2, f3):
     i = 0
     reader = csv.DictReader(open(input_file, 'rb'), skipinitialspace=True)
     out1 = open(f1, 'w')
@@ -35,9 +33,9 @@ def gen_intermediate_data_for_one_way_linear_regression_plot(input_file, f1, f2,
                 if export_quantity == 'NaN':
                     continue
                 year = column_to_year(column)
-                print exporter + ' ' + importer + ' ' + str(year) + ' ' + export_quantity + ' ' + str(total_exports(
+                print exporter + ' ' + importer + ' ' + str(year) + ' ' + export_quantity + ' ' + str(data.total_exports(
                     exporter, year))
-                writer.writerow([year, float(export_quantity) / total_exports(exporter, year) * 100])
+                writer.writerow([year, float(export_quantity) / data.total_exports(exporter, year) * 100])
 
         out1.write(filepath + "\n")
         out2.write(
@@ -77,7 +75,7 @@ def gen_intermediate_data_for_one_way_linear_regression_plot(input_file, f1, f2,
     out3.write("end\n")
 
 
-def gen_intermediate_data_for_both_way_linear_regression_plot(f1, f2, f3):
+def gen_intermediate_data_for_both_way_linear_regression_plot(data,f1, f2, f3):
     out1 = open(f1, 'w')
     out2 = open(f2, 'w')
     i = 0
@@ -94,10 +92,10 @@ def gen_intermediate_data_for_both_way_linear_regression_plot(f1, f2, f3):
                 writer = csv.writer(csvfile, delimiter='\t')
                 for y in YEAR_COLUMNS:
                     year = column_to_year(y)
-                    a1 = float(export_data(year, exporter, importer))
-                    a2 = total_exports(exporter, year)
-                    a3 = float(export_data(year, importer, exporter))
-                    a4 = total_exports(importer, year)
+                    a1 = float(data.export_data(year, exporter, importer))
+                    a2 = data.total_exports(exporter, year)
+                    a3 = float(data.export_data(year, importer, exporter))
+                    a4 = data.total_exports(importer, year)
                     print "In %d, %s to %s: %f/%f, %s to %s : %f/%f" % (
                         year, exporter, importer, a1, a2, importer, exporter, a3, a4)
                     if a1 == 0.0 and a3 == 0.0:
@@ -119,9 +117,13 @@ def gen_intermediate_data_for_both_way_linear_regression_plot(f1, f2, f3):
 
     pass
 
-#gen_intermediate_data_for_one_way_linear_regression_plot(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, 'matlab/input-files-percent.txt',
+
+data = ExportData()
+data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
+
+#gen_intermediate_data_for_one_way_linear_regression_plot(data,WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, 'matlab/input-files-percent.txt',
 #    'matlab/output-files-percent.txt', 'matlab/generateplotsloop.m')
-gen_intermediate_data_for_both_way_linear_regression_plot('matlab/input-files-both-ways-percent.txt',
+gen_intermediate_data_for_both_way_linear_regression_plot(data,'matlab/input-files-both-ways-percent.txt',
     'matlab/output-files-both-ways-percent.txt', 'matlab/generateplotsloop.m')
 
 '''
