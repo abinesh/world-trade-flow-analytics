@@ -14,7 +14,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
             f.write('{source:"%s", target:"%s", type:"%s"},\n' % (c1, c2, link_type))
     f.close()
 
-data = ExportData()
+data = ExportData(1991,2000)
 data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
 #generate_network_graph_data(data, 2000, a_subset_of_countries, output_file(2000), definition_A,

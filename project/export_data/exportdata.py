@@ -21,10 +21,10 @@ class Country:
 
 
 class ExportData:
-    def __init__(self):
+    def __init__(self, start_year=1963, end_year=2000):
         self.years_map = {}
         self.missing_data_records_map = {}
-        self.all_years = range(1963, 2001)
+        self.all_years = range(start_year, end_year + 1)
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
             self.missing_data_records_map[year] = {}
@@ -88,6 +88,8 @@ class ExportData:
             for column in year_columns:
                 export_quantity = row.get(column)
                 year = column_to_year(column)
+                if not year in self.all_years:
+                    continue
                 if export_quantity == 'NaN':
                     self.__record_missing_data(year, exporter, importer)
                     continue
