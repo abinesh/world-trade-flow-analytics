@@ -16,11 +16,13 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
     f.write(html_footer)
     f.close()
 
-data = ExportData(1991, 2000)
+data = ExportData()
 data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
 
 #generate_network_graph_data(data, 2000, a_subset_of_countries, output_file(2000), definition_A,
 #    args_for_definition_A(STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND))
 
-generate_network_graph_data(data, 2000, world_excluded_countries_list(), output_file_html(2000), definition_B,args_for_definition_B(5))
+for year in range(1968, 2001):
+    generate_network_graph_data(data, year, world_excluded_countries_list(), output_file_html(year), definition_B,
+        args_for_definition_B(5))
 

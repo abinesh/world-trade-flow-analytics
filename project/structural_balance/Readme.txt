@@ -17,9 +17,22 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
 
 4. Positive/negative links definitions
     A. If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
-    B. Link between two countries(A,B) in a year(Y) in a year is positive if both A->B trend and B->A trend are accelerating/stable-rising else it is either no_trend or decelerating/stable-falling
-        a trend is stable-rising if linear fit slope is positive and export_percentage in a year is within bollinger band range considering last 5 years data
-        a trend is stable-falling if linear fit slope is negative and export_percentage in a year is within bollinger band range ranges considering last 5 years data
-        a trend is accelerating if export_percentage is above upper range
-        a trend is decelerating if export_percentage is below lower range
-        a trend doesn't exist if there is a missing data point in the sliding window period
+    B.
+        -Each yearly graph represents positive, negative relationships/links between all pairs of countries. Missing links are taken into consideration too.
+        -A relationship/link between two countries in a year are determined as follows:
+            -Relationship is positive if both export_from_A_to_B trend and export_from_B_to_A trend are positive
+            -Relationship is negative if one or both of the trends are negative
+            -Relationship is missing if one or both of the trends are missing
+        -Trends are determined using a variation of bollinger bands where linear fit is used instead of moving average. Sliding window size is 5 years
+            -A trend is considered positive when one of the following conditions are met
+                -Linear fit slope is positive and export_percentage is within the range
+                -Linear fit slope is positive and export_percentage is above range
+                -Linear fit slope is negative and export_percentage is above range
+            -A trend is considered negative when one of the following conditions are met
+                -Linear fit slope is positive and export_percentage is below the range
+                -Linear fit slope is negative and export_percentage is within the upper range
+                -Linear fit slope is negative and export_percentage is below the upper range
+            -A trend is missing when one of the following conditions are met
+                -If the ratio of import/export between the two countries is not within the range 0.5 and 2
+                -No datapoint for the interested year
+                -Not enough data points(there should be atleast 3 data points) in sliding window to compute bollinger bands
