@@ -55,7 +55,6 @@ html_header = '''
 Modified from http://bl.ocks.org/1153292
 <script type="text/javascript">
 
-// http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
 var links = [
     '''
 
@@ -80,7 +79,7 @@ var force = d3.layout.force()
         .linkDistance(function (n) {
             if (n.type == "negative") return 600;
             if (n.type == "missing") return 300;
-            else return 1;
+            else return 10;
         })
         .charge(-300)
         .on("tick", tick)

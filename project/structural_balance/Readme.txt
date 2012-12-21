@@ -36,3 +36,6 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
                 -If the ratio of import/export between the two countries is not within the range 0.5 and 2
                 -No datapoint for the interested year
                 -Not enough data points(there should be atleast 3 data points) in sliding window to compute bollinger bands
+
+5. Top 50 countries data
+    https://docs.google.com/spreadsheet/ccc?key=0AtaB149ijWVNdGI3eTBaVGxZajZFQnFDY09URmtRYWc#gid=1

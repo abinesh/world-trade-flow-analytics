@@ -2,7 +2,7 @@ import csv
 from numpy import polyfit, std
 from project import countries
 from project.config import YEAR_COLUMNS
-from project.countries import is_valid_country
+from project.countries import is_valid_country, world_excluded_countries_list
 from project.util import column_to_year
 
 class Country:
@@ -81,6 +81,15 @@ class ExportData:
         standard_deviation = std(filtered_export_percentages)
 
         return slope, predicted_export_percentage - standard_deviation, predicted_export_percentage + standard_deviation
+
+    def top_countries_by_export(self, year, k):
+        countries_list = world_excluded_countries_list()
+        all = [(self.total_exports(country, year), country) for country in countries_list]
+        all.sort()
+        size = len(all)
+        topK = all[size - k:size]
+        topK.reverse()
+        return [c for v,c in topK]
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)

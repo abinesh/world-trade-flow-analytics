@@ -23,6 +23,8 @@ data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=
 #    args_for_definition_A(STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND))
 
 for year in range(1968, 2001):
-    generate_network_graph_data(data, year, world_excluded_countries_list(), output_file_html(year), definition_B,
+    top_countries_and_exports = data.top_countries_by_export(year, 50)
+    generate_network_graph_data(data, year, top_countries_and_exports, output_file_html(year),
+        definition_B,
         args_for_definition_B(5))
 
