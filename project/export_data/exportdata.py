@@ -49,15 +49,15 @@ class ExportData:
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         return exporter_data_for_year.get_export_to_country(importer)
 
-    def export_data_as_percentage(self, year, exporter, importer, respect_missing_points=False):
-        if respect_missing_points:
+    def export_data_as_percentage(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
+        if return_none_if_data_point_is_nan:
             if not self.__data_exists(year, exporter, importer):
                 return None
         print "%d,%s,%s" % (year, exporter, importer)
         exports_to_world = self.total_exports(exporter, year)
         if exports_to_world is None or exports_to_world == 0:
             return None
-        return self.export_data(year, exporter, importer, respect_missing_points) / exports_to_world
+        return self.export_data(year, exporter, importer, return_none_if_data_point_is_nan) / exports_to_world
 
 
     def total_exports(self, exporter, year):

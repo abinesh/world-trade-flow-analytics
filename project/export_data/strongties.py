@@ -5,8 +5,8 @@ import scipy
 def is_there_a_strong_tie_method_B(exportdata,year, exporter, importer, lower_bound, upper_bound):
     num = exportdata.export_data(year, exporter, importer)
     den = exportdata.export_data(year, importer, exporter)
-    if(den == 0):
-        return False
+    if den == 0:
+        return None
     val = num / den
     return lower_bound <= val <= upper_bound
 
