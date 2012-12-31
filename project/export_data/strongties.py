@@ -2,21 +2,19 @@ from project import countries
 from scipy.sparse import csc_matrix
 import scipy
 
-def is_there_a_strong_tie_method_B(exportdata,year, exporter, importer, lower_bound, upper_bound):
-    num = exportdata.export_data(year, exporter, importer)
-    den = exportdata.export_data(year, importer, exporter)
-    if den == 0:
+def is_there_a_strong_tie_method_B(data, year, exporter, importer, lower_bound, upper_bound):
+    val = data.export_import_ratio(exporter, importer, year)
+    if val == -1:
         return False
-    val = num / den
     return lower_bound <= val <= upper_bound
 
 
-def matrix_for_year_method_B(data,year, lower_bound, upper_bound):
+def matrix_for_year_method_B(data, year, lower_bound, upper_bound):
     array_data = []
     for export_country in countries.countries:
         row = []
         for import_country in countries.countries:
-            if is_there_a_strong_tie_method_B(data,year, export_country, import_country, lower_bound, upper_bound):
+            if is_there_a_strong_tie_method_B(data, year, export_country, import_country, lower_bound, upper_bound):
                 row.append(1)
             else:
                 row.append(0)

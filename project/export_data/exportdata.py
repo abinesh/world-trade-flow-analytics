@@ -42,6 +42,14 @@ class ExportData:
         return self.years_map[year][country_index]
 
 
+    def export_import_ratio(self, exporter, importer, year):
+        num = self.export_data(year, exporter, importer)
+        den = self.export_data(year, importer, exporter)
+        val = -1
+        if den != 0:
+            val = num / den
+        return val
+
     def export_data(self, year, exporter, importer, respect_missing_points=False):
         if respect_missing_points:
             if not self.__data_exists(year, exporter, importer):
@@ -89,7 +97,7 @@ class ExportData:
         size = len(all)
         topK = all[size - k:size]
         topK.reverse()
-        return [c for v,c in topK]
+        return [c for v, c in topK]
 
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
