@@ -2,19 +2,27 @@ from project import countries
 from scipy.sparse import csc_matrix
 import scipy
 
-def is_there_a_strong_tie_method_B(data, year, exporter, importer, lower_bound, upper_bound):
+#todo: Merge lower_bound and upper_bound to single value
+def strong_tie_def_args(lower_bound, upper_bound):
+    return {
+        'lower_bound': lower_bound,
+        'upper_bound': upper_bound
+    }
+
+
+def is_there_a_strong_tie_method_B(data, year, exporter, importer, def_args):
     val = data.export_import_ratio(exporter, importer, year)
     if val == -1:
         return False
-    return lower_bound <= val <= upper_bound
+    return def_args['lower_bound'] <= val <= def_args['upper_bound']
 
 
-def matrix_for_year_method_B(data, year, lower_bound, upper_bound):
+def relationship_matrix(data, year, relationship_definition, def_args):
     array_data = []
     for export_country in countries.countries:
         row = []
         for import_country in countries.countries:
-            if is_there_a_strong_tie_method_B(data, year, export_country, import_country, lower_bound, upper_bound):
+            if relationship_definition(data, year, export_country, import_country, def_args):
                 row.append(1)
             else:
                 row.append(0)
@@ -41,7 +49,7 @@ def number_of_degrees(dense_matrix, row_country):
     return int(degree)
 
 
-def matrix_cube(dense_matrix):
+def __matrix_cube(dense_matrix):
     sparse_matrix = csc_matrix(dense_matrix)
     cube_matrix = sparse_matrix * sparse_matrix * sparse_matrix
     return cube_matrix.todense()
@@ -49,6 +57,6 @@ def matrix_cube(dense_matrix):
 
 def graph_data(matrix):
     return (('Country', 'Traids', 'Degree'),
-            [(country, number_of_traids(matrix_cube(matrix), country), number_of_degrees(matrix, country)) for country
+            [(country, number_of_traids(__matrix_cube(matrix), country), number_of_degrees(matrix, country)) for country
              in
              countries.countries])

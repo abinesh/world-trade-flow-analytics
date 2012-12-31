@@ -1,4 +1,4 @@
-from project.export_data.strongties import is_there_a_strong_tie_method_B
+from project.export_data.strongties import is_there_a_strong_tie_method_B, strong_tie_def_args
 from project.traids_vs_degree_plot import config
 
 NEGATIVE_LINK = "negative"
@@ -13,8 +13,7 @@ def args_for_definition_A(lower_bound, upper_bound):
 
 
 def definition_A(data, year, country_A, country_B, args):
-    return POSITIVE_LINK if is_there_a_strong_tie_method_B(data, year, country_A, country_B, args.lower_bound,
-        args.upper_bound) else NEGATIVE_LINK
+    return POSITIVE_LINK if is_there_a_strong_tie_method_B(data, year, country_A, country_B, args) else NEGATIVE_LINK
 
 
 def args_for_definition_B(sliding_window_size):
@@ -31,8 +30,8 @@ def definition_B(data, year, country_A, country_B, args):
     CANT_ESTABLISH_TREND = "null"
 
     def export_growth(data, year, A, B):
-        if not is_there_a_strong_tie_method_B(data, year, A, B, config.STRONG_TIES_LOWER_BOUND,
-            config.STRONG_TIES_UPPER_BOUND):
+        if not is_there_a_strong_tie_method_B(data, year, A, B,
+            strong_tie_def_args(config.STRONG_TIES_LOWER_BOUND, config.STRONG_TIES_UPPER_BOUND)):
             return CANT_ESTABLISH_TREND
         actual_export_percentage = data.export_data_as_percentage(year, A, B, True)
         if actual_export_percentage is None:
