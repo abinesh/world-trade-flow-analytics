@@ -91,13 +91,13 @@ class ExportData:
         topK.reverse()
         return [c for v,c in topK]
 
-    def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_include_world=False):
+    def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
 
         for row in reader:
             importer = row.get('Importer')
             exporter = row.get('Exporter')
-            if not should_include_world:
+            if not should_read_world_datapoints:
                 if importer == 'World' or exporter == 'World':
                     continue
             if importer == exporter:

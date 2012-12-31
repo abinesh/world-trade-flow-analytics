@@ -64,7 +64,7 @@ def write_data_files_for_slope_vs_export_plots(data,root_dir, out_dir):
     return total_countries
 
 data = ExportData()
-data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, ["Value00"],should_include_world=True)
+data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, ["Value00"], should_read_world_datapoints=True)
 
 total_countries = write_data_files_for_slope_vs_export_plots(data,'matlab', 'out/slope-vs-export-percent')
 matlab_program_file = open('matlab/slope_vs_export_percent_gen.m', 'w')

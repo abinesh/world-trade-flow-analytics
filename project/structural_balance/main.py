@@ -17,7 +17,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
     f.close()
 
 data = ExportData()
-data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
+data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #generate_network_graph_data(data, 2000, a_subset_of_countries, output_file(2000), definition_A,
 #    args_for_definition_A(STRONG_TIES_LOWER_BOUND, STRONG_TIES_UPPER_BOUND))

@@ -42,6 +42,6 @@ def positives_and_negatives_data_d3(data, definition, def_args, out_dir):
     json_file.close()
 
 data = ExportData()
-data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
+data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 positives_and_negatives_data_d3(data, definition_B, args_for_definition_B(5), OUT_DIR.POSITIVES_AND_NEGATIVES)

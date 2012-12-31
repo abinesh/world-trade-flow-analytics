@@ -119,7 +119,7 @@ def gen_intermediate_data_for_both_way_linear_regression_plot(data,f1, f2, f3):
 
 
 data = ExportData()
-data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_include_world=True)
+data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #gen_intermediate_data_for_one_way_linear_regression_plot(data,WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, 'matlab/input-files-percent.txt',
 #    'matlab/output-files-percent.txt', 'matlab/generateplotsloop.m')
