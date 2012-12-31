@@ -21,14 +21,34 @@ def write_number_of_positive_traids(data, definition, def_args, out_dir):
     def relationship_def(data, year, A, B, def_args1):
         return definition(data, year, A, B, def_args) == POSITIVE_LINK
 
-    for year in data.all_years:
+    all_years_data = {}
+    years = data.all_years
+    countries_list = countries.world_excluded_countries_list()
+
+    for year in years:
+        single_year_data = {}
         with open(out_dir + '%s.csv' % year, 'wb') as csvfile:
             out_file = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
             out_file.writerow(['Country', 'Number of positive traids'])
             relationship_matrix = get_relationship_matrix(data, year, relationship_def, {})
             relationship_matrix_cube = __matrix_cube(relationship_matrix)
-            for C in countries.world_excluded_countries_list():
-                out_file.writerow([C, number_of_traids(relationship_matrix_cube, C)])
+            for C in countries_list:
+                number_of_positive_traids = number_of_traids(relationship_matrix_cube, C)
+                out_file.writerow([C, number_of_positive_traids])
+                single_year_data[C] = number_of_positive_traids
+        all_years_data[year] = single_year_data
+
+    with open(out_dir + 'all-years.csv', 'wb') as csvfile:
+        out_file = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+        header = ['*']
+        for C in countries_list:
+            header.append(C)
+        out_file.writerow(header)
+        for year in years:
+            row = [year]
+            for C in countries_list:
+                row.append(all_years_data[year][C])
+            out_file.writerow(row)
 
 
 data = ExportData()
@@ -37,5 +57,5 @@ data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_w
 definition = definition_B
 def_args = args_for_definition_B(5)
 
-write_relationship_types(data, definition, def_args, OUT_DIR.RELATIONSHIP_TYPES)
+#write_relationship_types(data, definition, def_args, OUT_DIR.RELATIONSHIP_TYPES)
 write_number_of_positive_traids(data, definition, def_args, OUT_DIR.NUMBER_OF_POSITIVE_TRAIDS)
