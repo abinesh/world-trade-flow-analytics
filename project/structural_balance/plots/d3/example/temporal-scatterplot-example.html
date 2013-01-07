@@ -175,6 +175,9 @@ blockquote:after {
 text {
   font: 10px sans-serif;
 }
+text.dot-text {
+  font: 9px sans-serif;
+}
 
 .dot {
   stroke: #000;
@@ -225,8 +228,10 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     height = width/1.4;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.linear().domain([1, 85]).range([0, width]),
-    yScale = d3.scale.linear().domain([1, 85]).range([height, 0]),
+var xScale = d3.scale.log().domain([1, 150]).range([0, width]),
+        yScale = d3.scale.log().domain([1, 150]).range([height, 0]),
+//var xScale = d3.scale.linear().domain([1, 85]).range([0, width]),
+//    yScale = d3.scale.linear().domain([1, 85]).range([height, 0]),
     radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 50]),
     colorScale = d3.scale.category20();
 
@@ -284,15 +289,23 @@ d3.json("nations.json", function(nations) {
   var bisect = d3.bisector(function(d) { return d[0]; });
 
   // Add a dot per nation. Initialize the data at 1963, and set the colors.
-  var dot = svg.append("g")
-      .attr("class", "dots")
-    .selectAll(".dot")
-      .data(interpolateData(1963))
-    .enter().append("circle")
+    var placeholder = svg.append("g")
+            .attr("class", "dots")
+            .selectAll(".dot")
+            .data(interpolateData(1963))
+            .enter();
+
+    var dot = placeholder.append("circle")
       .attr("class", "dot")
       .style("fill", function(d) { return colorScale(color(d)); })
       .call(position)
       .sort(order);
+
+    var dot_texts = placeholder.append("text")
+      .attr("class", "dot-text")
+      .call(position_text)
+      .sort(order)
+            .text(function(d){return d.name;});
 
   // Add a title.
   dot.append("title")
@@ -321,6 +334,10 @@ d3.json("nations.json", function(nations) {
     dot .attr("cx", function(d) { return xScale(x(d)); })
         .attr("cy", function(d) { return yScale(y(d)); })
         .attr("r", function(d) { return radiusScale(radius(d)); });
+  }
+function position_text(dot) {
+    dot .attr("x", function(d) { return xScale(x(d)); })
+        .attr("y", function(d) { return yScale(y(d)); });
   }
 
   // Defines a sort order so that the smallest dots are drawn on top.
@@ -367,6 +384,7 @@ d3.json("nations.json", function(nations) {
   // Updates the display to show the specified year.
   function displayYear(year) {
     dot.data(interpolateData(year), key).call(position).sort(order);
+    dot_texts.data(interpolateData(year), key).call(position_text).sort(order);
     label.text(Math.round(year));
   }
 
