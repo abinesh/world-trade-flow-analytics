@@ -5,7 +5,7 @@ from project.structural_balance.config import  output_file_html, html_footer, ht
 from project.structural_balance.definitions import  NO_LINK, args_for_definition_B, definition_B, POSITIVE_LINK
 
 def normalize(n):
-#    normalizes 0.5 t0 2 to a repulsion percentage. 1 returns 0% repulsion, and it grows on either side of 1 with 0.5 and 2 returning 100%
+#    normalizes 0.5 to 2 to a repulsion percentage. 1 returns 0% repulsion, and it grows on either side of 1 with 0.5 and 2 returning 100%
     if n < 1:
         n = 1 / n
     return  n - 1
