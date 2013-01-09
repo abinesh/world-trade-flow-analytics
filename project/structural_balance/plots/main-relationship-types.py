@@ -56,6 +56,9 @@ data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_w
 
 definition = definition_B
 def_args = args_for_definition_B(5)
+subtypes_out = open(OUT_DIR.RELATIONSHIP_TYPES + 'subtypes.txt', 'w')
+def_args['file']= subtypes_out
 
-#write_relationship_types(data, definition, def_args, OUT_DIR.RELATIONSHIP_TYPES)
-write_number_of_positive_traids(data, definition, def_args, OUT_DIR.NUMBER_OF_POSITIVE_TRAIDS)
+write_relationship_types(data, definition, def_args, OUT_DIR.RELATIONSHIP_TYPES)
+subtypes_out.close()
+#write_number_of_positive_traids(data, definition, def_args, OUT_DIR.NUMBER_OF_POSITIVE_TRAIDS)

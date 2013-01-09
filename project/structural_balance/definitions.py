@@ -50,10 +50,13 @@ def definition_B(data, year, country_A, country_B, args):
 
     def combine_trends(trend_A, trend_B):
         if CANT_ESTABLISH_TREND in [trend_A, trend_B]:
+            if args['file']: args['file'].write("%s,%s,%s\n" % (trend_A, trend_B, NO_LINK))
             return NO_LINK
         elif trend_A in [ACCELERATING, STEADY_RISING] and trend_B in [ACCELERATING, STEADY_RISING]:
+            if args['file']: args['file'].write("%s,%s,%s\n" % (trend_A, trend_B, POSITIVE_LINK))
             return POSITIVE_LINK
         else:
+            if args['file']: args['file'].write("%s,%s,%s\n" % (trend_A, trend_B, NEGATIVE_LINK))
             return NEGATIVE_LINK
 
     trend_A = export_growth(data, year, country_A, country_B)
