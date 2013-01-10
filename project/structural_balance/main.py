@@ -16,7 +16,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
     f.write(html_header)
     for (c1, c2) in country_pairs(subset_of_countries):
         link_type = definition(data, year, c1, c2, args)
-        if link_type != NO_LINK:
+        if link_type == POSITIVE_LINK:
             ratio = data.export_import_ratio(c1, c2, year)
             f.write('{source:"%s", target:"%s", type:"%s",repulsionpercentage:"%f"},\n' % (
                     c1, c2, link_type, normalize(ratio)))

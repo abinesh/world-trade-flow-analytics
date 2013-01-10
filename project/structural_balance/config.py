@@ -23,7 +23,7 @@ html_header = '''
         path.link {
             fill: none;
             stroke: #0e6611;
-            stroke-width: 0.8px;
+            stroke-width: 0.3px;
         }
 
         path.link.negative {
@@ -73,15 +73,16 @@ function clusterNumberFor(country){
 
 //version to push groups apart
 /*var year =  1969;
+var total_groups = 10;
 var clusterNumbers ={
     "1969": {"USA":1,"Canada":1,"UK":1,"China":10,"Japan":10,"Iran":20,"Iraq":20},
     "1999": {"USA":10,"Canada":1,"UK":1,"China":10,"Japan":10,"Iran":20,"Iraq":20},
 };
 
 function clusterNumberFor(country){
-    if (country in clusterNumbers[year])
+    if (year in clusterNumbers && country in clusterNumbers[year])
     return clusterNumbers[year][country];
-    else return 2;
+    else return Math.floor(Math.random()*(total_groups+1));
 }*/
 
 var nodes = {};
@@ -99,14 +100,14 @@ var force = d3.layout.force()
         .nodes(d3.values(nodes))
         .links(links)
         .size([w, h])
-        .linkDistance(function (n) {
-            if (n.type == "negative") return 500;
-            if (n.type == "missing") return 300;
-            else return 300*n.replustionpercentage;
-        })
-//        .linkDistance(300)
+//      .linkDistance(function (n) {
+//          if (n.type == "negative") return 500;
+//          if (n.type == "missing") return 300;
+//          else return 300*n.replustionpercentage;
+//       })
+        .linkDistance(300)
         .charge(function(n){
-            return 10;
+            return -10;
         })
         .gravity(0.1)
         .on("tick", tick)
@@ -187,7 +188,7 @@ function tick() {
 
 //version to push groups apart
 /*
- var nb_group = 20;
+ var nb_group = total_groups;
  var angle = 2*Math.PI/nb_group;
  var intensity = 10;
 
