@@ -64,26 +64,29 @@ var links = [
     '''
 
 html_footer = '''
-    ];
+
+];
 
 
-function clusterNumberFor(country){
+var clusterNumberFor=function (country){
     return 1;
-}
+};
 
 //version to push groups apart
-/*var year =  1969;
-var total_groups = 10;
+/*
+var year =  1969;
+ var total_groups = 10;
 var clusterNumbers ={
     "1969": {"USA":1,"Canada":1,"UK":1,"China":10,"Japan":10,"Iran":20,"Iraq":20},
     "1999": {"USA":10,"Canada":1,"UK":1,"China":10,"Japan":10,"Iran":20,"Iraq":20},
 };
 
-function clusterNumberFor(country){
-    if (year in clusterNumbers && country in clusterNumbers[year])
-    return clusterNumbers[year][country];
-    else return Math.floor(Math.random()*(total_groups+1));
-}*/
+var clusterNumberFor=function(country){
+ if (year in clusterNumbers && country in clusterNumbers[year])
+ return clusterNumbers[year][country];
+ else return Math.floor(Math.random()*(total_groups+1));
+};
+*/
 
 var nodes = {};
 
@@ -185,8 +188,7 @@ function tick() {
 }
 
 //version to push groups apart
-/*
- var nb_group = total_groups;
+/* var nb_group = total_groups;
  var angle = 2*Math.PI/nb_group;
  var intensity = 10;
 
@@ -213,7 +215,8 @@ function tick() {
         var ym = d.y + intensity*Math.sin(angle*d.group);
         return "translate(" + xm + "," + ym + ")";
     });
-}     */
+}
+*/
 
 </script>
 </body>
