@@ -117,10 +117,8 @@ var force = d3.layout.force()
 //          if (n.type == "missing") return 300;
 //          else return 300*n.replustionpercentage;
 //       })
-        .linkDistance(300)
-        .charge(function(n){
-            return -10;
-        })
+        .linkDistance(10)
+        .charge(-700)
         .gravity(0.1)
         .on("tick", tick)
         .start();
