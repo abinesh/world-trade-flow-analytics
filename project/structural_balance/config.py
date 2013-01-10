@@ -513,8 +513,8 @@ var force = d3.layout.force()
 //          if (n.type == "missing") return 300;
 //          else return 300*n.replustionpercentage;
 //       })
-        .linkDistance(10)
-        .charge(-700)
+        .linkDistance(5)
+        .charge(-30)
         .gravity(0.1)
         .on("tick", tick)
         .start();
@@ -595,7 +595,7 @@ function tick() {
 //version to push groups apart
 /* var nb_group = total_groups;
  var angle = 2*Math.PI/nb_group;
- var intensity = 150;
+ var intensity = 250;
 
 function tick() {
     path.attr("d", function (d) {
@@ -605,7 +605,7 @@ function tick() {
         var targetym = d.target.y + intensity*Math.sin(angle* d.target.group);
         var dx = d.target.x - d.source.x,
                 dy = d.target.y - d.source.y,
-                dr = Math.sqrt(dx * dx + dy * dy);
+                dr = Math.sqrt(dx * dx + dy * dy)*100;
         return "M" + sourcexm + "," + sourceym + "A" + dr + "," + dr + " 0 0,1 " + targetxm + "," + targetym;
     });
 
