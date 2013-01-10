@@ -21,7 +21,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
             f.write('{source:"%s", target:"%s", type:"%s",repulsionpercentage:"%f"},\n' % (
                     c1, c2, link_type, normalize(ratio)))
 
-    f.write(html_footer())
+    f.write(html_footer(year))
     f.close()
 
 data = ExportData()
