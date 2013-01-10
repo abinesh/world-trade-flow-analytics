@@ -29,6 +29,46 @@ class ExportData:
             self.years_map[year] = self.__empty_data_for_a_year()
             self.missing_data_records_map[year] = {}
             print "Inited map for year %d " % year
+        self.inflation_data = {
+            '1963': 4.5,
+            '1964': 4.4,
+            '1965': 6.3,
+            '1966': 7.2,
+            '1967': 2.5,
+            '1968': 3.7,
+            '1969': 0.8,
+            '1970': 7.6,
+            '1971': 4.5,
+            '1972': 4.5,
+            '1973': 7.5,
+            '1974': 9.5,
+            '1975': 7.4,
+            '1976': 5.3,
+            '1977': 4.5,
+            '1978': 3.7,
+            '1979': 4.9,
+            '1980': 6.7,
+            '1981': 8.4,
+            '1982': 9.2,
+            '1983': 3.7,
+            '1984': 2.9,
+            '1985': 4.7,
+            '1986': 1.3,
+            '1987': 6.2,
+            '1988': 4.5,
+            '1989': 3.5,
+            '1990': 2.7,
+            '1991': 4.8,
+            '1992': 6.5,
+            '1993': 7.2,
+            '1994': 9.1,
+            '1995': 4.1,
+            '1996': 3.1,
+            '1997': 2.2,
+            '1998': 3.5,
+            '1999': 5.7,
+            '2000': 6.8,
+        }
 
     def __empty_data_for_a_year(self):
         list = []
@@ -56,6 +96,19 @@ class ExportData:
                 return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         return exporter_data_for_year.get_export_to_country(importer)
+
+    def _adjust_inflation(self, value, year):
+        current_year = year
+        beginning = 1963
+        while current_year >= beginning:
+            value = (100 * value) / (100 + self.inflation_data['%s' % current_year])
+            current_year -= 1
+        return value
+
+    def export_data_inflation_adjusted(self, year, exporter, importer, respect_missing_points=False):
+        actual_export_data = self.export_data(year, exporter, importer, respect_missing_points)
+        if actual_export_data is None: return None
+        return self._adjust_inflation(actual_export_data, year)
 
     def export_data_as_percentage(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
         if return_none_if_data_point_is_nan:
