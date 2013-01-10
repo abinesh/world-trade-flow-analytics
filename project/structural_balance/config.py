@@ -4,13 +4,13 @@ HTML_OUT_DIR = 'out/html'
 def output_file(year):
     return JSON_OUT_DIR + "/%s.json" % year
 
+
 def output_file_html(year):
     return HTML_OUT_DIR + "/%s.html" % year
 
 
-
-
-html_header = '''
+def html_header():
+    return '''
     <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +63,9 @@ Modified from http://bl.ocks.org/1153292
 var links = [
     '''
 
-html_footer = '''
+
+def html_footer():
+    return'''
 
 ];
 

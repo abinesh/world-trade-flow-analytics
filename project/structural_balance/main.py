@@ -13,7 +13,7 @@ def normalize(n):
 def generate_network_graph_data(data, year, subset_of_countries, out_file, definition, args):
 
     f = open(out_file, 'w')
-    f.write(html_header)
+    f.write(html_header())
     for (c1, c2) in country_pairs(subset_of_countries):
         link_type = definition(data, year, c1, c2, args)
         if link_type == POSITIVE_LINK:
@@ -21,7 +21,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
             f.write('{source:"%s", target:"%s", type:"%s",repulsionpercentage:"%f"},\n' % (
                     c1, c2, link_type, normalize(ratio)))
 
-    f.write(html_footer)
+    f.write(html_footer())
     f.close()
 
 data = ExportData()
