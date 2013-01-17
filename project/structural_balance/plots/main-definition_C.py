@@ -28,13 +28,13 @@ def print_densities_for_thresholds(data):
     f.close()
 
 
-def print_total_exports(data):
+def print_total_exports(data, T):
     i = 0
     str = ""
     list = []
     for (A, B) in countries.country_pairs():
         total = data.total_exports_from_C1_to_C2(A, B)
-        if total != 0:
+        if total != 0 and total > T:
             str = "%s %d" % (str, total)
             list.append(total)
             i += 1
@@ -43,6 +43,6 @@ def print_total_exports(data):
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#print_total_exports(data)
+print_total_exports(data, 1000)
 print_densities_for_thresholds(data)
 
