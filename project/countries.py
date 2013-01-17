@@ -278,7 +278,7 @@ def world_excluded_countries_list():
     return world_excluded_list
 
 
-def country_pairs(only_these_countries = countries):
+def country_pairs(only_these_countries=world_excluded_countries_list()):
     return combinations(only_these_countries, 2)
 
 
