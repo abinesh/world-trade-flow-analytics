@@ -81,6 +81,11 @@ class ExportData:
         country_index = countries.country_to_index_map[exporter]
         return self.years_map[year][country_index]
 
+    def sorted_list_of_export_percentages(self, exporter, year):
+        result = [(c, self.export_data_as_percentage(year, exporter, c) * 100) for c in
+                  countries.world_excluded_countries_list()]
+        return sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
+
 
     def export_import_ratio(self, exporter, importer, year):
         num = self.export_data(year, exporter, importer)
