@@ -2,6 +2,7 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.structural_balance.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D
+from project.structural_balance.plots.config import OUT_DIR
 
 thresholds = [99, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50]
 a_few_years = [1969, 1979, 1989, 1999, 2000]
@@ -56,13 +57,14 @@ def generate_matlab_code(data):
 
 
 def print_graph_densities_for_different_thresholds(data):
+    f = open(OUT_DIR.DEFINITION_D + 'combinations.txt', 'w')
     for T in thresholds:
         for year in a_few_years:
             positive_edges = 0
             negative_edges = 0
             unique_countries = {}
             for (A, B) in countries.country_pairs():
-                link_sign = definition_D(data, year, A, B, args_for_definition_D(T))
+                link_sign = definition_D(data, year, A, B, args_for_definition_D(T, f))
                 if link_sign == POSITIVE_LINK:
                     positive_edges += 1
                     unique_countries[A] = 1
@@ -74,6 +76,7 @@ def print_graph_densities_for_different_thresholds(data):
             N = len(unique_countries)
             density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
             print "%d,%d,%f,%d,%d,%d" % (T, year, density, positive_edges, negative_edges, N)
+    f.close()
 
 data = None
 data = ExportData()

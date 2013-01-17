@@ -68,9 +68,10 @@ def definition_B(data, year, country_A, country_B, args):
     return combine_trends(trend_A, trend_B)
 
 
-def args_for_definition_D(threshold):
+def args_for_definition_D(threshold, f=None):
     return {
         'threshold': threshold,
+        'f': f
     }
 
 
@@ -105,6 +106,9 @@ def definition_D(data, year, country_A, country_B, args):
     else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(year, country_B, country_A)\
     else NO_LINK if first_positive_year(country_B, country_A) > year\
     else NEGATIVE_LINK
+
+    if args['f'] is not None:
+        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T, one_way, other_way))
 
     if NO_LINK in [one_way, other_way]: return NO_LINK
     if NEGATIVE_LINK in [one_way, other_way]: return NEGATIVE_LINK
