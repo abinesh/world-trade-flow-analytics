@@ -77,7 +77,7 @@ def args_for_definition_D(threshold):
 def definition_D(data, year, country_A, country_B, args):
     T = args['threshold']
 
-    def is_C2_in_top_T_percentage_exports_of_C1(C1, C2):
+    def is_C2_in_top_T_percentage_exports_of_C1(year, C1, C2):
         (total, previous_percentage, current_percentage) = (0, -1, -1)
         for (C, percentage) in data.sorted_list_of_export_percentages(C1, year):
             total += percentage
@@ -85,14 +85,25 @@ def definition_D(data, year, country_A, country_B, args):
             if total > T: return False
         return False
 
+    def first_positive_year(C1, C2):
+        current_year = data.all_years[0]
+        end_year = data.all_years[len(data.all_years) - 1]
+        while current_year <= end_year:
+            if is_C2_in_top_T_percentage_exports_of_C1(current_year, C1, C2):
+                return current_year
+            current_year += 1
+        return end_year + 1
+
     one_way = NO_LINK\
     if data.export_data(year, country_A, country_B) == 0\
-    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(country_A, country_B)\
+    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(year, country_A, country_B)\
+    else NO_LINK if first_positive_year(country_A, country_B) > year\
     else NEGATIVE_LINK
 
     other_way = NO_LINK\
     if data.export_data(year, country_B, country_A) == 0\
-    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(country_B, country_A)\
+    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(year, country_B, country_A)\
+    else NO_LINK if first_positive_year(country_B, country_A) > year\
     else NEGATIVE_LINK
 
     if NO_LINK in [one_way, other_way]: return NO_LINK
