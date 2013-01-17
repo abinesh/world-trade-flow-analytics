@@ -3,3 +3,4 @@ class OUT_DIR:
     RELATIONSHIP_TYPES = 'out/relationship_types/'
     NUMBER_OF_POSITIVE_TRAIDS='out/number_of_positive_traids/'
     DEFINITION_D='out/definition_d/'
+    DEFINITION_C='out/definition_c/'

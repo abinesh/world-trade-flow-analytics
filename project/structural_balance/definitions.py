@@ -68,6 +68,38 @@ def definition_B(data, year, country_A, country_B, args):
     return combine_trends(trend_A, trend_B)
 
 
+def __combine_links(T, args, country_A, country_B, one_way, other_way, year):
+    if args['f'] is not None:
+        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T, one_way, other_way))
+    if NO_LINK in [one_way, other_way]: return NO_LINK
+    if NEGATIVE_LINK in [one_way, other_way]: return NEGATIVE_LINK
+    return POSITIVE_LINK
+
+
+def args_for_definition_C(min_export_quantity_threshold, export_percentage_cutoff_threshold, f=None):
+    return {
+        'export_percentage_cutoff_threshold': export_percentage_cutoff_threshold,
+        'min_export_quantity_threshold': min_export_quantity_threshold,
+        'f': f
+    }
+
+
+def definition_C(data, year, country_A, country_B, args):
+    def directed_link(data, year, A, B, T1, T2):
+        if data.export_data(year, A, B) is None: return NO_LINK
+        if data.export_data(year, A, B) == 0: return NO_LINK
+        if data.export_data(year, A, B) < T1: return NO_LINK
+        if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
+        return NEGATIVE_LINK
+
+
+    T1 = args['min_export_quantity_threshold']
+    T2 = args['export_percentage_cutoff_threshold']
+    one_way = directed_link(data, year, country_A, country_B, T1, T2)
+    other_way = directed_link(data, year, country_B, country_A, T1, T2)
+    return __combine_links(T2, args, country_A, country_B, one_way, other_way, year)
+
+
 def args_for_definition_D(threshold, f=None):
     return {
         'threshold': threshold,
@@ -107,11 +139,6 @@ def definition_D(data, year, country_A, country_B, args):
     else NO_LINK if first_positive_year(country_B, country_A) > year\
     else NEGATIVE_LINK
 
-    if args['f'] is not None:
-        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T, one_way, other_way))
-
-    if NO_LINK in [one_way, other_way]: return NO_LINK
-    if NEGATIVE_LINK in [one_way, other_way]: return NEGATIVE_LINK
-    return POSITIVE_LINK
+    return __combine_links(T, args, country_A, country_B, one_way, other_way, year)
 
 

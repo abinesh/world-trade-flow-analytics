@@ -125,6 +125,12 @@ class ExportData:
             return None
         return self.export_data(year, exporter, importer, return_none_if_data_point_is_nan) / exports_to_world
 
+    def total_exports_from_C1_to_C2(self, C1, C2):
+        total = 0
+        for year in self.all_years:
+            v = self.export_data(year, C1, C2)
+            if v is not None: total += v
+        return total
 
     def total_exports(self, exporter, year):
         return self.export_data(year, exporter, 'World')
