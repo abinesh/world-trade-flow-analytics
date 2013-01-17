@@ -114,7 +114,6 @@ class ExportData:
         if return_none_if_data_point_is_nan:
             if not self.__data_exists(year, exporter, importer):
                 return None
-        print "%d,%s,%s" % (year, exporter, importer)
         exports_to_world = self.total_exports(exporter, year)
         if exports_to_world is None or exports_to_world == 0:
             return None
