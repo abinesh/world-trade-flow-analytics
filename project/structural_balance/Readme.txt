@@ -36,6 +36,11 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
                 -If the ratio of import/export between the two countries is not within the range 0.5 and 2
                 -No datapoint for the interested year
                 -Not enough data points(there should be atleast 3 data points) in sliding window to compute bollinger bands
+    C. A->B is positive if A's export to B is above a percentage threshold. Else it is negative. Links with sum of A->B exports over time below threshold T2 are pruned out and considered missing.
+       A->B and B->A relationships should be combined
+    D. A->B is Positive if A's export to B is within top 90 percent of its exports. Else it is pruned out. If it is pruned after a non-zero data-point it is negative, else it is missing link
+       A->B and B->A relationships should be combined
+
 
 5. Top 50 countries data
     https://docs.google.com/spreadsheet/ccc?key=0AtaB149ijWVNdGI3eTBaVGxZajZFQnFDY09URmtRYWc#gid=1
