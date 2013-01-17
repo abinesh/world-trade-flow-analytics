@@ -68,3 +68,35 @@ def definition_B(data, year, country_A, country_B, args):
     return combine_trends(trend_A, trend_B)
 
 
+def args_for_definition_D(threshold):
+    return {
+        'threshold': threshold,
+    }
+
+
+def definition_D(data, year, country_A, country_B, args):
+    T = args['threshold']
+
+    def is_C2_in_top_T_percentage_exports_of_C1(C1, C2):
+        (total, previous_percentage, current_percentage) = (0, -1, -1)
+        for (C, percentage) in data.sorted_list_of_export_percentages(C1, year):
+            total += percentage
+            if C == C2: return True
+            if total > T: return False
+        return False
+
+    one_way = NO_LINK\
+    if data.export_data(year, country_A, country_B) == 0\
+    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(country_A, country_B)\
+    else NEGATIVE_LINK
+
+    other_way = NO_LINK\
+    if data.export_data(year, country_B, country_A) == 0\
+    else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(country_B, country_A)\
+    else NEGATIVE_LINK
+
+    if NO_LINK in [one_way, other_way]: return NO_LINK
+    if NEGATIVE_LINK in [one_way, other_way]: return NEGATIVE_LINK
+    return POSITIVE_LINK
+
+

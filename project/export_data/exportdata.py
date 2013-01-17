@@ -82,9 +82,10 @@ class ExportData:
         return self.years_map[year][country_index]
 
     def sorted_list_of_export_percentages(self, exporter, year):
-        result = [(c, self.export_data_as_percentage(year, exporter, c) * 100) for c in
+        result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
                   countries.world_excluded_countries_list()]
-        return sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
+        return [(a, 100 * b) for (a, b) in sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
+                if b is not None]
 
 
     def export_import_ratio(self, exporter, importer, year):
@@ -95,8 +96,8 @@ class ExportData:
             val = num / den
         return val
 
-    def export_data(self, year, exporter, importer, respect_missing_points=False):
-        if respect_missing_points:
+    def export_data(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
+        if return_none_if_data_point_is_nan:
             if not self.__data_exists(year, exporter, importer):
                 return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
@@ -110,8 +111,8 @@ class ExportData:
             current_year -= 1
         return value
 
-    def export_data_inflation_adjusted(self, year, exporter, importer, respect_missing_points=False):
-        actual_export_data = self.export_data(year, exporter, importer, respect_missing_points)
+    def export_data_inflation_adjusted(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
+        actual_export_data = self.export_data(year, exporter, importer, return_none_if_data_point_is_nan)
         if actual_export_data is None: return None
         return self._adjust_inflation(actual_export_data, year)
 
