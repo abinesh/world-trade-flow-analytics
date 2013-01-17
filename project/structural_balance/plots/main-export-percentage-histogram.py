@@ -2,14 +2,16 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 
+thresholds = [99, 95, 90, 85, 80]
+a_few_years = [1969, 1979, 1989, 1999, 2000]
 
 def generate_matlab_code(data):
 #USA, UK, Australia, France, China, Iran, Bangladesh, Srilanka
 #1969,1979,1989,1999,2000
 # cutoff threshold 99,95,90,85,80
 #    todo: slanted x axis labels or inline labels, colour to separate top 90% bars
-    for percentile_threshold in [99,95,90,85,80]:
-        for year in [1969, 1979, 1989, 1999, 2000]:
+    for percentile_threshold in thresholds:
+        for year in a_few_years:
             for A in ['Iran', 'USA', 'UK', 'Australia', 'France,Monac', 'China', 'Bangladesh', 'Sri Lanka']:
                 list = []
                 for B in countries.world_excluded_countries_list():
