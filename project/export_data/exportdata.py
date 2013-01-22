@@ -275,8 +275,8 @@ class ExportData:
                 return False
         return True
 
-    def first_positive_year(self, C1, C2):
-        cache_key = self.cache_key(self.first_positive_year, C1, C2)
+    def first_trade_year(self, C1, C2):
+        cache_key = self.cache_key(self.first_trade_year, C1, C2)
         if cache_key in self.cache:
             return self.cache[cache_key]
 

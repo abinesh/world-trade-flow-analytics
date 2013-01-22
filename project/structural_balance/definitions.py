@@ -94,7 +94,7 @@ def __def_C__(args, country_A, country_B, data, year, t1_function):
         if t1_function(A, B) < T1: return NO_LINK
         if data.export_data(year, A, B, return_this_for_missing_datapoint=-1) == -1: return NO_LINK
         if data.export_data(year, A, B) is None or data.export_data(year, A, B) == 0:
-            if year > data.first_positive_year(A, B):
+            if year > data.first_trade_year(A, B):
                 return NEGATIVE_LINK
             else:
                 return NO_LINK
@@ -130,7 +130,7 @@ def definition_D(data, year, country_A, country_B, args):
     def _def_D_directed_link(T, A, B, data, year):
         if data.export_data(year, A, B, -1) == -1: return NO_LINK
         if B in data.top_T_percent_exports(A, year, T): return POSITIVE_LINK
-        if data.first_positive_year(A, B) > year: return NO_LINK
+        if data.first_trade_year(A, B) > year: return NO_LINK
         return NEGATIVE_LINK
 
     T = args['threshold']
