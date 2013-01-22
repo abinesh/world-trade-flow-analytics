@@ -11,7 +11,7 @@ class Country:
         self.list = []
         for k in countries.index_to_country_map.keys():
             name = countries.index_to_country_map.get(k)
-            self.list.append((name, 0))
+            self.list.append((name, -1))
 
     def set_export_to_country(self, country, quantity):
         self.list[countries.country_to_index_map[country]] = (country, quantity)
@@ -24,11 +24,11 @@ class ExportData:
     def __init__(self, start_year=1963, end_year=2000):
         self.cache = {}
         self.years_map = {}
-        self.missing_data_records_map = {}
+        self.nan_records_map = {}
         self.all_years = range(start_year, end_year + 1)
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
-            self.missing_data_records_map[year] = {}
+            self.nan_records_map[year] = {}
             print "Inited map for year %d " % year
         self.inflation_data = {
             '1963': 4.5,
@@ -106,12 +106,16 @@ class ExportData:
             val = num / den
         return val
 
-    def export_data(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
+    def export_data(self, year, exporter, importer,
+                    return_none_if_data_point_is_nan=False,
+                    return_this_for_missing_datapoint=0):
         if return_none_if_data_point_is_nan:
             if not self.__data_exists(year, exporter, importer):
                 return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
-        return exporter_data_for_year.get_export_to_country(importer)
+        retval = exporter_data_for_year.get_export_to_country(importer)
+        if retval == -1: return return_this_for_missing_datapoint
+        return retval
 
     def _adjust_inflation(self, value, year):
         current_year = year
@@ -121,19 +125,29 @@ class ExportData:
             current_year -= 1
         return value
 
-    def export_data_inflation_adjusted(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
-        actual_export_data = self.export_data(year, exporter, importer, return_none_if_data_point_is_nan)
+    def export_data_inflation_adjusted(self, year, exporter, importer,
+                                       return_none_if_data_point_is_nan=False,
+                                       return_this_for_missing_datapoint=0):
+        actual_export_data = self.export_data(year, exporter, importer,
+            return_none_if_data_point_is_nan,
+            return_this_for_missing_datapoint)
         if actual_export_data is None: return None
+        if actual_export_data == -1: return return_this_for_missing_datapoint
         return self._adjust_inflation(actual_export_data, year)
 
-    def export_data_as_percentage(self, year, exporter, importer, return_none_if_data_point_is_nan=False):
+    def export_data_as_percentage(self, year, exporter, importer,
+                                  return_none_if_data_point_is_nan=False,
+                                  return_this_for_missing_datapoint=0):
         if return_none_if_data_point_is_nan:
             if not self.__data_exists(year, exporter, importer):
                 return None
         exports_to_world = self.total_exports(exporter, year)
         if exports_to_world is None or exports_to_world == 0:
             return None
-        return self.export_data(year, exporter, importer, return_none_if_data_point_is_nan) / exports_to_world
+        val = self.export_data(year, exporter, importer, return_none_if_data_point_is_nan,
+            return_this_for_missing_datapoint)
+        if val == -1: return return_this_for_missing_datapoint
+        return val / exports_to_world
 
     def total_exports_from_C1_to_C2(self, C1, C2):
         cache_key = self.cache_key(self.total_exports_from_C1_to_C2, C1, C2)
@@ -198,19 +212,20 @@ class ExportData:
                 if not year in self.all_years:
                     continue
                 if export_quantity == 'NaN':
-                    self.__record_missing_data(year, exporter, importer)
+                    self.__record_nan_data(year, exporter, importer)
                     continue
                 self.__export_data_for_a_country(exporter, year).set_export_to_country(importer, float(export_quantity))
                 print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
 
-    def __record_missing_data(self, year, exporter, importer):
-        m = self.missing_data_records_map[year]
+    def __record_nan_data(self, year, exporter, importer):
+        m = self.nan_records_map[year]
+        self.__export_data_for_a_country(exporter, year).set_export_to_country(importer, 0)
         if exporter not in m:
             m[exporter] = {}
         m[exporter][importer] = 1
 
     def __data_exists(self, year, exporter, importer):
-        m = self.missing_data_records_map[year]
+        m = self.nan_records_map[year]
         if exporter in m:
             if importer in m[exporter]:
                 return False
