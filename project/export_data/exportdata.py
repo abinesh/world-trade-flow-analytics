@@ -108,7 +108,7 @@ class ExportData:
 
     def top_T_percent_exports(self, exporter, year, T):
         if self.memoization_switch:
-            cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year)
+            cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year,T)
             if cache_key in self.cache:
                 return self.cache[cache_key]
         (total, ret_val, tie_percent) = (0, [], -1)
