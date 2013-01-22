@@ -67,7 +67,7 @@ def print_graph_densities_for_different_thresholds(data):
             positive_edges = 0
             negative_edges = 0
             unique_countries = {}
-            for (A, B) in countries.country_pairs():
+            for (A, B) in countries.country_pairs(data.countries()):
                 link_sign = definition_D(data, year, A, B, args_for_definition_D(T, f))
                 if link_sign == POSITIVE_LINK:
                     positive_edges += 1

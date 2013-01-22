@@ -26,6 +26,7 @@ class ExportData:
         self.years_map = {}
         self.nan_records_map = {}
         self.all_years = range(start_year, end_year + 1)
+        self.all_countries = {}
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
             self.nan_records_map[year] = {}
@@ -76,6 +77,9 @@ class ExportData:
         for index in countries.index_to_country_map.keys():
             list.append(Country(countries.index_to_country_map.get(index)))
         return list
+
+    def countries(self):
+        return self.all_countries.keys()
 
 
     def __export_data_for_a_country(self, exporter, year):
@@ -248,8 +252,11 @@ class ExportData:
                     continue
                 if export_quantity == 'NaN':
                     self.__record_nan_data(year, exporter, importer)
-                    continue
-                self.__export_data_for_a_country(exporter, year).set_export_to_country(importer, float(export_quantity))
+                else:
+                    self.__export_data_for_a_country(exporter, year).set_export_to_country(importer,
+                        float(export_quantity))
+                self.all_countries[exporter] = 1
+                self.all_countries[importer] = 1
                 print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
 
     def __record_nan_data(self, year, exporter, importer):
