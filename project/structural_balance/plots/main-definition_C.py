@@ -1,7 +1,7 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_C, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK
+from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK
 from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data):
@@ -12,7 +12,7 @@ def print_densities_for_thresholds(data):
                 unique_countries = {}
                 (positive_edges, negative_edges) = (0, 0)
                 for (A, B) in countries.country_pairs():
-                    link_sign = definition_C(data, year, A, B,
+                    link_sign = definition_C1(data, year, A, B,
                         args_for_definition_C(min_export_threshold, percentage_threshold, f))
                     if link_sign == POSITIVE_LINK:
                         positive_edges += 1

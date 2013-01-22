@@ -88,7 +88,7 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
         args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, file_safe(country_A), file_safe(country_B), T2, one_way, other_way))
 
 
-def definition_C(data, year, country_A, country_B, args):
+def definition_C1(data, year, country_A, country_B, args):
     def directed_link(data, year, A, B, T1, T2):
         if data.total_exports_from_C1_to_C2(A, B) < T1: return NO_LINK
         if data.export_data(year, A, B,return_this_for_missing_datapoint= -1) == -1: return NO_LINK
