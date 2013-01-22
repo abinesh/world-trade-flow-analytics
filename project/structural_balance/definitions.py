@@ -89,9 +89,9 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
 
 def definition_C(data, year, country_A, country_B, args):
     def directed_link(data, year, A, B, T1, T2):
-        if data.export_data(year, A, B) is None: return NO_LINK
-        if data.export_data(year, A, B) == 0: return NO_LINK
-        if data.export_data(year, A, B) < T1: return NO_LINK
+        if data.total_exports_from_C1_to_C2(A, B) < T1: return NO_LINK
+        if data.export_data(year, A, B) is None: return NEGATIVE_LINK
+        if data.export_data(year, A, B) == 0: return NEGATIVE_LINK
         if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
         return NEGATIVE_LINK
 
