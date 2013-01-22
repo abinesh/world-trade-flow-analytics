@@ -91,8 +91,9 @@ class ExportData:
             return self.cache[cache_key]
         result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
                   countries.world_excluded_countries_list()]
-        ret_val = [(a, 100 * b) for (a, b) in sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
-             if b is not None]
+        ret_val = [(a, 100 * b) for (a, b) in
+                   sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
+                   if b is not None]
         self.cache[cache_key] = ret_val
         return ret_val
 
@@ -215,3 +216,20 @@ class ExportData:
                 return False
         return True
 
+    def first_positive_year(self, C1, C2):
+        cache_key = self.cache_key(self.first_positive_year, C1, C2)
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+
+        current_year = self.all_years[0]
+        end_year = self.all_years[len(self.all_years) - 1]
+        retval = None
+        while current_year <= end_year:
+            if self.export_data(current_year, C1, C2) is None or self.export_data(current_year, C1, C2) == 0:
+                current_year += 1
+            else:
+                retval = current_year
+                break
+        if retval is None: retval = end_year + 1
+        self.cache[cache_key] = retval
+        return retval

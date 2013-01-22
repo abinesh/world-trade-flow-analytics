@@ -90,8 +90,8 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
 def definition_C(data, year, country_A, country_B, args):
     def directed_link(data, year, A, B, T1, T2):
         if data.total_exports_from_C1_to_C2(A, B) < T1: return NO_LINK
-        if data.export_data(year, A, B) is None: return NEGATIVE_LINK
-        if data.export_data(year, A, B) == 0: return NEGATIVE_LINK
+        if data.export_data(year, A, B) is None or data.export_data(year, A, B) == 0:
+            return NEGATIVE_LINK
         if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
         return NEGATIVE_LINK
 
@@ -123,25 +123,16 @@ def definition_D(data, year, country_A, country_B, args):
             if total > T: return False
         return False
 
-    def first_positive_year(C1, C2):
-        current_year = data.all_years[0]
-        end_year = data.all_years[len(data.all_years) - 1]
-        while current_year <= end_year:
-            if is_C2_in_top_T_percentage_exports_of_C1(current_year, C1, C2):
-                return current_year
-            current_year += 1
-        return end_year + 1
-
     one_way = NO_LINK\
     if data.export_data(year, country_A, country_B) == 0\
     else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(year, country_A, country_B)\
-    else NO_LINK if first_positive_year(country_A, country_B) > year\
+    else NO_LINK if data.first_positive_year(country_A, country_B) > year\
     else NEGATIVE_LINK
 
     other_way = NO_LINK\
     if data.export_data(year, country_B, country_A) == 0\
     else POSITIVE_LINK if is_C2_in_top_T_percentage_exports_of_C1(year, country_B, country_A)\
-    else NO_LINK if first_positive_year(country_B, country_A) > year\
+    else NO_LINK if data.first_positive_year(country_B, country_A) > year\
     else NEGATIVE_LINK
 
     __log_to_file(T, args, country_A, country_B, one_way, other_way, year)
