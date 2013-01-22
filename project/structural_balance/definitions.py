@@ -68,9 +68,7 @@ def definition_B(data, year, country_A, country_B, args):
     return combine_trends(trend_A, trend_B)
 
 
-def __combine_links(T, args, country_A, country_B, one_way, other_way, year):
-    if args['f'] is not None:
-        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T, one_way, other_way))
+def __combine_links(one_way, other_way):
     if NO_LINK in [one_way, other_way]: return NO_LINK
     if NEGATIVE_LINK in [one_way, other_way]: return NEGATIVE_LINK
     return POSITIVE_LINK
@@ -82,6 +80,11 @@ def args_for_definition_C(min_export_quantity_threshold, export_percentage_cutof
         'min_export_quantity_threshold': min_export_quantity_threshold,
         'f': f
     }
+
+
+def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
+    if args['f'] is not None:
+        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T2, one_way, other_way))
 
 
 def definition_C(data, year, country_A, country_B, args):
@@ -97,7 +100,9 @@ def definition_C(data, year, country_A, country_B, args):
     T2 = args['export_percentage_cutoff_threshold']
     one_way = directed_link(data, year, country_A, country_B, T1, T2)
     other_way = directed_link(data, year, country_B, country_A, T1, T2)
-    return __combine_links(T2, args, country_A, country_B, one_way, other_way, year)
+
+    __log_to_file(T2, args, country_A, country_B, one_way, other_way, year)
+    return __combine_links(one_way, other_way)
 
 
 def args_for_definition_D(threshold, f=None):
@@ -139,6 +144,7 @@ def definition_D(data, year, country_A, country_B, args):
     else NO_LINK if first_positive_year(country_B, country_A) > year\
     else NEGATIVE_LINK
 
-    return __combine_links(T, args, country_A, country_B, one_way, other_way, year)
+    __log_to_file(T, args, country_A, country_B, one_way, other_way, year)
+    return __combine_links(one_way, other_way)
 
 
