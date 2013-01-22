@@ -90,6 +90,7 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
 def definition_C(data, year, country_A, country_B, args):
     def directed_link(data, year, A, B, T1, T2):
         if data.total_exports_from_C1_to_C2(A, B) < T1: return NO_LINK
+        if data.export_data(year, A, B,return_this_for_missing_datapoint= -1) == -1: return NO_LINK
         if data.export_data(year, A, B) is None or data.export_data(year, A, B) == 0:
             if year > data.first_positive_year(country_A, country_B):
                 return NEGATIVE_LINK
