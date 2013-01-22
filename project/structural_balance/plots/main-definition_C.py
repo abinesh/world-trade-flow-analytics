@@ -6,9 +6,9 @@ from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data):
     f = open(OUT_DIR.DEFINITION_C + 'combinations.txt', 'w')
-    for min_export_threshold in [0,100,200,250,300,500,1000,1500,2000,3000,5000]:
+    for min_export_threshold in [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000]:
         for percentage_threshold in [1]:
-            for year in [1969, 1979, 1989, 1999, 2000]:
+            for year in [1969, 1979, 1988, 1989, 1990, 1999, 2000]:
                 unique_countries = {}
                 (positive_edges, negative_edges) = (0, 0)
                 for (A, B) in countries.country_pairs():
@@ -25,7 +25,7 @@ def print_densities_for_thresholds(data):
                 N = len(unique_countries)
                 density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
                 print "%d,%f,%d,%f,%d,%d,%d" % (
-                min_export_threshold, percentage_threshold, year, density, positive_edges, negative_edges, N)
+                    min_export_threshold, percentage_threshold, year, density, positive_edges, negative_edges, N)
     f.close()
 
 
@@ -39,11 +39,16 @@ def print_total_exports(data, T):
             str = "%s %d" % (str, total)
             list.append(total)
             i += 1
-    print str
+    print "y=[%s];" % str
+    print "hist(y,100000);"
+    print "xlabel('Export quantity');"
+    print "ylabel('Count of country pairs');"
+    print "set(gca, 'Xscale', 'log');"
+    print "saveas(gcf,'definition_C_histogram','png');"
 
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#print_total_exports(data, 1000)
-print_densities_for_thresholds(data)
+print_total_exports(data, 1000)
+#print_densities_for_thresholds(data)
 

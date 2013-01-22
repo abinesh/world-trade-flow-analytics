@@ -5,7 +5,7 @@ from project.structural_balance.definitions import definition_D, NEGATIVE_LINK, 
 from project.structural_balance.plots.config import OUT_DIR
 
 thresholds = [99, 95, 90, 85, 80]
-a_few_years = [1969, 1979, 1989, 1999, 2000]
+a_few_years = [1969, 1979, 1988, 1989, 1990, 1999, 2000]
 
 def generate_matlab_code(data):
 #USA, UK, Australia, France, China, Iran, Bangladesh, Srilanka
@@ -54,7 +54,7 @@ def generate_matlab_code(data):
                 print line3
                 print "bar(1:%d,[x x1],0.5,'stack');" % count
                 print "set(gca,'XTickLabel',y);"
-#                print "text(30,0,y(:,1:%d));" % positives_count if positives_count < 50 else 50
+                #                print "text(30,0,y(:,1:%d));" % positives_count if positives_count < 50 else 50
                 #                print "text(30,0,y(:,1:20))"
                 #                print "set(gca,'XTick',0:5:length(x));"
                 print "saveas(gcf,'%s-%d-%d','png');" % (A, percentile_threshold, year)
