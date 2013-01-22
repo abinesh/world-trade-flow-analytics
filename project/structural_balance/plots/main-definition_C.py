@@ -6,7 +6,7 @@ from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data):
     f = open(OUT_DIR.DEFINITION_C + 'combinations.txt', 'w')
-    for min_export_threshold in [0,100,200,250,300]:
+    for min_export_threshold in [0,100,200,250,300,500,1000,1500,2000,3000,5000]:
         for percentage_threshold in [1]:
             for year in [1969, 1979, 1989, 1999, 2000]:
                 unique_countries = {}
