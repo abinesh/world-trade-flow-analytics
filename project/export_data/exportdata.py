@@ -79,7 +79,9 @@ class ExportData:
         return list
 
     def countries(self):
-        return self.all_countries.keys()
+        retval = self.all_countries.keys()
+        retval.remove('World')
+        return retval
 
 
     def __export_data_for_a_country(self, exporter, year):

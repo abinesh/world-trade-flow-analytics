@@ -11,7 +11,7 @@ def write_relationship_types(data, definition, def_args, out_dir):
         with open(out_dir + '%s.csv' % year, 'wb') as csvfile:
             out_file = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
             out_file.writerow(['Country1', 'Country2', 'Link type', 'Export/Import ratio'])
-            for (A, B) in countries.country_pairs():
+            for (A, B) in countries.country_pairs(data.countries()):
                 link_type = definition(data, year, A, B, def_args)
                 if link_type != NO_LINK:
                     out_file.writerow([A, B, link_type, data.export_import_ratio(A, B, year)])

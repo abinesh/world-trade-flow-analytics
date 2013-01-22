@@ -1,4 +1,5 @@
 WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL = '../../dataset/wtf_bilat.csv'
+#WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL = '../../dataset/wtf_bilat_test.csv'
 WORLD_TRADE_FLOW_DATA_FILE_CLEANED = '../../dataset/wtf_bilat_cleaned.csv'
 WRITE_OUT_TO_DIR = 'out/'
 

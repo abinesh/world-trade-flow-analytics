@@ -12,7 +12,7 @@ def print_densities_for_thresholds(data, definition, T1_thresholds):
             for year in [1969, 1979, 1988, 1989, 1990, 1999, 2000]:
                 unique_countries = {}
                 (positive_edges, negative_edges) = (0, 0)
-                for (A, B) in countries.country_pairs():
+                for (A, B) in countries.country_pairs(data.countries()):
                     link_sign = definition(data, year, A, B,
                         args_for_definition_C(min_export_threshold, percentage_threshold, f))
                     if link_sign == POSITIVE_LINK:
@@ -34,7 +34,7 @@ def print_histogram_matlab_code(data, T):
     i = 0
     str = ""
     list = []
-    for (A, B) in countries.country_pairs():
+    for (A, B) in countries.country_pairs(data.countries()):
         total = data.total_exports_from_C1_to_C2(A, B)
         if total != 0 and total > T:
             str = "%s %d" % (str, total)
@@ -52,5 +52,5 @@ data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_w
 
 print_histogram_matlab_code(data, 1000)
 #print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
-#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
+print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
 
