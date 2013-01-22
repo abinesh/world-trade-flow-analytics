@@ -1,18 +1,19 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK
+from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2
 from project.structural_balance.plots.config import OUT_DIR
 
-def print_densities_for_thresholds(data):
-    f = open(OUT_DIR.DEFINITION_C + 'combinations.txt', 'w')
-    for min_export_threshold in [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000]:
+def print_densities_for_thresholds(data, definition, T1_thresholds):
+    f = open(OUT_DIR.DEFINITION_C + definition.__name__ + '-combinations.txt', 'w')
+
+    for min_export_threshold in T1_thresholds:
         for percentage_threshold in [1]:
             for year in [1969, 1979, 1988, 1989, 1990, 1999, 2000]:
                 unique_countries = {}
                 (positive_edges, negative_edges) = (0, 0)
                 for (A, B) in countries.country_pairs():
-                    link_sign = definition_C1(data, year, A, B,
+                    link_sign = definition(data, year, A, B,
                         args_for_definition_C(min_export_threshold, percentage_threshold, f))
                     if link_sign == POSITIVE_LINK:
                         positive_edges += 1
@@ -29,7 +30,7 @@ def print_densities_for_thresholds(data):
     f.close()
 
 
-def print_total_exports(data, T):
+def print_histogram_matlab_code(data, T):
     i = 0
     str = ""
     list = []
@@ -49,6 +50,7 @@ def print_total_exports(data, T):
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#print_total_exports(data, 1000)
-print_densities_for_thresholds(data)
+print_histogram_matlab_code(data, 1000)
+#print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
+#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
 
