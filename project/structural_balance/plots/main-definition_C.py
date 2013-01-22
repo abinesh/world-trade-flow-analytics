@@ -49,6 +49,6 @@ def print_total_exports(data, T):
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-print_total_exports(data, 1000)
-#print_densities_for_thresholds(data)
+#print_total_exports(data, 1000)
+print_densities_for_thresholds(data)
 

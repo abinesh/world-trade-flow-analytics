@@ -1,5 +1,6 @@
 from project.export_data.strongties import is_there_a_strong_tie_method_B, strong_tie_def_args
 from project.traids_vs_degree_plot import config
+from project.util import file_safe
 
 NEGATIVE_LINK = "negative"
 POSITIVE_LINK = "positive"
@@ -84,7 +85,7 @@ def args_for_definition_C(min_export_quantity_threshold, export_percentage_cutof
 
 def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
     if args['f'] is not None:
-        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, country_A, country_B, T2, one_way, other_way))
+        args['f'].write("%d,%s,%s,%d,%s,%s\n" % (year, file_safe(country_A), file_safe(country_B), T2, one_way, other_way))
 
 
 def definition_C(data, year, country_A, country_B, args):
@@ -105,7 +106,7 @@ def definition_C(data, year, country_A, country_B, args):
     one_way = directed_link(data, year, country_A, country_B, T1, T2)
     other_way = directed_link(data, year, country_B, country_A, T1, T2)
 
-    __log_to_file(T2, args, country_A, country_B, one_way, other_way, year)
+    __log_to_file(T1, args, country_A, country_B, one_way, other_way, year)
     return __combine_links(one_way, other_way)
 
 
