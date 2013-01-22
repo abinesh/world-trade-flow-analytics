@@ -86,7 +86,7 @@ data = None
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-generate_matlab_code(data)
-#print_graph_densities_for_different_thresholds(data)
+#generate_matlab_code(data)
+print_graph_densities_for_different_thresholds(data)
 
 
