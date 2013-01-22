@@ -90,10 +90,27 @@ class ExportData:
         if cache_key in self.cache:
             return self.cache[cache_key]
         result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
-                  countries.world_excluded_countries_list()]
+                  countries.world_excluded_countries_list() if
+                  self.export_data_as_percentage(year, exporter, c) != 0]
         ret_val = [(a, 100 * b) for (a, b) in
                    sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
                    if b is not None]
+        self.cache[cache_key] = ret_val
+        return ret_val
+
+    def top_T_percent_exports(self, exporter, year, T):
+        cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year)
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+        (total, ret_val, tie_percent) = (0, [], -1)
+        for (C, percent) in self.sorted_list_of_export_percentages(exporter, year):
+            total += percent
+            if total > T and tie_percent == -1:
+                tie_percent = percent
+            elif total > T and percent < tie_percent:
+                break
+            ret_val.append(C)
+
         self.cache[cache_key] = ret_val
         return ret_val
 
