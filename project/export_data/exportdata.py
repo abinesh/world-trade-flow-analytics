@@ -22,6 +22,7 @@ class Country:
 
 class ExportData:
     def __init__(self, start_year=1963, end_year=2000):
+        self.cache = {}
         self.years_map = {}
         self.missing_data_records_map = {}
         self.all_years = range(start_year, end_year + 1)
@@ -81,11 +82,19 @@ class ExportData:
         country_index = countries.country_to_index_map[exporter]
         return self.years_map[year][country_index]
 
+    def cache_key(self, func, *args):
+        return "%s,%s" % (func.__name__, ",".join([str(a) for a in args]))
+
     def sorted_list_of_export_percentages(self, exporter, year):
+        cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year)
+        if cache_key in self.cache:
+            return self.cache[cache_key]
         result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
                   countries.world_excluded_countries_list()]
-        return [(a, 100 * b) for (a, b) in sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
-                if b is not None]
+        ret_val = [(a, 100 * b) for (a, b) in sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
+             if b is not None]
+        self.cache[cache_key] = ret_val
+        return ret_val
 
 
     def export_import_ratio(self, exporter, importer, year):
@@ -126,10 +135,16 @@ class ExportData:
         return self.export_data(year, exporter, importer, return_none_if_data_point_is_nan) / exports_to_world
 
     def total_exports_from_C1_to_C2(self, C1, C2):
+        cache_key = self.cache_key(self.total_exports_from_C1_to_C2, C1, C2)
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+
         total = 0
         for year in self.all_years:
             v = self.export_data(year, C1, C2)
             if v is not None: total += v
+
+        self.cache[cache_key] = total
         return total
 
     def total_exports(self, exporter, year):
