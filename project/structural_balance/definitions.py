@@ -91,7 +91,10 @@ def definition_C(data, year, country_A, country_B, args):
     def directed_link(data, year, A, B, T1, T2):
         if data.total_exports_from_C1_to_C2(A, B) < T1: return NO_LINK
         if data.export_data(year, A, B) is None or data.export_data(year, A, B) == 0:
-            return NEGATIVE_LINK
+            if year > data.first_positive_year(country_A, country_B):
+                return NEGATIVE_LINK
+            else:
+                return NO_LINK
         if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
         return NEGATIVE_LINK
 
