@@ -4,7 +4,7 @@ from project.export_data.exportdata import ExportData
 from project.structural_balance.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D
 from project.structural_balance.plots.config import OUT_DIR
 
-thresholds = [99, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50]
+thresholds = [99, 95, 90, 85, 80]
 a_few_years = [1969, 1979, 1989, 1999, 2000]
 
 def generate_matlab_code(data):
@@ -22,11 +22,11 @@ def generate_matlab_code(data):
                     list.append((B, 100 * percentage))
 
                 (line1, line2, line3) = ('x=[', 'x1=[', 'y={')
-                (sum, count, previous_value, in_pruned_zone) = (0, 0, -1, False)
+                (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
 
                 for entry in sorted(list, key=lambda country: 0 if country[1] is None else -country[1]):
-                    current_value = int(entry[1])
-                    if current_value == 0: break
+                    current_value = float(entry[1])
+                    if "%.2f" % current_value == "0.00": break
                     sum += current_value
                     count += 1
 
@@ -37,8 +37,9 @@ def generate_matlab_code(data):
                         else:
                             line2_value = 10
                             in_pruned_zone = True
+                    if not in_pruned_zone: positives_count += 1
 
-                    line1 = "%s %d " % (line1, entry[1])
+                    line1 = "%s %.2f " % (line1, entry[1])
                     line2 = "%s %d " % (line2, line2_value)
                     line3 = "%s, '%s'" % (line3, entry[0])
 
@@ -53,6 +54,9 @@ def generate_matlab_code(data):
                 print line3
                 print "bar(1:%d,[x x1],0.5,'stack');" % count
                 print "set(gca,'XTickLabel',y);"
+#                print "text(30,0,y(:,1:%d));" % positives_count if positives_count < 50 else 50
+                #                print "text(30,0,y(:,1:20))"
+                #                print "set(gca,'XTick',0:5:length(x));"
                 print "saveas(gcf,'%s-%d-%d','png');" % (A, percentile_threshold, year)
 
 
@@ -82,7 +86,7 @@ data = None
 data = ExportData()
 data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#generate_matlab_code(data)
-print_graph_densities_for_different_thresholds(data)
+generate_matlab_code(data)
+#print_graph_densities_for_different_thresholds(data)
 
 
