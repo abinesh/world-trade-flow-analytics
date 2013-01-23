@@ -126,11 +126,25 @@ def args_for_definition_D(threshold, f=None):
     }
 
 
+def_D_first_positive_years = {}
+
 def definition_D(data, year, country_A, country_B, args):
+    def _def_D_first_positive(data, A, B, T):
+        key = '%s,%s,%f' % (A, B, T)
+        if key in def_D_first_positive_years:
+            return def_D_first_positive_years[key]
+        retval = 9999
+        for year in data.all_years:
+            if B in data.top_T_percent_exports(A, year, T):
+                retval = year
+                break
+        def_D_first_positive_years[key] = retval
+        return retval
+
     def _def_D_directed_link(T, A, B, data, year):
         if data.export_data(year, A, B, -1) == -1: return NO_LINK
         if B in data.top_T_percent_exports(A, year, T): return POSITIVE_LINK
-        if data.first_trade_year(A, B) > year: return NO_LINK
+        if _def_D_first_positive(data, A, B, T) > year: return NO_LINK
         return NEGATIVE_LINK
 
     T = args['threshold']
