@@ -9,6 +9,4 @@ YEAR_COLUMNS = ["Value63", "Value64", "Value65", "Value66", "Value67", "Value68"
                 "Value90", "Value91", "Value92", "Value93", "Value94", "Value95", "Value96", "Value97", "Value98",
                 "Value99", "Value00"]
 
-# Switchboard
-EXPORT_DATA_MEMOIZATION_SWITCH = True
 

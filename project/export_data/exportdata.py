@@ -1,9 +1,9 @@
 import csv
 from numpy import polyfit, std
 from project import countries
-from project.config import YEAR_COLUMNS, EXPORT_DATA_MEMOIZATION_SWITCH
+from project.config import YEAR_COLUMNS
 from project.countries import is_valid_country, world_excluded_countries_list
-from project.util import column_to_year
+from project.util import column_to_year, memoize
 
 class Country:
     def __init__(self, name):
@@ -21,13 +21,11 @@ class Country:
 
 
 class ExportData:
-    def __init__(self, start_year=1963, end_year=2000, memoization=EXPORT_DATA_MEMOIZATION_SWITCH):
-        self.cache = {}
+    def __init__(self, start_year=1963, end_year=2000):
         self.years_map = {}
         self.nan_records_map = {}
         self.all_years = range(start_year, end_year + 1)
         self.all_countries = {}
-        self.memoization_switch = memoization
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
             self.nan_records_map[year] = {}
@@ -89,28 +87,18 @@ class ExportData:
         country_index = countries.country_to_index_map[exporter]
         return self.years_map[year][country_index]
 
-    def cache_key(self, func, *args):
-        return "%s,%s" % (func.__name__, ",".join([str(a) for a in args]))
-
+    @memoize
     def sorted_list_of_export_percentages(self, exporter, year):
-        if self.memoization_switch:
-            cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year)
-            if cache_key in self.cache:
-                return self.cache[cache_key]
         result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
                   countries.world_excluded_countries_list() if
                   self.export_data_as_percentage(year, exporter, c) != 0]
         ret_val = [(a, 100 * b) for (a, b) in
                    sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
                    if b is not None]
-        if self.memoization_switch: self.cache[cache_key] = ret_val
         return ret_val
 
+    @memoize
     def top_T_percent_exports(self, exporter, year, T):
-        if self.memoization_switch:
-            cache_key = self.cache_key(self.sorted_list_of_export_percentages, exporter, year,T)
-            if cache_key in self.cache:
-                return self.cache[cache_key]
         (total, ret_val, tie_percent) = (0, [], -1)
         for (C, percent) in self.sorted_list_of_export_percentages(exporter, year):
             total += percent
@@ -120,7 +108,6 @@ class ExportData:
                 break
             ret_val.append(C)
 
-        if self.memoization_switch: self.cache[cache_key] = ret_val
         return ret_val
 
 
@@ -175,26 +162,16 @@ class ExportData:
         if val == -1: return return_this_for_missing_datapoint
         return val / exports_to_world
 
+    @memoize
     def total_exports_from_C1_to_C2(self, C1, C2):
-        if self.memoization_switch:
-            cache_key = self.cache_key(self.total_exports_from_C1_to_C2, C1, C2)
-            if cache_key in self.cache:
-                return self.cache[cache_key]
-
         total = 0
         for year in self.all_years:
             v = self.export_data(year, C1, C2)
             if v is not None: total += v
-
-        if self.memoization_switch: self.cache[cache_key] = total
         return total
 
+    @memoize
     def total_non_nan_points_from_C1_to_C2(self, C1, C2):
-        if self.memoization_switch:
-            cache_key = self.cache_key(self.total_non_nan_points_from_C1_to_C2, C1, C2)
-            if cache_key in self.cache:
-                return self.cache[cache_key]
-
         retval = 0
         for year in self.all_years:
             v = self.export_data(year, C1, C2,
@@ -204,8 +181,6 @@ class ExportData:
                 retval = -1
                 break
             if v is not None: retval += 1
-
-        if self.memoization_switch: self.cache[cache_key] = retval
         return retval
 
     def total_exports(self, exporter, year):
@@ -280,12 +255,8 @@ class ExportData:
                 return False
         return True
 
+    @memoize
     def first_trade_year(self, C1, C2):
-        if self.memoization_switch:
-            cache_key = self.cache_key(self.first_trade_year, C1, C2)
-            if cache_key in self.cache:
-                return self.cache[cache_key]
-
         current_year = self.all_years[0]
         end_year = self.all_years[len(self.all_years) - 1]
         retval = None
@@ -296,5 +267,4 @@ class ExportData:
                 retval = current_year
                 break
         if retval is None: retval = end_year + 1
-        if self.memoization_switch: self.cache[cache_key] = retval
         return retval
