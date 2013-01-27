@@ -2,7 +2,7 @@ import csv
 from numpy import polyfit, std
 from project import countries
 from project.config import YEAR_COLUMNS
-from project.countries import is_valid_country, world_excluded_countries_list
+from project.countries import is_valid_country
 from project.util import column_to_year, memoize
 
 class Country:
@@ -77,6 +77,7 @@ class ExportData:
             list.append(Country(countries.index_to_country_map.get(index)))
         return list
 
+    @memoize
     def countries(self):
         retval = self.all_countries.keys()
         retval.remove('World')
@@ -89,9 +90,8 @@ class ExportData:
 
     @memoize
     def sorted_list_of_export_percentages(self, exporter, year):
-        result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in
-                  countries.world_excluded_countries_list() if
-                  self.export_data_as_percentage(year, exporter, c) != 0]
+        result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in self.countries()
+                  if self.export_data_as_percentage(year, exporter, c) != 0]
         ret_val = [(a, 100 * b) for (a, b) in
                    sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
                    if b is not None]
@@ -205,9 +205,9 @@ class ExportData:
 
         return slope, predicted_export_percentage - standard_deviation, predicted_export_percentage + standard_deviation
 
+    @memoize
     def top_countries_by_export(self, year, k):
-        countries_list = world_excluded_countries_list()
-        all = [(self.total_exports(country, year), country) for country in countries_list]
+        all = [(self.total_exports(country, year), country) for country in self.countries()]
         all.sort()
         size = len(all)
         topK = all[size - k:size]

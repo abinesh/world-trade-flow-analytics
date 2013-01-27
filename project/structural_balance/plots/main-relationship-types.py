@@ -23,7 +23,7 @@ def write_number_of_positive_traids(data, definition, def_args, out_dir):
 
     all_years_data = {}
     years = data.all_years
-    countries_list = countries.world_excluded_countries_list()
+    countries_list = data.countries()
 
     for year in years:
         single_year_data = {}
@@ -56,7 +56,7 @@ data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_w
 
 definition = definition_B
 subtypes_out = open(OUT_DIR.RELATIONSHIP_TYPES + 'subtypes.txt', 'w')
-def_args = args_for_definition_B(5,subtypes_out)
+def_args = args_for_definition_B(5, subtypes_out)
 write_relationship_types(data, definition, def_args, OUT_DIR.RELATIONSHIP_TYPES)
 subtypes_out.close()
 #write_number_of_positive_traids(data, definition, def_args, OUT_DIR.NUMBER_OF_POSITIVE_TRAIDS)

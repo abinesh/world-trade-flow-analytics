@@ -16,7 +16,7 @@ def generate_matlab_code(data):
         for year in a_few_years:
             for A in ['Iran', 'USA', 'UK', 'Australia', 'France,Monac', 'China', 'Bangladesh', 'Sri Lanka']:
                 list = []
-                for B in countries.world_excluded_countries_list():
+                for B in data.countries():
                     percentage = data.export_data_as_percentage(year, A, B, False)
                     if percentage is None: continue
                     list.append((B, 100 * percentage))
