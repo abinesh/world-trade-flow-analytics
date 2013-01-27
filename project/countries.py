@@ -265,8 +265,8 @@ for c in countries:
     index_to_country_map[index] = c
     index += 1
 
-def is_valid_country(importer):
-    return country_to_index_map.has_key(importer)
+def is_valid_country(c):
+    return c in country_to_index_map
 
 world_excluded_list = None
 

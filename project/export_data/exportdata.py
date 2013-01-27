@@ -119,6 +119,9 @@ class ExportData:
             val = num / den
         return val
 
+    #    export from A->B can be missing, Nan or non-zero
+    #    Default value when A->B is missing: -1
+    #    Default value when A->B is Nan: 0
     def export_data(self, year, exporter, importer,
                     return_none_if_data_point_is_nan=False,
                     return_this_for_missing_datapoint=0):
@@ -129,24 +132,6 @@ class ExportData:
         retval = exporter_data_for_year.get_export_to_country(importer)
         if retval == -1: return return_this_for_missing_datapoint
         return retval
-
-    def _adjust_inflation(self, value, year):
-        current_year = year
-        beginning = 1963
-        while current_year >= beginning:
-            value = (100 * value) / (100 + self.inflation_data['%s' % current_year])
-            current_year -= 1
-        return value
-
-    def export_data_inflation_adjusted(self, year, exporter, importer,
-                                       return_none_if_data_point_is_nan=False,
-                                       return_this_for_missing_datapoint=0):
-        actual_export_data = self.export_data(year, exporter, importer,
-            return_none_if_data_point_is_nan,
-            return_this_for_missing_datapoint)
-        if actual_export_data is None: return None
-        if actual_export_data == -1: return return_this_for_missing_datapoint
-        return self._adjust_inflation(actual_export_data, year)
 
     def export_data_as_percentage(self, year, exporter, importer,
                                   return_none_if_data_point_is_nan=False,
@@ -214,6 +199,21 @@ class ExportData:
         topK.reverse()
         return [c for v, c in topK]
 
+    def _load_row(self, exporter, importer, row_map, year_columns):
+        for column in year_columns:
+            export_quantity = row_map.get(column)
+            year = column_to_year(column)
+            if not year in self.all_years:
+                continue
+            if export_quantity == 'NaN':
+                self.__record_nan_data(year, exporter, importer)
+            else:
+                self.__export_data_for_a_country(exporter, year).set_export_to_country(importer,
+                    float(export_quantity))
+            self.all_countries[exporter] = 1
+            self.all_countries[importer] = 1
+            print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
+
     def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
         reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
 
@@ -227,19 +227,7 @@ class ExportData:
                 continue
             if not is_valid_country(importer) or not is_valid_country(exporter):
                 continue
-            for column in year_columns:
-                export_quantity = row.get(column)
-                year = column_to_year(column)
-                if not year in self.all_years:
-                    continue
-                if export_quantity == 'NaN':
-                    self.__record_nan_data(year, exporter, importer)
-                else:
-                    self.__export_data_for_a_country(exporter, year).set_export_to_country(importer,
-                        float(export_quantity))
-                self.all_countries[exporter] = 1
-                self.all_countries[importer] = 1
-                print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
+            self._load_row(exporter, importer, row, year_columns)
 
     def __record_nan_data(self, year, exporter, importer):
         m = self.nan_records_map[year]
