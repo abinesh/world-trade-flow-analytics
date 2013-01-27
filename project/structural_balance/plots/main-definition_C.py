@@ -48,7 +48,7 @@ def print_histogram_matlab_code(data, T):
     print "saveas(gcf,'definition_C_histogram','png');"
 
 data = ExportData()
-data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 print_histogram_matlab_code(data, 1000)
 print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])

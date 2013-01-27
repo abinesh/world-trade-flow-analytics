@@ -25,7 +25,7 @@ def generate_network_graph_data(data, year, subset_of_countries, out_file, defin
     f.close()
 
 data = ExportData()
-data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+data.load_file(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 for year in range(1968, 2001):
     top_countries_and_exports = data.top_countries_by_export(year, 50)

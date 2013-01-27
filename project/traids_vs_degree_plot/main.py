@@ -13,7 +13,7 @@ def write_out_graph_data_for_traids_vs_degree_plot(data):
         csv_write(config.graph_data_file_name(year), strongties.graph_data(matrix_for_a_year))
 
 data = ExportData()
-data.load_export_data(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL)
+data.load_file(WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL)
 write_out_graph_data_for_traids_vs_degree_plot(data)
 
 

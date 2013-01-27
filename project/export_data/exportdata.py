@@ -214,8 +214,9 @@ class ExportData:
             self.all_countries[importer] = 1
             print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
 
-    def load_export_data(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
-        reader = csv.DictReader(open(file_path, 'rb'), skipinitialspace=True)
+    def load_file(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
+        f = open(file_path, 'rb')
+        reader = csv.DictReader(f, skipinitialspace=True)
 
         for row in reader:
             importer = row.get('Importer')
@@ -228,6 +229,7 @@ class ExportData:
             if not is_valid_country(importer) or not is_valid_country(exporter):
                 continue
             self._load_row(exporter, importer, row, year_columns)
+        f.close()
 
     def __record_nan_data(self, year, exporter, importer):
         m = self.nan_records_map[year]

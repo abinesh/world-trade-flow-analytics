@@ -52,7 +52,7 @@ def write_number_of_positive_traids(data, definition, def_args, out_dir):
 
 
 data = ExportData()
-data.load_export_data('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 definition = definition_B
 subtypes_out = open(OUT_DIR.RELATIONSHIP_TYPES + 'subtypes.txt', 'w')
