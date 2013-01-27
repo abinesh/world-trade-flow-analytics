@@ -199,7 +199,7 @@ class ExportData:
         topK.reverse()
         return [c for v, c in topK]
 
-    def _load_row(self, exporter, importer, row_map, year_columns):
+    def _load_row(self, exporter, importer, row_map, year_columns=YEAR_COLUMNS):
         for column in year_columns:
             export_quantity = row_map.get(column)
             year = column_to_year(column)

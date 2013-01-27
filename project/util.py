@@ -21,5 +21,5 @@ def memoize(function):
 
 
 def file_safe(country):
-#    strip('. ') trims whitespaces, periods and comma characters
+#    strip('. ,') trims whitespaces, periods and comma characters
     return country.strip('. ,').replace(',', '_').replace('.', '_').replace(' ', '_')
