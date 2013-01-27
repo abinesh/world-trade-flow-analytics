@@ -80,3 +80,9 @@ def row_map(
         'Value99': str(y99),
         'Value00': str(y2000)
     }
+
+
+def write_to_file(f, *lines):
+    f.write('\n'.join(lines))
+    f.flush()
+
