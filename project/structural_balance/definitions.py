@@ -77,8 +77,8 @@ def __combine_links(one_way, other_way):
 
 def args_for_definition_C(min_export_quantity_threshold, export_percentage_cutoff_threshold, f=None):
     return {
-        'export_percentage_cutoff_threshold': export_percentage_cutoff_threshold,
         'min_export_quantity_threshold': min_export_quantity_threshold,
+        'export_percentage_cutoff_threshold': export_percentage_cutoff_threshold,
         'f': f
     }
 
