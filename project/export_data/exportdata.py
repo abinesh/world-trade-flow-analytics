@@ -163,7 +163,7 @@ class ExportData:
                 return_none_if_data_point_is_nan=True,
                 return_this_for_missing_datapoint=-1)
             if v == -1:
-                retval = -1
+                retval = 0
                 break
             if v is not None: retval += 1
         return retval
