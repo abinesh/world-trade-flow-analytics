@@ -125,9 +125,8 @@ class ExportData:
     def export_data(self, year, exporter, importer,
                     return_none_if_data_point_is_nan=False,
                     return_this_for_missing_datapoint=0):
-        if return_none_if_data_point_is_nan:
-            if self._is_nan(year, exporter, importer):
-                return None
+        if return_none_if_data_point_is_nan and self._is_nan(year, exporter, importer):
+            return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         retval = exporter_data_for_year.get_export_to_country(importer)
         if retval == -1: return return_this_for_missing_datapoint
@@ -136,9 +135,8 @@ class ExportData:
     def export_data_as_percentage(self, year, exporter, importer,
                                   return_none_if_data_point_is_nan=False,
                                   return_this_for_missing_datapoint=0):
-        if return_none_if_data_point_is_nan:
-            if self._is_nan(year, exporter, importer):
-                return None
+        if return_none_if_data_point_is_nan and self._is_nan(year, exporter, importer):
+            return None
         exports_to_world = self.total_exports(exporter, year)
         if exports_to_world is None or exports_to_world == 0:
             return None
