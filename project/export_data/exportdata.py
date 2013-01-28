@@ -126,7 +126,7 @@ class ExportData:
                     return_none_if_data_point_is_nan=False,
                     return_this_for_missing_datapoint=0):
         if return_none_if_data_point_is_nan:
-            if not self.__data_exists(year, exporter, importer):
+            if self._is_nan(year, exporter, importer):
                 return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         retval = exporter_data_for_year.get_export_to_country(importer)
@@ -137,7 +137,7 @@ class ExportData:
                                   return_none_if_data_point_is_nan=False,
                                   return_this_for_missing_datapoint=0):
         if return_none_if_data_point_is_nan:
-            if not self.__data_exists(year, exporter, importer):
+            if self._is_nan(year, exporter, importer):
                 return None
         exports_to_world = self.total_exports(exporter, year)
         if exports_to_world is None or exports_to_world == 0:
@@ -238,12 +238,12 @@ class ExportData:
             m[exporter] = {}
         m[exporter][importer] = 1
 
-    def __data_exists(self, year, exporter, importer):
+    def _is_nan(self, year, exporter, importer):
         m = self.nan_records_map[year]
         if exporter in m:
             if importer in m[exporter]:
-                return False
-        return True
+                return True
+        return False
 
     @memoize
     def first_trade_year(self, C1, C2):
@@ -258,3 +258,6 @@ class ExportData:
                 break
         if retval is None: retval = end_year + 1
         return retval
+
+    def _trade_exists(self, year, exporter, importer):
+        pass
