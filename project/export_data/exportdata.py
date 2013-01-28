@@ -231,6 +231,13 @@ class ExportData:
             self._load_row(exporter, importer, row, year_columns)
         f.close()
 
+    @memoize
+    def __trade_exists(self, exporter, importer):
+        return self.export_data(1999, exporter, importer, return_this_for_missing_datapoint=-1) != -1
+
+    def _trade_exists(self, year, exporter, importer):
+        return self.__trade_exists(exporter, importer)
+
     def __record_nan_data(self, year, exporter, importer):
         m = self.nan_records_map[year]
         self.__export_data_for_a_country(exporter, year).set_export_to_country(importer, 0)
@@ -259,5 +266,3 @@ class ExportData:
         if retval is None: retval = end_year + 1
         return retval
 
-    def _trade_exists(self, year, exporter, importer):
-        pass
