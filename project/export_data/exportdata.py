@@ -129,6 +129,7 @@ class ExportData:
             return None
         exporter_data_for_year = self.__export_data_for_a_country(exporter, year)
         retval = exporter_data_for_year.get_export_to_country(importer)
+        assert retval is not None
         if retval == -1: return return_this_for_missing_datapoint
         return retval
 
