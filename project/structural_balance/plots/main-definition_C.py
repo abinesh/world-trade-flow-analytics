@@ -1,7 +1,8 @@
+from itertools import combinations
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2
+from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK
 from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data, definition, T1_thresholds):
@@ -47,10 +48,30 @@ def print_histogram_matlab_code(data, T):
     print "set(gca, 'Xscale', 'log');"
     print "saveas(gcf,'definition_C_histogram','png');"
 
+
+def print_traid_counts(data, definition):
+    args = args_for_definition_C(1000, 1)
+    for year in [1970, 1980, 1990, 2000]:
+        t0, t1, t2, t3 = 0, 0, 0, 0
+        for (A, B, C) in combinations(data.countries(), 3):
+            side1 = definition(data, year, A, B, args)
+            side2 = definition(data, year, B, C, args)
+            side3 = definition(data, year, C, A, args)
+            if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
+            positive_sides = 0
+            for side in [side1, side2, side3]:
+                if side == POSITIVE_LINK: positive_sides += 1
+            if positive_sides == 0: t0 += 1
+            if positive_sides == 1: t1 += 1
+            if positive_sides == 2: t2 += 1
+            if positive_sides == 3: t3 += 1
+            print "%d,t0=%d,t1=%d,t2=%d,t3=%d" % (year, t0, t1, t2, t3)
+
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 print_histogram_matlab_code(data, 1000)
 print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
 print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
+#print_traid_counts(data, definition_C1)
 
