@@ -43,6 +43,11 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
     D. A->B is Positive if A's export to B is within top 90 percent of its exports. Else it is pruned out. If it is pruned after a non-zero data-point it is negative, else it is missing link
        A->B and B->A relationships should be combined
 
+   (To generate count of edge pairs run the following:
+   def_C1: cat definition_C1-combinations.txt | cut -d"," -f 1,4,5,6 | sort | uniq -c
+   def_C2: cat definition_C2-combinations.txt | cut -d"," -f 1,4,5,6 | sort | uniq -c
+   def_D:  cat combinations.txt | cut -d "," -f 1,4,5,6 | sort | uniq -c
+
 
 5. Top 50 countries data
     https://docs.google.com/spreadsheet/ccc?key=0AtaB149ijWVNdGI3eTBaVGxZajZFQnFDY09URmtRYWc#gid=1
