@@ -10,11 +10,12 @@ def memoize(function):
     memo = {}
 
     def wrapper(*args):
-        if args in memo:
-            return memo[args]
+        key = str(args)
+        if key in memo:
+            return memo[key]
         else:
             rv = function(*args)
-            memo[args] = rv
+            memo[key] = rv
             return rv
 
     return wrapper

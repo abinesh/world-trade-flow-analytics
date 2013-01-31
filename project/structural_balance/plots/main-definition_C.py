@@ -58,13 +58,13 @@ def print_traid_counts(data, definition):
             if positive_sides == 1: t1 += 1
             if positive_sides == 2: t2 += 1
             if positive_sides == 3: t3 += 1
-            print "%d,t0=%d,t1=%d,t2=%d,t3=%d" % (year, t0, t1, t2, t3)
+        print "%d,t0=%d,t1=%d,t2=%d,t3=%d" % (year, t0, t1, t2, t3)
 
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-print_histogram_matlab_code(data, 1000)
-print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
-print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
-#print_traid_counts(data, definition_C1)
+#print_histogram_matlab_code(data, 1000)
+#print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
+#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
+print_traid_counts(data, definition_C1)
 

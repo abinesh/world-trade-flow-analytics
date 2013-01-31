@@ -1,6 +1,6 @@
 from project.export_data.strongties import is_there_a_strong_tie_method_B, strong_tie_def_args
 from project.traids_vs_degree_plot import config
-from project.util import file_safe
+from project.util import file_safe, memoize
 
 NEGATIVE_LINK = "negative"
 POSITIVE_LINK = "positive"
@@ -111,10 +111,12 @@ def __def_C__(args, country_A, country_B, data, year, t1_function):
     return __combine_links(one_way, other_way)
 
 
+@memoize
 def definition_C1(data, year, country_A, country_B, args):
     return __def_C__(args, country_A, country_B, data, year, data.total_exports_from_C1_to_C2)
 
 
+@memoize
 def definition_C2(data, year, country_A, country_B, args):
     return __def_C__(args, country_A, country_B, data, year, data.total_non_nan_points_from_C1_to_C2)
 
@@ -126,21 +128,16 @@ def args_for_definition_D(threshold, f=None):
     }
 
 
-def_D_first_positive_years = {}
+@memoize
+def _def_D_first_positive(data, A, B, T):
+    for year in data.all_years:
+        if B in data.top_T_percent_exports(A, year, T):
+            return year
+    return 9999
 
+
+@memoize
 def definition_D(data, year, country_A, country_B, args):
-    def _def_D_first_positive(data, A, B, T):
-        key = '%s,%s,%f' % (A, B, T)
-        if key in def_D_first_positive_years:
-            return def_D_first_positive_years[key]
-        retval = 9999
-        for year in data.all_years:
-            if B in data.top_T_percent_exports(A, year, T):
-                retval = year
-                break
-        def_D_first_positive_years[key] = retval
-        return retval
-
     def _def_D_directed_link(T, A, B, data, year):
         if data.export_data(year, A, B, -1) == -1: return NO_LINK
         if B in data.top_T_percent_exports(A, year, T): return POSITIVE_LINK
