@@ -11,20 +11,13 @@ def print_densities_for_thresholds(data, definition, T1_thresholds):
     for min_export_threshold in T1_thresholds:
         for percentage_threshold in [1]:
             for year in [1969, 1979, 1988, 1989, 1990, 1999, 2000]:
-                unique_countries = {}
                 (positive_edges, negative_edges) = (0, 0)
                 for (A, B) in countries.country_pairs(data.countries()):
                     link_sign = definition(data, year, A, B,
                         args_for_definition_C(min_export_threshold, percentage_threshold, f))
-                    if link_sign == POSITIVE_LINK:
-                        positive_edges += 1
-                        unique_countries[A] = 1
-                        unique_countries[B] = 1
-                    if link_sign == NEGATIVE_LINK:
-                        negative_edges += 1
-                        unique_countries[A] = 1
-                        unique_countries[B] = 1
-                N = len(unique_countries)
+                    if link_sign == POSITIVE_LINK: positive_edges += 1
+                    if link_sign == NEGATIVE_LINK: negative_edges += 1
+                N = 203
                 density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
                 print "%d,%f,%d,%f,%d,%d,%d" % (
                     min_export_threshold, percentage_threshold, year, density, positive_edges, negative_edges, N)

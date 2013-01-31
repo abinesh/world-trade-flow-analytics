@@ -66,18 +66,11 @@ def print_graph_densities_for_different_thresholds(data):
         for year in a_few_years:
             positive_edges = 0
             negative_edges = 0
-            unique_countries = {}
             for (A, B) in countries.country_pairs(data.countries()):
                 link_sign = definition_D(data, year, A, B, args_for_definition_D(T, f))
-                if link_sign == POSITIVE_LINK:
-                    positive_edges += 1
-                    unique_countries[A] = 1
-                    unique_countries[B] = 1
-                if link_sign == NEGATIVE_LINK:
-                    negative_edges += 1
-                    unique_countries[A] = 1
-                    unique_countries[B] = 1
-            N = len(unique_countries)
+                if link_sign == POSITIVE_LINK: positive_edges += 1
+                if link_sign == NEGATIVE_LINK: negative_edges += 1
+            N = 203
             density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
             print "%d,%d,%f,%d,%d,%d" % (T, year, density, positive_edges, negative_edges, N)
     f.close()
