@@ -1,5 +1,6 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from itertools import combinations
+from random import choice
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
@@ -26,11 +27,40 @@ def table1(data, year, definition, def_args):
 
 
 def table2(data, year, definition, def_args):
+    class RandomLinkGenerator:
+        def __init__(self, positive, negative, missing):
+            self.total_positive = positive
+            self.total_negative = negative
+            self.total_missing = missing
+
+            self.assigned_positive = 0
+            self.assigned_negative = 0
+            self.assigned_missing = 0
+
+        def next_random(self):
+            choices = []
+            if self.total_positive >= self.assigned_positive: choices.append(POSITIVE_LINK)
+            if self.total_negative >= self.assigned_negative: choices.append(NEGATIVE_LINK)
+            if self.total_missing >= self.assigned_missing: choices.append(NO_LINK)
+            retval = choice(choices)
+            if retval == POSITIVE_LINK: self.assigned_positive += 1
+            if retval == NEGATIVE_LINK: self.assigned_negative += 1
+            if retval == NO_LINK: self.assigned_missing += 1
+            return retval
+
     t0, t1, t2, t3 = 0, 0, 0, 0
+    rt0, rt1, rt2, rt3 = 0, 0, 0, 0
+    total_positive, total_negative, total_missing = 0, 0, 0
     for (A, B, C) in combinations(data.countries(), 3):
         side1 = definition(data, year, A, B, def_args)
         side2 = definition(data, year, B, C, def_args)
         side3 = definition(data, year, C, A, def_args)
+
+        for side in [side1, side2, side3]:
+            if side == POSITIVE_LINK: total_positive += 1
+            if side == NEGATIVE_LINK: total_negative += 1
+            if side == NO_LINK: total_missing += 1
+
         if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
         positive_sides = 0
         for side in [side1, side2, side3]:
@@ -40,7 +70,22 @@ def table2(data, year, definition, def_args):
         if positive_sides == 2: t2 += 1
         if positive_sides == 3: t3 += 1
     total = t0 + t1 + t2 + t3
-    return {'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total},
-            'T1': {'|Ti|': t1, 'p(Ti)': t1 * 1.0 / total},
-            'T2': {'|Ti|': t2, 'p(Ti)': t2 * 1.0 / total},
-            'T3': {'|Ti|': t3, 'p(Ti)': t3 * 1.0 / total}}
+
+    r = RandomLinkGenerator(total_positive, total_negative, total_missing)
+    for (A, B, C) in combinations(data.countries(), 3):
+        side1 = r.next_random()
+        side2 = r.next_random()
+        side3 = r.next_random()
+        if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
+        positive_sides = 0
+        for side in [side1, side2, side3]:
+            if side == POSITIVE_LINK: positive_sides += 1
+        if positive_sides == 0: rt0 += 1
+        if positive_sides == 1: rt1 += 1
+        if positive_sides == 2: rt2 += 1
+        if positive_sides == 3: rt3 += 1
+    rtotal = rt0 + rt1 + rt2 + rt3
+    return {'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total, 'p0(Ti)': rt0 * 1.0 / rtotal, 's(Ti)': (t0 - rt0) / (pow(rt0*(1-rt0*1.0/rtotal),0.5))},
+            'T1': {'|Ti|': t1, 'p(Ti)': t1 * 1.0 / total, 'p0(Ti)': rt1 * 1.0 / rtotal, 's(Ti)': (t1 - rt1) / (pow(rt1*(1-rt1*1.0/rtotal),0.5))},
+            'T2': {'|Ti|': t2, 'p(Ti)': t2 * 1.0 / total, 'p0(Ti)': rt2 * 1.0 / rtotal, 's(Ti)': (t2 - rt2) / (pow(rt2*(1-rt2*1.0/rtotal),0.5))},
+            'T3': {'|Ti|': t3, 'p(Ti)': t3 * 1.0 / total, 'p0(Ti)': rt3 * 1.0 / rtotal, 's(Ti)': (t3 - rt3) / (pow(rt3*(1-rt3*1.0/rtotal),0.5))}}
