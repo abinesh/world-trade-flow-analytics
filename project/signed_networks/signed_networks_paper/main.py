@@ -6,7 +6,6 @@ from project.signed_networks.signed_networks_paper.tables import table1
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-print "FIX THIS: def_A number of traids is not correct: Expected 1373701, actual:1394237.8333333333"
 print table1(data, 2000, definition_A, args_for_definition_A(.5, 2))
 print table1(data, 2000, definition_B, args_for_definition_B(5))
 print table1(data, 2000, definition_C1, args_for_definition_C(5000, 1))

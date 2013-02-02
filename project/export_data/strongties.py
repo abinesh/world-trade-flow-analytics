@@ -22,7 +22,8 @@ def get_relationship_matrix(data, year, relationship_definition, def_args):
     for export_country in countries.countries:
         row = []
         for import_country in countries.countries:
-            if relationship_definition(data, year, export_country, import_country, def_args):
+            if relationship_definition(data, year, export_country, import_country,
+                def_args) and export_country != import_country:
                 row.append(1)
             else:
                 row.append(0)
