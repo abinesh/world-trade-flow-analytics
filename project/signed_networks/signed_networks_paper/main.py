@@ -1,7 +1,7 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
-from project.export_data.strongties import get_relationship_matrix, number_of_traids
+from project.export_data.strongties import get_relationship_matrix, number_of_traids_for_a_country
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, NEGATIVE_LINK, POSITIVE_LINK, NO_LINK
 
@@ -22,7 +22,7 @@ def table1(data, year, definition, def_args):
             '+ edges': positive_edges_count * 100.0 / edges_count,
             '- edges': negative_edges_count * 100.0 / edges_count,
             'No edges': no_edge_count * 100.0 / edges_count,
-#            'Traids': number_of_traids(get_relationship_matrix(data, year, link_exists_def, {}), 'USA')
+                        'Traids': number_of_traids_for_a_country(get_relationship_matrix(data, year, link_exists_def, {}), 'USA')
     }
 
 

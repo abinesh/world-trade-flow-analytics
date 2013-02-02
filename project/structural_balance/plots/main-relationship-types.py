@@ -1,7 +1,7 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.export_data.strongties import get_relationship_matrix, __matrix_cube, number_of_traids
+from project.export_data.strongties import get_relationship_matrix, __matrix_cube, number_of_traids_for_a_country
 from project.signed_networks.definitions import definition_B, args_for_definition_B, NO_LINK, POSITIVE_LINK
 from project.structural_balance.plots.config import OUT_DIR
 import csv
@@ -33,7 +33,7 @@ def write_number_of_positive_traids(data, definition, def_args, out_dir):
             relationship_matrix = get_relationship_matrix(data, year, relationship_def, {})
             relationship_matrix_cube = __matrix_cube(relationship_matrix)
             for C in countries_list:
-                number_of_positive_traids = number_of_traids(relationship_matrix_cube, C)
+                number_of_positive_traids = number_of_traids_for_a_country(relationship_matrix_cube, C)
                 out_file.writerow([C, number_of_positive_traids])
                 single_year_data[C] = number_of_positive_traids
         all_years_data[year] = single_year_data

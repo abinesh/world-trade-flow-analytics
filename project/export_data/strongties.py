@@ -32,7 +32,7 @@ def get_relationship_matrix(data, year, relationship_definition, def_args):
     return b
 
 
-def number_of_traids(dense_cube_matrix, country):
+def number_of_traids_for_a_country(dense_cube_matrix, country):
     index = countries.country_to_index_map[country]
     return int(dense_cube_matrix.tolist()[index][index])
 
@@ -57,6 +57,6 @@ def __matrix_cube(dense_matrix):
 
 def graph_data(matrix):
     return (('Country', 'Traids', 'Degree'),
-            [(country, number_of_traids(__matrix_cube(matrix), country), number_of_degrees(matrix, country)) for country
+            [(country, number_of_traids_for_a_country(__matrix_cube(matrix), country), number_of_degrees(matrix, country)) for country
              in
              countries.countries])
