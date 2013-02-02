@@ -399,10 +399,15 @@ class TestFunctions(unittest.TestCase):
         d.load_file(f.name, should_read_world_datapoints=True)
         map = table2(d, 1963, test_extension_def_A, args_for_definition_A(.5, 2))
 
-        self.assertEquals(0,map['T0'])
-        self.assertEquals(2,map['T1'])
-        self.assertEquals(2,map['T2'])
-        self.assertEquals(1,map['T3'])
+        self.assertEquals(0, map['T0']['|Ti|'])
+        self.assertEquals(2, map['T1']['|Ti|'])
+        self.assertEquals(2, map['T2']['|Ti|'])
+        self.assertEquals(1, map['T3']['|Ti|'])
+
+        self.assertEquals(0, map['T0']['p(Ti)'])
+        self.assertEquals(2.0 / 5, map['T1']['p(Ti)'])
+        self.assertEquals(2.0 / 5, map['T2']['p(Ti)'])
+        self.assertEquals(1.0 / 5, map['T3']['p(Ti)'])
 
 
 @memoize

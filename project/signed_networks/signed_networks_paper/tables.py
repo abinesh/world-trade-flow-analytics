@@ -39,4 +39,8 @@ def table2(data, year, definition, def_args):
         if positive_sides == 1: t1 += 1
         if positive_sides == 2: t2 += 1
         if positive_sides == 3: t3 += 1
-    return {'T0': t0, 'T1': t1, 'T2': t2, 'T3': t3}
+    total = t0 + t1 + t2 + t3
+    return {'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total},
+            'T1': {'|Ti|': t1, 'p(Ti)': t1 * 1.0 / total},
+            'T2': {'|Ti|': t2, 'p(Ti)': t2 * 1.0 / total},
+            'T3': {'|Ti|': t3, 'p(Ti)': t3 * 1.0 / total}}
