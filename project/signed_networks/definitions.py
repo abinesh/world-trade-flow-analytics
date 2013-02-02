@@ -13,6 +13,7 @@ def args_for_definition_A(lower_bound, upper_bound):
     }
 
 
+@memoize
 def definition_A(data, year, country_A, country_B, args):
     return POSITIVE_LINK if is_there_a_strong_tie_method_B(data, year, country_A, country_B, args) else NEGATIVE_LINK
 
@@ -24,6 +25,7 @@ def args_for_definition_B(sliding_window_size, trend_combinations_log=None):
     }
 
 
+@memoize
 def definition_B(data, year, country_A, country_B, args):
     ACCELERATING = "+"
     DECELERATING = "-"

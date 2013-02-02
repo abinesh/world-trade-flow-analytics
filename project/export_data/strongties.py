@@ -37,6 +37,13 @@ def number_of_traids_for_a_country(dense_cube_matrix, country):
     return int(dense_cube_matrix.tolist()[index][index])
 
 
+def number_of_traids(dense_cube_matrix):
+    total = 0
+    for C in countries.world_excluded_countries_list():
+        total += number_of_traids_for_a_country(dense_cube_matrix, C)
+    return total / 6.0
+
+
 def number_of_degrees(dense_matrix, row_country):
     matrix_as_list = dense_matrix.tolist()
     row_country_index = countries.country_to_index_map[row_country]
@@ -57,6 +64,7 @@ def __matrix_cube(dense_matrix):
 
 def graph_data(matrix):
     return (('Country', 'Traids', 'Degree'),
-            [(country, number_of_traids_for_a_country(__matrix_cube(matrix), country), number_of_degrees(matrix, country)) for country
+            [(country, number_of_traids_for_a_country(__matrix_cube(matrix), country),
+              number_of_degrees(matrix, country)) for country
              in
              countries.countries])
