@@ -2,7 +2,7 @@ from project.config import  WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.countries import country_pairs
 from project.export_data.exportdata import ExportData
 from project.structural_balance.config import  output_file_html, html_footer, html_header
-from project.structural_balance.definitions import  NO_LINK, args_for_definition_B, definition_B, POSITIVE_LINK
+from project.signed_networks.definitions import   args_for_definition_B, definition_B, POSITIVE_LINK
 
 def normalize(n):
 #    normalizes 0.5 to 2 to a repulsion percentage. 1 returns 0% repulsion, and it grows on either side of 1 with 0.5 and 2 returning 100%

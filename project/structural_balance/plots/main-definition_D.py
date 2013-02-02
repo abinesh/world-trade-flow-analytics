@@ -1,7 +1,7 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D
+from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D
 from project.structural_balance.plots.config import OUT_DIR
 
 thresholds = [99, 95, 90, 85, 80]

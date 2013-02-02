@@ -2,7 +2,7 @@ from itertools import combinations
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK
+from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK
 from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data, definition, T1_thresholds):
@@ -65,6 +65,6 @@ data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_da
 
 #print_histogram_matlab_code(data, 1000)
 #print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000])
-#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
-print_traid_counts(data, definition_C1)
+print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1))
+#print_traid_counts(data, definition_C1)
 

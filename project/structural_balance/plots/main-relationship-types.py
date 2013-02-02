@@ -2,7 +2,7 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.export_data.strongties import get_relationship_matrix, __matrix_cube, number_of_traids
-from project.structural_balance.definitions import definition_B, args_for_definition_B, NO_LINK, POSITIVE_LINK
+from project.signed_networks.definitions import definition_B, args_for_definition_B, NO_LINK, POSITIVE_LINK
 from project.structural_balance.plots.config import OUT_DIR
 import csv
 

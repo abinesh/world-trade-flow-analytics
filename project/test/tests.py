@@ -1,6 +1,6 @@
 import unittest
 from project.export_data.exportdata import ExportData
-from project.structural_balance.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D
+from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize
 import tempfile
