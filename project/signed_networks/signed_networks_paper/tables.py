@@ -1,4 +1,5 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
+from itertools import combinations
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
@@ -23,3 +24,19 @@ def table1(data, year, definition, def_args):
             'Traids': number_of_traids(__matrix_cube(get_relationship_matrix(data, year, link_exists_def, {})))
     }
 
+
+def table2(data, year, definition, def_args):
+    t0, t1, t2, t3 = 0, 0, 0, 0
+    for (A, B, C) in combinations(data.countries(), 3):
+        side1 = definition(data, year, A, B, def_args)
+        side2 = definition(data, year, B, C, def_args)
+        side3 = definition(data, year, C, A, def_args)
+        if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
+        positive_sides = 0
+        for side in [side1, side2, side3]:
+            if side == POSITIVE_LINK: positive_sides += 1
+        if positive_sides == 0: t0 += 1
+        if positive_sides == 1: t1 += 1
+        if positive_sides == 2: t2 += 1
+        if positive_sides == 3: t3 += 1
+    return {'T0': t0, 'T1': t1, 'T2': t2, 'T3': t3}
