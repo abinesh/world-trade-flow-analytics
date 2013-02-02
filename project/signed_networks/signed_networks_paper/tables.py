@@ -1,3 +1,4 @@
+#Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
