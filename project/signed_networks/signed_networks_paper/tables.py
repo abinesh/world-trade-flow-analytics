@@ -4,6 +4,7 @@ from random import choice
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
+from project.util import memoize
 
 def table1(data, year, definition, def_args):
     def link_exists_def(data, year, A, B, def_args1):
@@ -35,7 +36,8 @@ def table2(data, year, definition, def_args):
             self.assigned_positive = 0
             self.assigned_negative = 0
 
-        def next_random(self):
+        @memoize
+        def next_random(self, pair):
             choices = []
             if self.total_positive > self.assigned_positive: choices.append(POSITIVE_LINK)
             if self.total_negative > self.assigned_negative: choices.append(NEGATIVE_LINK)
@@ -74,9 +76,9 @@ def table2(data, year, definition, def_args):
         side3 = definition(data, year, C, A, def_args)
         if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
         positive_sides = 0
-        side1 = r.next_random()
-        side2 = r.next_random()
-        side3 = r.next_random()
+        side1 = r.next_random(sorted([A, B]))
+        side2 = r.next_random(sorted([B, C]))
+        side3 = r.next_random(sorted([C, A]))
         for side in [side1, side2, side3]:
             if side == POSITIVE_LINK: positive_sides += 1
         if positive_sides == 0: rt0 += 1
