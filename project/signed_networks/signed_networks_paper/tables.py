@@ -1,6 +1,6 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from itertools import combinations
-from random import choice
+from random import uniform
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
@@ -36,12 +36,21 @@ def table2(data, year, definition, def_args):
             self.assigned_positive = 0
             self.assigned_negative = 0
 
+        def __random_pick(self, list, probabilities):
+            x = uniform(0, 1)
+            cumulative_probability = 0.0
+            for item, item_probability in zip(list, probabilities):
+                cumulative_probability += item_probability
+                if x < cumulative_probability: break
+            return item
+
         @memoize
         def next_random(self, pair):
-            choices = []
-            if self.total_positive > self.assigned_positive: choices.append(POSITIVE_LINK)
-            if self.total_negative > self.assigned_negative: choices.append(NEGATIVE_LINK)
-            retval = choice(choices)
+            remaining_positive = self.total_positive - self.assigned_positive
+            remaining_negative = self.total_negative - self.assigned_negative
+            total_remaining = remaining_positive + remaining_negative
+            retval = self.__random_pick([POSITIVE_LINK, NEGATIVE_LINK],
+                [1.0 * remaining_positive / total_remaining, 1.0 * remaining_negative / total_remaining])
             if retval == POSITIVE_LINK: self.assigned_positive += 1
             if retval == NEGATIVE_LINK: self.assigned_negative += 1
             return retval
