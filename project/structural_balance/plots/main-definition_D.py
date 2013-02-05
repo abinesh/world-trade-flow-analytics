@@ -61,10 +61,10 @@ def generate_matlab_code(data, thresholds=thresholds, years=a_few_years, countri
                 print "saveas(gcf,'%s-%d-%d','png');" % (A, percentile_threshold, year)
 
 
-def print_graph_densities_for_different_thresholds(data):
+def print_graph_densities_for_different_thresholds(data, thresholds, years):
     f = open(OUT_DIR.DEFINITION_D + 'combinations.txt', 'w')
     for T in thresholds:
-        for year in a_few_years:
+        for year in years:
             positive_edges = 0
             negative_edges = 0
             for (A, B) in countries.country_pairs(data.countries()):
@@ -80,8 +80,8 @@ data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-generate_matlab_code(data, [99], [2000],
-    ['Canada', 'USA', 'UK', 'Singapore', 'Greece', 'Mexico', 'Japan', 'Australia', 'Costa Rica'])
-#print_graph_densities_for_different_thresholds(data)
+#generate_matlab_code(data, [99], [2000],
+#    ['Canada', 'USA', 'UK', 'Singapore', 'Greece', 'Mexico', 'Japan', 'Australia', 'Costa Rica'])
+print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 
 

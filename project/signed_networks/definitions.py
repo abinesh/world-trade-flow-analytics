@@ -141,7 +141,7 @@ def _def_D_first_positive(data, A, B, T):
 @memoize
 def definition_D(data, year, country_A, country_B, args):
     def _def_D_directed_link(T, A, B, data, year):
-        if data.export_data(year, A, B, -1) == -1: return NO_LINK
+        if data.export_data(year, A, B, return_this_for_missing_datapoint=-1) == -1: return NO_LINK
         if B in data.top_T_percent_exports(A, year, T): return POSITIVE_LINK
         if _def_D_first_positive(data, A, B, T) > year: return NO_LINK
         return NEGATIVE_LINK
