@@ -20,8 +20,8 @@ def print_table(json):
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-for i in range(1, 5):
-    for table in [table2]:
-        print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 1)))
-        print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 1)))
-        print_table(table(data, 2000, definition_D, args_for_definition_D(90)))
+for table in [table1, table2]:
+    print_table(table(data, 2000, definition_B, args_for_definition_B(5)))
+    print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 1)))
+    print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 1)))
+    print_table(table(data, 2000, definition_D, args_for_definition_D(90)))

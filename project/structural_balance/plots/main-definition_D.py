@@ -6,15 +6,16 @@ from project.structural_balance.plots.config import OUT_DIR
 
 thresholds = [99, 95, 90, 85, 80]
 a_few_years = [1969, 1979, 1988, 1989, 1990, 1999, 2000]
+a_few_countries = ['Iran', 'USA', 'UK', 'Australia', 'France,Monac', 'China', 'Bangladesh', 'Sri Lanka']
 
-def generate_matlab_code(data):
+def generate_matlab_code(data, thresholds=thresholds, years=a_few_years, countries=a_few_countries):
 #USA, UK, Australia, France, China, Iran, Bangladesh, Srilanka
 #1969,1979,1989,1999,2000
 # cutoff threshold 99,95,90,85,80
 #    todo: slanted x axis labels or inline labels, colour to separate top 90% bars
     for percentile_threshold in thresholds:
-        for year in a_few_years:
-            for A in ['Iran', 'USA', 'UK', 'Australia', 'France,Monac', 'China', 'Bangladesh', 'Sri Lanka']:
+        for year in years:
+            for A in countries:
                 list = []
                 for B in data.countries():
                     percentage = data.export_data_as_percentage(year, A, B, False)
@@ -79,7 +80,8 @@ data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#generate_matlab_code(data)
-print_graph_densities_for_different_thresholds(data)
+generate_matlab_code(data, [99], [2000],
+    ['Canada', 'USA', 'UK', 'Singapore', 'Greece', 'Mexico', 'Japan', 'Australia', 'Costa Rica'])
+#print_graph_densities_for_different_thresholds(data)
 
 
