@@ -19,7 +19,8 @@ def table1(data, year, definition, def_args):
         elif link_type == NO_LINK: no_edge_count += 1
 
     edges_count = positive_edges_count + negative_edges_count
-    return {'Nodes': len(data.countries()),
+    return {'Name': 'Table1',
+            'Nodes': len(data.countries()),
             'Edges': edges_count,
             '+ edges': positive_edges_count * 100.0 / edges_count,
             '- edges': negative_edges_count * 100.0 / edges_count,
@@ -46,6 +47,7 @@ def table2(data, year, definition, def_args):
 
         @memoize
         def next_random(self, pair):
+            # argument 'pair' is used for memoization
             remaining_positive = self.total_positive - self.assigned_positive
             remaining_negative = self.total_negative - self.assigned_negative
             total_remaining = remaining_positive + remaining_negative
@@ -58,13 +60,14 @@ def table2(data, year, definition, def_args):
     t0, t1, t2, t3 = 0, 0, 0, 0
     rt0, rt1, rt2, rt3 = 0, 0, 0, 0
     total_positive, total_negative, total_missing = 0, 0, 0
+    traids = []
     for (A, B, C) in combinations(data.countries(), 3):
         side1 = definition(data, year, A, B, def_args)
         side2 = definition(data, year, B, C, def_args)
         side3 = definition(data, year, C, A, def_args)
 
         if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
-
+        traids.append((A, B, C))
         for side in [side1, side2, side3]:
             if side == POSITIVE_LINK: total_positive += 1
             if side == NEGATIVE_LINK: total_negative += 1
@@ -79,11 +82,7 @@ def table2(data, year, definition, def_args):
     total = t0 + t1 + t2 + t3
 
     r = RandomLinkGenerator(total_positive, total_negative)
-    for (A, B, C) in combinations(data.countries(), 3):
-        side1 = definition(data, year, A, B, def_args)
-        side2 = definition(data, year, B, C, def_args)
-        side3 = definition(data, year, C, A, def_args)
-        if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
+    for (A, B, C) in traids:
         positive_sides = 0
         side1 = r.next_random(sorted([A, B]))
         side2 = r.next_random(sorted([B, C]))
@@ -95,7 +94,9 @@ def table2(data, year, definition, def_args):
         if positive_sides == 2: rt2 += 1
         if positive_sides == 3: rt3 += 1
     rtotal = rt0 + rt1 + rt2 + rt3
-    return {'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total, 'p0(Ti)': rt0 * 1.0 / rtotal,
+
+    return {'Name': 'Table2',
+            'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total, 'p0(Ti)': rt0 * 1.0 / rtotal,
                    's(Ti)': 99999999 if rt0 == 0 else (t0 - rt0) / (pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5))},
             'T1': {'|Ti|': t1, 'p(Ti)': t1 * 1.0 / total, 'p0(Ti)': rt1 * 1.0 / rtotal,
                    's(Ti)': 99999999 if rt1 == 0 else(t1 - rt1) / (pow(rt1 * (1 - rt1 * 1.0 / rtotal), 0.5))},
