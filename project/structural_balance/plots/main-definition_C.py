@@ -8,9 +8,9 @@ from project.structural_balance.plots.config import OUT_DIR
 def print_densities_for_thresholds(data, definition, T1_thresholds, T2_thresholds, combinations_file_name):
     f = open(OUT_DIR.DEFINITION_C + combinations_file_name + '-combinations.txt', 'w')
 
-    for min_export_threshold in T1_thresholds:
-        for percentage_threshold in T2_thresholds:
-            args = args_for_definition_C(min_export_threshold, percentage_threshold)
+    for pruning_T in T1_thresholds:
+        for classifying_T in T2_thresholds:
+            args = args_for_definition_C(pruning_T, classifying_T)
 
             for year in [1969, 1979, 1988, 1989, 1990, 1999, 2000]:
                 (positive_edges, negative_edges) = (0, 0)
@@ -21,7 +21,7 @@ def print_densities_for_thresholds(data, definition, T1_thresholds, T2_threshold
                 N = 203
                 density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
                 print "%d,%f,%d,%f,%d,%d,%d" % (
-                    min_export_threshold, percentage_threshold, year, density, positive_edges, negative_edges, N)
+                pruning_T, classifying_T, year, density, positive_edges, negative_edges, N)
     f.close()
 
 
