@@ -8,7 +8,7 @@ thresholds = [99, 95, 90, 85, 80]
 a_few_years = [1969, 1979, 1988, 1989, 1990, 1999, 2000]
 a_few_countries = ['Iran', 'USA', 'UK', 'Australia', 'France,Monac', 'China', 'Bangladesh', 'Sri Lanka']
 
-def generate_matlab_code(data, thresholds=thresholds, years=a_few_years, countries=a_few_countries):
+def generate_matlab_histogram_code(data, thresholds=thresholds, years=a_few_years, countries=a_few_countries):
 #USA, UK, Australia, France, China, Iran, Bangladesh, Srilanka
 #1969,1979,1989,1999,2000
 # cutoff threshold 99,95,90,85,80
@@ -74,7 +74,7 @@ def print_graph_densities_for_different_thresholds(data, thresholds, years):
     f.close()
 
 
-def print_top_countries_for_def_D(data, years, countries):
+def print_histogram_as_text(data, years, countries):
     args = args_for_definition_D(99, mode='one-way')
     f = open(OUT_DIR.DEFINITION_D + 'def_d_db.txt', 'w')
     for year in years:
@@ -109,8 +109,8 @@ data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#generate_matlab_code(data, [99], [2000],['Georgia', 'USA'])
-print_top_countries_for_def_D(data, a_few_years, data.countries())
+generate_matlab_histogram_code(data, [99], [2000],['Georgia', 'USA'])
+print_histogram_as_text(data, a_few_years, data.countries())
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 
 
