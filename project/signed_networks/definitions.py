@@ -77,10 +77,10 @@ def __combine_links(one_way, other_way):
     return POSITIVE_LINK
 
 
-def args_for_definition_C(min_export_quantity_threshold, export_percentage_cutoff_threshold, f=None):
+def args_for_definition_C(pruning_T, classifying_T, f=None):
     return {
-        'min_export_quantity_threshold': min_export_quantity_threshold,
-        'export_percentage_cutoff_threshold': export_percentage_cutoff_threshold,
+        'pruning_T': pruning_T,
+        'classifying_T': classifying_T,
         'f': f
     }
 
@@ -103,8 +103,7 @@ def __def_C__(args, country_A, country_B, data, year, t1_function):
         if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
         return NEGATIVE_LINK
 
-    T1 = args['min_export_quantity_threshold']
-    T2 = args['export_percentage_cutoff_threshold']
+    (T1, T2) = (args['pruning_T'], args['classifying_T'])
 
     one_way = __def_C_directed_link(data, year, country_A, country_B, T1, T2, t1_function)
     other_way = __def_C_directed_link(data, year, country_B, country_A, T1, T2, t1_function)
