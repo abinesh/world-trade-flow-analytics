@@ -1,4 +1,3 @@
-from itertools import combinations
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
@@ -46,7 +45,7 @@ data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #print_histogram_matlab_code(data, 1000)
-#print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000], [1],
+#print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000], [0.01],
 #    'definition_C1')
-#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1), [1], 'definition_C2')
+#print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1), [0.01], 'definition_C2')
 print_densities_for_thresholds(data, definition_C3, [0], [100], 'definition_C3')

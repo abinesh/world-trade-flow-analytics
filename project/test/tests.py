@@ -142,19 +142,20 @@ class TestFunctions(unittest.TestCase):
         d.load_file(f.name, should_read_world_datapoints=True)
 
         #        C1->C2 or C2->C1 does not exist
-        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'Cent.Afr.Rep', 'India', args_for_definition_C(1000, 1)))
+        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'Cent.Afr.Rep', 'India', args_for_definition_C(1000, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is below threshold T1
-        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'Cent.Afr.Rep', 'Bermuda', args_for_definition_C(1000, 1)))
+        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'Cent.Afr.Rep', 'Bermuda', args_for_definition_C(1000, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from one of C1->C2 and C2->C1 is Nan and is the first Nan
-        self.assertEquals(NO_LINK, definition_C1(d, 1963, 'USA', 'India', args_for_definition_C(10, 1)))
+        self.assertEquals(NO_LINK, definition_C1(d, 1963, 'USA', 'India', args_for_definition_C(10, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from one of C1->C2 and C2->C1 is Nan and is not first Nan
-        self.assertEquals(NEGATIVE_LINK, definition_C1(d, 1966, 'USA', 'India', args_for_definition_C(10, 1)))
+        self.assertEquals(NEGATIVE_LINK, definition_C1(d, 1966, 'USA', 'India', args_for_definition_C(10, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from C1->C2 and C2->C1 is below T2
-        self.assertEquals(NEGATIVE_LINK, definition_C1(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 100)))
+        self.assertEquals(NEGATIVE_LINK, definition_C1(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 1)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold and percentage of exports from C1->C2 and C2->C1 is above T2
-        self.assertEquals(POSITIVE_LINK, definition_C1(d, 1995, 'South Africa', 'USA', args_for_definition_C(1000, 1)))
+        self.assertEquals(POSITIVE_LINK,
+            definition_C1(d, 1995, 'South Africa', 'USA', args_for_definition_C(1000, 0.01)))
         #        C1->C2 is positive, C2->C1 is missing
-        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'South Africa', 'India', args_for_definition_C(1000, 1)))
+        self.assertEquals(NO_LINK, definition_C1(d, 1995, 'South Africa', 'India', args_for_definition_C(1000, 0.01)))
 
     def test_definition_c2(self):
         f = tempfile.NamedTemporaryFile()
@@ -174,19 +175,19 @@ class TestFunctions(unittest.TestCase):
         d.load_file(f.name, should_read_world_datapoints=True)
 
         #        C1->C2 or C2->C1 does not exist
-        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'Cent.Afr.Rep', 'India', args_for_definition_C(5, 1)))
+        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'Cent.Afr.Rep', 'India', args_for_definition_C(5, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is below threshold T1
-        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'Cent.Afr.Rep', 'Bermuda', args_for_definition_C(35, 1)))
+        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'Cent.Afr.Rep', 'Bermuda', args_for_definition_C(35, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from one of C1->C2 and C2->C1 is Nan and is the first Nan
-        self.assertEquals(NO_LINK, definition_C2(d, 1963, 'USA', 'India', args_for_definition_C(10, 1)))
+        self.assertEquals(NO_LINK, definition_C2(d, 1963, 'USA', 'India', args_for_definition_C(10, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from one of C1->C2 and C2->C1 is Nan and is not first Nan
-        self.assertEquals(NEGATIVE_LINK, definition_C2(d, 1966, 'USA', 'India', args_for_definition_C(10, 1)))
+        self.assertEquals(NEGATIVE_LINK, definition_C2(d, 1966, 'USA', 'India', args_for_definition_C(10, 0.01)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold but percentage of exports from C1->C2 and C2->C1 is below T2
-        self.assertEquals(NEGATIVE_LINK, definition_C2(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 100)))
+        self.assertEquals(NEGATIVE_LINK, definition_C2(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 1)))
         #        sum of exports from C1->C2 and C2->C1 is above threshold and percentage of exports from C1->C2 and C2->C1 is above T2
-        self.assertEquals(POSITIVE_LINK, definition_C2(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 1)))
+        self.assertEquals(POSITIVE_LINK, definition_C2(d, 1995, 'South Africa', 'USA', args_for_definition_C(10, 0.01)))
         #        C1->C2 is positive, C2->C1 is missing
-        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'South Africa', 'India', args_for_definition_C(10, 1)))
+        self.assertEquals(NO_LINK, definition_C2(d, 1995, 'South Africa', 'India', args_for_definition_C(10, 0.01)))
 
     def test_definition_d(self):
         f = tempfile.NamedTemporaryFile()

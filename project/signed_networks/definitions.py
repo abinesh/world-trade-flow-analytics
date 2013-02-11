@@ -91,7 +91,7 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
             "%d,%s,%s,%d,%s,%s\n" % (year, file_safe(country_A), file_safe(country_B), T2, one_way, other_way))
 
 
-def __def_C__(args, country_A, country_B, data, year, t1_function):
+def __def_C__(args, country_A, country_B, data, year, t1_function, t2_function):
     def __def_C_directed_link(data, year, A, B, T1, T2, t1_function):
         if t1_function(A, B) < T1: return NO_LINK
         if data.export_data(year, A, B, return_this_for_missing_datapoint=-1) == -1: return NO_LINK
@@ -100,7 +100,7 @@ def __def_C__(args, country_A, country_B, data, year, t1_function):
                 return NEGATIVE_LINK
             else:
                 return NO_LINK
-        if data.export_data_as_percentage(year, A, B) * 100 >= T2: return POSITIVE_LINK
+        if t2_function(year, A, B) >= T2: return POSITIVE_LINK
         return NEGATIVE_LINK
 
     (T1, T2) = (args['pruning_T'], args['classifying_T'])
@@ -113,35 +113,18 @@ def __def_C__(args, country_A, country_B, data, year, t1_function):
 
 
 @memoize
-def definition_C1(data, year, country_A, country_B, args):
-    return __def_C__(args, country_A, country_B, data, year, data.total_exports_from_C1_to_C2)
+def definition_C1(data, year, A, B, args):
+    return __def_C__(args, A, B, data, year, data.total_exports_from_C1_to_C2, data.export_data_as_percentage)
 
 
 @memoize
-def definition_C2(data, year, country_A, country_B, args):
-    return __def_C__(args, country_A, country_B, data, year, data.total_non_nan_points_from_C1_to_C2)
+def definition_C2(data, year, A, B, args):
+    return __def_C__(args, A, B, data, year, data.total_non_nan_points_from_C1_to_C2, data.export_data_as_percentage)
 
 
 @memoize
 def definition_C3(data, year, country_A, country_B, args):
-    def __def_C3_directed_link(data, year, A, B, T):
-        if data.export_data(year, A, B, return_this_for_missing_datapoint=-1) == -1: return NO_LINK
-        export_quantity = data.export_data(year, A, B)
-        if export_quantity is None or export_quantity == 0:
-            if year > data.first_trade_year(A, B):
-                return NEGATIVE_LINK
-            else:
-                return NO_LINK
-        if export_quantity >= T: return POSITIVE_LINK
-        return NEGATIVE_LINK
-
-    T = args['classifying_T']
-
-    one_way = __def_C3_directed_link(data, year, country_A, country_B, T)
-    other_way = __def_C3_directed_link(data, year, country_B, country_A, T)
-
-    __log_to_file(T, args, country_A, country_B, one_way, other_way, year)
-    return __combine_links(one_way, other_way)
+    return __def_C__(args, country_A, country_B, data, year, data.total_non_nan_points_from_C1_to_C2, data.export_data)
 
 
 def args_for_definition_D(threshold, mode='two-way', log_file=None):
