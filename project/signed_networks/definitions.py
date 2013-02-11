@@ -123,10 +123,11 @@ def definition_C2(data, year, country_A, country_B, args):
     return __def_C__(args, country_A, country_B, data, year, data.total_non_nan_points_from_C1_to_C2)
 
 
-def args_for_definition_D(threshold, f=None):
+def args_for_definition_D(threshold, mode='two-way', log_file=None):
     return {
         'threshold': threshold,
-        'f': f
+        'f': log_file,
+        'mode': mode
     }
 
 
@@ -147,8 +148,10 @@ def definition_D(data, year, country_A, country_B, args):
         return NEGATIVE_LINK
 
     T = args['threshold']
+    mode = args['mode']
 
     one_way = _def_D_directed_link(T, country_A, country_B, data, year)
+    if mode == 'one-way': return one_way
     other_way = _def_D_directed_link(T, country_B, country_A, data, year)
 
     __log_to_file(T, args, country_A, country_B, one_way, other_way, year)

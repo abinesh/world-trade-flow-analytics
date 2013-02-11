@@ -1,7 +1,7 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D
+from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D, NO_LINK
 from project.structural_balance.plots.config import OUT_DIR
 
 thresholds = [99, 95, 90, 85, 80]
@@ -16,11 +16,8 @@ def generate_matlab_code(data, thresholds=thresholds, years=a_few_years, countri
     for percentile_threshold in thresholds:
         for year in years:
             for A in countries:
-                list = []
-                for B in data.countries():
-                    percentage = data.export_data_as_percentage(year, A, B, False)
-                    if percentage is None: continue
-                    list.append((B, 100 * percentage))
+                list = [(B, 100 * data.export_data_as_percentage(year, A, B, False)) for B in countries if
+                        data.export_data_as_percentage(year, A, B, False) is not None]
 
                 (line1, line2, line3) = ('x=[', 'x1=[', 'y={')
                 (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
@@ -68,7 +65,7 @@ def print_graph_densities_for_different_thresholds(data, thresholds, years):
             positive_edges = 0
             negative_edges = 0
             for (A, B) in countries.country_pairs(data.countries()):
-                link_sign = definition_D(data, year, A, B, args_for_definition_D(T, f))
+                link_sign = definition_D(data, year, A, B, args_for_definition_D(T, log_file=f))
                 if link_sign == POSITIVE_LINK: positive_edges += 1
                 if link_sign == NEGATIVE_LINK: negative_edges += 1
             N = 203
@@ -76,12 +73,44 @@ def print_graph_densities_for_different_thresholds(data, thresholds, years):
             print "%d,%d,%f,%d,%d,%d" % (T, year, density, positive_edges, negative_edges, N)
     f.close()
 
+
+def print_top_countries_for_def_D(data, years, countries):
+    args = args_for_definition_D(99, mode='one-way')
+    f = open(OUT_DIR.DEFINITION_D + 'def_d_db.txt', 'w')
+    for year in years:
+        for A in countries:
+            list = [(B, 100 * data.export_data_as_percentage(year, A, B, False)) for B in countries if
+                    data.export_data_as_percentage(year, A, B, False) is not None]
+
+            (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
+            file_entry = []
+
+            for entry in sorted(list, key=lambda country: 0 if country[1] is None else -country[1]):
+                current_value = float(entry[1])
+                if "%.2f" % current_value == "0.00": break
+                sum += current_value
+                count += 1
+
+                def link_sign(link):
+                    if link == POSITIVE_LINK: return '+'
+                    if link == NEGATIVE_LINK: return '-'
+                    if link == NO_LINK: return 'M'
+
+                #            file_entry = [('USA', 10, 10,+), ('UK', 10, 20,+), ('Japan', 10, 30,-)]
+                file_entry.append((entry[0], entry[1], sum, link_sign(definition_D(data, year, A, entry[0], args))))
+
+            if count == 0: continue
+            f.write("%d:%s:[%s]\n" % (year, A, ','.join(["(%s,%.2f,%.2f,%s)" % (country, percentage, percentile, sign)
+                                                         for(country, percentage, percentile, sign) in file_entry])))
+
+    f.close()
+
 data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-#generate_matlab_code(data, [99], [2000],
-#    ['Canada', 'USA', 'UK', 'Singapore', 'Greece', 'Mexico', 'Japan', 'Australia', 'Costa Rica'])
-print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
+#generate_matlab_code(data, [99], [2000],['Georgia', 'USA'])
+print_top_countries_for_def_D(data, a_few_years, data.countries())
+#print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 
 
