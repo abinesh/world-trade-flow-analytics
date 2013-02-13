@@ -92,7 +92,7 @@ def __log_to_file(T2, args, country_A, country_B, one_way, other_way, year):
 
 
 def __def_C__(args, country_A, country_B, data, year, t1_function, t2_function):
-    def __def_C_directed_link(data, year, A, B, T1, T2, t1_function):
+    def __def_C_directed_link(data, year, A, B, T1, T2):
         if t1_function(A, B) < T1: return NO_LINK
         if data.export_data(year, A, B, return_this_for_missing_datapoint=-1) == -1: return NO_LINK
         if data.export_data(year, A, B) is None or data.export_data(year, A, B) == 0:
@@ -105,8 +105,8 @@ def __def_C__(args, country_A, country_B, data, year, t1_function, t2_function):
 
     (T1, T2) = (args['pruning_T'], args['classifying_T'])
 
-    one_way = __def_C_directed_link(data, year, country_A, country_B, T1, T2, t1_function)
-    other_way = __def_C_directed_link(data, year, country_B, country_A, T1, T2, t1_function)
+    one_way = __def_C_directed_link(data, year, country_A, country_B, T1, T2)
+    other_way = __def_C_directed_link(data, year, country_B, country_A, T1, T2)
 
     __log_to_file(T1, args, country_A, country_B, one_way, other_way, year)
     return __combine_links(one_way, other_way)
