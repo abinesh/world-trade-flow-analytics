@@ -77,11 +77,12 @@ def __combine_links(one_way, other_way):
     return POSITIVE_LINK
 
 
-def args_for_definition_C(pruning_T, classifying_T, f=None):
+def args_for_definition_C(pruning_T, classifying_T, f=None, mode='two-way', ):
     return {
         'pruning_T': pruning_T,
         'classifying_T': classifying_T,
-        'f': f
+        'f': f,
+        'mode': mode
     }
 
 
@@ -104,8 +105,10 @@ def __def_C__(args, country_A, country_B, data, year, t1_function, t2_function):
         return NEGATIVE_LINK
 
     (T1, T2) = (args['pruning_T'], args['classifying_T'])
+    mode = args['mode']
 
     one_way = __def_C_directed_link(data, year, country_A, country_B, T1, T2)
+    if mode == 'one-way': return one_way
     other_way = __def_C_directed_link(data, year, country_B, country_A, T1, T2)
 
     __log_to_file(T1, args, country_A, country_B, one_way, other_way, year)
