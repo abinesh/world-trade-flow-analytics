@@ -121,6 +121,22 @@ class ExportData:
 
         return ret_val
 
+    @memoize
+    def export_percentile_range(self, year, A, B):
+        if not self._trade_exists(year, A, B): return 100.0, 100.0
+        start, end = 0, 0
+        previous_percentage = -1
+        total = 0
+        for (C, percent) in self.sorted_list_of_export_percentages(A, year):
+            if percent != previous_percentage:
+                start = total
+            total += percent
+            if C == B:
+                end = total
+                break
+            previous_percentage = percent
+        return start, end
+
 
     def export_import_ratio(self, exporter, importer, year):
         num = self.export_data(year, exporter, importer)
