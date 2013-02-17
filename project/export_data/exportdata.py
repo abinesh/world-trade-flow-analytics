@@ -91,10 +91,10 @@ class ExportData:
     #    this method excludes (A,B) missing and (A,B)=Nan
     @memoize
     def sorted_list_of_export_percentages(self, exporter, year):
-        list = [(B, 100 * self.export_data_as_percentage(year, exporter, B))
+        list = [(B, self.export_data_as_percentage(year, exporter, B))
                 for B in self.countries()
                 if self.export_data_as_percentage(year, exporter, B) != 0]
-        return [(a, b) for (a, b) in
+        return [(a, 100 * b) for (a, b) in
                 sorted(list, key=lambda country: 0 if country[1] is None else -country[1])
                 if b is not None]
 
@@ -122,20 +122,20 @@ class ExportData:
         return ret_val
 
     @memoize
-    def export_percentile_range(self, year, A, B):
-        if not self._trade_exists(year, A, B): return 100.0, 100.0
-        start, end = 0, 0
+    def export_data_as_percentile(self, year, A, B):
+        if not self._trade_exists(year, A, B): return 100.0
+        sorted_countries = self.sorted_list_of_export_percentages(A, year)
+        if B == sorted_countries[0][0]:
+            return 0.01
+        start = 0
         previous_percentage = -1
         total = 0
-        for (C, percent) in self.sorted_list_of_export_percentages(A, year):
-            if percent != previous_percentage:
-                start = total
+        for (C, percent) in sorted_countries:
+            if percent != previous_percentage: start = total
             total += percent
-            if C == B:
-                end = total
-                break
+            if C == B: break
             previous_percentage = percent
-        return start, end
+        return start
 
 
     def export_import_ratio(self, exporter, importer, year):

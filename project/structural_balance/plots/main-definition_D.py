@@ -3,6 +3,7 @@ from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D, NO_LINK
 from project.structural_balance.plots.config import OUT_DIR
+from project.util import file_safe
 
 thresholds = [99, 95, 90, 85, 80]
 a_few_years = [1969, 1979, 1988, 1989, 1990, 1999, 2000]
@@ -103,25 +104,31 @@ def print_histogram_as_text(data, years, countries):
 def print_missing_links_db(data, year, T, log_file_name):
     two_way_args = args_for_definition_D(T)
     one_way_args = args_for_definition_D(T, mode='one-way')
-
+    count = 0
     f = open(OUT_DIR.DEFINITION_D + log_file_name, 'w')
     for (A, B) in countries.country_pairs(data.countries()):
         if definition_D(data, year, A, B, two_way_args) == NO_LINK:
             one_way = definition_D(data, year, A, B, one_way_args)
             other_way = definition_D(data, year, B, A, one_way_args)
-            f.write("Y%d,%s,%s,%s,%s\n" % (year, A, B, one_way, other_way))
-            for Y in [1963, 2001]:
-                one_way = definition_D(data, Y, A, B, one_way_args)
-                other_way = definition_D(data, Y, B, A, one_way_args)
-                f.write("%d,%s,%s,%s,%s\n" % (Y, A, B, one_way, other_way))
+            f.write("Y%d,%s,%s,%s,%s\n" % (year, file_safe(A), file_safe(B), one_way, other_way))
+            if one_way != other_way:
+                for Y in range(1963, 2001):
+                    f.write("%d,%s,%s,%s,%s\n" % (
+                        Y, file_safe(A), file_safe(B),
+                        data.export_data_as_percentile(year, A, B),
+                        data.export_data_as_percentile(year, B, A)))
+                    count += 1
+                    if count == 5000: break
     f.close()
+
 
 data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
-print_histogram_as_text(data, a_few_years, data.countries())
+#generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
+#print_histogram_as_text(data, a_few_years, data.countries())
+print_missing_links_db(data, 2000, 99, 'def_d_db_hist.txt')
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 
 

@@ -261,12 +261,12 @@ class TestFunctions(unittest.TestCase):
             [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
              ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0)]),
             str(d.sorted_list_of_export_percentages('USA', 1963)))
-        self.assertEquals(str((0, 25.0)), str(d.export_percentile_range(1963, 'USA', 'UK')))
-        self.assertEquals(str((25.0, 45.0)), str(d.export_percentile_range(1963, 'USA', 'Italy')))
-        self.assertEquals(str((55.0, 56.0)), str(d.export_percentile_range(1963, 'USA', 'Armenia')))
-        self.assertEquals(str((55.0, 57.0)), str(d.export_percentile_range(1963, 'USA', 'Afghanistan')))
-        self.assertEquals(str((55.0, 62.0)), str(d.export_percentile_range(1963, 'USA', 'Bangladesh')))
-        self.assertEquals(str((100.0, 100.0)), str(d.export_percentile_range(1963, 'USA', 'Spain')))
+        self.assertEquals(0.01, d.export_data_as_percentile(1963, 'USA', 'UK'))
+        self.assertEquals(25.0, d.export_data_as_percentile(1963, 'USA', 'Italy'))
+        self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Armenia'))
+        self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Afghanistan'))
+        self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Bangladesh'))
+        self.assertEquals(100.0, d.export_data_as_percentile(1963, 'USA', 'Spain'))
         self.assertEquals(str(
             [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
              ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0),
