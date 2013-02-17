@@ -119,23 +119,23 @@ class ExportData:
     def top_T_percent_exports(self, exporter, year, T):
         return self._pick_top_T(self.sorted_list_of_export_percentages(exporter, year), T)
 
+    def _calculate_export_percentile(self, B, list):
+        if len(list) == 0: return 100.0
+        retval = 0
+        previous_percentage = -1
+        total = 0
+        for (C, percent) in list:
+            if percent != previous_percentage: retval = total
+            total += percent
+            if C == B: return retval
+            previous_percentage = percent
+        return 100
+
     #this method does not work properly yet for (A,B) missing. It should return 100.0
     @memoize
     def export_data_as_percentile(self, year, A, B):
         if not self._trade_exists(year, A, B): return 100.0
-        sorted_countries = self.sorted_list_of_export_percentages(A, year)
-        if len(sorted_countries) == 0: return 100.0
-        if B == sorted_countries[0][0]:
-            return 0.01
-        start = 0
-        previous_percentage = -1
-        total = 0
-        for (C, percent) in sorted_countries:
-            if percent != previous_percentage: start = total
-            total += percent
-            if C == B: break
-            previous_percentage = percent
-        return start
+        return self._calculate_export_percentile(B, self.sorted_list_of_export_percentages(A, year))
 
 
     def export_import_ratio(self, exporter, importer, year):

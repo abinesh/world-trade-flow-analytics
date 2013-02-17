@@ -231,6 +231,17 @@ class TestFunctions(unittest.TestCase):
         #        C1->C2 or C2->C1 exports are not in top T1 percentage of exports(Nan) and there has been a positive year before
         self.assertEquals(NEGATIVE_LINK, definition_D(d, 1965, 'USA', 'Bahrain', args_for_definition_D(30)))
 
+    def test_exportdata_percentile(self):
+        d = ExportData()
+        self.assertEquals(100, d._calculate_export_percentile('A', []))
+        self.assertEquals(0, d._calculate_export_percentile('A', [('A', 10), ('B', 5)]))
+        self.assertEquals(10, d._calculate_export_percentile('B', [('A', 10), ('B', 5)]))
+        self.assertEquals(10, d._calculate_export_percentile('B', [('A', 10), ('B', 5), ('C', 5), ('D', 5), ('E', 4)]))
+        self.assertEquals(10, d._calculate_export_percentile('C', [('A', 10), ('B', 5), ('C', 5), ('D', 5), ('E', 4)]))
+        self.assertEquals(10, d._calculate_export_percentile('D', [('A', 10), ('B', 5), ('C', 5), ('D', 5), ('E', 4)]))
+        self.assertEquals(25, d._calculate_export_percentile('E', [('A', 10), ('B', 5), ('C', 5), ('D', 5), ('E', 4)]))
+        self.assertEquals(100, d._calculate_export_percentile('non existing', [('A', 10), ('B', 5)]))
+        pass
 
     def test_exportdata_top_T_percentage_exports(self):
         f = tempfile.NamedTemporaryFile()
@@ -261,7 +272,7 @@ class TestFunctions(unittest.TestCase):
             [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
              ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0)]),
             str(d.sorted_list_of_export_percentages('USA', 1963)))
-        self.assertEquals(0.01, d.export_data_as_percentile(1963, 'USA', 'UK'))
+        self.assertEquals(0, d.export_data_as_percentile(1963, 'USA', 'UK'))
         self.assertEquals(25.0, d.export_data_as_percentile(1963, 'USA', 'Italy'))
         self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Armenia'))
         self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Afghanistan'))
