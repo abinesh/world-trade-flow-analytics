@@ -108,18 +108,16 @@ class ExportData:
                 if self.export_data_as_percentage(year, exporter, B, False) is not None and exporter != B]
         return sorted(list, key=lambda country: 0 if country[1] is None else -country[1])
 
+    def _pick_top_T(self, list, T):
+        total, i = 0, 0
+        while i < len(list) and (total <= T or (i - 1 >= 0 and list[i - 1][1] == list[i][1])):
+            total += list[i][1]
+            i += 1
+        return [a for (a, _) in list[:i]]
+
     @memoize
     def top_T_percent_exports(self, exporter, year, T):
-        (total, ret_val, tie_percent) = (0, [], -1)
-        for (C, percent) in self.sorted_list_of_export_percentages(exporter, year):
-            total += percent
-            if total > T and tie_percent == -1:
-                tie_percent = percent
-            elif total > T and percent < tie_percent:
-                break
-            ret_val.append(C)
-
-        return ret_val
+        return self._pick_top_T(self.sorted_list_of_export_percentages(exporter, year), T)
 
     #this method does not work properly yet for (A,B) missing. It should return 100.0
     @memoize

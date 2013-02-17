@@ -274,12 +274,23 @@ class TestFunctions(unittest.TestCase):
              ('Ghana', 0.0), ('Australia', 0.0), ('Georgia', 0.0), ('Greece', 0.0), ('Barbados', 0.0)]),
             str(d.countries_sorted_by_export_percentages('USA', 1963)))
         self.assertEquals(str(['UK', 'Italy', 'Canada', 'India']), str(d.top_T_percent_exports('USA', 1963, 50)))
-        self.assertEquals(str(['UK', 'Italy', 'Canada', 'India']), str(d.top_T_percent_exports('USA', 1963, 50)))
+        self.assertEquals(str(
+            ['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil', 'Bahrain',
+             'Bangladesh']), str(d.top_T_percent_exports('USA', 1963, 56)))
         self.assertEquals(str(['Ghana', 'Georgia']), str(d.top_T_percent_exports('Greece', 1963, 40)))
         self.assertEquals(
             str(['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil',
                  'Bahrain', 'Bangladesh']),
             str(d.top_T_percent_exports('USA', 1963, 100)))
+
+
+    def test_exportdata_pick_top_T(self):
+        d = ExportData()
+        self.assertEquals(['UK'], d._pick_top_T([('UK', 25)], 1))
+        self.assertEquals(['UK'], d._pick_top_T([('UK', 25)], 100))
+        self.assertEquals(['UK', 'UK'], d._pick_top_T([('UK', 25), ('UK', 20), ('UK', 15), ('UK', 10), ], 30))
+        self.assertEquals(['A', 'B', 'C', 'D', 'E', 'F'],
+            d._pick_top_T([('A', 25), ('B', 20), ('C', 15), ('D', 15), ('E', 15), ('F', 15), ('G', 14), ], 50))
 
 
     def test_exportdata_first_trade_year(self):
