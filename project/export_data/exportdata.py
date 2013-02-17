@@ -121,10 +121,12 @@ class ExportData:
 
         return ret_val
 
+    #this method does not work properly yet for (A,B) missing. It should return 100.0
     @memoize
     def export_data_as_percentile(self, year, A, B):
         if not self._trade_exists(year, A, B): return 100.0
         sorted_countries = self.sorted_list_of_export_percentages(A, year)
+        if len(sorted_countries) == 0: return 100.0
         if B == sorted_countries[0][0]:
             return 0.01
         start = 0

@@ -267,6 +267,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Afghanistan'))
         self.assertEquals(55.0, d.export_data_as_percentile(1963, 'USA', 'Bangladesh'))
         self.assertEquals(100.0, d.export_data_as_percentile(1963, 'USA', 'Spain'))
+        self.assertEquals(100.0, d.export_data_as_percentile(1964, 'USA', 'UK'))
         self.assertEquals(str(
             [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
              ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0),
