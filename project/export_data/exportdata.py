@@ -88,14 +88,25 @@ class ExportData:
         country_index = countries.country_to_index_map[exporter]
         return self.years_map[year][country_index]
 
+    #    this method excludes (A,B) missing and (A,B)=Nan
     @memoize
     def sorted_list_of_export_percentages(self, exporter, year):
-        result = [(c, self.export_data_as_percentage(year, exporter, c)) for c in self.countries()
-                  if self.export_data_as_percentage(year, exporter, c) != 0]
-        ret_val = [(a, 100 * b) for (a, b) in
-                   sorted(result, key=lambda country: 0 if country[1] is None else -country[1])
-                   if b is not None]
-        return ret_val
+        list = [(B, 100 * self.export_data_as_percentage(year, exporter, B))
+                for B in self.countries()
+                if self.export_data_as_percentage(year, exporter, B) != 0]
+        return [(a, b) for (a, b) in
+                sorted(list, key=lambda country: 0 if country[1] is None else -country[1])
+                if b is not None]
+
+        #    this method includes (A,B) missing and (A,B)=Nan
+
+    @memoize
+    def countries_sorted_by_export_percentages(self, exporter, year, countries=None):
+        if countries is None: countries = self.countries()
+        list = [(B, 100 * self.export_data_as_percentage(year, exporter, B, False))
+                for B in countries
+                if self.export_data_as_percentage(year, exporter, B, False) is not None and exporter != B]
+        return sorted(list, key=lambda country: 0 if country[1] is None else -country[1])
 
     @memoize
     def top_T_percent_exports(self, exporter, year, T):

@@ -257,12 +257,22 @@ class TestFunctions(unittest.TestCase):
             '"218400","Belgium-Lux","117100","USA",251562,1,NaN,225124,250540,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342')
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
-        self.assertEquals(['UK', 'Italy', 'Canada', 'India'], d.top_T_percent_exports('USA', 1963, 50))
-        self.assertEquals(['Ghana', 'Georgia'], d.top_T_percent_exports('Greece', 1963, 40))
+        self.assertEquals(str(
+            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
+             ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0)]),
+            str(d.sorted_list_of_export_percentages('USA', 1963)))
+        self.assertEquals(str(
+            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
+             ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0),
+             ('Ghana', 0.0), ('Australia', 0.0), ('Georgia', 0.0), ('Greece', 0.0), ('Barbados', 0.0)]),
+            str(d.countries_sorted_by_export_percentages('USA', 1963)))
+        self.assertEquals(str(['UK', 'Italy', 'Canada', 'India']), str(d.top_T_percent_exports('USA', 1963, 50)))
+        self.assertEquals(str(['UK', 'Italy', 'Canada', 'India']), str(d.top_T_percent_exports('USA', 1963, 50)))
+        self.assertEquals(str(['Ghana', 'Georgia']), str(d.top_T_percent_exports('Greece', 1963, 40)))
         self.assertEquals(
-            ['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil', 'Bahrain'
-                , 'Bangladesh'],
-            d.top_T_percent_exports('USA', 1963, 100))
+            str(['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil',
+                 'Bahrain', 'Bangladesh']),
+            str(d.top_T_percent_exports('USA', 1963, 100)))
 
 
     def test_exportdata_first_trade_year(self):

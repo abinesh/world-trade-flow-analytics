@@ -16,13 +16,10 @@ def generate_matlab_histogram_code(data, thresholds=thresholds, years=a_few_year
     for percentile_threshold in thresholds:
         for year in years:
             for A in countries:
-                list = [(B, 100 * data.export_data_as_percentage(year, A, B, False)) for B in countries if
-                        data.export_data_as_percentage(year, A, B, False) is not None]
-
                 (line1, line2, line3) = ('x=[', 'x1=[', 'y={')
                 (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
 
-                for entry in sorted(list, key=lambda country: 0 if country[1] is None else -country[1]):
+                for entry in data.countries_sorted_by_export_percentages(A, year, countries):
                     current_value = float(entry[1])
                     if "%.2f" % current_value == "0.00": break
                     sum += current_value
@@ -79,13 +76,10 @@ def print_histogram_as_text(data, years, countries):
     f = open(OUT_DIR.DEFINITION_D + 'def_d_db.txt', 'w')
     for year in years:
         for A in countries:
-            list = [(B, 100 * data.export_data_as_percentage(year, A, B, False)) for B in countries if
-                    data.export_data_as_percentage(year, A, B, False) is not None]
-
             (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
             file_entry = []
 
-            for entry in sorted(list, key=lambda country: 0 if country[1] is None else -country[1]):
+            for entry in data.countries_sorted_by_export_percentages(A, year, countries):
                 current_value = float(entry[1])
                 if "%.2f" % current_value == "0.00": break
                 sum += current_value
@@ -105,11 +99,28 @@ def print_histogram_as_text(data, years, countries):
 
     f.close()
 
+
+def print_missing_links_db(data, year, T, log_file_name):
+    two_way_args = args_for_definition_D(T)
+    one_way_args = args_for_definition_D(T, mode='one-way')
+
+    f = open(OUT_DIR.DEFINITION_D + log_file_name, 'w')
+    for (A, B) in countries.country_pairs(data.countries()):
+        if definition_D(data, year, A, B, two_way_args) == NO_LINK:
+            one_way = definition_D(data, year, A, B, one_way_args)
+            other_way = definition_D(data, year, B, A, one_way_args)
+            f.write("Y%d,%s,%s,%s,%s\n" % (year, A, B, one_way, other_way))
+            for Y in [1963, 2001]:
+                one_way = definition_D(data, Y, A, B, one_way_args)
+                other_way = definition_D(data, Y, B, A, one_way_args)
+                f.write("%d,%s,%s,%s,%s\n" % (Y, A, B, one_way, other_way))
+    f.close()
+
 data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-generate_matlab_histogram_code(data, [99], [2000],['Georgia', 'USA'])
+generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
 print_histogram_as_text(data, a_few_years, data.countries())
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 
