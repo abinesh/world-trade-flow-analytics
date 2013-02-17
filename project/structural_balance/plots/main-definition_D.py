@@ -74,7 +74,7 @@ def print_graph_densities_for_different_thresholds(data, thresholds, years):
 
 def print_histogram_as_text(data, years, countries):
     args = args_for_definition_D(99, mode='one-way')
-    f = open(OUT_DIR.DEFINITION_D + 'def_d_db.txt', 'w')
+    f = open(OUT_DIR.DEFINITION_D + 'def_d_histogram_country_wise.txt', 'w')
     for year in years:
         for A in countries:
             (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
@@ -104,8 +104,7 @@ def print_histogram_as_text(data, years, countries):
 def print_missing_links_db(data, year, T, log_file_name):
     two_way_args = args_for_definition_D(T)
     one_way_args = args_for_definition_D(T, mode='one-way')
-    count = 0
-    f = open(OUT_DIR.DEFINITION_D + log_file_name, 'w')
+    f = open(OUT_DIR.DEFINITION_D + log_file_name + ".%d.txt" % T, 'w')
     for (A, B) in countries.country_pairs(data.countries()):
         if definition_D(data, year, A, B, two_way_args) == NO_LINK:
             one_way = definition_D(data, year, A, B, one_way_args)
@@ -115,10 +114,8 @@ def print_missing_links_db(data, year, T, log_file_name):
                 for Y in range(1963, 2001):
                     f.write("%d,%s,%s,%s,%s\n" % (
                         Y, file_safe(A), file_safe(B),
-                        data.export_data_as_percentile(year, A, B),
-                        data.export_data_as_percentile(year, B, A)))
-                    count += 1
-                    if count == 5000: break
+                        data.export_data_as_percentile(Y, A, B),
+                        data.export_data_as_percentile(Y, B, A)))
     f.close()
 
 
@@ -127,8 +124,9 @@ data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
-#print_histogram_as_text(data, a_few_years, data.countries())
-print_missing_links_db(data, 2000, 99, 'def_d_db_hist.txt')
+print_histogram_as_text(data, a_few_years, data.countries())
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
+print_missing_links_db(data, 2000, 90, 'def_d_histogram_pair_wise')
+print_missing_links_db(data, 2000, 99, 'def_d_histogram_pair_wise')
 
 

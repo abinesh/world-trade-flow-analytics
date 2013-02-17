@@ -120,7 +120,7 @@ class ExportData:
         return self._pick_top_T(self.sorted_list_of_export_percentages(exporter, year), T)
 
     def _calculate_export_percentile(self, B, list):
-        if len(list) == 0: return 100.0
+        if len(list) == 0: return 100
         retval = 0
         previous_percentage = -1
         total = 0
@@ -134,7 +134,7 @@ class ExportData:
     #this method does not work properly yet for (A,B) missing. It should return 100.0
     @memoize
     def export_data_as_percentile(self, year, A, B):
-        if not self._trade_exists(year, A, B): return 100.0
+        if not self._trade_exists(year, A, B): return 100
         return self._calculate_export_percentile(B, self.sorted_list_of_export_percentages(A, year))
 
 
