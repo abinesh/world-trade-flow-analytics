@@ -73,31 +73,14 @@ def print_graph_densities_for_different_thresholds(data, thresholds, years):
 
 
 def print_histogram_as_text(data, years, countries):
-    args = args_for_definition_D(99, mode='one-way')
     f = open(OUT_DIR.DEFINITION_D + 'def_d_histogram_country_wise.txt', 'w')
     for year in years:
         for A in countries:
-            (sum, count, previous_value, in_pruned_zone, positives_count) = (0, 0, -1, False, 0)
-            file_entry = []
-
-            for entry in data.countries_sorted_by_export_percentages(A, year, countries):
-                current_value = float(entry[1])
-                if "%.2f" % current_value == "0.00": break
-                sum += current_value
-                count += 1
-
-                def link_sign(link):
-                    if link == POSITIVE_LINK: return '+'
-                    if link == NEGATIVE_LINK: return '-'
-                    if link == NO_LINK: return 'M'
-
-                #            file_entry = [('USA', 10, 10,+), ('UK', 10, 20,+), ('Japan', 10, 30,-)]
-                file_entry.append((entry[0], entry[1], sum, link_sign(definition_D(data, year, A, entry[0], args))))
-
-            if count == 0: continue
-            f.write("%d:%s:[%s]\n" % (year, A, ','.join(["(%s,%.2f,%.2f,%s)" % (country, percentage, percentile, sign)
-                                                         for(country, percentage, percentile, sign) in file_entry])))
-
+            res_list = []
+            for (B, q) in data.countries_sorted_by_export_percentages(A, year, countries):
+                if "%.2f" % q == "0.00": break
+                res_list.append((B, data.export_data_as_percentile(year, A, B)))
+            f.write("%d:%s:%s\n" % (year, A, ','.join(["(%s,%.4g)" % (B, q) for (B, q) in res_list])))
     f.close()
 
 
@@ -112,7 +95,7 @@ def print_missing_links_db(data, year, T, log_file_name):
             f.write("Y%d,%s,%s,%s,%s\n" % (year, file_safe(A), file_safe(B), one_way, other_way))
             if one_way != other_way:
                 for Y in range(1963, 2001):
-                    f.write("%d,%s,%s,%s,%s\n" % (
+                    f.write("%d,%s,%s,%.4g,%.4g\n" % (
                         Y, file_safe(A), file_safe(B),
                         data.export_data_as_percentile(Y, A, B),
                         data.export_data_as_percentile(Y, B, A)))
@@ -124,7 +107,7 @@ data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
-print_histogram_as_text(data, a_few_years, data.countries())
+print_histogram_as_text(data, range(1963, 2001), data.countries())
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
 print_missing_links_db(data, 2000, 90, 'def_d_histogram_pair_wise')
 print_missing_links_db(data, 2000, 99, 'def_d_histogram_pair_wise')
