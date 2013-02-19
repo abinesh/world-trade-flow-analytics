@@ -7,11 +7,7 @@ from project.signed_networks.signed_networks_paper.tables import table1, table2
 def print_table(json):
     print json['Name']
     if json['Name'] == 'Table1':
-        print json['Nodes']
-        print json['Edges']
-        print json['+ edges']
-        print json['- edges']
-        print json['Traids']
+        print "%d\t%.2f\t%2f\t%d" % (json['Edges'], json['+ edges'], json['- edges'], json['Traids'])
     elif json['Name'] == 'Table2':
         for t in ['T3', 'T1', 'T2', 'T0']:
             r = json[t]
@@ -20,10 +16,11 @@ def print_table(json):
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-for table in [table1]:
-#    print_table(table(data, 2000, definition_B, args_for_definition_B(5)))
-#    print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 1)))
-#    print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 1)))
-    for T in [0, 5, 10, 15, 20, 25, 30, 35, 37]:
-        print_table(table(data, 2000, definition_C3, args_for_definition_C(T, 0)))
-        #    print_table(table(data, 2000, definition_D, args_for_definition_D(90)))
+for i in range(1, 6):
+    for table in [table2]:
+        print_table(table(data, 2000, definition_B, args_for_definition_B(5)))
+        print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 0.01)))
+        print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 0.01)))
+        print_table(table(data, 2000, definition_C3, args_for_definition_C(10, 5000)))
+        print_table(table(data, 2000, definition_D, args_for_definition_D(90)))
+        print_table(table(data, 2000, definition_D, args_for_definition_D(99)))
