@@ -16,7 +16,7 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
     group by A.exporter,A.importer) A where A.cccc = 3
 
 4. Positive/negative links definitions
-    A. If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
+    A. [This does not classify positive and negative relationships, it classifies strong ties and weak ties] If ratio of import and exports is within 0.5 and 2, it is a positive link. On all other cases(ratio out of range, missing datapoint), it is negative link.
     B.
         -Each yearly graph represents positive, negative relationships/links between all pairs of countries. Missing links are taken into consideration too.
         -A relationship/link between two countries in a year are determined as follows:
@@ -40,6 +40,7 @@ select * from (select A.exporter,A.importer,count(*) cccc from export_data_colum
        A->B and B->A relationships should be combined
     C2. A->B is positive if A's export to B is above a percentage threshold. Else it is negative. Links with number of missing/Nan datapoints for  A->B exports above threshold T2 are pruned out and considered missing.
        A->B and B->A relationships should be combined
+    C3. A->B is positive if raw export from A->B is above threshold T. Links can be pruned in one of the above ways(C1 and C2).
     D. A->B is Positive if A's export to B is within top 90 percent of its exports. Else it is pruned out. If it is pruned after a non-zero data-point it is negative, else it is missing link
        A->B and B->A relationships should be combined
 
