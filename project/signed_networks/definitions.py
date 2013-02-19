@@ -53,17 +53,15 @@ def definition_B(data, year, country_A, country_B, args):
             return STEADY_RISING if slope > 0 else STEADY_FALLING
 
     def combine_trends(trend_A, trend_B):
+        log_file = args['trend_combinations_log']
         if CANT_ESTABLISH_TREND in [trend_A, trend_B]:
-            if  args['trend_combinations_log'] is not None: args['trend_combinations_log'].write(
-                "%s,%s,%s\n" % (trend_A, trend_B, NO_LINK))
+            if  log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NO_LINK))
             return NO_LINK
         elif trend_A in [ACCELERATING, STEADY_RISING] and trend_B in [ACCELERATING, STEADY_RISING]:
-            if args['trend_combinations_log'] is not None: args['trend_combinations_log'].write(
-                "%s,%s,%s\n" % (trend_A, trend_B, POSITIVE_LINK))
+            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, POSITIVE_LINK))
             return POSITIVE_LINK
         else:
-            if args['trend_combinations_log'] is not None: args['trend_combinations_log'].write(
-                "%s,%s,%s\n" % (trend_A, trend_B, NEGATIVE_LINK))
+            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NEGATIVE_LINK))
             return NEGATIVE_LINK
 
     trend_A = export_growth(data, year, country_A, country_B)
