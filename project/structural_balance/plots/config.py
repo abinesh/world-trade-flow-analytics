@@ -4,4 +4,3 @@ class OUT_DIR:
     NUMBER_OF_POSITIVE_TRAIDS='out/number_of_positive_traids/'
     DEFINITION_D='out/definition_d/'
     DEFINITION_C='out/definition_c/'
-    DEFINITION_B='out/definition_b/'
