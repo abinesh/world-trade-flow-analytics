@@ -33,6 +33,9 @@ def definition_B(data, year, country_A, country_B, args):
     STEADY_FALLING = "s-"
     CANT_ESTABLISH_TREND = "null"
 
+    sliding_window_size = args['sliding_window_size']
+
+
     def export_growth(data, year, A, B):
         if not is_there_a_strong_tie_method_B(data, year, A, B,
             strong_tie_def_args(config.STRONG_TIES_LOWER_BOUND, config.STRONG_TIES_UPPER_BOUND)):
@@ -40,7 +43,7 @@ def definition_B(data, year, country_A, country_B, args):
         actual_export_percentage = data.export_data_as_percentage(year, A, B, True)
         if actual_export_percentage is None:
             return CANT_ESTABLISH_TREND
-        (slope, lower_limit, upper_limit) = data.bollinger_band_range(year - args['sliding_window_size'] - 1, year - 1,
+        (slope, lower_limit, upper_limit) = data.bollinger_band_range(year - sliding_window_size - 1, year - 1,
             A, B)
 
         if lower_limit is None or upper_limit is None:
@@ -54,14 +57,19 @@ def definition_B(data, year, country_A, country_B, args):
 
     def combine_trends(trend_A, trend_B):
         log_file = args['trend_combinations_log']
+        oneway = POSITIVE_LINK if trend_A in [ACCELERATING,
+                                              STEADY_RISING] else NO_LINK if trend_A == CANT_ESTABLISH_TREND else NEGATIVE_LINK
+        otherway = POSITIVE_LINK if trend_B in [ACCELERATING,
+                                                STEADY_RISING] else NO_LINK if trend_B == CANT_ESTABLISH_TREND else NEGATIVE_LINK
+        __log_to_file(sliding_window_size, {'f': log_file}, country_A, country_B, oneway, otherway, year)
         if CANT_ESTABLISH_TREND in [trend_A, trend_B]:
-            if  log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NO_LINK))
+        #            if  log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NO_LINK))
             return NO_LINK
         elif trend_A in [ACCELERATING, STEADY_RISING] and trend_B in [ACCELERATING, STEADY_RISING]:
-            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, POSITIVE_LINK))
+        #            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, POSITIVE_LINK))
             return POSITIVE_LINK
         else:
-            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NEGATIVE_LINK))
+        #            if log_file is not None: log_file.write("%s,%s,%s\n" % (trend_A, trend_B, NEGATIVE_LINK))
             return NEGATIVE_LINK
 
     trend_A = export_growth(data, year, country_A, country_B)

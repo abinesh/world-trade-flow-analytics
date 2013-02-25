@@ -2,7 +2,7 @@ from itertools import combinations
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK, definition_C1, definition_C3
+from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK, definition_C1, definition_C3, definition_D, args_for_definition_D, args_for_definition_B, definition_B
 from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data, definition, T1_thresholds, T2_thresholds, log_file_name):
@@ -12,8 +12,8 @@ def print_densities_for_thresholds(data, definition, T1_thresholds, T2_threshold
 
     for pruning_T in T1_thresholds:
         for classifying_T in T2_thresholds:
-            args1 = args_for_definition_C(pruning_T, classifying_T, f1)
-            args2 = args_for_definition_C(pruning_T, classifying_T, f1)
+            args1 = args_for_definition_B(classifying_T, f1)
+            args2 = args_for_definition_B(classifying_T, f1)
 
             for year in range(1969, 2001):
                 (positive_edges, negative_edges) = (0, 0)
@@ -64,6 +64,14 @@ data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_da
 #print_densities_for_thresholds(data, definition_C3, [0], [1000], 'definition_C3-1000')
 #print_densities_for_thresholds(data, definition_C3, [0], [5000], 'definition_C3-5000')
 
-print_densities_for_thresholds(data, definition_C2, [10], [0.01], 'definition_C2-001')
-print_densities_for_thresholds(data, definition_C2, [10], [0.1], 'definition_C2-01')
-print_densities_for_thresholds(data, definition_C2, [10], [1], 'definition_C2-1')
+#print_densities_for_thresholds(data, definition_C2, [10], [0.01], 'definition_C2-001')
+#print_densities_for_thresholds(data, definition_C2, [10], [0.1], 'definition_C2-01')
+#print_densities_for_thresholds(data, definition_C2, [10], [1], 'definition_C2-1')
+
+#print_densities_for_thresholds(data, definition_D, [0], [85], 'definition_D-85')
+#print_densities_for_thresholds(data, definition_D, [0], [90], 'definition_D-90')
+#print_densities_for_thresholds(data, definition_D, [0], [99], 'definition_D-99')
+
+print_densities_for_thresholds(data, definition_B, [0], [5], 'definition_B-5')
+print_densities_for_thresholds(data, definition_B, [0], [10], 'definition_B-10')
+print_densities_for_thresholds(data, definition_B, [0], [15], 'definition_B-15')

@@ -1,7 +1,7 @@
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D, NO_LINK
+from project.signed_networks.definitions import definition_D, NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_D, NO_LINK, args_for_definition_B, definition_B
 from project.structural_balance.plots.config import OUT_DIR
 from project.util import file_safe
 
@@ -101,15 +101,32 @@ def print_missing_links_db(data, year, T, log_file_name):
                         data.export_data_as_percentile(Y, B, A)))
     f.close()
 
+def print_graph_densities_for_different_sliding_windows(data, sliding_window_sizes, years):
+    f = open(OUT_DIR.DEFINITION_B + 'combinations.txt', 'w')
+    for T in sliding_window_sizes:
+        args = args_for_definition_B(T, f)
+        for year in years:
+            positive_edges = 0
+            negative_edges = 0
+            for (A, B) in countries.country_pairs(data.countries()):
+                link_sign = definition_B(data, year, A, B, args)
+                if link_sign == POSITIVE_LINK: positive_edges += 1
+                if link_sign == NEGATIVE_LINK: negative_edges += 1
+            N = 203
+            density = 2.0 * (positive_edges + negative_edges) / (N * (N - 1)) * 100
+            print "%d,%d,%f,%d,%d,%d" % (T, year, density, positive_edges, negative_edges, N)
+    f.close()
 
 data = None
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 #generate_matlab_histogram_code(data, [99], [2000], ['Georgia', 'USA'])
-print_histogram_as_text(data, range(1963, 2001), data.countries())
+#print_histogram_as_text(data, range(1963, 2001), data.countries())
 #print_graph_densities_for_different_thresholds(data, thresholds, a_few_years)
-print_missing_links_db(data, 2000, 90, 'def_d_histogram_pair_wise')
-print_missing_links_db(data, 2000, 99, 'def_d_histogram_pair_wise')
+#print_missing_links_db(data, 2000, 90, 'def_d_histogram_pair_wise')
+#print_missing_links_db(data, 2000, 99, 'def_d_histogram_pair_wise')
+
+print_graph_densities_for_different_sliding_windows(data, [5, 6, 7, 8, 9, 10], [1969, 1979, 1988, 1989, 1990, 1999, 2000])
 
 
