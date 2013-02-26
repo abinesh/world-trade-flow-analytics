@@ -3,7 +3,7 @@ from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
 from project.signed_networks.signed_networks_paper.tables import table1, table2
 from project.test.testutils import row_map, write_to_file
-from project.util import memoize
+from project.util import memoize, std_dev
 import tempfile
 
 
@@ -448,6 +448,14 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(2.0 / 5, map['T1']['p(Ti)'])
         self.assertEquals(2.0 / 5, map['T2']['p(Ti)'])
         self.assertEquals(1.0 / 5, map['T3']['p(Ti)'])
+
+    def test_std_dev(self):
+        self.assertEquals(None, std_dev([]))
+        self.assertEquals("1.414", "%.3f" % std_dev([1, 2, 3, 4, 5]))
+        self.assertEquals("0.816", "%.3f" % std_dev([1, 2, 3]))
+        self.assertEquals("0.000", "%.3f" % std_dev([1, 1, 1]))
+        self.assertEquals("1.118", "%.3f" % std_dev([1, 2, 3, 4]))
+        self.assertEquals("2.693", "%.3f" % std_dev([1, 2, 3, -4]))
 
 
 @memoize
