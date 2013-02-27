@@ -58,7 +58,6 @@ def table2(data, year, definition, def_args):
             return retval
 
     t0, t1, t2, t3 = 0, 0, 0, 0
-    rt0, rt1, rt2, rt3 = 0, 0, 0, 0
     total_positive, total_negative, total_missing = 0, 0, 0
     traids = []
     for (A, B, C) in combinations(data.countries(), 3):
@@ -81,31 +80,43 @@ def table2(data, year, definition, def_args):
         if positive_sides == 3: t3 += 1
     total = t0 + t1 + t2 + t3
 
-    r = RandomLinkGenerator(total_positive, total_negative)
-    for (A, B, C) in traids:
-        positive_sides = 0
-        side1 = r.next_random(sorted([A, B]))
-        side2 = r.next_random(sorted([B, C]))
-        side3 = r.next_random(sorted([C, A]))
-        for side in [side1, side2, side3]:
-            if side == POSITIVE_LINK: positive_sides += 1
-        if positive_sides == 0: rt0 += 1
-        if positive_sides == 1: rt1 += 1
-        if positive_sides == 2: rt2 += 1
-        if positive_sides == 3: rt3 += 1
-    rtotal = rt0 + rt1 + rt2 + rt3
+    rt0, rt1, rt2, rt3, rtotal = [], [], [], [], []
+    for i in range(0, 5):
+        for list in [rt0, rt1, rt2, rt3, rtotal]: list.append(0)
+
+        r = RandomLinkGenerator(total_positive, total_negative)
+        for (A, B, C) in traids:
+            positive_sides = 0
+            side1 = r.next_random(sorted([A, B]))
+            side2 = r.next_random(sorted([B, C]))
+            side3 = r.next_random(sorted([C, A]))
+            for side in [side1, side2, side3]:
+                if side == POSITIVE_LINK: positive_sides += 1
+            if positive_sides == 0: rt0[i] += 1
+            if positive_sides == 1: rt1[i] += 1
+            if positive_sides == 2: rt2[i] += 1
+            if positive_sides == 3: rt3[i] += 1
+        rtotal[i] = rt0[i] + rt1[i] + rt2[i] + rt3[i]
 
 
     def table2_row(t0, total, rt0, rtotal):
-        def pTi(t, total): return t * 1.0 / total
+        def pTi(t, total): return t * 1.0 / total, 1
 
         def sTi(rt0, rtotal, t0): return 99999999 if rt0 == 0 else (t0 - rt0) / (
-            pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5))
+            pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5)), 1
 
-        return {'|Ti|': t0, 'p(Ti)': pTi(t0, total), 'p0(Ti)': pTi(rt0, total), 's(Ti)': sTi(rt0, rtotal, t0)}
+        p0ti = pTi(rt0, total)
+        soti = sTi(rt0, rtotal, t0)
+        return {'|Ti|': t0,
+                'p(Ti)': pTi(t0, total)[0],
+                'p0(Ti)': p0ti[0],
+                'p0(Ti)-sd': p0ti[1],
+                's(Ti)': soti[0],
+                's(Ti)-sd': soti[1]
+        }
 
     return {'Name': 'Table2',
-            'T0': table2_row(t0, total, rt0, rtotal),
-            'T1': table2_row(t1, total, rt1, rtotal),
-            'T2': table2_row(t2, total, rt2, rtotal),
-            'T3': table2_row(t3, total, rt3, rtotal)}
+            'T0': table2_row(t0, total, rt0[0], rtotal[0]),
+            'T1': table2_row(t1, total, rt1[0], rtotal[0]),
+            'T2': table2_row(t2, total, rt2[0], rtotal[0]),
+            'T3': table2_row(t3, total, rt3[0], rtotal[0])}
