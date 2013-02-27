@@ -8,7 +8,8 @@ from project.structural_balance.plots.config import OUT_DIR
 def print_densities_for_thresholds(data, definition, T1_thresholds, T2_thresholds, log_file_name):
     f1 = open(OUT_DIR.DEFINITION_C + log_file_name + '-edges.txt', 'w')
     f2 = open(OUT_DIR.DEFINITION_C + log_file_name + '-traids.txt', 'w')
-    countries_list = ['USA', 'Iran', 'Iraq', 'Argentina', 'UK']
+    f3 = open(OUT_DIR.DEFINITION_C + log_file_name + '-nodes.txt', 'w')
+    countries_list = data.countries()
 
     for pruning_T in T1_thresholds:
         for classifying_T in T2_thresholds:
@@ -32,8 +33,16 @@ def print_densities_for_thresholds(data, definition, T1_thresholds, T2_threshold
                     count = [linkAtoB, linkBtoC, linkCtoA].count(POSITIVE_LINK)
                     f2.write("%d,%.2f,%d,%s,%s,%s,%s,%s,%s,T%d\n" % (
                         year, pruning_T, classifying_T, A, B, C, linkAtoB, linkBtoC, linkCtoA, count))
+                for A in countries_list:
+                    degree_sum = 0
+                    for B in data.countries():
+                        if A == B: continue
+                        link_sign = definition(data, year, A, B, args1)
+                        degree_sum += 1 if link_sign == POSITIVE_LINK else -1 if link_sign == NEGATIVE_LINK else 0
+                    f3.write("%d,%s,%d\n" % (year, A, degree_sum))
     f1.close()
     f2.close()
+    f3.close()
 
 
 def print_histogram_matlab_code(data, low, high):
@@ -60,10 +69,10 @@ data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_da
 #print_densities_for_thresholds(data, definition_C1, [0, 100, 200, 250, 300, 500, 1000, 1500, 2000, 3000, 5000], [0.01],
 #    'definition_C1')
 #print_densities_for_thresholds(data, definition_C2, range(0, 2000 - 1963 + 1), [0.01], 'definition_C2')
-#print_densities_for_thresholds(data, definition_C3, [0], [100], 'definition_C3-100')
-#print_densities_for_thresholds(data, definition_C3, [0], [1000], 'definition_C3-1000')
-#print_densities_for_thresholds(data, definition_C3, [0], [5000], 'definition_C3-5000')
+print_densities_for_thresholds(data, definition_C3, [0], [100], 'definition_C3-100')
+print_densities_for_thresholds(data, definition_C3, [0], [1000], 'definition_C3-1000')
+print_densities_for_thresholds(data, definition_C3, [0], [5000], 'definition_C3-5000')
 
-print_densities_for_thresholds(data, definition_C2, [10], [0.01], 'definition_C2-001')
-print_densities_for_thresholds(data, definition_C2, [10], [0.1], 'definition_C2-01')
-print_densities_for_thresholds(data, definition_C2, [10], [1], 'definition_C2-1')
+#print_densities_for_thresholds(data, definition_C2, [10], [0.01], 'definition_C2-001')
+#print_densities_for_thresholds(data, definition_C2, [10], [0.1], 'definition_C2-01')
+#print_densities_for_thresholds(data, definition_C2, [10], [1], 'definition_C2-1')
