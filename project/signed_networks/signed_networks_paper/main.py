@@ -11,16 +11,16 @@ def print_table(json):
     elif json['Name'] == 'Table2':
         for t in ['T3', 'T1', 'T2', 'T0']:
             r = json[t]
-            print "%s| %d \t| %.3g \t| %.3g \t| %.1f \t|" % (t, r['|Ti|'], r['p(Ti)'], r['p0(Ti)'], r['s(Ti)'])
+            print "%s| %d \t| %.3g \t| %.3g \t| %.3g \t| %.1f \t| %.1f \t|" % (
+                t, r['|Ti|'], r['p(Ti)'], r['p0(Ti)'], r['p0(Ti)-sd'], r['s(Ti)'], r['s(Ti)-sd'])
 
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-for i in range(1, 6):
-    for table in [table2]:
-        print_table(table(data, 2000, definition_B, args_for_definition_B(5)))
-        print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 0.01)))
-        print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 0.01)))
-        print_table(table(data, 2000, definition_C3, args_for_definition_C(10, 5000)))
-        print_table(table(data, 2000, definition_D, args_for_definition_D(90)))
-        print_table(table(data, 2000, definition_D, args_for_definition_D(99)))
+for table in [table2]:
+    print_table(table(data, 2000, definition_B, args_for_definition_B(5)))
+    print_table(table(data, 2000, definition_C1, args_for_definition_C(5000, 0.01)))
+    print_table(table(data, 2000, definition_C2, args_for_definition_C(10, 0.01)))
+    print_table(table(data, 2000, definition_C3, args_for_definition_C(10, 5000)))
+    print_table(table(data, 2000, definition_D, args_for_definition_D(90)))
+    print_table(table(data, 2000, definition_D, args_for_definition_D(99)))
