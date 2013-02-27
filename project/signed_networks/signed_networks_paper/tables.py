@@ -95,12 +95,17 @@ def table2(data, year, definition, def_args):
         if positive_sides == 3: rt3 += 1
     rtotal = rt0 + rt1 + rt2 + rt3
 
+
+    def table2_row(t0, total, rt0, rtotal):
+        def pTi(t, total): return t * 1.0 / total
+
+        def sTi(rt0, rtotal, t0): return 99999999 if rt0 == 0 else (t0 - rt0) / (
+            pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5))
+
+        return {'|Ti|': t0, 'p(Ti)': pTi(t0, total), 'p0(Ti)': pTi(rt0, total), 's(Ti)': sTi(rt0, rtotal, t0)}
+
     return {'Name': 'Table2',
-            'T0': {'|Ti|': t0, 'p(Ti)': t0 * 1.0 / total, 'p0(Ti)': rt0 * 1.0 / rtotal,
-                   's(Ti)': 99999999 if rt0 == 0 else (t0 - rt0) / (pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5))},
-            'T1': {'|Ti|': t1, 'p(Ti)': t1 * 1.0 / total, 'p0(Ti)': rt1 * 1.0 / rtotal,
-                   's(Ti)': 99999999 if rt1 == 0 else(t1 - rt1) / (pow(rt1 * (1 - rt1 * 1.0 / rtotal), 0.5))},
-            'T2': {'|Ti|': t2, 'p(Ti)': t2 * 1.0 / total, 'p0(Ti)': rt2 * 1.0 / rtotal,
-                   's(Ti)': 99999999 if rt2 == 0 else(t2 - rt2) / (pow(rt2 * (1 - rt2 * 1.0 / rtotal), 0.5))},
-            'T3': {'|Ti|': t3, 'p(Ti)': t3 * 1.0 / total, 'p0(Ti)': rt3 * 1.0 / rtotal,
-                   's(Ti)': 99999999 if rt3 == 0 else(t3 - rt3) / (pow(rt3 * (1 - rt3 * 1.0 / rtotal), 0.5))}}
+            'T0': table2_row(t0, total, rt0, rtotal),
+            'T1': table2_row(t1, total, rt1, rtotal),
+            'T2': table2_row(t2, total, rt2, rtotal),
+            'T3': table2_row(t3, total, rt3, rtotal)}
