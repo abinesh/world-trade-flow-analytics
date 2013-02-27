@@ -1,10 +1,11 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from itertools import combinations
 from random import uniform
+import numpy
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
-from project.util import memoize
+from project.util import memoize, std_dev
 
 def table1(data, year, definition, def_args):
     def link_exists_def(data, year, A, B, def_args1):
@@ -81,7 +82,8 @@ def table2(data, year, definition, def_args):
     total = t0 + t1 + t2 + t3
 
     rt0, rt1, rt2, rt3, rtotal = [], [], [], [], []
-    for i in range(0, 5):
+    MAX_RANDOM_RUNS = 5
+    for i in range(0, MAX_RANDOM_RUNS):
         for list in [rt0, rt1, rt2, rt3, rtotal]: list.append(0)
 
         r = RandomLinkGenerator(total_positive, total_negative)
@@ -100,23 +102,21 @@ def table2(data, year, definition, def_args):
 
 
     def table2_row(t0, total, rt0, rtotal):
-        def pTi(t, total): return t * 1.0 / total, 1
+        def pTi(t, total): return t * 1.0 / total
 
         def sTi(rt0, rtotal, t0): return 99999999 if rt0 == 0 else (t0 - rt0) / (
-            pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5)), 1
+            pow(rt0 * (1 - rt0 * 1.0 / rtotal), 0.5))
 
-        p0ti = pTi(rt0, total)
-        soti = sTi(rt0, rtotal, t0)
         return {'|Ti|': t0,
-                'p(Ti)': pTi(t0, total)[0],
-                'p0(Ti)': p0ti[0],
-                'p0(Ti)-sd': p0ti[1],
-                's(Ti)': soti[0],
-                's(Ti)-sd': soti[1]
+                'p(Ti)': pTi(t0, total),
+                'p0(Ti)': numpy.mean([pTi(rt0[i], rtotal[i]) for i in range(0, MAX_RANDOM_RUNS)]),
+                'p0(Ti)-sd': std_dev([pTi(rt0[i], rtotal[i]) for i in range(0, MAX_RANDOM_RUNS)]),
+                's(Ti)': numpy.mean([sTi(rt0[i], rtotal[i], t0) for i in range(0, MAX_RANDOM_RUNS)]),
+                's(Ti)-sd': std_dev([sTi(rt0[i], rtotal[i], t0) for i in range(0, MAX_RANDOM_RUNS)])
         }
 
     return {'Name': 'Table2',
-            'T0': table2_row(t0, total, rt0[0], rtotal[0]),
-            'T1': table2_row(t1, total, rt1[0], rtotal[0]),
-            'T2': table2_row(t2, total, rt2[0], rtotal[0]),
-            'T3': table2_row(t3, total, rt3[0], rtotal[0])}
+            'T0': table2_row(t0, total, rt0, rtotal),
+            'T1': table2_row(t1, total, rt1, rtotal),
+            'T2': table2_row(t2, total, rt2, rtotal),
+            'T3': table2_row(t3, total, rt3, rtotal)}
