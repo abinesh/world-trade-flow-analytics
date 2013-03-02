@@ -3,7 +3,9 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK, definition_C1, definition_C3, definition_D, args_for_definition_D
-from project.structural_balance.plots.config import OUT_DIR
+from project.signed_networks.structural_balance.metrics.vertex import degree_sum
+from project.signed_networks.structural_balance.plots.config import OUT_DIR
+
 
 def print_densities_for_thresholds(data, definition, T1_thresholds, T2_thresholds, log_file_name):
     f1 = open(OUT_DIR.DEFINITION_C + log_file_name + '-edges.txt', 'w')
@@ -37,12 +39,7 @@ def print_densities_for_thresholds(data, definition, T1_thresholds, T2_threshold
                     f2.write("%d,%.2f,%d,%s,%s,%s,%s,%s,%s,T%d%d%d\n" % (
                         year, pruning_T, classifying_T, A, B, C, linkAtoB, linkBtoC, linkCtoA, pcount, ncount, mcount))
                 for A in countries_list:
-                    degree_sum = 0
-                    for B in data.countries():
-                        if A == B: continue
-                        link_sign = definition(data, year, A, B, args1)
-                        degree_sum += 1 if link_sign == POSITIVE_LINK else -1 if link_sign == NEGATIVE_LINK else 0
-                    f3.write("%d,%s,%d\n" % (year, A, degree_sum))
+                    f3.write("%d,%s,%d\n" % (year, A, degree_sum(data, year, A, definition, args1)))
     f1.close()
     f2.close()
     f3.close()
