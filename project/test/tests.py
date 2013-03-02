@@ -460,15 +460,15 @@ class TestFunctions(unittest.TestCase):
 
     def test_embeddedness_graph(self):
         map = {
-            0: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            1: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            2: [NO_LINK, NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            3: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            4: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            5: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            6: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            7: [NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
-            8: [NO_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            0: (4, 4),
+            1: (1, 3),
+            2: (1, 3),
+            3: (2, 1),
+            4: (2, 2),
+            5: (2, 2),
+            6: (1, 2),
+            7: (1, 5),
+            8: (0, 3),
         }
         ret_map = compute_fraction(map)
         self.assertEquals(0.5, ret_map[0])
