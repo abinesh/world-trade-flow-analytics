@@ -39,3 +39,5 @@ def compute_map(data, year, definition, def_args):
 
 def fraction_of_embedded_positive_signs(data, year, definition, def_args):
     return compute_fraction(compute_map(data, year, definition, def_args))
+
+# Todo: number of balanced triangles vs number of common neighbours
