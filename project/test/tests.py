@@ -1,6 +1,7 @@
 import unittest
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
+from project.signed_networks.structural_balance.metrics.edge import compute_fraction
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
@@ -456,6 +457,29 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals("0.000", "%.3f" % std_dev([1, 1, 1]))
         self.assertEquals("1.118", "%.3f" % std_dev([1, 2, 3, 4]))
         self.assertEquals("2.693", "%.3f" % std_dev([1, 2, 3, -4]))
+
+    def test_embeddedness_graph(self):
+        map = {
+            0: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            1: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            2: [NO_LINK, NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            3: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            4: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            5: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            6: [NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            7: [NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+            8: [NO_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
+        }
+        ret_map = compute_fraction(map)
+        self.assertEquals(0.5, ret_map[0])
+        self.assertEquals(0.75, ret_map[1])
+        self.assertEquals(0.75, ret_map[2])
+        self.assertEquals(1.0 / 3, ret_map[3])
+        self.assertEquals(0.5, ret_map[4])
+        self.assertEquals(0.5, ret_map[5])
+        self.assertEquals(2.0 / 3, ret_map[6])
+        self.assertEquals(5.0 / 6, ret_map[7])
+        self.assertEquals(1, ret_map[8])
 
 
 @memoize
