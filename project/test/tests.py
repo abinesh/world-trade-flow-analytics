@@ -1,7 +1,7 @@
 import unittest
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
-from project.signed_networks.structural_balance.metrics.edge import compute_fraction, compute_map
+from project.signed_networks.structural_balance.metrics.edge import compute_fraction, compute_map, fraction_of_embedded_positive_signs
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
@@ -481,7 +481,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(5.0 / 6, ret_map[7])
         self.assertEquals(1, ret_map[8])
 
-    def test_embeddedness_compute_map(self):
+    def test_fraction_of_embedded_positive_signs(self):
         f = tempfile.NamedTemporaryFile()
         write_to_file(f,
             'ICode,Importer,ECode,Exporter,Value62,Value63,Value64,Value65,Value66,Value67,Value68,Value69,Value70,Value71,Value72,Value73,Value74,Value75,Value76,Value77,Value78,Value79,Value80,Value81,Value82,Value83,Value84,Value85,Value86,Value87,Value88,Value89,Value90,Value91,Value92,Value93,Value94,Value95,Value96,Value97,Value98,Value99,Value00',
@@ -517,6 +517,11 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals((1, 0), map[0])
         self.assertEquals((2, 2), map[1])
         self.assertEquals((0, 1), map[2])
+
+        fractions = fraction_of_embedded_positive_signs(d, 1963, test_extension_def, {})
+        self.assertEquals(0, fractions[0])
+        self.assertEquals(.5, fractions[1])
+        self.assertEquals(1, fractions[2])
 
 
 @memoize
