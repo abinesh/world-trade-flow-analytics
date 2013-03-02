@@ -2,14 +2,14 @@ from itertools import combinations
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK, definition_C1, definition_C3
+from project.signed_networks.definitions import  args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, definition_C2, NO_LINK, definition_C1, definition_C3, definition_D, args_for_definition_D
 from project.structural_balance.plots.config import OUT_DIR
 
 def print_densities_for_thresholds(data, definition, T1_thresholds, T2_thresholds, log_file_name):
     f1 = open(OUT_DIR.DEFINITION_C + log_file_name + '-edges.txt', 'w')
     f2 = open(OUT_DIR.DEFINITION_C + log_file_name + '-traids.txt', 'w')
     f3 = open(OUT_DIR.DEFINITION_C + log_file_name + '-nodes.txt', 'w')
-    countries_list = data.countries()
+    countries_list = ['USA', 'Iran', 'Iraq', 'Argentina', 'UK', 'China', 'Kuwait', 'France,Monac']
 
     for pruning_T in T1_thresholds:
         for classifying_T in T2_thresholds:
@@ -30,9 +30,12 @@ def print_densities_for_thresholds(data, definition, T1_thresholds, T2_threshold
                     linkAtoB = definition(data, year, A, B, args2)
                     linkBtoC = definition(data, year, B, C, args2)
                     linkCtoA = definition(data, year, C, A, args2)
-                    count = [linkAtoB, linkBtoC, linkCtoA].count(POSITIVE_LINK)
-                    f2.write("%d,%.2f,%d,%s,%s,%s,%s,%s,%s,T%d\n" % (
-                        year, pruning_T, classifying_T, A, B, C, linkAtoB, linkBtoC, linkCtoA, count))
+                    triangle = [linkAtoB, linkBtoC, linkCtoA]
+                    pcount = triangle.count(POSITIVE_LINK)
+                    ncount = triangle.count(NEGATIVE_LINK)
+                    mcount = triangle.count(NO_LINK)
+                    f2.write("%d,%.2f,%d,%s,%s,%s,%s,%s,%s,T%d%d%d\n" % (
+                        year, pruning_T, classifying_T, A, B, C, linkAtoB, linkBtoC, linkCtoA, pcount, ncount, mcount))
                 for A in countries_list:
                     degree_sum = 0
                     for B in data.countries():
@@ -72,6 +75,9 @@ data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_da
 print_densities_for_thresholds(data, definition_C3, [0], [100], 'definition_C3-100')
 print_densities_for_thresholds(data, definition_C3, [0], [1000], 'definition_C3-1000')
 print_densities_for_thresholds(data, definition_C3, [0], [5000], 'definition_C3-5000')
+#print_densities_for_thresholds(data, definition_D, [0], [99], 'definition_D-99')
+#print_densities_for_thresholds(data, definition_D, [0], [90], 'definition_D-90')
+#print_densities_for_thresholds(data, definition_D, [0], [85], 'definition_D-85')
 
 #print_densities_for_thresholds(data, definition_C2, [10], [0.01], 'definition_C2-001')
 #print_densities_for_thresholds(data, definition_C2, [10], [0.1], 'definition_C2-01')
