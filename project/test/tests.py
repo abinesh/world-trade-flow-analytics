@@ -389,8 +389,8 @@ class TestFunctions(unittest.TestCase):
         d2 = ExportData()
         d1.load_file(incomplete_graph.name, should_read_world_datapoints=True)
         d2.load_file(complete_graph.name, should_read_world_datapoints=True)
-        incomplege_graph_map = table1(d1, 1963, test_extension_def_A, args_for_definition_A(.5, 2))
-        complege_graph_map = table1(d2, 1963, test_extension_def_A, args_for_definition_A(.5, 2))
+        incomplege_graph_map = table1(d1, 1963, definition_A, args_for_definition_A(.5, 2))
+        complege_graph_map = table1(d2, 1963, definition_A, args_for_definition_A(.5, 2))
         self.assertEquals(5, incomplege_graph_map['Nodes'])
         self.assertEquals(8, incomplege_graph_map['Edges'])
         self.assertEquals(5.0 / 8 * 100, incomplege_graph_map['+ edges'])
@@ -438,7 +438,7 @@ class TestFunctions(unittest.TestCase):
         )
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
-        map = table2(d, 1963, test_extension_def_A, args_for_definition_A(.5, 2))
+        map = table2(d, 1963, definition_A, args_for_definition_A(.5, 2))
 
         self.assertEquals(0, map['T0']['|Ti|'])
         self.assertEquals(2, map['T1']['|Ti|'])
@@ -458,7 +458,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals("1.118", "%.3f" % std_dev([1, 2, 3, 4]))
         self.assertEquals("2.693", "%.3f" % std_dev([1, 2, 3, -4]))
 
-    def test_embeddedness_graph(self):
+    def test_embeddedness_compute_fraction(self):
         map = {
             0: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
             1: [NO_LINK, NO_LINK, NO_LINK, NEGATIVE_LINK, POSITIVE_LINK, POSITIVE_LINK, POSITIVE_LINK],
