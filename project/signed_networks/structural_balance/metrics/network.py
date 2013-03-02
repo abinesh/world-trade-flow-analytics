@@ -7,6 +7,18 @@ from project.export_data.strongties import number_of_traids, __matrix_cube, get_
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
 from project.util import memoize, std_dev
 
+
+def print_table(json):
+    print json['Name']
+    if json['Name'] == 'Table1':
+        print "%d\t%.2f\t%2f\t%d" % (json['Edges'], json['+ edges'], json['- edges'], json['Traids'])
+    elif json['Name'] == 'Table2':
+        for t in ['T3', 'T1', 'T2', 'T0']:
+            r = json[t]
+            print "%s| %d \t| %.3g \t| %.3g \t| %.3g \t| %.1f \t| %.1f \t|" % (
+                t, r['|Ti|'], r['p(Ti)'], r['p0(Ti)'], r['p0(Ti)-sd'], r['s(Ti)'], r['s(Ti)-sd'])
+
+
 def table1(data, year, definition, def_args):
     def link_exists_def(data, year, A, B, def_args1):
         if 'World' in [A, B]: return 0
