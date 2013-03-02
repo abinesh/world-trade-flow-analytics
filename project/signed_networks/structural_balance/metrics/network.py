@@ -1,11 +1,11 @@
 #Implementation of tables listed in paper http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf
 from itertools import combinations
-from random import uniform
 import numpy
 from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
-from project.util import memoize, std_dev
+from project.signed_networks.structural_balance.metrics.util import RandomLinkGenerator
+from project.util import std_dev
 
 
 def print_table(json):
@@ -42,34 +42,6 @@ def table1(data, year, definition, def_args):
 
 
 def table2(data, year, definition, def_args):
-    class RandomLinkGenerator:
-        def __init__(self, positive, negative):
-            self.total_positive = positive
-            self.total_negative = negative
-
-            self.assigned_positive = 0
-            self.assigned_negative = 0
-
-        def __random_pick(self, list, probabilities):
-            x = uniform(0, 1)
-            cumulative_probability = 0.0
-            for item, item_probability in zip(list, probabilities):
-                cumulative_probability += item_probability
-                if x < cumulative_probability: break
-            return item
-
-        @memoize
-        def next_random(self, pair):
-            # argument 'pair' is used for memoization
-            remaining_positive = self.total_positive - self.assigned_positive
-            remaining_negative = self.total_negative - self.assigned_negative
-            total_remaining = remaining_positive + remaining_negative
-            retval = self.__random_pick([POSITIVE_LINK, NEGATIVE_LINK],
-                [1.0 * remaining_positive / total_remaining, 1.0 * remaining_negative / total_remaining])
-            if retval == POSITIVE_LINK: self.assigned_positive += 1
-            if retval == NEGATIVE_LINK: self.assigned_negative += 1
-            return retval
-
     t0, t1, t2, t3 = 0, 0, 0, 0
     total_positive, total_negative, total_missing = 0, 0, 0
     traids = []
