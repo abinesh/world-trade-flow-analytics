@@ -53,8 +53,7 @@ def traids_per_common_edge_count(data, year, definition, def_args):
 
     result = {}
     for A, B in combinations(data.countries(), 2):
-        side1 = definition(data, year, A, B, def_args)
-        if side1 != NO_LINK:
+        if definition(data, year, A, B, def_args) != NO_LINK:
             neighbours = common_neighbours(data, year, A, B, definition, def_args)
             if len(neighbours) not in result: result[len(neighbours)] = (0, 0, 0, 0)
             for C in neighbours:
