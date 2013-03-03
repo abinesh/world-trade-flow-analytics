@@ -1,7 +1,7 @@
 import unittest
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
-from project.signed_networks.structural_balance.metrics.edge import compute_fraction, compute_map, fraction_of_embedded_positive_signs
+from project.signed_networks.structural_balance.metrics.edge import compute_fraction, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
@@ -522,6 +522,10 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(0, fractions[0])
         self.assertEquals(.5, fractions[1])
         self.assertEquals(1, fractions[2])
+
+        traids = traids_per_common_edge_count(d, 1963, test_extension_def, {})
+#        self.assertEquals((0, 1, 3, 0), traids[1])
+#        self.assertEquals((0, 0, 2, 0), traids[2])
 
 
 @memoize
