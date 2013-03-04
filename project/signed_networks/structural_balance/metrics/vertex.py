@@ -1,6 +1,5 @@
 from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK
 
-#Todo: Write tests
 def degree_sum(data, year, A, definition, def_args):
     sum = 0
     for B in data.countries():
