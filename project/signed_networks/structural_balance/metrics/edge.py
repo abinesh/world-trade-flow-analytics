@@ -45,7 +45,6 @@ def traid_type(data, year, A, B, C, definition, def_args):
     assert NO_LINK not in traid
     return "T%d" % (traid.count(POSITIVE_LINK))
 
-# Todo: number of balanced triangles vs number of common neighbours
 def traids_per_common_edge_count(data, year, definition, def_args):
     def to_list(map):
         return [map[i] if i in map else (0, 0, 0, 0)
