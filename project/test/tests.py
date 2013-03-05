@@ -3,7 +3,7 @@ from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
 from project.signed_networks.structural_balance.metrics.network import table1, table2
-from project.signed_networks.structural_balance.metrics.vertex import degree_sum
+from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
 import tempfile
@@ -561,6 +561,12 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(1, degree_sum(d, 1963, 'India', test_extension_def, {}))
         self.assertEquals(0, degree_sum(d, 1963, 'Canada', test_extension_def, {}))
         self.assertEquals(-1, degree_sum(d, 1963, 'Japan', test_extension_def, {}))
+
+        self.assertEquals(4, degree_count(d, 1963, 'UK', test_extension_def, {}))
+        self.assertEquals(2, degree_count(d, 1963, 'USA', test_extension_def, {}))
+        self.assertEquals(3, degree_count(d, 1963, 'India', test_extension_def, {}))
+        self.assertEquals(2, degree_count(d, 1963, 'Canada', test_extension_def, {}))
+        self.assertEquals(1, degree_count(d, 1963, 'Japan', test_extension_def, {}))
 
     def test_traids_per_common_edge_count(self):
         f = tempfile.NamedTemporaryFile()
