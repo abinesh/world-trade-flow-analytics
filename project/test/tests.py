@@ -471,16 +471,16 @@ class TestFunctions(unittest.TestCase):
             7: (1, 5),
             8: (0, 3),
         }
-        ret_map = compute_fraction_of_positive_edges(map)
-        self.assertEquals(0.5, ret_map[0])
-        self.assertEquals(0.75, ret_map[1])
-        self.assertEquals(0.75, ret_map[2])
-        self.assertEquals(1.0 / 3, ret_map[3])
-        self.assertEquals(0.5, ret_map[4])
-        self.assertEquals(0.5, ret_map[5])
-        self.assertEquals(2.0 / 3, ret_map[6])
-        self.assertEquals(5.0 / 6, ret_map[7])
-        self.assertEquals(1, ret_map[8])
+        return_list = compute_fraction_of_positive_edges(map)
+        self.assertEquals(0.5, return_list[0])
+        self.assertEquals(0.75, return_list[1])
+        self.assertEquals(0.75, return_list[2])
+        self.assertEquals(1.0 / 3, return_list[3])
+        self.assertEquals(0.5, return_list[4])
+        self.assertEquals(0.5, return_list[5])
+        self.assertEquals(2.0 / 3, return_list[6])
+        self.assertEquals(5.0 / 6, return_list[7])
+        self.assertEquals(1, return_list[8])
 
     def test_fraction_of_embedded_positive_signs(self):
         f = tempfile.NamedTemporaryFile()
