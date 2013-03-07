@@ -17,8 +17,22 @@ year = 2000
 #    print_table(table(data, year, definition_C3, args_for_definition_C(10, 5000)))
 #    print_table(table(data, year, definition_D, args_for_definition_D(90)))
 #    print_table(table(data, year, definition_D, args_for_definition_D(99)))
-def print_embeddedness_matlab_code():
-    common_neighbours_range = range(0, max_common_neighbours_possible + 1)
+common_neighbours_range = range(0, max_common_neighbours_possible + 1)
+
+def embeddedness_vs_balanced_traids_over_time():
+    print "x=%s" % (str(common_neighbours_range).replace(",", " "))
+    args = args_for_definition_C(10, 5000)
+    for year in data.all_years:
+        print "y=%s" % str([1 if t0 + t1 + t2 + t3 == 0 else (t1 + t3) * 1.0 / (t0 + t1 + t2 + t3)
+                            for(t0, t1, t2, t3) in
+                            traids_per_common_edge_count(data, year, definition_C3, args)]).replace(",", " ")
+        print "plot(x,y,'b-');"
+        print "xlabel('Number of common neighbours');"
+        print "ylabel('Percentage of balanced triangles(T1+T3)');"
+        print "saveas(gcf,'balanced-traid-embeddedness-%s','png');" % year
+
+
+def embeddedness_vs_positive_edges_over_time():
     print "x=%s" % (str(common_neighbours_range).replace(",", " "))
     args = args_for_definition_C(10, 5000)
     for year in data.all_years:
@@ -38,4 +52,5 @@ def print_embeddedness_matlab_code():
 #    (t0, t1, t2, t3) = traid_counts[i]
 #    print "%d\t%d\t%d\t%d\t%d" % (i, t0, t1, t2, t3)
 
-print_embeddedness_matlab_code()
+#embeddedness_vs_positive_edges_over_time()
+embeddedness_vs_balanced_traids_over_time()
