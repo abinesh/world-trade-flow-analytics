@@ -4,6 +4,7 @@ from project.signed_networks.definitions import definition_C1, args_for_definiti
 from project.signed_networks.structural_balance.metrics.edge import fraction_of_embedded_positive_signs, max_common_neighbours_possible, traids_per_common_edge_count
 from project.signed_networks.structural_balance.metrics.network import table2, print_table
 from project.signed_networks.structural_balance.metrics.util import RandomNetwork, count_edge_types
+from project.util import fraction
 
 
 data = ExportData()
@@ -23,13 +24,29 @@ def embeddedness_vs_balanced_traids_over_time():
     print "x=%s" % (str(common_neighbours_range).replace(",", " "))
     args = args_for_definition_C(10, 5000)
     for year in data.all_years:
-        print "y=%s" % str([1 if t0 + t1 + t2 + t3 == 0 else (t1 + t3) * 1.0 / (t0 + t1 + t2 + t3)
+        print "y=%s" % str([fraction(t1 + t3, t0 + t1 + t2 + t3, 1)
                             for(t0, t1, t2, t3) in
                             traids_per_common_edge_count(data, year, definition_C3, args)]).replace(",", " ")
         print "plot(x,y,'b-');"
         print "xlabel('Number of common neighbours');"
         print "ylabel('Percentage of balanced triangles(T1+T3)');"
         print "saveas(gcf,'balanced-traid-embeddedness-%s','png');" % year
+
+
+def embeddedness_vs_individual_traids_over_time():
+    print "x=%s" % (str(common_neighbours_range).replace(",", " "))
+    args = args_for_definition_C(10, 5000)
+    for year in data.all_years:
+        traid_counts = traids_per_common_edge_count(data, year, definition_C3, args)
+        print "t0=%s" % str([fraction(t0, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t1=%s" % str([fraction(t1, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t2=%s" % str([fraction(t2, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t3=%s" % str([fraction(t3, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "plot(x,t0,'b-*',x,t1,'r-*',x,t2,'g-*',x,t3,'m-*');"
+        print "xlabel('Number of common neighbours');"
+        print "ylabel('Percentage of triangles');"
+        print "legend('T0','T1','T2','T3');"
+        print "saveas(gcf,'individual-traid-embeddedness-%s','png');" % year
 
 
 def embeddedness_vs_positive_edges_over_time():
@@ -53,4 +70,5 @@ def embeddedness_vs_positive_edges_over_time():
 #    print "%d\t%d\t%d\t%d\t%d" % (i, t0, t1, t2, t3)
 
 #embeddedness_vs_positive_edges_over_time()
-embeddedness_vs_balanced_traids_over_time()
+#embeddedness_vs_balanced_traids_over_time()
+embeddedness_vs_individual_traids_over_time()
