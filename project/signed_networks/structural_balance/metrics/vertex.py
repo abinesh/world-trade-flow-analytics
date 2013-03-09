@@ -1,5 +1,6 @@
 from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
 
+
 def degree_sum(data, year, A, definition, def_args):
     sum = 0
     for B in data.countries():
@@ -10,5 +11,18 @@ def degree_sum(data, year, A, definition, def_args):
 
 
 def degree_count(data, year, A, definition, def_args):
-    return len([1 for B in data.countries() if A != B and definition(data, year, A, B, def_args) != NO_LINK])
+    return positive_edge_count(data, year, A, definition, def_args) \
+           + negative_edge_count(data, year, A, definition, def_args)
+
+
+def edge_count(A, data, def_args, definition, year, edge_type):
+    return len([1 for B in data.countries() if A != B and definition(data, year, A, B, def_args) == edge_type])
+
+
+def positive_edge_count(data, year, A, definition, def_args):
+    return edge_count(A, data, def_args, definition, year, POSITIVE_LINK)
+
+
+def negative_edge_count(data, year, A, definition, def_args):
+    return edge_count(A, data, def_args, definition, year, NEGATIVE_LINK)
 
