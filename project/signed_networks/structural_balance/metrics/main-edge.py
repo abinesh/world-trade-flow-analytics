@@ -20,12 +20,13 @@ year = 2000
 #    print_table(table(data, year, definition_D, args_for_definition_D(99)))
 common_neighbours_range = range(0, max_common_neighbours_possible + 1)
 
+
 def embeddedness_vs_balanced_traids_over_time():
     print "x=%s" % (str(common_neighbours_range).replace(",", " "))
     args = args_for_definition_C(10, 5000)
     for year in data.all_years:
         print "y=%s" % str([fraction(t1 + t3, t0 + t1 + t2 + t3, 1)
-                            for(t0, t1, t2, t3) in
+                            for (t0, t1, t2, t3) in
                             traids_per_common_edge_count(data, year, definition_C3, args)]).replace(",", " ")
         print "plot(x,y,'b-');"
         print "xlabel('Number of common neighbours');"
@@ -38,10 +39,10 @@ def embeddedness_vs_individual_traids_over_time():
     args = args_for_definition_C(10, 5000)
     for year in data.all_years:
         traid_counts = traids_per_common_edge_count(data, year, definition_C3, args)
-        print "t0=%s" % str([fraction(t0, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
-        print "t1=%s" % str([fraction(t1, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
-        print "t2=%s" % str([fraction(t2, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
-        print "t3=%s" % str([fraction(t3, t0 + t1 + t2 + t3, 0) for(t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t0=%s" % str([fraction(t0, t0 + t1 + t2 + t3, 0) for (t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t1=%s" % str([fraction(t1, t0 + t1 + t2 + t3, 0) for (t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t2=%s" % str([fraction(t2, t0 + t1 + t2 + t3, 0) for (t0, t1, t2, t3) in traid_counts]).replace(",", " ")
+        print "t3=%s" % str([fraction(t3, t0 + t1 + t2 + t3, 0) for (t0, t1, t2, t3) in traid_counts]).replace(",", " ")
         print "plot(x,t0,'b-*',x,t1,'r-*',x,t2,'g-*',x,t3,'m-*');"
         print "xlabel('Number of common neighbours');"
         print "ylabel('Percentage of triangles');"
