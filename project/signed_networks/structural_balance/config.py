@@ -508,12 +508,10 @@ var force = d3.layout.force()
         .nodes(d3.values(nodes))
         .links(links)
         .size([w, h])
-//      .linkDistance(function (n) {
-//          if (n.type == "negative") return 500;
-//          if (n.type == "missing") return 300;
-//          else return 300*n.replustionpercentage;
-//       })
-        .linkDistance(5)
+        .linkDistance(function (n) {
+            if (n.type == "negative") return 500;
+            else return 250;
+         })
         .charge(-30)
         .gravity(0.1)
         .on("tick", tick)
