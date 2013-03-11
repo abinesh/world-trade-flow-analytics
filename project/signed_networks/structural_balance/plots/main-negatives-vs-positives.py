@@ -2,8 +2,9 @@ import json
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
-from project.signed_networks.definitions import definition_B, args_for_definition_B, NEGATIVE_LINK, POSITIVE_LINK
-from project.structural_balance.plots.config import OUT_DIR
+from project.signed_networks.definitions import NEGATIVE_LINK, POSITIVE_LINK, args_for_definition_C, definition_C3
+from project.signed_networks.structural_balance.plots.config import OUT_DIR
+
 
 def positives_and_negatives_data_d3(data, definition, def_args, out_dir):
 #    countries_list = ["USA","UK","Turkey"]
@@ -42,6 +43,6 @@ def positives_and_negatives_data_d3(data, definition, def_args, out_dir):
     json_file.close()
 
 data = ExportData()
-data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-positives_and_negatives_data_d3(data, definition_B, args_for_definition_B(5), OUT_DIR.POSITIVES_AND_NEGATIVES)
+positives_and_negatives_data_d3(data, definition_C3, args_for_definition_C(10,5000), OUT_DIR.POSITIVES_AND_NEGATIVES)

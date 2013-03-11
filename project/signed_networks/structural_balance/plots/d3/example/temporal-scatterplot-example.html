@@ -228,10 +228,10 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     height = width/1.4;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([1, 150]).range([0, width]),
-        yScale = d3.scale.log().domain([1, 150]).range([height, 0]),
-//var xScale = d3.scale.linear().domain([1, 85]).range([0, width]),
-//    yScale = d3.scale.linear().domain([1, 85]).range([height, 0]),
+//var xScale = d3.scale.log().domain([1, 150]).range([0, width]),
+//        yScale = d3.scale.log().domain([1, 150]).range([height, 0]),
+var xScale = d3.scale.linear().domain([1, 150]).range([0, width]),
+    yScale = d3.scale.linear().domain([1, 150]).range([height, 0]),
     radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 50]),
     colorScale = d3.scale.category20();
 
@@ -283,7 +283,7 @@ var label = svg.append("text")
     .text(1963);
 
 // Load the data.
-d3.json("nations.json", function(nations) {
+d3.json("nations_gen.json", function(nations) {
 
   // A bisector since many nation's data is sparsely-defined.
   var bisect = d3.bisector(function(d) { return d[0]; });

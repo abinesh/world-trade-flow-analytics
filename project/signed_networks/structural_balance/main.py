@@ -31,7 +31,8 @@ data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 for year in range(1968, 2001):
-    top_countries_and_exports = data.top_countries_by_export(year, 50)
+    top_countries_and_exports = data.top_countries_by_export(year, 100)
+    # top_countries_and_exports = data.countries()
     generate_network_graph_data(data, year, top_countries_and_exports, output_file_html(year),
                                 definition_C3,
                                 args_for_definition_C(10, 5000))
