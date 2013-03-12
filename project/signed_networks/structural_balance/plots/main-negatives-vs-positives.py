@@ -45,4 +45,4 @@ def positives_and_negatives_data_d3(data, definition, def_args, out_dir):
 data = ExportData()
 data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-positives_and_negatives_data_d3(data, definition_C3, args_for_definition_C(10,5000), OUT_DIR.POSITIVES_AND_NEGATIVES)
+positives_and_negatives_data_d3(data, definition_C3, args_for_definition_C(10,1000), OUT_DIR.POSITIVES_AND_NEGATIVES)

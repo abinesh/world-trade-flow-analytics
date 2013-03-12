@@ -36,11 +36,12 @@ def traid_plot_value(traid_type):
 
 
 f = open(OUT_DIR + 'triad-matlab-code.txt', 'w')
+args = args_for_definition_C(10, 1000)
 
 for (A, B, C) in combinations(data.countries(), 3):
     f.write("%s-%s-%s:y=%s\n" % (file_safe(A), file_safe(B), file_safe(C),
                                  str([traid_plot_value(
-                                     triad_type(data, year, A, B, C, definition_C3, args_for_definition_C(10, 5000)))
+                                     triad_type(data, year, A, B, C, definition_C3, args))
                                       for year in data.all_years]).replace(",", " ")))
 f.write("x=%s;\n" % str([year for year in data.all_years]).replace(",", " "))
 f.write("plot(x,y,'b-o',[2000 2000],[0 8],'b.');\n")

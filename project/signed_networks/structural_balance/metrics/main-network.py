@@ -9,4 +9,4 @@ data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world
 
 year = 2000
 
-print_table(table1(data, year, definition_C3, args_for_definition_C(10, 5000)))
+print_table(table1(data, year, definition_C3, args_for_definition_C(10, 1000)))
