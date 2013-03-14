@@ -5,7 +5,7 @@ from project import countries
 from project.export_data.strongties import number_of_traids, __matrix_cube, get_relationship_matrix
 from project.signed_networks.definitions import NO_LINK, NEGATIVE_LINK, POSITIVE_LINK
 from project.signed_networks.structural_balance.metrics.util import RandomLinkGenerator
-from project.util import std_dev
+from project.util import std_dev, memoize
 
 
 def print_table(json):
@@ -19,24 +19,44 @@ def print_table(json):
                 t, r['|Ti|'], r['p(Ti)'], r['p0(Ti)'], r['p0(Ti)-sd'], r['s(Ti)'], r['s(Ti)-sd'])
 
 
+@memoize
+def sign_distributions(data, year, definition, def_args):
+    positive_edges_count, negative_edges_count, no_edge_count = 0, 0, 0
+    for (A, B) in countries.country_pairs(data.countries()):
+        link_type = definition(data, year, A, B, def_args)
+        if link_type == NEGATIVE_LINK:
+            negative_edges_count += 1
+        elif link_type == POSITIVE_LINK:
+            positive_edges_count += 1
+        elif link_type == NO_LINK:
+            no_edge_count += 1
+    edges_count = positive_edges_count + negative_edges_count
+    return edges_count, positive_edges_count, negative_edges_count, no_edge_count
+
+
+@memoize
+def link_type_ratio(data, year, definition, def_args, link_type):
+    total, positives, negatives, no_edge_count = sign_distributions(data, year, definition, def_args)
+    if link_type == POSITIVE_LINK:
+        return positives * 1.0 / total
+    if link_type == NEGATIVE_LINK:
+        return negatives * 1.0 / total
+    if link_type == NO_LINK:
+        return no_edge_count * 1.0 / total
+    return None
+
+
 def table1(data, year, definition, def_args):
     def link_exists_def(data, year, A, B, def_args1):
         if 'World' in [A, B]: return 0
         return 0 if definition(data, year, A, B, def_args) == NO_LINK else 1
 
-    positive_edges_count, negative_edges_count, no_edge_count, traids = 0, 0, 0, 0
-    for (A, B) in countries.country_pairs(data.countries()):
-        link_type = definition(data, year, A, B, def_args)
-        if link_type == NEGATIVE_LINK: negative_edges_count += 1
-        elif link_type == POSITIVE_LINK: positive_edges_count += 1
-        elif link_type == NO_LINK: no_edge_count += 1
-
-    edges_count = positive_edges_count + negative_edges_count
+    edges_count, positives, negatives, _ = sign_distributions(data, year, definition, def_args)
     return {'Name': 'Table1',
             'Nodes': len(data.countries()),
             'Edges': edges_count,
-            '+ edges': positive_edges_count * 100.0 / edges_count,
-            '- edges': negative_edges_count * 100.0 / edges_count,
+            '+ edges': positives * 100.0 / edges_count,
+            '- edges': negatives * 100.0 / edges_count,
             'Traids': number_of_traids(__matrix_cube(get_relationship_matrix(data, year, link_exists_def, {})))
     }
 
