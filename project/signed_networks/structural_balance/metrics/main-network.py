@@ -34,11 +34,11 @@ def print_code_for_triad_distribution_over_time(def_args):
     print "x=%s;" % str([year for year in data.all_years]).replace(",", " ")
     print "t0=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T0')
                           for year in data.all_years]).replace(",", " ")
-    print "t1=%s;" % str([link_type_ratio(data, year, definition, def_args, 'T1')
+    print "t1=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T1')
                           for year in data.all_years]).replace(",", " ")
-    print "t2=%s;" % str([link_type_ratio(data, year, definition, def_args, 'T2')
+    print "t2=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T2')
                           for year in data.all_years]).replace(",", " ")
-    print "t3=%s;" % str([link_type_ratio(data, year, definition, def_args, 'T3')
+    print "t3=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T3')
                           for year in data.all_years]).replace(",", " ")
     print "plot(x,t0,x,t1,x,t2,x,t3);"
     print "legend('T0','T1','T2','T3')"
