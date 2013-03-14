@@ -61,9 +61,10 @@ def table1(data, year, definition, def_args):
     }
 
 
-def table2(data, year, definition, def_args):
+@memoize
+def traid_distribution(data, year, definition, def_args):
     t0, t1, t2, t3 = 0, 0, 0, 0
-    total_positive, total_negative, total_missing = 0, 0, 0
+    total_positive_edges, total_negative_edges = 0, 0
     traids = []
     for (A, B, C) in combinations(data.countries(), 3):
         side1 = definition(data, year, A, B, def_args)
@@ -73,8 +74,8 @@ def table2(data, year, definition, def_args):
         if side1 == NO_LINK or side2 == NO_LINK or side3 == NO_LINK: continue
         traids.append((A, B, C))
         for side in [side1, side2, side3]:
-            if side == POSITIVE_LINK: total_positive += 1
-            if side == NEGATIVE_LINK: total_negative += 1
+            if side == POSITIVE_LINK: total_positive_edges += 1
+            if side == NEGATIVE_LINK: total_negative_edges += 1
 
         positive_sides = 0
         for side in [side1, side2, side3]:
@@ -84,6 +85,20 @@ def table2(data, year, definition, def_args):
         if positive_sides == 2: t2 += 1
         if positive_sides == 3: t3 += 1
     total = t0 + t1 + t2 + t3
+    return t0, t1, t2, t3, total, total_positive_edges, total_negative_edges, traids
+
+
+def traid_type_ratio(data, year, definition, def_args, traid_type):
+    t0, t1, t2, t3, total, _, _, _ = traid_distribution(data, year, definition, def_args)
+    if traid_type == 'T0': return t0 * 1.0 / total
+    if traid_type == 'T1': return t1 * 1.0 / total
+    if traid_type == 'T2': return t2 * 1.0 / total
+    if traid_type == 'T3': return t3 * 1.0 / total
+    return None
+
+
+def table2(data, year, definition, def_args):
+    t0, t1, t2, t3, total, total_positive, total_negative, traids = traid_distribution(data, year, definition, def_args)
 
     rt0, rt1, rt2, rt3, rtotal = [], [], [], [], []
     MAX_RANDOM_RUNS = 5
