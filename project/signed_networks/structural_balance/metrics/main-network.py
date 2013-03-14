@@ -30,7 +30,7 @@ def print_code_for_sign_distribution_over_time():
     print "saveas(gcf,'sign-distribution-over-time(Not-density)','png');"
 
 
-def print_code_for_triad_distribution_over_time(def_args):
+def print_code_for_triad_distribution_over_time(def_args, file_name):
     print "x=%s;" % str([year for year in data.all_years]).replace(",", " ")
     print "t0=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T0')
                           for year in data.all_years]).replace(",", " ")
@@ -42,9 +42,9 @@ def print_code_for_triad_distribution_over_time(def_args):
                           for year in data.all_years]).replace(",", " ")
     print "plot(x,t0,x,t1,x,t2,x,t3);"
     print "legend('T0','T1','T2','T3')"
-    print "saveas(gcf,'traid-distribution-over-time(Not-clustering-coefficient)','png');"
+    print "saveas(gcf,'traid-distribution-over-time(Not-clustering-coefficient)-%s','png');" % file_name
 
 
 # print_code_for_sign_distribution_over_time()
-print_code_for_triad_distribution_over_time(def_args1000)
-print_code_for_triad_distribution_over_time(def_args5000)
+print_code_for_triad_distribution_over_time(def_args1000, '1000')
+print_code_for_triad_distribution_over_time(def_args5000, '5000')

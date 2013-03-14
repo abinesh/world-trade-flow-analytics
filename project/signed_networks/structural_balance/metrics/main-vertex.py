@@ -8,8 +8,8 @@ data = ExportData()
 data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 definition = definition_C3
-def_args1 = args_for_definition_C(10, 1000)
-def_args2 = args_for_definition_C(10, 5000)
+def_args1 = args_for_definition_C(10, 5000)
+def_args2 = args_for_definition_C(10, 1000)
 
 print "x=%s;" % str([year for year in data.all_years]).replace(",", " ")
 for A in data.countries():
@@ -21,5 +21,5 @@ for A in data.countries():
     print "plot(x,degreesum1,'b-o',x,degreesum2,'b-*',x,degreecount,'m-o',x,positivecount1,'g-o',x,negativecount1,'r-o');"
     print "hline = refline([0 0]);"
     print "set(hline,'Color','b');"
-    print "legend('degree-sum1(T2=1000)','degree-sum2(T2=5000)','degree-count','positivecount1','negativecount1','Location','Best')"
+    print "legend('degree-sum1(T2=5000)','degree-sum2(T2=1000)','degree-count','positivecount1','negativecount1','Location','Best')"
     print "saveas(gcf,'%s','png');" % file_safe(A)
