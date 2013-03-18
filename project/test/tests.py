@@ -654,8 +654,14 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals("T120", triad_type(d, 1963, "USA", "UK", "India", test_extension_def, {}))
         self.assertEquals("T021", triad_type(d, 1963, "USA", "UK", "Japan", test_extension_def, {}))
 
+    def _assertListEquals(self,expected,actual):
+        self.assertEquals(len(expected),len(actual))
+        for item in expected:
+            self.assertTrue(item in actual)
+
+
     def test_faction_detection_on_d3_plot(self):
-        self.assertEquals([['A', 'B'], ['C', 'D']], detect_factions_from_co_movements({
+        self._assertListEquals([['A', 'B'], ['C', 'D']], detect_factions_from_co_movements({
                                                                                           1963: {'A': (4, 5),
                                                                                                  'B': (5, 6),
                                                                                                  'C': (3, 3),
@@ -665,6 +671,30 @@ class TestFunctions(unittest.TestCase):
                                                                                                  'C': (2, 2),
                                                                                                  'D': (3, 3)}
                                                                                       }, 1, 1964))
+        self._assertListEquals([['A', 'B'], ['C', 'D']], detect_factions_from_co_movements({
+                                                                                          1963: {'A': (4, 5),
+                                                                                                 'B': (5, 6),
+                                                                                                 'C': (3, 3),
+                                                                                                 'D': (4, 4)},
+                                                                                          1964: {'A': (4, 16),
+                                                                                                 'B': (5, 17),
+                                                                                                 'C': (2, 2),
+                                                                                                 'D': (3, 3)}
+                                                                                      }, 1, 1964))
+        self._assertListEquals([['A', 'B'], ['C', 'D']], detect_factions_from_co_movements({
+                                                                                          1963: {'A': (4, 5),
+                                                                                                 'B': (5, 6),
+                                                                                                 'C': (3, 3),
+                                                                                                 'D': (4, 4)},
+                                                                                          1964: {'A': (5, 6),
+                                                                                                 'B': (6, 7),
+                                                                                                 'C': (2, 2),
+                                                                                                 'D': (3, 3)},
+                                                                                          1965: {'A': (6, 7),
+                                                                                                 'B': (7, 8),
+                                                                                                 'C': (1, 1),
+                                                                                                 'D': (2, 2)}
+                                                                                      }, 2, 1965))
 
 
 @memoize
