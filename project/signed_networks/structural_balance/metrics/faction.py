@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, ceil
 import sys
 
 
@@ -25,7 +25,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
         for C in countries_list:
             current_year_position = positives_and_negatives[current_year][C]
             previous_year_position = positives_and_negatives[previous_year][C]
-            slope = _compute_slope(current_year_position, previous_year_position)
+            slope = ceil(_compute_slope(current_year_position, previous_year_position))
             distance_diff_from_origin = _distance_from_origin(current_year_position) - \
                                         _distance_from_origin(previous_year_position)
 
