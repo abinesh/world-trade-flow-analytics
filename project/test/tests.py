@@ -2,6 +2,7 @@ import unittest
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
+from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
@@ -652,6 +653,18 @@ class TestFunctions(unittest.TestCase):
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals("T120", triad_type(d, 1963, "USA", "UK", "India", test_extension_def, {}))
         self.assertEquals("T021", triad_type(d, 1963, "USA", "UK", "Japan", test_extension_def, {}))
+
+    def test_faction_detection_on_d3_plot(self):
+        self.assertEquals([['A', 'B'], ['C', 'D']], detect_factions_from_co_movements({
+                                                                                          1963: {'A': (4, 5),
+                                                                                                 'B': (5, 6),
+                                                                                                 'C': (3, 3),
+                                                                                                 'D': (4, 4)},
+                                                                                          1964: {'A': (5, 6),
+                                                                                                 'B': (6, 7),
+                                                                                                 'C': (2, 2),
+                                                                                                 'D': (3, 3)}
+                                                                                      }, 1, 1964))
 
 
 @memoize
