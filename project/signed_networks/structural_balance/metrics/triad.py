@@ -1,3 +1,4 @@
+from itertools import combinations
 from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
 
 
@@ -10,5 +11,16 @@ def triad_type(data, year, A, B, C, definition, def_args):
     ncount = triangle.count(NEGATIVE_LINK)
     mcount = triangle.count(NO_LINK)
     return "T%d%d%d" % ( pcount, ncount, mcount)
+
+
+def is_traid(data, year, A, B, C, definition, def_args):
+    return triad_type(data, year, A, B, C, definition, def_args)[-1:] == '0'
+
+
+def get_traids(data, year, definition, def_args, traid_type):
+    return [(A, B, C) for (A, B, C) in combinations(data.countries(), 3) if
+            is_traid(data, year, A, B, C, definition, def_args) and
+            triad_type(data, year, A, B, C, definition, def_args)[:2] == traid_type]
+
 
 
