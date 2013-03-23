@@ -7,8 +7,6 @@ from project.signed_networks.structural_balance.metrics.config import OUT_DIR
 from project.util import file_safe
 
 
-data = ExportData()
-data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 
 def traid_plot_value(traid_type):
@@ -35,17 +33,24 @@ def traid_plot_value(traid_type):
     print "traid_type=%s" % traid_type
 
 
-f = open(OUT_DIR + 'triad-matlab-code.txt', 'w')
-args = args_for_definition_C(10, 1000)
+def generate_triad_type_transition_matlab_code():
+    f = open(OUT_DIR + 'triad-matlab-code.txt', 'w')
+    args = args_for_definition_C(10, 1000)
 
-for (A, B, C) in combinations(data.countries(), 3):
-    f.write("%s-%s-%s:y=%s\n" % (file_safe(A), file_safe(B), file_safe(C),
-                                 str([traid_plot_value(
-                                     triad_type(data, year, A, B, C, definition_C3, args))
-                                      for year in data.all_years]).replace(",", " ")))
-f.write("x=%s;\n" % str([year for year in data.all_years]).replace(",", " "))
-f.write("plot(x,y,'b-o',[2000 2000],[0 8],'b.');\n")
-f.write("set(gca,'YTick',[0 1 2 3 4 5 6 7 8 9]);\n")
-f.write("set(gca,'YTickLabel',{'T003','T012','T102','T021','T111','T201','T030','T120','T210','T300'});\n")
+    for (A, B, C) in combinations(data.countries(), 3):
+        f.write("%s-%s-%s:y=%s\n" % (file_safe(A), file_safe(B), file_safe(C),
+                                     str([traid_plot_value(
+                                         triad_type(data, year, A, B, C, definition_C3, args))
+                                          for year in data.all_years]).replace(",", " ")))
+    f.write("x=%s;\n" % str([year for year in data.all_years]).replace(",", " "))
+    f.write("plot(x,y,'b-o',[2000 2000],[0 8],'b.');\n")
+    f.write("set(gca,'YTick',[0 1 2 3 4 5 6 7 8 9]);\n")
+    f.write("set(gca,'YTickLabel',{'T003','T012','T102','T021','T111','T201','T030','T120','T210','T300'});\n")
 
-f.close()
+    f.close()
+
+data = ExportData()
+data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+
+generate_triad_type_transition_matlab_code()
+
