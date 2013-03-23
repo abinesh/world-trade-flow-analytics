@@ -616,8 +616,8 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         traids = traids_per_common_edge_count(d, 1963, test_extension_def, {})
-        self.assertEquals((0, 2, 2, 0), traids[1])
-        self.assertEquals((0, 1, 1, 0), traids[2])
+        self.assertEquals((0, (0, 2), (1, 1), 0), traids[1])
+        self.assertEquals((0, (1, 0), (1, 0), 0), traids[2])
 
     def test_traids_type(self):
         f = tempfile.NamedTemporaryFile()

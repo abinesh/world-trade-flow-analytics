@@ -3,6 +3,7 @@ from project.signed_networks.definitions import POSITIVE_LINK, NO_LINK
 
 max_common_neighbours_possible = 201
 
+
 def compute_fraction_of_positive_edges(map):
     result = []
     for i in range(0, max_common_neighbours_possible + 1):
@@ -28,8 +29,8 @@ def compute_map(data, year, definition, def_args):
         if common_neighbour_count not in result:
             result[common_neighbour_count] = (0, 0)
         (negative_edges, positive_edges) = result[common_neighbour_count]
-        result[common_neighbour_count] = (negative_edges, positive_edges + 1) if link_sign == POSITIVE_LINK\
-        else (negative_edges + 1, positive_edges)
+        result[common_neighbour_count] = (negative_edges, positive_edges + 1) if link_sign == POSITIVE_LINK \
+            else (negative_edges + 1, positive_edges)
     return result
 
 
@@ -45,21 +46,27 @@ def traid_type(data, year, A, B, C, definition, def_args):
     assert NO_LINK not in traid
     return "T%d" % (traid.count(POSITIVE_LINK))
 
+
 def traids_per_common_edge_count(data, year, definition, def_args):
+    ZERO_TRIADS = (0, (0, 0), (0, 0), 0)
+
     def to_list(map):
-        return [map[i] if i in map else (0, 0, 0, 0)
+        return [map[i] if i in map else ZERO_TRIADS
                 for i in range(0, max_common_neighbours_possible + 1)]
 
     result = {}
     for A, B in combinations(data.countries(), 2):
-        if definition(data, year, A, B, def_args) != NO_LINK:
+        edge_sign = definition(data, year, A, B, def_args)
+        if edge_sign != NO_LINK:
             neighbours = common_neighbours(data, year, A, B, definition, def_args)
-            if len(neighbours) not in result: result[len(neighbours)] = (0, 0, 0, 0)
+            if len(neighbours) not in result: result[len(neighbours)] = ZERO_TRIADS
             for C in neighbours:
-                (old_t0, old_t1, old_t2, old_t3) = result[len(neighbours)]
+                (old_t0, (old_t1P, old_t1N), (old_t2P, old_t2N), old_t3) = result[len(neighbours)]
                 t = traid_type(data, year, A, B, C, definition, def_args)
-                if t == "T0": result[len(neighbours)] = (old_t0 + 1, old_t1, old_t2, old_t3)
-                if t == "T1": result[len(neighbours)] = (old_t0, old_t1 + 1, old_t2, old_t3)
-                if t == "T2": result[len(neighbours)] = (old_t0, old_t1, old_t2 + 1, old_t3)
-                if t == "T3": result[len(neighbours)] = (old_t0, old_t1, old_t2, old_t3 + 1)
+                if t == "T0": result[len(neighbours)] = (old_t0 + 1, (old_t1P, old_t1N), (old_t2P, old_t2N), old_t3)
+                if t == "T1": result[len(neighbours)] = (old_t0, (old_t1P + 1, old_t1N), (old_t2P, old_t2N), old_t3) \
+                    if edge_sign == POSITIVE_LINK else (old_t0, (old_t1P, old_t1N + 1), (old_t2P, old_t2N), old_t3)
+                if t == "T2": result[len(neighbours)] = (old_t0, (old_t1P, old_t1N), (old_t2P + 1, old_t2N), old_t3) \
+                    if edge_sign == POSITIVE_LINK else (old_t0, (old_t1P, old_t1N ), (old_t2P, old_t2N + 1), old_t3)
+                if t == "T3": result[len(neighbours)] = (old_t0, (old_t1P, old_t1N), (old_t2P, old_t2N), old_t3 + 1)
     return to_list(result)
