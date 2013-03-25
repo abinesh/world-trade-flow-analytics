@@ -39,6 +39,22 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
     return countries_that_co_moved.values()
 
 
+def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
+    if countries is None: countries = data.countries()
+
+    def flatten(multilist): return [item for sublist in multilist for item in sublist]
+
+    def country_row(C):
+        def delta_from_mean(C, years, year, edge_type):
+            mean = sum([edge_type(data, Y, C, definition, def_args) for Y in years]) * 1.0 / len(years)
+            return edge_type(data, year, C, definition, def_args) - mean
+
+        return flatten([[delta_from_mean(C, years, year, positive_edge_count),
+                         delta_from_mean(C, years, year, negative_edge_count)] for year in years])
+
+    return [country_row(C) for C in countries]
+
+
 def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=None):
     if countries is None: countries = data.countries()
 
@@ -66,9 +82,9 @@ def adjacency_matrix(data, definition, def_args, year, countries=None):
 
 
 def adjacency_matrix_matlab(data, definition, def_args, year, countries=None):
-    return str(adjacency_matrix(data,definition,def_args,year,countries))\
-        .replace("], [",";")\
-        .replace("[","")\
-        .replace("]","")\
-        .replace(",","")
+    return str(adjacency_matrix(data, definition, def_args, year, countries)) \
+        .replace("], [", ";") \
+        .replace("[", "") \
+        .replace("]", "") \
+        .replace(",", "")
 
