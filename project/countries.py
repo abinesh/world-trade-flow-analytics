@@ -265,10 +265,15 @@ for c in countries:
     index_to_country_map[index] = c
     index += 1
 
-def is_valid_country(c):
-    return c in country_to_index_map
+
+def is_valid_country(c): return c in country_to_index_map
+
+
+def index_of_country(c): return countries.index(c)
+
 
 world_excluded_list = None
+
 
 def world_excluded_countries_list():
     global world_excluded_list
@@ -278,8 +283,10 @@ def world_excluded_countries_list():
     return world_excluded_list
 
 
-def country_pairs(only_these_countries=world_excluded_countries_list()):
-    return combinations(only_these_countries, 2)
+def country_pairs(only_these_countries=world_excluded_countries_list()): return combinations(only_these_countries, 2)
+
+falklands_war_countries = ["USA", "UK", "Argentina", "France,Monac", "Libya", "Fm USSR", "Israel", "Peru", "Brazil"]
+
 
 
 
