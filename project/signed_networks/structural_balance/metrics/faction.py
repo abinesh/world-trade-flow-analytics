@@ -1,5 +1,7 @@
 from math import sqrt, ceil
 import sys
+from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK
+from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
 
 
 def _add_to_slope_map(slope_map, key, new_list_item):
@@ -35,3 +37,31 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
     for key in movements_per_country:
         _add_to_slope_map(countries_that_co_moved, str(movements_per_country[key]), key)
     return countries_that_co_moved.values()
+
+
+def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
+    if countries is None: countries = data.countries()
+
+    def delta_from_mean(C, years, year, edge_type):
+        mean = sum([edge_type(data, Y, C, definition, def_args) for Y in years]) * 1.0 / len(years)
+        return edge_type(data, year, C, definition, def_args) - mean
+
+    def country_row(C):
+        return str([(delta_from_mean(C, years, year, positive_edge_count),
+                     delta_from_mean(C, years, year, negative_edge_count)) for year in years]) \
+            .replace(",", " ").replace("(", "").replace(")", "").replace("[", "").replace("]", "")
+
+    return ";".join([country_row(C) for C in countries])
+
+
+def adjacency_matrix(data, definition, def_args, year, countries=None):
+    if countries is None: countries = data.countries()
+
+    def country_row(A):
+        return str([("0" if A == B else "1" if definition(data, year, A, B, def_args) == POSITIVE_LINK
+        else "-1" if definition(data, year, A, B, def_args) == NEGATIVE_LINK else "0")
+                    for B in countries]) \
+            .replace(",", " ").replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace("'", "")
+
+    return ";".join([country_row(A) for A in countries])
+
