@@ -693,7 +693,7 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals(
-            "-1.0  1.0  1.0  -1.0;-1.5  1.5  1.5  -1.5;0.0  0.0  0.0  0.0;0.0  0.0  0.0  0.0;-0.5  0.5  0.5  -0.5",
+            "-1.0 1.0 1.0 -1.0;-1.5 1.5 1.5 -1.5;0.0 0.0 0.0 0.0;0.0 0.0 0.0 0.0;-0.5 0.5 0.5 -0.5",
                           positives_and_negatives_matrix_matlab(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"]))
         self.assertEquals([[-1.0, 1.0, 1.0, -1.0],
                            [-1.5, 1.5, 1.5, -1.5],

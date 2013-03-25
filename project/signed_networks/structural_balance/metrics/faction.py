@@ -55,21 +55,6 @@ def positives_and_negatives_matrix(data, definition, def_args, years, countries=
     return [country_row(C) for C in countries]
 
 
-def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=None):
-    if countries is None: countries = data.countries()
-
-    def delta_from_mean(C, years, year, edge_type):
-        mean = sum([edge_type(data, Y, C, definition, def_args) for Y in years]) * 1.0 / len(years)
-        return edge_type(data, year, C, definition, def_args) - mean
-
-    def country_row(C):
-        return str([(delta_from_mean(C, years, year, positive_edge_count),
-                     delta_from_mean(C, years, year, negative_edge_count)) for year in years]) \
-            .replace(",", " ").replace("(", "").replace(")", "").replace("[", "").replace("]", "")
-
-    return ";".join([country_row(C) for C in countries])
-
-
 def adjacency_matrix(data, definition, def_args, year, countries=None):
     if countries is None: countries = data.countries()
 
@@ -87,4 +72,13 @@ def adjacency_matrix_matlab(data, definition, def_args, year, countries=None):
         .replace("[", "") \
         .replace("]", "") \
         .replace(",", "")
+
+
+def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=None):
+    return str(positives_and_negatives_matrix(data, definition, def_args, years, countries)) \
+        .replace("], [", ";") \
+        .replace("[", "") \
+        .replace("]", "") \
+        .replace(",", "")
+
 
