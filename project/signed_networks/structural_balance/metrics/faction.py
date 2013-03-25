@@ -39,6 +39,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
         _add_to_slope_map(countries_that_co_moved, str(movements_per_country[key]), key)
     return countries_that_co_moved.values()
 
+
 @memoize
 def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
     if countries is None: countries = data.countries()
@@ -56,15 +57,16 @@ def positives_and_negatives_matrix(data, definition, def_args, years, countries=
     return [country_row(C) for C in countries]
 
 @memoize
-def adjacency_matrix(data, definition, def_args, year, countries=None):
+def adjacency_matrix_row(data, definition, def_args, year, A, countries=None):
     if countries is None: countries = data.countries()
+    return [0 if A == B or definition(data, year, A, B, def_args) == NO_LINK
+            else 1 if definition(data, year, A, B, def_args) == POSITIVE_LINK
+    else -1 for B in countries]
 
-    def country_row(A):
-        return [0 if A == B or definition(data, year, A, B, def_args) == NO_LINK
-                else 1 if definition(data, year, A, B, def_args) == POSITIVE_LINK
-        else -1 for B in countries]
 
-    return [country_row(A) for A in countries]
+@memoize
+def adjacency_matrix(data, definition, def_args, year, countries=None):
+    return [adjacency_matrix_row(data, definition, def_args, year, A, countries) for A in countries]
 
 
 def adjacency_matrix_matlab(data, definition, def_args, year, countries=None):
