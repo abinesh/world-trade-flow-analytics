@@ -8,6 +8,7 @@ from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
+from project.util import transpose
 import tempfile
 
 
@@ -780,6 +781,9 @@ class TestFunctions(unittest.TestCase):
                                                                                                  'C': (1, 1),
                                                                                                  'D': (2, 2)}
                                                                                       }, 2, 1965))
+
+    def test_transpose(self):
+        self.assertEquals([[1, 4, 7], [2, 5, 8], [3, 6, 9]], transpose([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
 
 
 @memoize

@@ -25,6 +25,7 @@ def file_safe(country):
 #    strip('. ,') trims whitespaces, periods and comma characters
     return country.strip('. ,').replace(',', '_').replace('.', '_').replace(' ', '_')
 
+def transpose(matrix): return [list(i) for i in zip(*matrix)]
 
 def std_dev(s):
     if len(s) == 0: return None

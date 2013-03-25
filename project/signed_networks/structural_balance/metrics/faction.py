@@ -2,6 +2,7 @@ from math import sqrt, ceil
 import sys
 from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
 from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
+from project.util import memoize
 
 
 def _add_to_slope_map(slope_map, key, new_list_item):
@@ -38,7 +39,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
         _add_to_slope_map(countries_that_co_moved, str(movements_per_country[key]), key)
     return countries_that_co_moved.values()
 
-
+@memoize
 def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
     if countries is None: countries = data.countries()
 
@@ -54,7 +55,7 @@ def positives_and_negatives_matrix(data, definition, def_args, years, countries=
 
     return [country_row(C) for C in countries]
 
-
+@memoize
 def adjacency_matrix(data, definition, def_args, year, countries=None):
     if countries is None: countries = data.countries()
 
