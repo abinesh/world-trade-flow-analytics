@@ -274,8 +274,8 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals(str(
-            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
-             ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0)]),
+            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Afghanistan', 1.0), ('Armenia', 1.0),
+             ('Bahrain', 1.0), ('Bangladesh', 1.0), ('Belgium-Lux', 1.0), ('Brazil', 1.0), ('Pakistan', 1.0)]),
             str(d.sorted_list_of_export_percentages('USA', 1963)))
         self.assertEquals(0, d.export_data_as_percentile(1963, 'USA', 'UK'))
         self.assertEquals(25.0, d.export_data_as_percentile(1963, 'USA', 'Italy'))
@@ -285,18 +285,18 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(100.0, d.export_data_as_percentile(1963, 'USA', 'Spain'))
         self.assertEquals(100.0, d.export_data_as_percentile(1964, 'USA', 'UK'))
         self.assertEquals(str(
-            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Armenia', 1.0), ('Afghanistan', 1.0),
-             ('Belgium-Lux', 1.0), ('Pakistan', 1.0), ('Brazil', 1.0), ('Bahrain', 1.0), ('Bangladesh', 1.0),
-             ('Ghana', 0.0), ('Australia', 0.0), ('Georgia', 0.0), ('Greece', 0.0), ('Barbados', 0.0)]),
+            [('UK', 25.0), ('Italy', 20.0), ('Canada', 5.0), ('India', 5.0), ('Afghanistan', 1.0), ('Armenia', 1.0),
+             ('Bahrain', 1.0), ('Bangladesh', 1.0), ('Belgium-Lux', 1.0), ('Brazil', 1.0), ('Pakistan', 1.0),
+             ('Australia', 0.0), ('Barbados', 0.0), ('Georgia', 0.0), ('Ghana', 0.0), ('Greece', 0.0)]),
             str(d.countries_sorted_by_export_percentages('USA', 1963)))
         self.assertEquals(str(['UK', 'Italy', 'Canada', 'India']), str(d.top_T_percent_exports('USA', 1963, 50)))
         self.assertEquals(str(
-            ['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil', 'Bahrain',
-             'Bangladesh']), str(d.top_T_percent_exports('USA', 1963, 56)))
-        self.assertEquals(str(['Ghana', 'Georgia']), str(d.top_T_percent_exports('Greece', 1963, 40)))
+            ['UK', 'Italy', 'Canada', 'India', 'Afghanistan', 'Armenia', 'Bahrain', 'Bangladesh', 'Belgium-Lux',
+             'Brazil', 'Pakistan']), str(d.top_T_percent_exports('USA', 1963, 56)))
+        self.assertEquals(str(['Georgia', 'Ghana']), str(d.top_T_percent_exports('Greece', 1963, 40)))
         self.assertEquals(
-            str(['UK', 'Italy', 'Canada', 'India', 'Armenia', 'Afghanistan', 'Belgium-Lux', 'Pakistan', 'Brazil',
-                 'Bahrain', 'Bangladesh']),
+            str(['UK', 'Italy', 'Canada', 'India', 'Afghanistan', 'Armenia', 'Bahrain', 'Bangladesh', 'Belgium-Lux',
+                 'Brazil', 'Pakistan']),
             str(d.top_T_percent_exports('USA', 1963, 100)))
 
 

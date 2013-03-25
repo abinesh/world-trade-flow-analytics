@@ -5,6 +5,7 @@ from project.config import YEAR_COLUMNS
 from project.countries import is_valid_country
 from project.util import column_to_year, memoize
 
+
 class Country:
     def __init__(self, name):
         self.name = name
@@ -22,7 +23,7 @@ class ExportData:
         self.years_map = {}
         self.nan_records_map = {}
         self.all_years = range(start_year, end_year + 1)
-        self.all_countries = {}
+        self.all_countries = []
         for year in self.all_years:
             self.years_map[year] = self.__empty_data_for_a_year()
             self.nan_records_map[year] = {}
@@ -73,7 +74,7 @@ class ExportData:
 
     @memoize
     def countries(self):
-        retval = self.all_countries.keys()
+        retval = list(self.all_countries)
         retval.remove('World')
         return retval
 
@@ -163,7 +164,7 @@ class ExportData:
         if exports_to_world is None or exports_to_world == 0:
             return None
         val = self.export_data(year, exporter, importer, return_none_if_data_point_is_nan,
-            return_this_for_missing_datapoint)
+                               return_this_for_missing_datapoint)
         if val == -1: return return_this_for_missing_datapoint
         return val / exports_to_world
 
@@ -180,8 +181,8 @@ class ExportData:
         retval = 0
         for year in self.all_years:
             v = self.export_data(year, C1, C2,
-                return_none_if_data_point_is_nan=True,
-                return_this_for_missing_datapoint=-1)
+                                 return_none_if_data_point_is_nan=True,
+                                 return_this_for_missing_datapoint=-1)
             if v == -1:
                 retval = 0
                 break
@@ -229,10 +230,18 @@ class ExportData:
                 self.__record_nan_data(year, exporter, importer)
             else:
                 self.__export_data_for_a_country(exporter, year).set_export_to_country(importer,
-                    float(export_quantity))
-            self.all_countries[exporter] = 1
-            self.all_countries[importer] = 1
+                                                                                       float(export_quantity))
+            if exporter not in self.all_countries: self.all_countries.append(exporter)
+            if importer not in self.all_countries: self.all_countries.append(importer)
             print "in " + str(year) + ", " + exporter + " exported " + export_quantity + " to " + importer
+
+        def reorder_countries(countries_list):
+            copy_list = list(countries_list)
+            inputHasUSA = "USA" in copy_list
+            if inputHasUSA: copy_list.remove("USA")
+            return ['USA'] + sorted(copy_list) if inputHasUSA else sorted(copy_list)
+
+        self.all_countries = reorder_countries(self.all_countries)
 
     def load_file(self, file_path, year_columns=YEAR_COLUMNS, should_read_world_datapoints=False):
         f = open(file_path, 'rb')
