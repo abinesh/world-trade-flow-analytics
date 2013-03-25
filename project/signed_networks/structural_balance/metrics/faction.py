@@ -1,6 +1,6 @@
 from math import sqrt, ceil
 import sys
-from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK
+from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
 from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
 
 
@@ -39,7 +39,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
     return countries_that_co_moved.values()
 
 
-def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
+def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=None):
     if countries is None: countries = data.countries()
 
     def delta_from_mean(C, years, year, edge_type):
@@ -58,10 +58,17 @@ def adjacency_matrix(data, definition, def_args, year, countries=None):
     if countries is None: countries = data.countries()
 
     def country_row(A):
-        return str([("0" if A == B else "1" if definition(data, year, A, B, def_args) == POSITIVE_LINK
-        else "-1" if definition(data, year, A, B, def_args) == NEGATIVE_LINK else "0")
-                    for B in countries]) \
-            .replace(",", " ").replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace("'", "")
+        return [0 if A == B or definition(data, year, A, B, def_args) == NO_LINK
+                else 1 if definition(data, year, A, B, def_args) == POSITIVE_LINK
+        else -1 for B in countries]
 
-    return ";".join([country_row(A) for A in countries])
+    return [country_row(A) for A in countries]
+
+
+def adjacency_matrix_matlab(data, definition, def_args, year, countries=None):
+    return str(adjacency_matrix(data,definition,def_args,year,countries))\
+        .replace("], [",";")\
+        .replace("[","")\
+        .replace("]","")\
+        .replace(",","")
 

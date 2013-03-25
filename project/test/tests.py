@@ -2,7 +2,7 @@ import unittest
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
-from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix, positives_and_negatives_matrix
+from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix_matlab, positives_and_negatives_matrix_matlab, adjacency_matrix
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
@@ -651,7 +651,13 @@ class TestFunctions(unittest.TestCase):
                       )
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
-        self.assertEquals("0  -1  -1  0  0;-1  0  1  -1  -1;-1  1  0  1  0;0  -1  1  0  0;0  -1  0  0  0",
+        self.assertEquals("0 -1 -1 0 0;-1 0 1 -1 -1;-1 1 0 1 0;0 -1 1 0 0;0 -1 0 0 0",
+                          adjacency_matrix_matlab(d, test_extension_def, {},1963,["USA","UK","India","Canada","Japan"]))
+        self.assertEquals([[0, -1, -1, 0, 0],
+                           [-1, 0, 1, -1, -1],
+                           [-1, 1, 0, 1, 0],
+                           [0, -1, 1, 0, 0],
+                           [0, -1, 0, 0, 0]],
                           adjacency_matrix(d, test_extension_def, {},1963,["USA","UK","India","Canada","Japan"]))
 
     def test_positives_and_negatives_matrix(self):
@@ -687,7 +693,7 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals("0  -1  -1  0  0;-1  0  1  -1  -1;-1  1  0  1  0;0  -1  1  0  0;0  -1  0  0  0",
-                          positives_and_negatives_matrix(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"]))
+                          positives_and_negatives_matrix_matlab(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"]))
 
     def test_traids_type(self):
         f = tempfile.NamedTemporaryFile()
