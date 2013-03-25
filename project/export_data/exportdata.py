@@ -8,10 +8,7 @@ from project.util import column_to_year, memoize
 class Country:
     def __init__(self, name):
         self.name = name
-        self.list = []
-        for k in countries.index_to_country_map.keys():
-            name = countries.index_to_country_map.get(k)
-            self.list.append((name, -1))
+        self.list = [(countries.index_to_country_map.get(k), -1) for k in countries.index_to_country_map.keys()]
 
     def set_export_to_country(self, country, quantity):
         self.list[countries.country_to_index_map[country]] = (country, quantity)
@@ -72,10 +69,7 @@ class ExportData:
         }
 
     def __empty_data_for_a_year(self):
-        list = []
-        for index in countries.index_to_country_map.keys():
-            list.append(Country(countries.index_to_country_map.get(index)))
-        return list
+        return [Country(countries.index_to_country_map.get(index)) for index in countries.index_to_country_map.keys()]
 
     @memoize
     def countries(self):
