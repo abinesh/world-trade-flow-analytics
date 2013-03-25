@@ -13,12 +13,12 @@ def_args = args_for_definition_C(10, 5000)
 print "xpn=[%s]" % positives_and_negatives_matrix_matlab(data, definition, def_args, [1981, 1982, 1983, 1984])
 print "xad=[%s]" % adjacency_matrix_matlab(data, definition, def_args, 1982,world_excluded_countries_list())
 
-def pp(A,year):
+def print_adjacency_matrix_row(A,year):
     print str([("0" if A == B else "1" if definition(data, year, A, B, def_args) == POSITIVE_LINK
     else "-1" if definition(data, year, A, B, def_args) == NEGATIVE_LINK else "0")
            for B in data.countries()]) \
     .replace(",", " ").replace("(", "").replace(")", "").replace("[", "").replace("]", "").replace("'", "")
 
-pp("China",1970)
-pp("China",1990)
+print_adjacency_matrix_row("China",1970)
+print_adjacency_matrix_row("China",1990)
 
