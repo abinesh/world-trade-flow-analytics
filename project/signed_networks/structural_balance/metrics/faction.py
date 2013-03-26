@@ -1,5 +1,6 @@
 from math import sqrt, ceil
 import sys
+from project.countries import world_excluded_countries_list
 from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
 from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
 from project.util import memoize
@@ -42,7 +43,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
 
 @memoize
 def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
-    if countries is None: countries = data.countries()
+    if countries is None: countries = world_excluded_countries_list()
 
     def flatten(multilist): return [item for sublist in multilist for item in sublist]
 
@@ -58,7 +59,7 @@ def positives_and_negatives_matrix(data, definition, def_args, years, countries=
 
 @memoize
 def adjacency_matrix_row(data, definition, def_args, year, A, countries=None):
-    if countries is None: countries = data.countries()
+    if countries is None: countries = world_excluded_countries_list()
     return [0 if A == B or definition(data, year, A, B, def_args) == NO_LINK
             else 1 if definition(data, year, A, B, def_args) == POSITIVE_LINK
     else -1 for B in countries]
@@ -66,6 +67,7 @@ def adjacency_matrix_row(data, definition, def_args, year, A, countries=None):
 
 @memoize
 def adjacency_matrix(data, definition, def_args, year, countries=None):
+    if countries is None: countries = world_excluded_countries_list()
     return [adjacency_matrix_row(data, definition, def_args, year, A, countries) for A in countries]
 
 
