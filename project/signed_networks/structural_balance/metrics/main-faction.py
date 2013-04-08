@@ -72,8 +72,7 @@ def write_all_correlation_files(data, definition, def_args):
         if 1963 + window_size <= year:
             write_correlation_list('pn-y%d-to-y%d.txt' % (year - window_size + 1, year),
                                    positives_and_negatives_matrix(data, definition, def_args,
-                                                                  range(year - window_size + 1, year + 1))
-                , 0.5)
+                                                                  range(year - window_size + 1, year + 1)), 0.5)
 
 
 write_all_correlation_files(data, definition, def_args)
