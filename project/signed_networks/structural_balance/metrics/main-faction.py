@@ -3,7 +3,7 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
-from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row
+from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab
 from project.util import transpose
 
 
@@ -23,8 +23,11 @@ data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world
 definition = definition_C3
 def_args = args_for_definition_C(10, 5000)
 
-print "xpn=[%s]" % positives_and_negatives_matrix_matlab(data, definition, def_args, [1981, 1982, 1983, 1984])
-print corrcoef(transpose(positives_and_negatives_matrix(data, definition, def_args, [1981, 1982, 1983, 1984])))
+# print "xpn=[%s]" % positives_and_negatives_matrix_matlab(data, definition, def_args, [1981, 1982, 1983, 1984])
+# print "xpn=[%s]" % adjacency_matrix_matlab(data, definition, def_args, 1980)
+# print corrcoef(adjacency_matrix(data, definition, def_args, 1980))
+
+# print corrcoef(transpose(positives_and_negatives_matrix(data, definition, def_args, [1981, 1982, 1983, 1984])))
 
 '''
 print "xad=[%s]" % adjacency_matrix_matlab(data, definition, def_args, 1982)
@@ -36,13 +39,22 @@ print adjacency_matrix_row(data, definition, def_args, 1990, "China")
 print data.countries()
 '''
 
-count = 0
+# f=
+# count = 0
 # for row in detect_community(corrcoef(adjacency_matrix(data, definition, def_args, 1980)), 0):
-for row in detect_community(corrcoef(adjacency_matrix(data, definition, def_args, 1983)), 0):
-# for row in detect_community(corrcoef(positives_and_negatives_matrix(data, definition, def_args, [1978,1979,1980,1981])),0.5):
-# for row in detect_community(corrcoef(positives_and_negatives_matrix(data, definition, def_args, [1982,1983,1984,1985])),0.5):
-    print "%d:%s,%d,%s" % (count, countries.index_to_country_map[count], len(row), row)
-    count += 1
+# for row in detect_community(corrcoef(adjacency_matrix(data, definition, def_args, 1972)), 0):
+# for row in detect_community(corrcoef(positives_and_negatives_matrix(data, definition, def_args, [1964,1965,1966,1967])),0.5):
+# for row in detect_community(corrcoef(positives_and_negatives_matrix(data, definition, def_args, [1968,1969,1970,1971])),0.5):
+# for row in detect_community(corrcoef(positives_and_negatives_matrix(data, definition, def_args, [1972,1973,1974,1975])),0.5):
+#     print ("%d:%s,%d,%s" % (count, countries.index_to_country_map[count], len(row), row))
+#     count += 1
+
+# f.close()
+
+print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1980)))
+print "countriesVector={'India','USA','UK','Germany'};"
+# print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
+print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
 
 
 
