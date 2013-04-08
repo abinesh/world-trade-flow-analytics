@@ -1,9 +1,11 @@
 from math import sqrt, ceil
 import sys
 from project.countries import world_excluded_countries_list
-from project.signed_networks.definitions import POSITIVE_LINK, NEGATIVE_LINK, NO_LINK
+from project.signed_networks.definitions import POSITIVE_LINK, NO_LINK
 from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
 from project.util import memoize
+
+DEFAULT_COUNTRIES_LIST = world_excluded_countries_list()
 
 
 def _add_to_slope_map(slope_map, key, new_list_item):
@@ -42,9 +44,7 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
 
 
 @memoize
-def positives_and_negatives_matrix(data, definition, def_args, years, countries=None):
-    if countries is None: countries = world_excluded_countries_list()
-
+def positives_and_negatives_matrix(data, definition, def_args, years, countries=DEFAULT_COUNTRIES_LIST):
     def flatten(multilist): return [item for sublist in multilist for item in sublist]
 
     def country_row(C):
@@ -57,33 +57,30 @@ def positives_and_negatives_matrix(data, definition, def_args, years, countries=
 
     return [country_row(C) for C in countries]
 
+
 @memoize
-def adjacency_matrix_row(data, definition, def_args, year, A, countries=None):
-    if countries is None: countries = world_excluded_countries_list()
+def adjacency_matrix_row(data, definition, def_args, year, A, countries=DEFAULT_COUNTRIES_LIST):
     return [0 if A == B or definition(data, year, A, B, def_args) == NO_LINK
             else 1 if definition(data, year, A, B, def_args) == POSITIVE_LINK
     else -1 for B in countries]
 
 
 @memoize
-def adjacency_matrix(data, definition, def_args, year, countries=None):
-    if countries is None: countries = world_excluded_countries_list()
+def adjacency_matrix(data, definition, def_args, year, countries=DEFAULT_COUNTRIES_LIST):
     return [adjacency_matrix_row(data, definition, def_args, year, A, countries) for A in countries]
 
 
-def adjacency_matrix_matlab(data, definition, def_args, year, countries=None):
-    return str(adjacency_matrix(data, definition, def_args, year, countries)) \
-        .replace("], [", ";") \
-        .replace("[", "") \
-        .replace("]", "") \
-        .replace(",", "")
+def matrix_py_to_matlab(matrix):
+    return ';'.join([(' '.join([str(value) for value in row])) for row in matrix])
 
 
-def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=None):
-    return str(positives_and_negatives_matrix(data, definition, def_args, years, countries)) \
-        .replace("], [", ";") \
-        .replace("[", "") \
-        .replace("]", "") \
-        .replace(",", "")
+def adjacency_matrix_matlab(data, definition, def_args, year, countries=DEFAULT_COUNTRIES_LIST):
+    return matrix_py_to_matlab(adjacency_matrix(data, definition, def_args, year, countries))
 
+
+def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=DEFAULT_COUNTRIES_LIST):
+    return matrix_py_to_matlab(positives_and_negatives_matrix(data, definition, def_args, years, countries))
+
+
+def corrcoef_py_to_matlab(var_name, matrix): return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix))
 
