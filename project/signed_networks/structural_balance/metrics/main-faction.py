@@ -3,6 +3,7 @@ from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
+from project.signed_networks.structural_balance.metrics.config import OUT_DIR
 from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab
 from project.util import transpose
 
@@ -51,10 +52,30 @@ print data.countries()
 
 # f.close()
 
-print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1980)))
-print "countriesVector={'India','USA','UK','Germany'};"
+# print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1980)))
+# print "countriesVector={'India','USA','UK','Germany'};"
 # print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
-print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
+# print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
+def write_correlation_list(file_name, matrix, threshold):
+    f = open(OUT_DIR.CORRELATION_LIST + file_name, 'w')
+    count = 0
+    for row in detect_community(corrcoef(matrix), threshold):
+        f.write("%d:%s,%d,%s\n" % (count, countries.index_to_country_map[count], len(row), row))
+        count += 1
+    f.close()
 
+
+def write_all_correlation_files(data, definition, def_args):
+    window_size = 4
+    for year in data.all_years:
+        write_correlation_list('adj-y%d.txt' % year, adjacency_matrix(data, definition, def_args, year), 0)
+        if 1963 + window_size <= year:
+            write_correlation_list('pn-y%d-to-y%d.txt' % (year - window_size + 1, year),
+                                   positives_and_negatives_matrix(data, definition, def_args,
+                                                                  range(year - window_size + 1, year + 1))
+                , 0.5)
+
+
+write_all_correlation_files(data, definition, def_args)
 
 

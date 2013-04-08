@@ -32,7 +32,7 @@ def traid_plot_value(traid_type):
 
 
 def generate_triad_type_transition_matlab_code(data, definition, def_args):
-    f = open(OUT_DIR + 'triad-matlab-code.txt', 'w')
+    f = open(OUT_DIR.DIR + 'triad-matlab-code.txt', 'w')
 
     for (A, B, C) in combinations(data.countries(), 3):
         f.write("%s-%s-%s:y=%s\n" % (file_safe(A), file_safe(B), file_safe(C),

@@ -1,1 +1,3 @@
-OUT_DIR='out/'
+class OUT_DIR:
+    DIR = 'out/'
+    CORRELATION_LIST=DIR+'correlation-list/'
