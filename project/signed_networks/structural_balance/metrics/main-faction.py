@@ -52,10 +52,33 @@ print data.countries()
 
 # f.close()
 
-# print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1980)))
+def transform_pn_to_01(matrix, threshold):
+    return [(1 if cell > threshold else 0 for cell in row) for row in matrix]
+
+
+def write_matlab_code_for_rcm(data, definition, def_args):
+    f = open(OUT_DIR.RCM_MATRIC + 'code.txt', 'w')
+    for year in [1965, 1970, 1975, 1980, 1985, 1990, 1995, 1999, 2000]:
+        corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year))
+        for coeff in range(0, 11):
+            c = coeff * .05
+            f.write(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, c)) + "\n")
+            f.write("r = symrcm(c0);\n")
+            f.write("spy(c0);\n")
+            f.write("saveas(gcf,'%d-%d-unordered','png');\n" % (year, c * 100))
+            f.write("spy(c0(r,r));\n")
+            f.write("saveas(gcf,'%d-%d-ordered','png');\n" % (year, c * 100))
+    f.close()
+
 # print "countriesVector={'India','USA','UK','Germany'};"
 # print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
 # print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
+
+# print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1990)))
+# print "countriesVector={'India','USA','UK','Germany'};"
+# print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
+# print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
+
 def write_correlation_list(file_name, matrix, threshold):
     f = open(OUT_DIR.CORRELATION_LIST + file_name, 'w')
     count = 0
@@ -75,6 +98,7 @@ def write_all_correlation_files(data, definition, def_args):
                                                                   range(year - window_size + 1, year + 1)), 0.5)
 
 
-write_all_correlation_files(data, definition, def_args)
+# write_all_correlation_files(data, definition, def_args)
+write_matlab_code_for_rcm(data, definition, def_args)
 
 
