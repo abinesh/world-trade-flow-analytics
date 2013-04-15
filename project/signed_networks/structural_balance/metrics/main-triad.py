@@ -78,10 +78,19 @@ class RunLength:
     def __init__(self):
         self.run_lengths = {}
 
-    def record(self, traid_type, length,count=1):
+    def record(self, traid_type, length, count=1):
         if traid_type not in self.run_lengths: self.run_lengths[traid_type] = {}
         if length not in self.run_lengths[traid_type]: self.run_lengths[traid_type][length] = 0
         self.run_lengths[traid_type][length] += count
+
+    def print_averages(self):
+        for traid_type in self.run_lengths:
+            numerator = 0
+            denominator = 0
+            for count in self.run_lengths[traid_type]:
+                numerator += count * self.run_lengths[traid_type][count]
+                denominator += count
+            print "%s=%.2f" % (traid_type, numerator * 1.0 / denominator)
 
 
 def get_run_lengths(data, definition, def_args):
@@ -132,6 +141,7 @@ for a in arr:
     for traid_type in a:
         if traid_type[-1:] == '0':
             for length in a[traid_type]:
-                runLengths.record(traid_type[:2], length, a[traid_type][length])
+                runLengths.record(traid_type[:2], length + 1, a[traid_type][length])
 
 print runLengths.run_lengths
+runLengths.print_averages()
