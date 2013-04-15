@@ -1,10 +1,12 @@
 from itertools import combinations
+from numpy import average
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.triad import triad_type, get_traids, is_traid
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
-from project.util import file_safe
+from project.signed_networks.structural_balance.metrics.util import count_edge_types, RandomNetwork
+from project.util import file_safe, std_dev
 
 
 def traid_plot_value(traid_type):
@@ -64,16 +66,6 @@ def print_traid_transitions(data, definition, def_args, years_range):
                 print "%d:%s->%s=%.2f" % (year, traid, next_traid, next_year_counts[next_traid] * 1.0 / this_year_count)
 
 
-# data = ExportData()
-# data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
-
-definition = definition_C3
-def_args = args_for_definition_C(10, 5000)
-
-# generate_triad_type_transition_matlab_code(data,definition, def_args)
-
-# print_traid_transitions(data, definition, def_args, range(1995, 2001))
-
 class RunLength:
     def __init__(self):
         self.run_lengths = {}
@@ -85,28 +77,35 @@ class RunLength:
 
     def print_averages(self):
         for traid_type in self.run_lengths:
-            numerator = 0
-            denominator = 0
+            values=[]
             for count in self.run_lengths[traid_type]:
-                numerator += count * self.run_lengths[traid_type][count]
-                denominator += count
-            print "%s=%.2f" % (traid_type, numerator * 1.0 / denominator)
+                for i in range(0,self.run_lengths[traid_type][count]): values.append(count)
+            print "%s=%.2f,%.2f" % (traid_type, average(values),std_dev(values))
 
 
-def get_run_lengths(data, definition, def_args):
+def get_run_lengths(data, definition, def_args, randomize=False):
     runLengths = RunLength()
     # 1373701
     count = 0
-    start = 10
-    end = 11
+    start = 6
+    end = 7
     total = 203 * 202 * 201 / 6 / 10
+
+    randomNetworks = {}
+    if randomize:
+        for year in range(1963, 2001):
+            print "random network for year %d" % year
+            (_, positive_edges, negative_edges) = count_edge_types(data, year, definition, def_args)
+            randomNetworks[year] = RandomNetwork(positive_edges, negative_edges, definition, def_args)
 
     for (A, B, C) in combinations(data.countries(), 3):
         if total * start < count < total * end:
-            running_traid = triad_type(data, 1963, A, B, C, definition, def_args)
+            running_traid = triad_type(data, 1963, A, B, C,
+                                       definition if not randomize else randomNetworks[1963].link_sign, def_args)
             running_count = 0
             for year in range(1964, 2001):
-                current_traid = triad_type(data, year, A, B, C, definition, def_args)
+                current_traid = triad_type(data, year, A, B, C,
+                                           definition if not randomize else randomNetworks[year].link_sign, def_args)
                 if current_traid != running_traid:
                     runLengths.record(running_traid, running_count)
                     running_traid = current_traid
@@ -115,10 +114,21 @@ def get_run_lengths(data, definition, def_args):
                     running_count += 1
             runLengths.record(running_traid, running_count)
         count += 1
+        print "count=%d" % count
     return runLengths
 
 
-# print get_run_lengths(data, definition, def_args).run_lengths
+# data = ExportData()
+# data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+#
+# definition = definition_C3
+# def_args = args_for_definition_C(10, 5000)
+
+# generate_triad_type_transition_matlab_code(data,definition, def_args)
+
+# print_traid_transitions(data, definition, def_args, range(1995, 2001))
+
+# print get_run_lengths(data, definition, def_args, True).run_lengths
 
 import ast
 
