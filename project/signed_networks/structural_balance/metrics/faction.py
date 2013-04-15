@@ -70,8 +70,9 @@ def adjacency_matrix(data, definition, def_args, year, countries=DEFAULT_COUNTRI
     return [adjacency_matrix_row(data, definition, def_args, year, A, countries) for A in countries]
 
 
-def matrix_py_to_matlab(matrix):
-    return ';'.join([(' '.join([str(value) for value in row])) for row in matrix])
+def matrix_py_to_matlab(matrix, only_first_row=False):
+    mat_as_matlab = [(' '.join([str(value) for value in row])) for row in matrix]
+    return ';'.join(mat_as_matlab) if not only_first_row else mat_as_matlab[0]
 
 
 def adjacency_matrix_matlab(data, definition, def_args, year, countries=DEFAULT_COUNTRIES_LIST):
@@ -82,7 +83,8 @@ def positives_and_negatives_matrix_matlab(data, definition, def_args, years, cou
     return matrix_py_to_matlab(positives_and_negatives_matrix(data, definition, def_args, years, countries))
 
 
-def corrcoef_py_to_matlab(var_name, matrix): return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix))
+def corrcoef_py_to_matlab(var_name, matrix, only_first_row=False):
+    return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix, only_first_row))
 
 
 def concat_countries(countries, years):

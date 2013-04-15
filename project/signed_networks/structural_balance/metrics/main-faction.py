@@ -1,7 +1,7 @@
 from numpy import corrcoef
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
-from project.countries import falklands_war_countries, falkland_related_war_countries
+from project.countries import falklands_war_countries, falkland_related_war_countries, iran_iraq_countries, warsaw_czechslovakia_invasion
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
@@ -72,13 +72,18 @@ def write_matlab_code_for_rcm(data, definition, def_args):
     f.close()
 
 
-def write_matlab_code_for_corrmatrix(data, years, definition, def_args, file_prefix, countries=DEFAULT_COUNTRIES_LIST):
+def write_matlab_code_for_corrmatrix(data, years, definition, def_args, file_prefix,
+                                     countries=DEFAULT_COUNTRIES_LIST,
+                                     country_study=False):
     for year in years:
         corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year, countries))
-        print corrcoef_py_to_matlab('corrmatrix%d' % year, corrcoef_mat)
+        print corrcoef_py_to_matlab('corrmatrix%d' % year, corrcoef_mat, country_study)
     print "corrmatrix=[%s]" % (';'.join(['corrmatrix%d' % year for year in years]))
     print "countriesVectorColumn={%s};" % (str(countries)[1:-1])
-    print "countriesVectorRow={%s};" % (str(concat_countries(countries, years))[1:-1])
+    if country_study:
+        print "countriesVectorRow={%s};" % (str(concat_countries([countries[0]], years))[1:-1])
+    else:
+        print "countriesVectorRow={%s};" % (str(concat_countries(countries, years))[1:-1])
     print "HeatMap(-corrmatrix,'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', redgreencmap(200));"
     print "saveas(gcf,'%s','png');" % (file_prefix)
 
@@ -104,5 +109,10 @@ def write_all_correlation_files(data, definition, def_args):
 
 # write_all_correlation_files(data, definition, def_args)
 # write_matlab_code_for_rcm(data, definition, def_args)
-write_matlab_code_for_corrmatrix(data, [1978, 1983, 1987], definition, def_args, 'falkland',falkland_related_war_countries)
+# write_matlab_code_for_corrmatrix(data, [1978, 1982, 1987], definition, def_args, 'falkland',falkland_related_war_countries)
+# write_matlab_code_for_corrmatrix(data, [1975, 1985, 1991], definition, def_args, 'iran-iraq', iran_iraq_countries)
+# write_matlab_code_for_corrmatrix(data, [1963, 1968, 1975], definition, def_args, 'warsaw-czech',warsaw_czechslovakia_invasion)
+write_matlab_code_for_corrmatrix(data, [1985, 1990], definition, def_args, 'china',
+                                 ['China', 'Indonesia', 'Thailand', 'Brazil', 'Australia', 'Turkey', 'Singapore', 'USA',
+                                  'UK', 'Fm USSR', 'Greece'], True)
 

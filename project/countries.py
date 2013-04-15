@@ -288,5 +288,7 @@ def country_pairs(only_these_countries=world_excluded_countries_list()): return 
 
 falklands_war_countries = ["USA", "UK", "Argentina", "France,Monac", "Libya", "Fm USSR", "Israel", "Peru", "Brazil"]
 falkland_related_war_countries = ['Argentina','Brazil','Fm USSR','Peru','Libya','Israel','UK','USA','Denmark','Portugal','Norway','Sweden']
+iran_iraq_countries = ['Iraq','Iran','Fm USSR','Untd Arab Em','Qatar','Kuwait','Egypt','UK','USA']
+warsaw_czechslovakia_invasion = ['Czechoslovak','Fm USSR','Bulgaria','Hungary','Poland','USA','UK','France,Monac']
 
 
