@@ -84,3 +84,9 @@ def positives_and_negatives_matrix_matlab(data, definition, def_args, years, cou
 
 def corrcoef_py_to_matlab(var_name, matrix): return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix))
 
+
+def concat_countries(countries, years):
+    row = []
+    for year in years:
+        row += ['%s-%d' % (c, year) for c in countries]
+    return row

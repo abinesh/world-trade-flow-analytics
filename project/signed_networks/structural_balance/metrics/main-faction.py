@@ -1,10 +1,11 @@
 from numpy import corrcoef
 from project import countries
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
+from project.countries import falklands_war_countries, falkland_related_war_countries
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
-from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab
+from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab, DEFAULT_COUNTRIES_LIST, concat_countries
 from project.util import transpose
 
 
@@ -70,14 +71,17 @@ def write_matlab_code_for_rcm(data, definition, def_args):
             f.write("saveas(gcf,'%d-%d-ordered','png');\n" % (year, c * 100))
     f.close()
 
-# print "countriesVector={'India','USA','UK','Germany'};"
-# print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
-# print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
 
-# print corrcoef_py_to_matlab('corrmatrix', corrcoef(adjacency_matrix(data, definition, def_args, 1990)))
-# print "countriesVector={'India','USA','UK','Germany'};"
-# print "HeatMap(-corrmatrix,'RowLabels',countriesVector,'ColumnLabels',countriesVector, 'Colormap', redgreencmap(200))"
-# print "HeatMap(-corrmatrix, 'Colormap', redgreencmap(200))"
+def write_matlab_code_for_corrmatrix(data, years, definition, def_args, file_prefix, countries=DEFAULT_COUNTRIES_LIST):
+    for year in years:
+        corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year, countries))
+        print corrcoef_py_to_matlab('corrmatrix%d' % year, corrcoef_mat)
+    print "corrmatrix=[%s]" % (';'.join(['corrmatrix%d' % year for year in years]))
+    print "countriesVectorColumn={%s};" % (str(countries)[1:-1])
+    print "countriesVectorRow={%s};" % (str(concat_countries(countries, years))[1:-1])
+    print "HeatMap(-corrmatrix,'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', redgreencmap(200));"
+    print "saveas(gcf,'%s','png');" % (file_prefix)
+
 
 def write_correlation_list(file_name, matrix, threshold):
     f = open(OUT_DIR.CORRELATION_LIST + file_name, 'w')
@@ -99,6 +103,6 @@ def write_all_correlation_files(data, definition, def_args):
 
 
 # write_all_correlation_files(data, definition, def_args)
-write_matlab_code_for_rcm(data, definition, def_args)
-
+# write_matlab_code_for_rcm(data, definition, def_args)
+write_matlab_code_for_corrmatrix(data, [1978, 1983, 1987], definition, def_args, 'falkland',falkland_related_war_countries)
 

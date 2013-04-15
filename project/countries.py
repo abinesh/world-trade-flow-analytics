@@ -285,8 +285,8 @@ def world_excluded_countries_list():
 
 def country_pairs(only_these_countries=world_excluded_countries_list()): return combinations(only_these_countries, 2)
 
+
 falklands_war_countries = ["USA", "UK", "Argentina", "France,Monac", "Libya", "Fm USSR", "Israel", "Peru", "Brazil"]
-
-
+falkland_related_war_countries = ['Argentina','Brazil','Fm USSR','Peru','Libya','Israel','UK','USA','Denmark','Portugal','Norway','Sweden']
 
 

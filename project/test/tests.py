@@ -1,16 +1,16 @@
-from random import random
 import unittest
+import tempfile
+
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
-from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix_matlab, positives_and_negatives_matrix_matlab, adjacency_matrix, positives_and_negatives_matrix, corrcoef_py_to_matlab, matrix_py_to_matlab
+from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix_matlab, positives_and_negatives_matrix_matlab, adjacency_matrix, positives_and_negatives_matrix, corrcoef_py_to_matlab, matrix_py_to_matlab, concat_countries
 from project.signed_networks.structural_balance.metrics.network import table1, table2
 from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
 from project.test.testutils import row_map, write_to_file
 from project.util import memoize, std_dev
 from project.util import transpose
-import tempfile
 
 
 class ABC:
@@ -785,6 +785,10 @@ class TestFunctions(unittest.TestCase):
 
     def test_transpose(self):
         self.assertEquals([[1, 4, 7], [2, 5, 8], [3, 6, 9]], transpose([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+    def test_concat_countries(self):
+        self.assertEquals(['USA-1980', 'UK-1980', 'Argentina-1980', 'USA-1981', 'UK-1981', 'Argentina-1981'],
+                          concat_countries(['USA', 'UK', 'Argentina'], [1980, 1981]))
 
     def test_corr_coef_py_to_matlab(self):
         self.assertEquals("x=[1 2 3;4 5 6;7 8 9]", "%s=[%s]" % ('x', matrix_py_to_matlab([[1, 2, 3], [4, 5, 6], [7, 8, 9]])))
