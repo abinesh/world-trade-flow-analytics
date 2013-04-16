@@ -154,4 +154,9 @@ for a in arr:
                 runLengths.record(traid_type[:2], length + 1, a[traid_type][length])
 
 print runLengths.run_lengths
-runLengths.print_averages()
+# runLengths.print_averages()
+for length in range(1, 39):
+    print "%d\t%d\t%d\t%d\t%d" % (length, runLengths.run_lengths['T0'][length],
+                                  runLengths.run_lengths['T1'][length],
+                                  runLengths.run_lengths['T2'][length],
+                                  runLengths.run_lengths['T3'][length])
