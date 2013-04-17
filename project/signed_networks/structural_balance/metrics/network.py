@@ -87,7 +87,7 @@ def traid_distribution(data, year, definition, def_args):
     total = t0 + t1 + t2 + t3
     return t0, t1, t2, t3, total, total_positive_edges, total_negative_edges, traids
 
-
+@memoize
 def traid_type_ratio(data, year, definition, def_args, traid_type):
     t0, t1, t2, t3, total, _, _, _ = traid_distribution(data, year, definition, def_args)
     if traid_type == 'T0': return t0 * 1.0 / total

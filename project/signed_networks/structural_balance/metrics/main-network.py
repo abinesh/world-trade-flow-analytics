@@ -17,16 +17,16 @@ def_args5000 = args_for_definition_C(10, 5000)
 
 def print_code_for_sign_distribution_over_time():
     print "x=%s;" % str([year for year in data.all_years]).replace(",", " ")
-    print "p1000=%s;" % str([link_type_ratio(data, year, definition, def_args1000, POSITIVE_LINK)
-                             for year in data.all_years]).replace(",", " ")
+    # print "p1000=%s;" % str([link_type_ratio(data, year, definition, def_args1000, POSITIVE_LINK)
+    #                          for year in data.all_years]).replace(",", " ")
     print "p5000=%s;" % str([link_type_ratio(data, year, definition, def_args5000, POSITIVE_LINK)
                              for year in data.all_years]).replace(",", " ")
-    print "n1000=%s;" % str([link_type_ratio(data, year, definition, def_args1000, NEGATIVE_LINK)
-                             for year in data.all_years]).replace(",", " ")
+    # print "n1000=%s;" % str([link_type_ratio(data, year, definition, def_args1000, NEGATIVE_LINK)
+    #                          for year in data.all_years]).replace(",", " ")
     print "n5000=%s;" % str([link_type_ratio(data, year, definition, def_args5000, NEGATIVE_LINK)
                              for year in data.all_years]).replace(",", " ")
-    print "plot(x,p1000,x,p5000,x,n1000,x,n5000);"
-    print "legend('positive(1000)','positive(5000)','negative(1000)','negative(5000)')"
+    print "plot(x,p5000,x,n5000);"
+    print "legend('positive edges','negative edges')"
     print "saveas(gcf,'sign-distribution-over-time(Not-density)','png');"
 
 
@@ -43,8 +43,17 @@ def print_code_for_triad_distribution_over_time(def_args, file_name):
     print "plot(x,t0,x,t1,x,t2,x,t3);"
     print "legend('T0','T1','T2','T3')"
     print "saveas(gcf,'traid-distribution-over-time(Not-clustering-coefficient)-%s','png');" % file_name
+    print "unbalanced=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T0') +
+                                  traid_type_ratio(data, year, definition, def_args, 'T2')
+                                  for year in data.all_years]).replace(",", " ")
+    print "balanced=%s;" % str([traid_type_ratio(data, year, definition, def_args, 'T1') +
+                                traid_type_ratio(data, year, definition, def_args, 'T3')
+                                for year in data.all_years]).replace(",", " ")
+    print "plot(x,unbalanced,x,balanced);"
+    print "legend('Unbalanced','Balanced')"
+    print "saveas(gcf,'traid-type-over-time(Not-clustering-coefficient)-%s','png');" % file_name
 
 
 # print_code_for_sign_distribution_over_time()
-print_code_for_triad_distribution_over_time(def_args1000, '1000')
+# print_code_for_triad_distribution_over_time(def_args1000, '1000')
 print_code_for_triad_distribution_over_time(def_args5000, '5000')

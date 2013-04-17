@@ -75,6 +75,7 @@ def write_all_correlation_files(data, definition, def_args):
                                    positives_and_negatives_matrix(data, definition, def_args,
                                                                   range(year - window_size + 1, year + 1)), 0.5)
 
+
 data = ExportData()
 data.load_file('../../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
@@ -118,11 +119,11 @@ print data.countries()
 #                                  ['China', 'Indonesia', 'Thailand', 'Brazil', 'Australia', 'Turkey', 'Singapore', 'USA',
 #                                   'UK', 'Fm USSR', 'Greece'], True)
 
-# for year in data.all_years:
-#     f = open(OUT_DIR.ADJACENCY_MATRIX + 'adj-%d.m' % year, 'w')
-#     f.write(list_as_matlab_vector('countries', countries) + '\n')
-#     f.write('adj%d=[%s]\n' % (year, adjacency_matrix(data, definition, def_args, year)))
-#     f.close()
+def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_COUNTRIES_LIST):
+    f = open(OUT_DIR.ADJACENCY_MATRIX + 'adj-all.m', 'w')
+    f.write(list_as_matlab_vector('countries', countries_list) + '\n')
+    for year in data.all_years:
+        f.write('adj%d=[%s]\n' % (year, adjacency_matrix_matlab(data, definition, def_args, year, countries_list)))
+    f.close()
 
-print list_as_matlab_vector('countries', countries) + '\n'
-
+write_adjacency_matrices(data, definition, def_args)
