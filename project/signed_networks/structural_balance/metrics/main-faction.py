@@ -23,17 +23,20 @@ def transform_pn_to_01(matrix, threshold):
     return [(1 if cell > threshold else 0 for cell in row) for row in matrix]
 
 
-def write_matlab_code_for_rcm(data, definition, def_args):
+def write_matlab_code_for_rcm(data, definition, def_args,countries = DEFAULT_COUNTRIES_LIST):
     f = open(OUT_DIR.RCM_MATRIC + 'code.txt', 'w')
     for year in [1965, 1970, 1975, 1980, 1985, 1990, 1995, 1999, 2000]:
-        corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year))
+        corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year,countries))
         for coeff in range(0, 11):
             c = coeff * .05
             f.write(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, c)) + "\n")
             f.write("r = symrcm(c0);\n")
             f.write("spy(c0);\n")
-            f.write("saveas(gcf,'%d-%d-unordered','png');\n" % (year, c * 100))
-            f.write("spy(c0(r,r));\n")
+            f.write("countriesVectorRow={%s};\n" % (str(countries)[1:-1]))
+            # f.write("saveas(gcf,'%d-%d-unordered','png');\n" % (year, c * 100))
+            # f.write("HeatMap(c0(r,r));\n")
+            f.write( "x=redgreencmap(200);\n")
+            f.write("HeatMap(c0(r,r),'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));\n")
             f.write("saveas(gcf,'%d-%d-ordered','png');\n" % (year, c * 100))
     f.close()
 
@@ -53,7 +56,8 @@ def write_matlab_code_for_corrmatrix(data, years, definition, def_args, file_pre
         print "countriesVectorRow={%s};" % (str(concat_countries([countries[0]], years))[1:-1])
     else:
         print "countriesVectorRow={%s};" % (str(concat_countries(countries, years))[1:-1])
-    print "HeatMap(-corrmatrix,'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', redgreencmap(200));"
+    print "x=redgreencmap(200);"
+    print "HeatMap(corrmatrix,'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));"
     print "saveas(gcf,'%s','png');" % (file_prefix)
 
 
@@ -111,7 +115,7 @@ print data.countries()
 # f.close()
 
 # write_all_correlation_files(data, definition, def_args)
-# write_matlab_code_for_rcm(data, definition, def_args)
+write_matlab_code_for_rcm(data, definition, def_args)
 # write_matlab_code_for_corrmatrix(data, [1978, 1983, 1987], definition, def_args, 'falkland',falkland_related_war_countries)
 # write_matlab_code_for_corrmatrix(data, [1975, 1985, 1991], definition, def_args, 'iran-iraq', iran_iraq_countries)
 # write_matlab_code_for_corrmatrix(data, [1963, 1968, 1975], definition, def_args, 'warsaw-czech',warsaw_czechslovakia_invasion)
@@ -126,4 +130,4 @@ def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_
         f.write('adj%d=[%s]\n' % (year, adjacency_matrix_matlab(data, definition, def_args, year, countries_list)))
     f.close()
 
-write_adjacency_matrices(data, definition, def_args)
+# write_adjacency_matrices(data, definition, def_args)
