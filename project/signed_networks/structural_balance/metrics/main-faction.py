@@ -23,21 +23,29 @@ def transform_pn_to_01(matrix, threshold):
     return [(1 if cell > threshold else 0 for cell in row) for row in matrix]
 
 
+def adjacency_rcm_ordered(threshold, corrcoef_mat, countries, year):
+    lines = []
+    lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, threshold)))
+    lines.append("r = symrcm(c0);")
+    lines.append("spy(c0);")
+    lines.append("countriesVectorRow={%s};" % (str(countries)[1:-1]))
+    lines.append("saveas(gcf,'%d-%d-unordered','png');" % (year, threshold * 100))
+    lines.append("HeatMap(c0(r,r));")
+    lines.append("x=redgreencmap(200);")
+    lines.append(
+        "HeatMap(c0(r,r),'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));")
+    lines.append("saveas(gcf,'%d-%d-ordered','png');" % (year, threshold * 100))
+    return lines
+
+
 def write_matlab_code_for_rcm(data, definition, def_args,countries = DEFAULT_COUNTRIES_LIST):
     f = open(OUT_DIR.RCM_MATRIC + 'code.txt', 'w')
     for year in [1965, 1970, 1975, 1980, 1985, 1990, 1995, 1999, 2000]:
         corrcoef_mat = corrcoef(adjacency_matrix(data, definition, def_args, year,countries))
         for coeff in range(0, 11):
             c = coeff * .05
-            f.write(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, c)) + "\n")
-            f.write("r = symrcm(c0);\n")
-            f.write("spy(c0);\n")
-            f.write("countriesVectorRow={%s};\n" % (str(countries)[1:-1]))
-            # f.write("saveas(gcf,'%d-%d-unordered','png');\n" % (year, c * 100))
-            # f.write("HeatMap(c0(r,r));\n")
-            f.write( "x=redgreencmap(200);\n")
-            f.write("HeatMap(c0(r,r),'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorColumn, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));\n")
-            f.write("saveas(gcf,'%d-%d-ordered','png');\n" % (year, c * 100))
+            for line in adjacency_rcm_ordered(c, corrcoef_mat, countries, year):
+                f.write(line + "\n")
     f.close()
 
 
