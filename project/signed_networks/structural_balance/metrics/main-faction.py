@@ -158,9 +158,10 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
         window_end_year = sliding_window[-1:][0]
         if window_end_year > 2000: break
         pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, countries_list)
-        for line in adjacency_rcm_ordered(corrcoef(pn_matrix), 0, countries_list,
-                                          '%s-%s' % (window_start_year, window_end_year), True):
-            f.write("%s\n" % line)
+        for threshold in [0, 0.25, 0.5]:
+            for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, countries_list,
+                                              '%s-%s' % (window_start_year, window_end_year), True):
+                f.write("%s\n" % line)
     f.close()
 
 
