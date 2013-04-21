@@ -23,12 +23,9 @@ def transform_pn_to_01(matrix, threshold):
     return [(1 if cell > threshold else 0 for cell in row) for row in matrix]
 
 
-def adjacency_rcm_ordered(data, definition, def_args, year, countries, threshold):
-    adj_matrix = adjacency_matrix(data, definition, def_args, year, countries)
-    corrcoef_mat = corrcoef(adj_matrix)
+def adjacency_rcm_ordered(corrcoef_mat, threshold, countries, ordered=True):
     lines = []
     lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, threshold)))
-    lines.append('adj=[%s]' % (adjacency_matrix_matlab(data, definition, def_args, year, countries)))
     lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat, threshold))
     lines.append("r = symrcm(c0);")
     lines.append("countriesVectorRow={%s};" % (str(countries)[1:-1]))
@@ -37,18 +34,24 @@ def adjacency_rcm_ordered(data, definition, def_args, year, countries, threshold
     lines.append("orderedVector{i}=char(countriesVectorRow(r(i)));")
     lines.append("end")
     lines.append("x=redgreencmap(200);")
+    vectorName = 'orderedVector' if ordered else 'countriesVectorRow'
     lines.append(
-        "HeatMap(corr(r,r),'RowLabels',orderedVector,'ColumnLabels',orderedVector, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));")
-    lines.append("saveas(gcf,'%d-%d-ordered','png');" % (year, threshold * 100))
+        "hm = HeatMap(corr%s,'RowLabels',%s,'ColumnLabels',%s, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));"
+        % ('(r,r)' if ordered else '', vectorName, vectorName)
+    )
+    lines.append("plot(hm);")
+    lines.append("saveas(gcf,'%d-%d-%s','png');" % (year, threshold * 100, 'ordered' if ordered else 'unordered'))
+    lines.append("close all force;")
     return lines
 
 
-def write_matlab_code_for_rcm(data, definition, def_args,countries = DEFAULT_COUNTRIES_LIST):
+def write_matlab_code_for_rcm(data, definition, def_args, countries=DEFAULT_COUNTRIES_LIST):
     f = open(OUT_DIR.RCM_MATRIC + 'code.txt', 'w')
     for year in [1965, 1970, 1975, 1980, 1985, 1990, 1995, 1999, 2000]:
         for coeff in range(0, 11):
             c = coeff * .05
-            for line in adjacency_rcm_ordered(data, definition, def_args, year,countries,c):
+            adj_matrix = adjacency_matrix(data, definition, def_args, year, countries)
+            for line in adjacency_rcm_ordered(corrcoef(adj_matrix), c, countries):
                 f.write(line + "\n")
     f.close()
 
@@ -135,8 +138,14 @@ print data.countries()
 #                                  ['China', 'Indonesia', 'Thailand', 'Brazil', 'Australia', 'Turkey', 'Singapore', 'USA',
 #                                   'UK', 'Fm USSR', 'Greece'], True)
 
-for line in adjacency_rcm_ordered(data,definition,def_args,1995,DEFAULT_COUNTRIES_LIST[:150],0):
-    print line
+def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
+    f = open(OUT_DIR.RCM_MATRIC + 'code1.txt', 'w')
+    countries_list = data.top_countries_by_export_all_year(50)
+    for year in data.all_years:
+        adj_matrix = adjacency_matrix(data, definition, def_args, year, countries_list)
+        for line in adjacency_rcm_ordered(corrcoef(adj_matrix), 0, countries_list,True):
+            f.write("%s\n" % line)
+    f.close()
 
 
 def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_COUNTRIES_LIST):
@@ -147,3 +156,4 @@ def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_
     f.close()
 
 # write_adjacency_matrices(data, definition, def_args)
+matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)

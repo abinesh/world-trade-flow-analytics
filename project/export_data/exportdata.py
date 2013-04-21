@@ -212,6 +212,18 @@ class ExportData:
         return slope, predicted_export_percentage - standard_deviation, predicted_export_percentage + standard_deviation
 
     @memoize
+    def top_countries_by_export_all_year(self, k):
+        all_countries_export = {}
+        for country in self.all_countries:
+            all_countries_export[country] = 0
+        for year in self.all_years:
+            for country in self.all_countries:
+                all_countries_export[country] += self.total_exports(country, year)
+        tuples_list = [(country, all_countries_export[country]) for country in all_countries_export]
+        return [country for (country, export) in sorted(tuples_list, key=lambda pair: -pair[1])][:k]
+
+
+    @memoize
     def top_countries_by_export(self, year, k):
         all = [(self.total_exports(country, year), country) for country in self.countries()]
         all.sort()
