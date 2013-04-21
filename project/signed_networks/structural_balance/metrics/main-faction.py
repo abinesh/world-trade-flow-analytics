@@ -32,10 +32,13 @@ def adjacency_rcm_ordered(data, definition, def_args, year, countries, threshold
     lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat, threshold))
     lines.append("r = symrcm(c0);")
     lines.append("countriesVectorRow={%s};" % (str(countries)[1:-1]))
-    lines.append("HeatMap(c0(r,r));")
+    lines.append("orderedVector={}\n")
+    lines.append("for i=1:%d" % len(countries))
+    lines.append("orderedVector{i}=char(countriesVectorRow(r(i)));")
+    lines.append("end")
     lines.append("x=redgreencmap(200);")
     lines.append(
-        "HeatMap(corr(r,r),'RowLabels',countriesVectorRow,'ColumnLabels',countriesVectorRow, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));")
+        "HeatMap(corr(r,r),'RowLabels',orderedVector,'ColumnLabels',orderedVector, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));")
     lines.append("saveas(gcf,'%d-%d-ordered','png');" % (year, threshold * 100))
     return lines
 
