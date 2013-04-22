@@ -26,7 +26,7 @@ def transform_pn_to_01(matrix, threshold):
 def adjacency_rcm_ordered(corrcoef_mat, threshold, countries, file_prefix, ordered=True):
     lines = []
     lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, threshold)))
-    lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat, threshold))
+    lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat))
     lines.append("r = symrcm(c0);")
     lines.append("countriesVectorRow={%s};" % (str(countries)[1:-1]))
     lines.append("orderedVector={}\n")
