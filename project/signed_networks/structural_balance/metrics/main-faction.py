@@ -5,7 +5,7 @@ from project.countries import falklands_war_countries, falkland_related_war_coun
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
-from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab, DEFAULT_COUNTRIES_LIST, concat_countries
+from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, corrcoef_py_to_matlab, DEFAULT_COUNTRIES_LIST, concat_countries, matrix_py_to_matlab
 from project.util import transpose
 
 
@@ -159,8 +159,9 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
         if window_end_year > 2000: break
         pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, countries_list)
         for threshold in [0, 0.25, 0.5]:
+            f.write("pnmatrix=[%s]\n" % matrix_py_to_matlab(pn_matrix))
             for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, countries_list,
-                                              '%s-%s' % (window_start_year, window_end_year), True):
+                                              '%s-%s' % (window_start_year, window_end_year), False):
                 f.write("%s\n" % line)
     f.close()
 
