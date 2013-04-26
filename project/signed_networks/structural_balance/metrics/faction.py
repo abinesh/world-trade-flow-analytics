@@ -3,7 +3,7 @@ import sys
 from project.countries import world_excluded_countries_list
 from project.signed_networks.definitions import POSITIVE_LINK, NO_LINK
 from project.signed_networks.structural_balance.metrics.vertex import positive_edge_count, negative_edge_count
-from project.util import memoize
+from project.util import memoize, std_dev
 
 DEFAULT_COUNTRIES_LIST = world_excluded_countries_list()
 
@@ -47,15 +47,21 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
 def positives_and_negatives_matrix(data, definition, def_args, years, countries=DEFAULT_COUNTRIES_LIST):
     def flatten(multilist): return [item for sublist in multilist for item in sublist]
 
-    def country_row(C):
-        def delta_from_mean(C, years, year, edge_type):
-            mean = sum([edge_type(data, Y, C, definition, def_args) for Y in years]) * 1.0 / len(years)
-            return edge_type(data, year, C, definition, def_args) - mean
+    def country_row_row_normalisation(C):
+        very_small_value = 0.000001
 
-        return flatten([[delta_from_mean(C, years, year, positive_edge_count),
-                         delta_from_mean(C, years, year, negative_edge_count)] for year in years])
+        def delta_from_mean_by_thrice_std_dev(C, years, year, edge_type):
+            data_points = [edge_type(data, Y, C, definition, def_args) for Y in years]
+            mean = sum(data_points) * 1.0 / len(years)
+            stddev = std_dev(data_points)
+            if stddev == 0:
+                stddev = very_small_value if mean == 0 else mean * very_small_value
+            return (edge_type(data, year, C, definition, def_args) - mean) / (3.0 * stddev)
 
-    return [country_row(C) for C in countries]
+        return flatten([[delta_from_mean_by_thrice_std_dev(C, years, year, positive_edge_count),
+                         delta_from_mean_by_thrice_std_dev(C, years, year, negative_edge_count)] for year in years])
+
+    return [country_row_row_normalisation(C) for C in countries]
 
 
 @memoize
@@ -71,7 +77,7 @@ def adjacency_matrix(data, definition, def_args, year, countries=DEFAULT_COUNTRI
 
 
 def matrix_py_to_matlab(matrix, only_first_row=False):
-    mat_as_matlab = [(' '.join([str(value) for value in row])) for row in matrix]
+    mat_as_matlab = [(' '.join(['%.5g' % value for value in row])) for row in matrix]
     return ';'.join(mat_as_matlab) if not only_first_row else mat_as_matlab[0]
 
 

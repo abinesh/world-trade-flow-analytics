@@ -161,7 +161,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
         for threshold in [0, 0.25, 0.5]:
             f.write("pnmatrix=[%s]\n" % matrix_py_to_matlab(pn_matrix))
             for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, countries_list,
-                                              '%s-%s' % (window_start_year, window_end_year), False):
+                                              '%s-%s' % (window_start_year, window_end_year)):
                 f.write("%s\n" % line)
     f.close()
 
