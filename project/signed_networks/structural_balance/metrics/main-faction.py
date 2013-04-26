@@ -149,15 +149,17 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
     f.close()
 
 
-def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args):
+def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args,
+                                                                           normalize_row_or_column):
     f = open(OUT_DIR.RCM_MATRIC + 'codeslidingdegree.txt', 'w')
-    countries_list = data.top_countries_by_export_all_year(50)
+    countries_list = falkland_related_war_countries
     window_size = 5
     for window_start_year in data.all_years:
         sliding_window = range(window_start_year, window_start_year + window_size)
         window_end_year = sliding_window[-1:][0]
         if window_end_year > 2000: break
-        pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, countries_list)
+        pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, countries_list,
+                                                   normalize_row_or_column)
         for threshold in [0, 0.25, 0.5]:
             f.write("pnmatrix=[%s]\n" % matrix_py_to_matlab(pn_matrix))
             for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, countries_list,
@@ -175,4 +177,4 @@ def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_
 
 # write_adjacency_matrices(data, definition, def_args)
 # matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
-matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args)
+matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args, 'column')

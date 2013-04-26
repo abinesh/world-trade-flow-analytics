@@ -692,17 +692,36 @@ class TestFunctions(unittest.TestCase):
                       '"218400","Japan","117100","UK",251562,45,55,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
 
                       )
+        '''
+        Country 1963p   1963n   1964p   1964n |  mean    stddev
+        USA     0       2       2       0     |  1       1
+        UK      1       3       4       0     |  2     1.5811
+        India   2       1       2       1     |  1.5     0.5
+        Canada  1       1       1       1     |  1       0
+        Japan   0       1       1       0     |  0.5     0.5
+        _______________________________________
+        mean    0.8     1.6     2.0     0.4
+        stddev  0.74833 0.8     1.0954  0.4899
+        '''
+
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals(
             "-0.33333 0.33333 0.33333 -0.33333;-0.33333 0.33333 0.33333 -0.33333;0 0 0 0;0 0 0 0;-0.33333 0.33333 0.33333 -0.33333",
-                          positives_and_negatives_matrix_matlab(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"]))
+                          positives_and_negatives_matrix_matlab(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"],'row'))
+        self.assertEquals(
+            "-0.35635 0.16667 0 -0.27217;"+
+            "0.089087 0.58333 0.60858 -0.27217;"+
+            "0.53452 -0.25 0 0.40825;"+
+            "0.089087 -0.25 -0.30429 0.40825;"+
+            "-0.35635 -0.25 -0.30429 -0.27217",
+                          positives_and_negatives_matrix_matlab(d, test_extension_def, {},[1963,1964],["USA","UK","India","Canada","Japan"],'column'))
         self.assertEquals([[-0.3333333333333333, 0.3333333333333333, 0.3333333333333333, -0.3333333333333333],
                            [-0.3333333333333333, 0.3333333333333333, 0.3333333333333333, -0.3333333333333333],
                            [0.00000, 0.00000, 0.00000, 0.00000],
                            [0.00000, 0.00000, 0.00000, 0.00000],
                            [-0.3333333333333333, 0.3333333333333333, 0.3333333333333333, -0.3333333333333333]],
-                          positives_and_negatives_matrix(d, test_extension_def, {}, [1963, 1964],["USA", "UK", "India", "Canada", "Japan"]))
+                          positives_and_negatives_matrix(d, test_extension_def, {}, [1963, 1964],["USA", "UK", "India", "Canada", "Japan"],'row'))
 
 
 
