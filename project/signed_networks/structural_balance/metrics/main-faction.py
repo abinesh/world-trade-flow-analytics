@@ -24,20 +24,49 @@ def transform_pn_to_01(matrix, threshold):
 
 
 def adjacency_rcm_ordered(corrcoef_mat, threshold, countries, file_prefix, ordered=True):
+    '''
+    r = [1 2 3 4 5 6 7 8 9 10]
+    allowedR = [1 2 3 4 5 6]
+    orderedVector = {'Argentina', 'Brazil', 'Fm USSR', 'Peru', 'Libya', 'Israel', 'UK', 'USA', 'Denmark', 'Portugal', 'Norway', 'Sweden'};
+    filteredLabels = {};
+    filteredR = []
+    r_size = size(r)
+    r_size = r_size(2)
+    filteredRIndex = 1
+    for i=1:r_size
+        if ismember(r(i), allowedR)
+            filteredR = [filteredR r(i)]
+            filteredLabels{filteredRIndex} = char(orderedVector(r(i)));
+            filteredRIndex = filteredRIndex + 1
+        end
+    end
+    '''
+    all_countries = countries[0]
+    allowed_countries = countries[1]
     lines = []
     lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, threshold)))
     lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat))
     lines.append("r = symrcm(c0);")
-    lines.append("countriesVectorRow={%s};" % (str(countries)[1:-1]))
-    lines.append("orderedVector={}\n")
-    lines.append("for i=1:%d" % len(countries))
-    lines.append("orderedVector{i}=char(countriesVectorRow(r(i)));")
+    lines.append("allowedR = %s;" % (str([all_countries.index(country) + 1 for country in allowed_countries]).replace(",","")))
+    lines.append("countriesVectorRow={%s};" % (str(all_countries)[1:-1]))
+    lines.append("filteredLabels = {};")
+    lines.append("filteredR = []")
+    lines.append("r_size = size(r)")
+    lines.append("r_size = r_size(2)")
+    lines.append("filteredRIndex = 1")
+    lines.append("for i=1:r_size")
+    lines.append("\tif ismember(r(i), allowedR)")
+    lines.append("\t\tfilteredR = [filteredR r(i)]")
+    lines.append("\t\tfilteredLabels{filteredRIndex} = char(countriesVectorRow(r(i)));")
+    lines.append("\t\tfilteredRIndex = filteredRIndex + 1")
+    lines.append("\tend")
     lines.append("end")
+
     lines.append("x=redgreencmap(200);")
-    vectorName = 'orderedVector' if ordered else 'countriesVectorRow'
+    vectorName = 'filteredLabels' if ordered else 'countriesVectorRow'
     lines.append(
         "hm = HeatMap(corr%s,'RowLabels',%s,'ColumnLabels',%s, 'Colormap', horzcat(horzcat(x(:,2),x(:,1)),x(:,3)));"
-        % ('(r,r)' if ordered else '', vectorName, vectorName)
+        % ('(filteredR,filteredR)' if ordered else '', vectorName, vectorName)
     )
     lines.append("plot(hm);")
     lines.append(
@@ -52,7 +81,7 @@ def write_matlab_code_for_rcm(data, definition, def_args, countries=DEFAULT_COUN
         for coeff in range(0, 11):
             c = coeff * .05
             adj_matrix = adjacency_matrix(data, definition, def_args, year, countries)
-            for line in adjacency_rcm_ordered(corrcoef(adj_matrix), c, countries):
+            for line in adjacency_rcm_ordered(corrcoef(adj_matrix), c, [countries, countries]):
                 f.write(line + "\n")
     f.close()
 
@@ -144,7 +173,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
     countries_list = data.top_countries_by_export_all_year(50)
     for year in data.all_years:
         adj_matrix = adjacency_matrix(data, definition, def_args, year, countries_list)
-        for line in adjacency_rcm_ordered(corrcoef(adj_matrix), 0, countries_list, '%s' % year, True):
+        for line in adjacency_rcm_ordered(corrcoef(adj_matrix), 0, [countries_list, countries_list], '%s' % year, True):
             f.write("%s\n" % line)
     f.close()
 
@@ -152,17 +181,20 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
 def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args,
                                                                            normalize_row_or_column):
     f = open(OUT_DIR.RCM_MATRIC + 'codeslidingdegree.txt', 'w')
-    countries_list = falkland_related_war_countries
+    all_countries = DEFAULT_COUNTRIES_LIST
+    allowed_countries = data.top_countries_by_export_all_year(50)
+    # all_countries = ['USA', 'UK', 'Australia', 'Greece']
+    # allowed_countries = ['Australia', 'Greece']
     window_size = 5
     for window_start_year in data.all_years:
         sliding_window = range(window_start_year, window_start_year + window_size)
         window_end_year = sliding_window[-1:][0]
         if window_end_year > 2000: break
-        pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, countries_list,
+        pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, all_countries,
                                                    normalize_row_or_column)
         for threshold in [0, 0.25, 0.5]:
             f.write("pnmatrix=[%s]\n" % matrix_py_to_matlab(pn_matrix))
-            for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, countries_list,
+            for line in adjacency_rcm_ordered(corrcoef(pn_matrix), threshold, [all_countries, allowed_countries],
                                               '%s-%s' % (window_start_year, window_end_year)):
                 f.write("%s\n" % line)
     f.close()
