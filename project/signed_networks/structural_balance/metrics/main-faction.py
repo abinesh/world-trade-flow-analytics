@@ -78,7 +78,7 @@ def adjacency_rcm_ordered(data_matrix, threshold, countries, file_prefix, ordere
 
 
 def write_matlab_code_for_rcm(data, definition, def_args, countries=DEFAULT_COUNTRIES_LIST):
-    f = open(OUT_DIR.RCM_MATRIC + 'code.txt', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'code.m', 'w')
     for year in [1965, 1970, 1975, 1980, 1985, 1990, 1995, 1999, 2000]:
         for coeff in range(0, 11):
             c = coeff * .05
@@ -171,7 +171,7 @@ print data.countries()
 #                                   'UK', 'Fm USSR', 'Greece'], True)
 
 def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
-    f = open(OUT_DIR.RCM_MATRIC + 'code1.txt', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'code1.m', 'w')
     countries_list = data.top_countries_by_export_all_year(50)
     for year in data.all_years:
         adj_matrix = adjacency_matrix(data, definition, def_args, year, countries_list)
@@ -182,7 +182,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
 
 def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args,
                                                                            normalize_row_or_column):
-    f = open(OUT_DIR.RCM_MATRIC + 'top50-pn.txt', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'top50pn.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
     allowed_countries = data.top_countries_by_export_all_year(50)
     # all_countries = ['USA', 'UK', 'Australia', 'Greece']
@@ -204,7 +204,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
 
 
 def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
-    f = open(OUT_DIR.RCM_MATRIC + 'top50-adj.txt', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'top50adj.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
     allowed_countries = data.top_countries_by_export_all_year(50)
     for year in data.all_years:
@@ -215,7 +215,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
 
 
 def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_COUNTRIES_LIST):
-    f = open(OUT_DIR.ADJACENCY_MATRIX + 'adj-all.m', 'w')
+    f = open(OUT_DIR.ADJACENCY_MATRIX + 'adjall.m', 'w')
     f.write(list_as_matlab_vector('countries', countries_list) + '\n')
     for year in data.all_years:
         f.write('adj%d=[%s]\n' % (year, adjacency_matrix_matlab(data, definition, def_args, year, countries_list)))
