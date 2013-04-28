@@ -23,7 +23,7 @@ def transform_pn_to_01(matrix, threshold):
     return [(1 if cell > threshold else 0 for cell in row) for row in matrix]
 
 
-def adjacency_rcm_ordered(corrcoef_mat, threshold, countries, file_prefix, ordered=True):
+def adjacency_rcm_ordered(data_matrix, threshold, countries, file_prefix, ordered=True):
     '''
     r = [1 2 3 4 5 6 7 8 9 10]
     allowedR = [1 2 3 4 5 6]
@@ -44,8 +44,8 @@ def adjacency_rcm_ordered(corrcoef_mat, threshold, countries, file_prefix, order
     all_countries = countries[0]
     allowed_countries = countries[1]
     lines = []
-    lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(corrcoef_mat, threshold)))
-    lines.append(corrcoef_py_to_matlab('corr', corrcoef_mat))
+    lines.append(corrcoef_py_to_matlab('c0', transform_pn_to_01(data_matrix, threshold)))
+    lines.append(corrcoef_py_to_matlab('corr', data_matrix))
     lines.append("r = symrcm(c0);")
     lines.append("allowedR = %s;" % (str([all_countries.index(country) + 1 for country in allowed_countries]).replace(",","")))
     lines.append("countriesVectorRow={%s};" % (str(all_countries)[1:-1]))
