@@ -24,7 +24,6 @@ def transform_pn_to_01(matrix, threshold):
 
 
 def adjacency_rcm_ordered(data_matrix, threshold, countries, file_prefix, ordered=True):
-    assert len(data_matrix) == len(data_matrix[0])
     '''
     r = [1 2 3 4 5 6 7 8 9 10]
     allowedR = [1 2 3 4 5 6]
@@ -42,6 +41,7 @@ def adjacency_rcm_ordered(data_matrix, threshold, countries, file_prefix, ordere
         end
     end
     '''
+    assert len(data_matrix) == len(data_matrix[0])
     all_countries = countries[0]
     allowed_countries = countries[1]
     lines = []
@@ -182,7 +182,7 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
 
 def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args,
                                                                            normalize_row_or_column):
-    f = open(OUT_DIR.RCM_MATRIC + 'codeslidingdegree.txt', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'top50-pn.txt', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
     allowed_countries = data.top_countries_by_export_all_year(50)
     # all_countries = ['USA', 'UK', 'Australia', 'Greece']
@@ -192,8 +192,10 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
         sliding_window = range(window_start_year, window_start_year + window_size)
         window_end_year = sliding_window[-1:][0]
         if window_end_year > 2000: break
-        data_matrix = corrcoef(positives_and_negatives_matrix(data, definition, def_args, sliding_window, all_countries,
-                                                              normalize_row_or_column))
+        pn_matrix = positives_and_negatives_matrix(data, definition, def_args, sliding_window, all_countries,
+                                                   normalize_row_or_column)
+        f.write(matrix_py_matlab_with_name('pnmatrix', pn_matrix))
+        data_matrix = corrcoef(pn_matrix)
         for threshold in [0]:
             for line in adjacency_rcm_ordered(data_matrix, threshold, [all_countries, allowed_countries],
                                               '%s-%s' % (window_start_year, window_end_year)):
