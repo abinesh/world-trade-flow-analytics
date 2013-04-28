@@ -203,6 +203,17 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
     f.close()
 
 
+def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
+    f = open(OUT_DIR.RCM_MATRIC + 'top50-adj.txt', 'w')
+    all_countries = DEFAULT_COUNTRIES_LIST
+    allowed_countries = data.top_countries_by_export_all_year(50)
+    for year in data.all_years:
+        data_matrix = adjacency_matrix(data, definition, def_args, year, all_countries)
+        for line in adjacency_rcm_ordered(data_matrix, 0, [all_countries, allowed_countries], '%s' % year):
+            f.write("%s\n" % line)
+    f.close()
+
+
 def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_COUNTRIES_LIST):
     f = open(OUT_DIR.ADJACENCY_MATRIX + 'adj-all.m', 'w')
     f.write(list_as_matlab_vector('countries', countries_list) + '\n')
@@ -212,4 +223,5 @@ def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_
 
 # write_adjacency_matrices(data, definition, def_args)
 # matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
-matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args, 'column')
+# matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args, 'column')
+matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
