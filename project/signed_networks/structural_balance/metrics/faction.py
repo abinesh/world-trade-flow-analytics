@@ -109,7 +109,7 @@ def positives_and_negatives_matrix_matlab(data, definition, def_args, years, cou
     return matrix_py_to_matlab(positives_and_negatives_matrix(data, definition, def_args, years, countries, normalize_row_or_column))
 
 
-def corrcoef_py_to_matlab(var_name, matrix, only_first_row=False):
+def matrix_py_matlab_with_name(var_name, matrix, only_first_row=False):
     return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix, only_first_row))
 
 
