@@ -1,8 +1,6 @@
 import math
 from numpy import average
 
-__author__ = 'abinesh'
-
 
 def column_to_year(column): return 2000 if column == "Value00" else 1900 + int(column[5:])
 
@@ -42,11 +40,30 @@ def fraction(numerator, denominator, nan_value): return nan_value if denominator
 
 class Counts:
     def __init__(self):
-        self.as_map = {}
+        self.as_map_var = {}
 
     def record(self, count):
-        if count not in self.as_map: self.as_map[count] = 0
-        self.as_map[count] += 1
+        if count not in self.as_map_var: self.as_map_var[count] = 0
+        self.as_map_var[count] += 1
 
-    def asMap(self):
-        return self.as_map
+    def as_map(self):
+        return self.as_map_var
+
+    def as_tuples_list(self):
+        sorted_sparse_tuples_list = sorted([(key, self.as_map_var[key]) for key in self.as_map_var],
+                                           key=lambda key_value: key_value[0])
+        return_list = []
+        index = 1
+        lag_index = 0
+        last_index = sorted_sparse_tuples_list[-1:][0][0]
+        while index - 1 < last_index:
+            t = sorted_sparse_tuples_list[index - lag_index - 1]
+            if t[0] == index:
+                return_list.append(t)
+            else:
+                return_list.append((index, 0))
+                lag_index += 1
+            index += 1
+
+        return return_list
+

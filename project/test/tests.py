@@ -909,8 +909,9 @@ class TestFunctions(unittest.TestCase):
         c.record(3)
         c.record(3)
         c.record(3)
-        c.record(4)
-        self.assertEquals({1: 2, 2: 1, 3: 3, 4: 1}, c.asMap())
+        c.record(5)
+        self.assertEquals({1: 2, 2: 1, 3: 3, 5: 1}, c.as_map())
+        self.assertEquals([(1, 2), (2, 1), (3, 3), (4, 0), (5, 1)], c.as_tuples_list())
 
 
 @memoize
