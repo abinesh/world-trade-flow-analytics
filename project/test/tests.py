@@ -857,7 +857,7 @@ class TestFunctions(unittest.TestCase):
                       )
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
-        self.assertEquals(2.0/6, percentage_of_new_links(d, test_extension_def, {}, 1964))
+        self.assertEquals(2.0/6, percentage_of_new_links(d, test_extension_def, {}, 1964,1))
         pass
 
 @memoize
