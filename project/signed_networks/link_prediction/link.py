@@ -20,10 +20,10 @@ def edge_sign_change_and_total_edges(data, definition, def_args, year, look_back
     total = 0
     for (A, B) in combinations(data.all_countries, 2):
         if definition(data, year, A, B, def_args) != NO_LINK:
-            total += 1
             current_sign = definition(data, year, A, B, def_args)
             previous_sign = definition(data, year - look_back_duration, A, B, def_args)
-            if current_sign != NO_LINK or previous_sign != NO_LINK:
+            if current_sign != NO_LINK and previous_sign != NO_LINK:
+                total += 1
                 sign_change_count += 1 if current_sign != previous_sign else 0
     return sign_change_count, total
 
