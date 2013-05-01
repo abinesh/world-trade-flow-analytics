@@ -10,7 +10,8 @@ def new_edge_over_time(data, definition, def_args):
     print "y=%s;" % str(
         [percentage_of_new_links(data, definition, def_args, year) for year in x_axis]).replace(",", "")
     print "plot(x,y);"
-    print "legend('Year','% of new edges');"
+    print "xlabel('Year');"
+    print "ylabel('Percent of new edges');"
     print "saveas(gcf,'percent-of-new-edges-over-time','png');"
 
 
