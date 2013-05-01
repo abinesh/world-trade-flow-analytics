@@ -1,3 +1,5 @@
+ Country wise
+ ------------------------
  Afghanistan  	1963
  Afr.Other NS 	1984
  Africa N.NES 	1997
@@ -204,209 +206,210 @@
  Zimbabwe     	1963
 
 
+ Year wise
  ------------------------
 
- 1963	 Afghanistan
-     	 Albania
-     	 Algeria
-     	 Angola
-     	 Areas NES
-     	 Argentina
-     	 Asia NES
-     	 Australia
-     	 Austria
-     	 Bahamas
-     	 Bahrain
-     	 Barbados
-     	 Belgium-Lux
-     	 Benin
-     	 Bermuda
-     	 Bolivia
-     	 Brazil
-     	 Bulgaria
-     	 Burkina Faso
-     	 Burundi
-     	 Cambodia
-     	 Cameroon
-     	 Canada
-     	 Cent.Afr.Rep
-     	 Chad
-     	 Chile
-     	 China
-     	 China HK SAR
-     	 China MC SAR
-     	 Colombia
-     	 Congo
-     	 Costa Rica
-     	 Cote Divoire
-     	 Cuba
-     	 Cyprus
-     	 Czechoslovak
-     	 Dem.Rp.Congo
-     	 Denmark
-     	 Djibouti
-     	 Dominican Rp
-     	 Ecuador
-     	 Egypt
-     	 El Salvador
-     	 Eq.Guinea
-     	 Ethiopia
-     	 Fiji
-     	 Finland
-     	 Fm German DR
-     	 Fm German FR
-     	 Fm USSR
-     	 Fm Yemen AR
-     	 Fm Yemen Dm
-     	 Fm Yugoslav
-     	 Fr Ind O
-     	 Fr.Guiana
-     	 France,Monac
-     	 Gabon
-     	 Gambia
-     	 Ghana
-     	 Gibraltar
-     	 Greece
-     	 Guadeloupe
-     	 Guatemala
-     	 Guinea
-     	 GuineaBissau
-     	 Guyana
-     	 Haiti
-     	 Honduras
-     	 Hungary
-     	 Iceland
-     	 India
-     	 Indonesia
-     	 Iran
-     	 Iraq
-     	 Ireland
-     	 Israel
-     	 Italy
-     	 Jamaica
-     	 Japan
-     	 Jordan
-     	 Kenya
-     	 Kiribati
-     	 Korea D P Rp
-     	 Korea Rep.
-     	 Kuwait
-     	 Lao P.Dem.R
-     	 Lebanon
-     	 Liberia
-     	 Libya
-     	 Madagascar
-     	 Malaysia
-     	 Mali
-     	 Malta
-     	 Mauritania
-     	 Mauritius
-     	 Mexico
-     	 Mongolia
-     	 Morocco
-     	 Mozambique
-     	 Myanmar
-     	 Nepal
-     	 Neth.Ant.Aru
-     	 Netherlands
-     	 New Calednia
-     	 New Zealand
-     	 Nicaragua
-     	 Niger
-     	 Nigeria
-     	 Norway
-     	 Oman
-     	 Pakistan
-     	 Panama
-     	 Papua N.Guin
-     	 Paraguay
-     	 Peru
-     	 Philippines
-     	 Poland
-     	 Portugal
-     	 Qatar
-     	 Romania
-     	 Rwanda
-     	 Samoa
-     	 Saudi Arabia
-     	 Senegal
-     	 Seychelles
-     	 Sierra Leone
-     	 Singapore
-     	 Somalia
-     	 South Africa
-     	 Spain
-     	 Sri Lanka
-     	 St.Kt-Nev-An
-     	 St.Pierre Mq
-     	 Sudan
-     	 Suriname
-     	 Sweden
-     	 Switz.Liecht
-     	 Syria
-     	 Taiwan
-     	 Tanzania
-     	 Thailand
-     	 Togo
-     	 Trinidad Tbg
-     	 Tunisia
-     	 Turkey
-     	 UK
-     	 US NES
-     	 USA
-     	 Uganda
-     	 Untd Arab Em
-     	 Uruguay
-     	 Venezuela
-     	 Viet Nam
-     	 World
-     	 Zambia
-     	 Zimbabwe
- 1964	 Belize
-     	 Greenland
-     	 Malawi
- 1970	 Falkland Is
-     	 Neutral Zone
-     	 St.Helena
- 1971	 Br.Antr.Terr
- 1972	 Bangladesh
- 1984	 Afr.Other NS
-     	 Asia West NS
-     	 Carib. NES
-     	 EEC NES
-     	 Eur.Other NE
-     	 Oth.Oceania
- 1985	 China SC
-     	 Int Org
- 1986	 LAIA NES
- 1987	 E Europe NES
- 1989	 CACM NES
- 1990	 Fm Yemen Ar
- 1991	 Germany
-     	 Yemen
- 1992	 Armenia
-     	 Azerbaijan
-     	 Belarus
-     	 Bosnia Herzg
-     	 China FTZ
-     	 Croatia
-     	 Estonia
-     	 Georgia
-     	 Kazakhstan
-     	 Kyrgyzstan
-     	 Latvia
-     	 Lithuania
-     	 Rep Moldova
-     	 Slovenia
-     	 Tajikistan
-     	 Turkmenistan
-     	 Ukraine
-     	 Uzbekistan
-     	 Yugoslavia
- 1993	 Czech Rep
-     	 Slovakia
-     	 TFYR Macedna
- 1996	 Eur. EFTA NS
-     	 Russian Fed
- 1997	 Africa N.NES
- 2000	 Occ.Pal.Terr
+1963(156)	 Afghanistan
+    	 Albania
+    	 Algeria
+    	 Angola
+    	 Areas NES
+    	 Argentina
+    	 Asia NES
+    	 Australia
+    	 Austria
+    	 Bahamas
+    	 Bahrain
+    	 Barbados
+    	 Belgium-Lux
+    	 Benin
+    	 Bermuda
+    	 Bolivia
+    	 Brazil
+    	 Bulgaria
+    	 Burkina Faso
+    	 Burundi
+    	 Cambodia
+    	 Cameroon
+    	 Canada
+    	 Cent.Afr.Rep
+    	 Chad
+    	 Chile
+    	 China
+    	 China HK SAR
+    	 China MC SAR
+    	 Colombia
+    	 Congo
+    	 Costa Rica
+    	 Cote Divoire
+    	 Cuba
+    	 Cyprus
+    	 Czechoslovak
+    	 Dem.Rp.Congo
+    	 Denmark
+    	 Djibouti
+    	 Dominican Rp
+    	 Ecuador
+    	 Egypt
+    	 El Salvador
+    	 Eq.Guinea
+    	 Ethiopia
+    	 Fiji
+    	 Finland
+    	 Fm German DR
+    	 Fm German FR
+    	 Fm USSR
+    	 Fm Yemen AR
+    	 Fm Yemen Dm
+    	 Fm Yugoslav
+    	 Fr Ind O
+    	 Fr.Guiana
+    	 France,Monac
+    	 Gabon
+    	 Gambia
+    	 Ghana
+    	 Gibraltar
+    	 Greece
+    	 Guadeloupe
+    	 Guatemala
+    	 Guinea
+    	 GuineaBissau
+    	 Guyana
+    	 Haiti
+    	 Honduras
+    	 Hungary
+    	 Iceland
+    	 India
+    	 Indonesia
+    	 Iran
+    	 Iraq
+    	 Ireland
+    	 Israel
+    	 Italy
+    	 Jamaica
+    	 Japan
+    	 Jordan
+    	 Kenya
+    	 Kiribati
+    	 Korea D P Rp
+    	 Korea Rep.
+    	 Kuwait
+    	 Lao P.Dem.R
+    	 Lebanon
+    	 Liberia
+    	 Libya
+    	 Madagascar
+    	 Malaysia
+    	 Mali
+    	 Malta
+    	 Mauritania
+    	 Mauritius
+    	 Mexico
+    	 Mongolia
+    	 Morocco
+    	 Mozambique
+    	 Myanmar
+    	 Nepal
+    	 Neth.Ant.Aru
+    	 Netherlands
+    	 New Calednia
+    	 New Zealand
+    	 Nicaragua
+    	 Niger
+    	 Nigeria
+    	 Norway
+    	 Oman
+    	 Pakistan
+    	 Panama
+    	 Papua N.Guin
+    	 Paraguay
+    	 Peru
+    	 Philippines
+    	 Poland
+    	 Portugal
+    	 Qatar
+    	 Romania
+    	 Rwanda
+    	 Samoa
+    	 Saudi Arabia
+    	 Senegal
+    	 Seychelles
+    	 Sierra Leone
+    	 Singapore
+    	 Somalia
+    	 South Africa
+    	 Spain
+    	 Sri Lanka
+    	 St.Kt-Nev-An
+    	 St.Pierre Mq
+    	 Sudan
+    	 Suriname
+    	 Sweden
+    	 Switz.Liecht
+    	 Syria
+    	 Taiwan
+    	 Tanzania
+    	 Thailand
+    	 Togo
+    	 Trinidad Tbg
+    	 Tunisia
+    	 Turkey
+    	 UK
+    	 US NES
+    	 USA
+    	 Uganda
+    	 Untd Arab Em
+    	 Uruguay
+    	 Venezuela
+    	 Viet Nam
+    	 World
+    	 Zambia
+    	 Zimbabwe
+1964(3)	 Belize
+    	 Greenland
+    	 Malawi
+1970(3)	 Falkland Is
+    	 Neutral Zone
+    	 St.Helena
+1971(1)	 Br.Antr.Terr
+1972(1)	 Bangladesh
+1984(6)	 Afr.Other NS
+    	 Asia West NS
+    	 Carib. NES
+    	 EEC NES
+    	 Eur.Other NE
+    	 Oth.Oceania
+1985(2)	 China SC
+    	 Int Org
+1986(1)	 LAIA NES
+1987(1)	 E Europe NES
+1989(1)	 CACM NES
+1990(1)	 Fm Yemen Ar
+1991(2)	 Germany
+    	 Yemen
+1992(19)	 Armenia
+    	 Azerbaijan
+    	 Belarus
+    	 Bosnia Herzg
+    	 China FTZ
+    	 Croatia
+    	 Estonia
+    	 Georgia
+    	 Kazakhstan
+    	 Kyrgyzstan
+    	 Latvia
+    	 Lithuania
+    	 Rep Moldova
+    	 Slovenia
+    	 Tajikistan
+    	 Turkmenistan
+    	 Ukraine
+    	 Uzbekistan
+    	 Yugoslavia
+1993(3)	 Czech Rep
+    	 Slovakia
+    	 TFYR Macedna
+1996(2)	 Eur. EFTA NS
+    	 Russian Fed
+1997(1)	 Africa N.NES
+2000(1)	 Occ.Pal.Terr
