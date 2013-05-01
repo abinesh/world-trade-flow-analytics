@@ -1,7 +1,7 @@
 from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
-from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time
+from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time
 
 
 def edge_proportion_over_time(data, definition, def_args, function, look_back_duration):
@@ -20,8 +20,8 @@ def_args = args_for_definition_C(10, 5000)
 
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
-edge_proportion_over_time(data, definition, def_args, percentage_of_new_edges_over_time, 1)
-edge_proportion_over_time(data, definition, def_args, percentage_of_new_edges_over_time, 5)
-edge_proportion_over_time(data, definition, def_args, percentage_of_new_edges_over_time, 10)
-edge_proportion_over_time(data, definition, def_args, percentage_of_new_edges_over_time, 20)
+
+for function in [percentage_of_edge_sign_changes_over_time]:
+    for look_back_duration in [1, 5, 10, 20]:
+        edge_proportion_over_time(data, definition, def_args, function, look_back_duration)
 
