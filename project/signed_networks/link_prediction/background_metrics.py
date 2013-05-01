@@ -13,8 +13,9 @@ def edge_proportion_over_time(data, definition, def_args, function, look_back_du
     print "plot(x1,y1,x5,y5,x10,y10,x20,y20);"
     print "legend('1y','5y','10y','20y')"
     print "xlabel('Year');"
-    print "ylabel('Percent of new edges');"
-    print "saveas(gcf,'%s','png');" % (str(function).split(" ")[1])
+    function_name = str(function).split(" ")[1]
+    print "ylabel('%s');" % function_name.replace("_", " ")
+    print "saveas(gcf,'%s','png');" % function_name
 
 
 definition = definition_C3
