@@ -40,7 +40,7 @@ def fraction(numerator, denominator, nan_value): return nan_value if denominator
 
 class Counts:
     def __init__(self):
-        self.as_map_var = {}
+        self.as_map_var = {0: 0}
 
     def record(self, count):
         if count not in self.as_map_var: self.as_map_var[count] = 0

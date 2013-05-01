@@ -37,5 +37,7 @@ def_args = args_for_definition_C(10, 5000)
 data = ExportData()
 data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
-for function in [percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time]:
-    edge_proportion_over_time(data, definition, def_args, function, [1, 5, 10, 20])
+# for function in [percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time]:
+#     edge_proportion_over_time(data, definition, def_args, function, [1, 5, 10, 20])
+
+number_of_hops_before_forming_edge(data, definition, def_args, 1999,  [1, 5, 10, 20])

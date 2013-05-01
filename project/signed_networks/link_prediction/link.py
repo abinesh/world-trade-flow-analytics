@@ -1,10 +1,11 @@
 from itertools import combinations
 from project.signed_networks.definitions import NO_LINK
-from project.util import memoize
+from project.util import memoize, Counts
 
 
 def is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
-    return definition(data, year - look_back_duration, A, B, def_args) == NO_LINK
+    return definition(data, year - look_back_duration, A, B, def_args) == NO_LINK and \
+           definition(data, year, A, B, def_args) != NO_LINK
 
 
 @memoize
@@ -42,7 +43,14 @@ def percentage_of_edge_sign_changes_over_time(data, definition, def_args, year, 
     return new * 1.0 / total
 
 
+def count_hops(data, def_args, definition, year, A, B):
+    return 2
+
+
 def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_duration):
-    for (A,B) in data.countries():
-        return [(1, 10), (2, 15)]
+    counts = Counts()
+    for (A, B) in combinations(data.countries(), 2):
+        if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
+            counts.record(count_hops(data, def_args, definition, year - look_back_duration, A, B))
+    return counts.as_tuples_list()
 
