@@ -3,7 +3,7 @@ import tempfile
 
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
-from project.signed_networks.link_prediction.link import percentage_of_new_links
+from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
 from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix_matlab, positives_and_negatives_matrix_matlab, adjacency_matrix, positives_and_negatives_matrix, matrix_py_matlab_with_name, matrix_py_to_matlab, concat_countries
 from project.signed_networks.structural_balance.metrics.network import table1, table2
@@ -857,7 +857,7 @@ class TestFunctions(unittest.TestCase):
                       )
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
-        self.assertEquals(2.0/6, percentage_of_new_links(d, test_extension_def, {}, 1964,1))
+        self.assertEquals(2.0/6, percentage_of_new_edges_over_time(d, test_extension_def, {}, 1964,1))
         pass
 
 @memoize

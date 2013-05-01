@@ -14,6 +14,6 @@ def new_and_total_links(data, definition, def_args, year, look_back_duration):
     return new, total
 
 
-def percentage_of_new_links(data, definition, def_args, year, look_back_duration):
+def percentage_of_new_edges_over_time(data, definition, def_args, year, look_back_duration):
     (new, total) = new_and_total_links(data, definition, def_args, year, look_back_duration)
     return new * 1.0 / total
