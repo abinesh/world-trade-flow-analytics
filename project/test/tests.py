@@ -10,7 +10,7 @@ from project.signed_networks.structural_balance.metrics.network import table1, t
 from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
 from project.test.testutils import row_map, write_to_file
-from project.util import memoize, std_dev
+from project.util import memoize, std_dev, Counts
 from project.util import transpose
 
 
@@ -900,6 +900,18 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals(3.0/5, percentage_of_edge_sign_changes_over_time(d, test_extension_def, {}, 1964,1))
+
+    def test_counts(self):
+        c = Counts()
+        c.record(1)
+        c.record(1)
+        c.record(2)
+        c.record(3)
+        c.record(3)
+        c.record(3)
+        c.record(4)
+        self.assertEquals({1: 2, 2: 1, 3: 3, 4: 1}, c.asMap())
+
 
 @memoize
 def test_extension_def(data, year, country_A, country_B, args):
