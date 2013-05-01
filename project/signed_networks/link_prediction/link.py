@@ -11,7 +11,7 @@ def is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
 def new_and_total_edges(data, definition, def_args, year, look_back_duration):
     new = 0
     total = 0
-    for (A, B) in combinations(data.all_countries, 2):
+    for (A, B) in combinations(data.countries(), 2):
         if definition(data, year, A, B, def_args) != NO_LINK:
             total += 1
             new += 1 if is_new_edge(data, def_args, definition, year, A, B, look_back_duration) else 0
@@ -22,7 +22,7 @@ def new_and_total_edges(data, definition, def_args, year, look_back_duration):
 def edge_sign_change_and_total_edges(data, definition, def_args, year, look_back_duration):
     sign_change_count = 0
     total = 0
-    for (A, B) in combinations(data.all_countries, 2):
+    for (A, B) in combinations(data.countries(), 2):
         if definition(data, year, A, B, def_args) != NO_LINK:
             current_sign = definition(data, year, A, B, def_args)
             previous_sign = definition(data, year - look_back_duration, A, B, def_args)
@@ -43,5 +43,6 @@ def percentage_of_edge_sign_changes_over_time(data, definition, def_args, year, 
 
 
 def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_duration):
-    return [(1, 10), (2, 15)]
+    for (A,B) in data.countries():
+        return [(1, 10), (2, 15)]
 
