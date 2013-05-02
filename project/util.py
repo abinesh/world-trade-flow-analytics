@@ -52,14 +52,14 @@ class Counts:
         del copied_map[0]
         return copied_map
 
-    def as_tuples_list(self, last_value_infinity=False):
+    def as_tuples_list(self):
         copied_map = self.as_map()
         sorted_sparse_tuples_list = sorted([(key, copied_map[key]) for key in copied_map],
                                            key=lambda key_value: key_value[0])
         return_list = []
         index = 1
         lag_index = 0
-        last_index = sorted_sparse_tuples_list[-2 if last_value_infinity else -1:][0][0]
+        last_index = sorted_sparse_tuples_list[-1:][0][0]
         while index - 1 < last_index:
             t = sorted_sparse_tuples_list[index - lag_index - 1]
             if t[0] == index:
@@ -69,6 +69,5 @@ class Counts:
                 lag_index += 1
             index += 1
 
-        if last_value_infinity: return_list.append(sorted_sparse_tuples_list[-1:][0])
         return return_list
 

@@ -48,6 +48,7 @@ def percentage_of_edge_sign_changes_over_time(data, definition, def_args, year, 
     (new, total) = edge_sign_change_and_total_edges(data, definition, def_args, year, look_back_duration)
     return new * 1.0 / total
 
+
 @memoize
 def count_hops(data, definition, def_args, year, A, B):
     scipy_matrix = scipy.asmatrix(scipy.array(unsigned_adjacency_matrix(data, definition, def_args, year)))
@@ -60,11 +61,17 @@ def count_hops(data, definition, def_args, year, A, B):
         hop_count += 1
     return INFINITE_HOPS
 
+
 @memoize
 def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_duration):
     counts = Counts()
+    infinity_count = 0
     for (A, B) in combinations(data.countries(), 2):
         if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
-            counts.record(count_hops(data, definition, def_args, year - look_back_duration, A, B))
-    return counts.as_tuples_list()
+            count = count_hops(data, definition, def_args, year - look_back_duration, A, B)
+            if count == INFINITE_HOPS: infinity_count += 1
+            counts.record(count)
+    return_val = counts.as_tuples_list()
+    return_val.append((INFINITE_HOPS, infinity_count))
+    return return_val
 
