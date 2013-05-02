@@ -910,8 +910,10 @@ class TestFunctions(unittest.TestCase):
         c.record(3)
         c.record(3)
         c.record(5)
-        self.assertEquals({1: 2, 2: 1, 3: 3, 5: 1}, c.as_map())
-        self.assertEquals([(1, 2), (2, 1), (3, 3), (4, 0), (5, 1)], c.as_tuples_list())
+        c.record(8)
+        self.assertEquals({1: 2, 2: 1, 3: 3, 5: 1, 8: 1}, c.as_map())
+        self.assertEquals([(1, 2), (2, 1), (3, 3), (4, 0), (5, 1), (6, 0), (7, 0), (8, 1)], c.as_tuples_list())
+        self.assertEquals([(1, 2), (2, 1), (3, 3), (4, 0), (5, 1), (8, 1)], c.as_tuples_list(True))
 
     def test_count_hops(self):
         f = tempfile.NamedTemporaryFile()

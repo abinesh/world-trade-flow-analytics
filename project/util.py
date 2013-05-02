@@ -1,3 +1,4 @@
+from copy import deepcopy
 import math
 from numpy import average
 
@@ -47,15 +48,18 @@ class Counts:
         self.as_map_var[count] += 1
 
     def as_map(self):
-        return self.as_map_var
+        copied_map = deepcopy(self.as_map_var)
+        del copied_map[0]
+        return copied_map
 
-    def as_tuples_list(self):
-        sorted_sparse_tuples_list = sorted([(key, self.as_map_var[key]) for key in self.as_map_var],
+    def as_tuples_list(self, last_value_infinity=False):
+        copied_map = self.as_map()
+        sorted_sparse_tuples_list = sorted([(key, copied_map[key]) for key in copied_map],
                                            key=lambda key_value: key_value[0])
         return_list = []
         index = 1
         lag_index = 0
-        last_index = sorted_sparse_tuples_list[-1:][0][0]
+        last_index = sorted_sparse_tuples_list[-2 if last_value_infinity else -1:][0][0]
         while index - 1 < last_index:
             t = sorted_sparse_tuples_list[index - lag_index - 1]
             if t[0] == index:
@@ -65,5 +69,6 @@ class Counts:
                 lag_index += 1
             index += 1
 
+        if last_value_infinity: return_list.append(sorted_sparse_tuples_list[-1:][0])
         return return_list
 
