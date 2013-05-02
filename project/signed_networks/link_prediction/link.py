@@ -72,6 +72,7 @@ def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_
             if count == INFINITE_HOPS: infinity_count += 1
             counts.record(count)
     return_val = counts.as_tuples_list()
-    return_val.append((INFINITE_HOPS, infinity_count))
+    last_value= return_val[-1:][0][0]
+    return_val.append((last_value+5, infinity_count))
     return return_val
 
