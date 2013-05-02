@@ -91,6 +91,12 @@ def adjacency_matrix_row(data, definition, def_args, year, A, countries=DEFAULT_
 
 
 @memoize
+def unsigned_adjacency_matrix(data, definition, def_args, year, countries=DEFAULT_COUNTRIES_LIST):
+    return [[1 if c in [1, -1] else 0 for c in row] for row in
+            adjacency_matrix(data, definition, def_args, year, countries)]
+
+
+@memoize
 def adjacency_matrix(data, definition, def_args, year, countries=DEFAULT_COUNTRIES_LIST):
     return [adjacency_matrix_row(data, definition, def_args, year, A, countries) for A in countries]
 
@@ -106,7 +112,8 @@ def adjacency_matrix_matlab(data, definition, def_args, year, countries=DEFAULT_
 
 def positives_and_negatives_matrix_matlab(data, definition, def_args, years, countries=DEFAULT_COUNTRIES_LIST,
                                           normalize_row_or_column='column'):
-    return matrix_py_to_matlab(positives_and_negatives_matrix(data, definition, def_args, years, countries, normalize_row_or_column))
+    return matrix_py_to_matlab(
+        positives_and_negatives_matrix(data, definition, def_args, years, countries, normalize_row_or_column))
 
 
 def matrix_py_matlab_with_name(var_name, matrix, only_first_row=False):

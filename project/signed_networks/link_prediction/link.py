@@ -1,6 +1,12 @@
 from itertools import combinations
+import numpy
+import scipy
+from project.countries import index_of_country
 from project.signed_networks.definitions import NO_LINK
+from project.signed_networks.structural_balance.metrics.faction import adjacency_matrix, unsigned_adjacency_matrix
 from project.util import memoize, Counts
+
+INFINITE_HOPS = 500
 
 
 def is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
@@ -43,14 +49,22 @@ def percentage_of_edge_sign_changes_over_time(data, definition, def_args, year, 
     return new * 1.0 / total
 
 
-def count_hops(data, def_args, definition, year, A, B):
-    return 2
+def count_hops(data, definition, def_args, year, A, B):
+    scipy_matrix = scipy.asmatrix(scipy.array(unsigned_adjacency_matrix(data, definition, def_args, year)))
+    multiplied_matrix = scipy.asmatrix(scipy.array(unsigned_adjacency_matrix(data, definition, def_args, year)))
+    hop_count = 1
+    while hop_count < len(data.countries()):
+        if multiplied_matrix.tolist()[index_of_country(A)][index_of_country(B)] != 0:
+            return hop_count
+        multiplied_matrix = numpy.dot(multiplied_matrix, scipy_matrix)
+        hop_count += 1
+    return INFINITE_HOPS
 
 
 def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_duration):
     counts = Counts()
     for (A, B) in combinations(data.countries(), 2):
         if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
-            counts.record(count_hops(data, def_args, definition, year - look_back_duration, A, B))
+            counts.record(count_hops(data, definition, def_args, year - look_back_duration, A, B))
     return counts.as_tuples_list()
 
