@@ -43,5 +43,5 @@ data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_da
 
 # for function in [percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time]:
 #     edge_proportion_over_time(data, definition, def_args, function, [1, 5, 10, 20])
-for year in range(1991, 2001):
+for year in range(1983, 2001):
     number_of_hops_before_forming_edge(data, definition, def_args, year, [1, 5, 10, 20])

@@ -76,7 +76,7 @@ def inf_scale_adjust(hops):
             updated_hop.append((index, 0))
         updated_hop.append((inf_x_axis_value, hops[hops_index][1]))
         updated_hops.append(updated_hop)
-    return updated_hops,inf_x_axis_value
+    return updated_hops, inf_x_axis_value
 
 
 @memoize

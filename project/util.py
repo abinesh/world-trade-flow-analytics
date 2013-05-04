@@ -53,6 +53,7 @@ class Counts:
         return copied_map
 
     def as_tuples_list(self):
+        if len(self.as_map_var) == 1: return [(0, 0)]
         copied_map = self.as_map()
         sorted_sparse_tuples_list = sorted([(key, copied_map[key]) for key in copied_map],
                                            key=lambda key_value: key_value[0])
