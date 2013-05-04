@@ -67,6 +67,18 @@ def count_hops(data, definition, def_args, year, A, B):
     return INFINITE_HOPS
 
 
+def inf_scale_adjust(hops):
+    inf_x_axis_value = max([hop[0][-1][0] for hop in hops]) + 1
+    updated_hops = []
+    for hops_index in range(0, len(hops)):
+        updated_hop = hops[hops_index][0]
+        for index in range(len(updated_hop) + 1, inf_x_axis_value):
+            updated_hop.append((index, 0))
+        updated_hop.append((inf_x_axis_value, hops[hops_index][1]))
+        updated_hops.append(updated_hop)
+    return updated_hops,inf_x_axis_value
+
+
 @memoize
 def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_duration):
     counts = Counts()
@@ -78,8 +90,5 @@ def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_
                 infinity_count += 1
             else:
                 counts.record(count)
-    return_val = counts.as_tuples_list()
-    last_value = return_val[-1:][0][0]
-    return_val.append((last_value + 5, infinity_count))
-    return return_val
+    return counts.as_tuples_list(), infinity_count
 

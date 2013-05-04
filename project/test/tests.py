@@ -3,7 +3,7 @@ import tempfile
 
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C1, args_for_definition_C, POSITIVE_LINK, NEGATIVE_LINK, NO_LINK, definition_C2, definition_D, args_for_definition_D, definition_A, args_for_definition_A
-from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time, count_hops, INFINITE_HOPS
+from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time, count_hops, INFINITE_HOPS, inf_scale_adjust
 from project.signed_networks.structural_balance.metrics.edge import compute_fraction_of_positive_edges, compute_map, fraction_of_embedded_positive_signs, traids_per_common_edge_count
 from project.signed_networks.structural_balance.metrics.faction import detect_factions_from_co_movements, adjacency_matrix_matlab, positives_and_negatives_matrix_matlab, adjacency_matrix, positives_and_negatives_matrix, matrix_py_matlab_with_name, matrix_py_to_matlab, concat_countries
 from project.signed_networks.structural_balance.metrics.network import table1, table2
@@ -900,6 +900,21 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
         self.assertEquals(3.0/5, percentage_of_edge_sign_changes_over_time(d, test_extension_def, {}, 1964,1))
+
+    def test_inf_scale(self):
+        hops = [
+            ([(1, 5), (2, 7), (3, 8), (4, 3)], 6),
+            ([(1, 2), (2, 6), (3, 90)], 7),
+            ([(1, 5), (2, 7), (3, 8), (4, 3), (5, 9), (6, 23), (7, 4)], 8)
+        ]
+        expected_updated_hops = [
+            [(1, 5), (2, 7), (3, 8), (4, 3), (5, 0), (6, 0), (7, 0), (8, 6)],
+            [(1, 2), (2, 6), (3, 90), (4, 0), (5, 0), (6, 0), (7, 0), (8, 7)],
+            [(1, 5), (2, 7), (3, 8), (4, 3), (5, 9), (6, 23), (7, 4), (8, 8)]
+        ]
+        updated_hops,inf_x_axis_value = inf_scale_adjust(hops)
+        self.assertEquals(expected_updated_hops, updated_hops)
+        self.assertEquals(inf_x_axis_value, 8)
 
     def test_counts(self):
         c = Counts()
