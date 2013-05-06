@@ -2,7 +2,7 @@ from itertools import combinations
 import numpy
 import scipy
 from project.countries import index_of_country
-from project.signed_networks.definitions import NO_LINK
+from project.signed_networks.definitions import NO_LINK, POSITIVE_LINK, NEGATIVE_LINK
 from project.signed_networks.structural_balance.metrics.faction import adjacency_matrix, unsigned_adjacency_matrix
 from project.util import memoize, Counts
 
@@ -93,22 +93,35 @@ def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_
     return counts.as_tuples_list(), infinity_count
 
 
+@memoize
+def count_of_bridge_configs_between(data, definition, def_args, year, A, B):
+    (twoPlus, plusMinus, twoMinus) = 0, 0, 0
+    for C in data.countries():
+        if C not in [A, B]:
+            cToA = definition(data, year, C, A, def_args)
+            cToB = definition(data, year, C, B, def_args)
+            both_links = [cToA, cToB]
+            if NO_LINK not in both_links:
+                if both_links.count(POSITIVE_LINK) == 2: twoPlus += 1
+                if both_links.count(NEGATIVE_LINK) == 2: twoMinus += 1
+                if both_links.count(POSITIVE_LINK) == 1 and both_links.count(NEGATIVE_LINK) == 1: plusMinus += 1
+    return (twoPlus, plusMinus, twoMinus)
+
+
+@memoize
+def _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year):
+    counts = {'2+': 0, '+-': 0, '2-': 0}
+    for (A, B) in combinations(data.countries(), 2):
+        if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
+            (twoPlus, plusMinus, twoMinus) = count_of_bridge_configs_between(data, definition, def_args,
+                                                                             year - look_back_duration, A, B)
+            counts['2+'] += twoPlus
+            counts['+-'] += plusMinus
+            counts['2-'] += twoMinus
+    return counts
+
+
 def count_of_bridge_configs(data, definition, def_args, year, look_back_duration, config):
-    if config == '2+':
-        if look_back_duration == 1: return 3
-        if look_back_duration == 5: return 5
-        if look_back_duration == 10: return 6
-        if look_back_duration == 20: return 2
-
-    if config == '+-':
-        if look_back_duration == 1: return 2
-        if look_back_duration == 5: return 7
-        if look_back_duration == 10: return 9
-        if look_back_duration == 20: return 6
-
-    if config == '2-':
-        if look_back_duration == 1: return 3
-        if look_back_duration == 5: return 5
-        if look_back_duration == 10: return 8
-        if look_back_duration == 20: return 5
+    counts = _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year)
+    return counts[config]
 
