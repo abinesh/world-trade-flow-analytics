@@ -41,22 +41,23 @@ def bridge_type_before_edge_formation(data, definition, def_args, year, look_bac
         [count_of_bridge_configs(data, definition, def_args, year, look_back_duration, bridge_type) for
          look_back_duration in look_back_durations]) for bridge_type in ["2+", "+-", "2-"]]))
     print "bar(y,'grouped');"
-    print "legend('1y','5y','10y','20y');"
+    print "legend('1y','5y','10y','20y','Location','Best');"
     print "set(gca,'XTickLabel',{'2+','+-','2-'});"
     print "saveas(gcf,'Bridge-type-before-edge-formation-%d','png');" % year
+    print "set(gca, 'YScale', 'log');"
+    print "saveas(gcf,'log-Bridge-type-before-edge-formation-%d','png');" % year
 
 
 definition = definition_C3
 def_args = args_for_definition_C(10, 5000)
 
 data = ExportData()
-# data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
+data.load_file('../' + WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL, should_read_world_datapoints=True)
 
 # for function in [percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time]:
 #     edge_proportion_over_time(data, definition, def_args, function, [1, 5, 10, 20])
 # for year in range(1983, 2001):
 #     number_of_hops_before_forming_edge(data, definition, def_args, year, [1, 5, 10, 20])
-
 
 for year in range(1983, 2001):
     bridge_type_before_edge_formation(data, definition, def_args, year, [1, 5, 10, 20])
