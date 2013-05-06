@@ -9,9 +9,17 @@ from project.util import memoize, Counts
 INFINITE_HOPS = 500
 
 
-def is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
+def is_new_edge(data, definition, def_args, year, A, B, look_back_duration):
     return definition(data, year - look_back_duration, A, B, def_args) == NO_LINK and \
            definition(data, year, A, B, def_args) != NO_LINK
+
+
+def did_sign_change(data, definition, def_args, year, A, B, look_back_duration):
+    current_sign = definition(data, year, A, B, def_args)
+    previous_sign = definition(data, year - look_back_duration, A, B, def_args)
+    if current_sign != NO_LINK and previous_sign != NO_LINK:
+        return current_sign != previous_sign
+    return False
 
 
 @memoize
@@ -21,7 +29,7 @@ def new_and_total_edges(data, definition, def_args, year, look_back_duration):
     for (A, B) in combinations(data.countries(), 2):
         if definition(data, year, A, B, def_args) != NO_LINK:
             total += 1
-            new += 1 if is_new_edge(data, def_args, definition, year, A, B, look_back_duration) else 0
+            new += 1 if is_new_edge(data, definition, def_args, year, A, B, look_back_duration) else 0
     return new, total
 
 
@@ -35,7 +43,8 @@ def edge_sign_change_and_total_edges(data, definition, def_args, year, look_back
             previous_sign = definition(data, year - look_back_duration, A, B, def_args)
             if current_sign != NO_LINK and previous_sign != NO_LINK:
                 total += 1
-                sign_change_count += 1 if current_sign != previous_sign else 0
+                sign_change_count += 1 if did_sign_change(data, definition, def_args, year, A, B,
+                                                          look_back_duration) else 0
     return sign_change_count, total
 
 
@@ -84,7 +93,7 @@ def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_
     counts = Counts()
     infinity_count = 0
     for (A, B) in combinations(data.countries(), 2):
-        if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
+        if is_new_edge(data, definition, def_args, year, A, B, look_back_duration):
             count = count_hops(data, definition, def_args, year - look_back_duration, A, B)
             if count == INFINITE_HOPS:
                 infinity_count += 1
@@ -112,7 +121,7 @@ def count_of_bridge_configs_between(data, definition, def_args, year, A, B):
 def _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year):
     counts = {'2+': 0, '+-': 0, '2-': 0}
     for (A, B) in combinations(data.countries(), 2):
-        if is_new_edge(data, def_args, definition, year, A, B, look_back_duration):
+        if is_new_edge(data, definition, def_args, year, A, B, look_back_duration):
             (twoPlus, plusMinus, twoMinus) = count_of_bridge_configs_between(data, definition, def_args,
                                                                              year - look_back_duration, A, B)
             counts['2+'] += twoPlus
