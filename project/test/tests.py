@@ -940,6 +940,8 @@ class TestFunctions(unittest.TestCase):
                       '"100000","World","117100","Japan",1137424,100,1315703,1453614,1719904,1934726,2073399,2172388,2067276,2087840,2197399,3035278,4473097,5151976,5786599,7168917,8039418,10691282,12774748,31497500,9593869,8498300,27745267,11587906,12944273,12142881,14767609,15973854,16353354,16153549,30129310,27374820,30949042,33215626,28668008,35065432,30622443,31679773,38330367',
                       '"100000","World","100000","USA",130820766,100,163401432,178619568,196373987,206306598,229438483,261773445,301725595,336632436,394429429,547697681,822593098,860894299,967082574,1080137888,1187499282,1588616996,1927615343,1908925277,1753041348,1650817500,1875030686,1949413915.813,2097956459,2454677596,2798583134,3044659532,3471060661,3600841444,3860180402,3796916610,4305600574,5136222078,5475815227,5631902195,5575802767,5791258924,6568385296',
                       '"100000","World","100000","Canada",130820766,100,163401432,178619568,196373987,206306598,229438483,261773445,301725595,336632436,394429429,547697681,822593098,860894299,967082574,1080137888,1187499282,1588616996,1927615343,1908925277,1753041348,1650817500,1875030686,1949413915.813,2097956459,2454677596,2798583134,3044659532,3471060661,3600841444,3860180402,3796916610,4305600574,5136222078,5475815227,5631902195,5575802767,5791258924,6568385296',
+                      '"100000","World","100000","Afghanistan",130820766,100,163401432,178619568,196373987,206306598,229438483,261773445,301725595,336632436,394429429,547697681,822593098,860894299,967082574,1080137888,1187499282,1588616996,1927615343,1908925277,1753041348,1650817500,1875030686,1949413915.813,2097956459,2454677596,2798583134,3044659532,3471060661,3600841444,3860180402,3796916610,4305600574,5136222078,5475815227,5631902195,5575802767,5791258924,6568385296',
+                      '"100000","World","100000","Australia",130820766,100,163401432,178619568,196373987,206306598,229438483,261773445,301725595,336632436,394429429,547697681,822593098,860894299,967082574,1080137888,1187499282,1588616996,1927615343,1908925277,1753041348,1650817500,1875030686,1949413915.813,2097956459,2454677596,2798583134,3044659532,3471060661,3600841444,3860180402,3796916610,4305600574,5136222078,5475815227,5631902195,5575802767,5791258924,6568385296',
 
                       '"218400","UK","117100","USA",251562,45,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
                       '"218400","USA","117100","UK",251562,45,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
@@ -959,6 +961,15 @@ class TestFunctions(unittest.TestCase):
                       '"218400","UK","117100","Japan",251562,45,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
                       '"218400","Japan","117100","UK",251562,45,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
 
+                      '"218400","UK","117100","Afghanistan",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+                      '"218400","Afghanistan","117100","UK",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+
+                      '"218400","Australia","117100","India",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+                      '"218400","India","117100","Australia",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+
+                      '"218400","Australia","117100","Afghanistan",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+                      '"218400","Afghanistan","117100","Australia",251562,55,NaN,NaN,NaN,228294,255674,247306,290816,287973,NaN,NaN,657842,926241,1013444,1336176,2538904,2798597,3562230,2754026,2120687,2157953,2651509,2218343,2503722,1436099,1633206,1664480,1861072,1879078,1906935,2037416,2274562,2438873,2586155,2838329,3389674,3530854,4646342',
+
                       )
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
@@ -967,31 +978,57 @@ class TestFunctions(unittest.TestCase):
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'USA', 'India'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'USA', 'Canada'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'USA', 'Japan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'USA', 'Afghanistan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'USA', 'Australia'))
 
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'UK', 'USA'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'UK', 'India'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'UK', 'Canada'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'UK', 'Japan'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'UK', 'Afghanistan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'UK', 'Australia'))
 
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'India', 'USA'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'India', 'UK'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'India', 'Canada'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'India', 'Japan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'India', 'Afghanistan'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'India', 'Australia'))
 
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'USA'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'UK'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'India'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'Japan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'Afghanistan'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Canada', 'Australia'))
 
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'USA'))
         self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'UK'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'India'))
         self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'Canada'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'Afghanistan'))
+        self.assertEquals(3, count_hops(d, test_extension_def, {}, 1963, 'Japan', 'Australia'))
 
-        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'USA'))
-        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'UK'))
-        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'India'))
-        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'Canada'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'USA'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'UK'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'India'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'Canada'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'Japan'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Afghanistan', 'Australia'))
+
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'USA'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'UK'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'India'))
+        self.assertEquals(2, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'Canada'))
+        self.assertEquals(1, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'Afghanistan'))
+        self.assertEquals(3, count_hops(d, test_extension_def, {}, 1963, 'Australia', 'Japan'))
+
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'USA'))
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'UK'))
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'India'))
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'Canada'))
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'Afghanistan'))
+        self.assertEquals(INFINITE_HOPS, count_hops(d, test_extension_def, {}, 1963, 'Chad', 'Australia'))
 
 
 @memoize
