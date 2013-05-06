@@ -2,6 +2,7 @@ from project.config import WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.link_prediction.link import percentage_of_new_edges_over_time, percentage_of_edge_sign_changes_over_time, hops_count_before_edge_vs_count, inf_scale_adjust, count_of_bridge_configs
+from project.util import array_as_matlab_row
 
 
 def edge_proportion_over_time(data, definition, def_args, function, look_back_durations):
@@ -36,10 +37,7 @@ def number_of_hops_before_forming_edge(data, definition, def_args, year, look_ba
 
 
 def bridge_type_before_edge_formation(data, definition, def_args, year, look_back_durations):
-    def array_as_matrix_form(arr):
-        return str(arr).replace("[", "").replace("]", "").replace(",", "")
-
-    print "y=[%s];" % (';'.join([array_as_matrix_form(
+    print "y=[%s];" % (';'.join([array_as_matlab_row(
         [count_of_bridge_configs(data, definition, def_args, year, look_back_duration, bridge_type) for
          look_back_duration in look_back_durations]) for bridge_type in ["2+", "+-", "2-"]]))
     print "bar(y,'grouped');"

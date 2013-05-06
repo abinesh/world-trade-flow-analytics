@@ -39,6 +39,10 @@ def std_dev(s):
 def fraction(numerator, denominator, nan_value): return nan_value if denominator == 0 else numerator * 1.0 / denominator
 
 
+def array_as_matlab_row(arr):
+    return str(arr).replace("[", "").replace("]", "").replace(",", "")
+
+
 class Counts:
     def __init__(self):
         self.as_map_var = {0: 0}

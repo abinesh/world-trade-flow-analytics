@@ -10,7 +10,7 @@ from project.signed_networks.structural_balance.metrics.network import table1, t
 from project.signed_networks.structural_balance.metrics.triad import triad_type
 from project.signed_networks.structural_balance.metrics.vertex import degree_sum, degree_count, positive_edge_count, negative_edge_count
 from project.test.testutils import row_map, write_to_file
-from project.util import memoize, std_dev, Counts
+from project.util import memoize, std_dev, Counts, array_as_matlab_row
 from project.util import transpose
 
 
@@ -915,6 +915,9 @@ class TestFunctions(unittest.TestCase):
         updated_hops,inf_x_axis_value = inf_scale_adjust(hops)
         self.assertEquals(expected_updated_hops, updated_hops)
         self.assertEquals(inf_x_axis_value, 8)
+
+    def test_array_as_matlab_row(self):
+        self.assertEquals("1 2 3", array_as_matlab_row([1, 2, 3]))
 
     def test_counts(self):
         c = Counts()
