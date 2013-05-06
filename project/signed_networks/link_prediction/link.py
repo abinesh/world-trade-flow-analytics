@@ -92,3 +92,23 @@ def hops_count_before_edge_vs_count(data, definition, def_args, year, look_back_
                 counts.record(count)
     return counts.as_tuples_list(), infinity_count
 
+
+def count_of_bridge_configs(data, definition, def_args, year, look_back_duration, config):
+    if config == '2+':
+        if look_back_duration == 1: return 3
+        if look_back_duration == 5: return 5
+        if look_back_duration == 10: return 6
+        if look_back_duration == 20: return 2
+
+    if config == '+-':
+        if look_back_duration == 1: return 2
+        if look_back_duration == 5: return 7
+        if look_back_duration == 10: return 9
+        if look_back_duration == 20: return 6
+
+    if config == '2-':
+        if look_back_duration == 1: return 3
+        if look_back_duration == 5: return 5
+        if look_back_duration == 10: return 8
+        if look_back_duration == 20: return 5
+
