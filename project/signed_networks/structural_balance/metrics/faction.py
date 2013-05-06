@@ -44,6 +44,34 @@ def detect_factions_from_co_movements(positives_and_negatives, window_size, year
 
 
 @memoize
+def export_volume_matrix(data, year, countries=DEFAULT_COUNTRIES_LIST,
+                         normalize_row_or_column='column'):
+    def normalize(data_point, data_points):
+        very_small_value = 0.000001
+        mean = sum(data_points) * 1.0 / len(data_points)
+        stddev = std_dev(data_points)
+        if stddev == 0:
+            stddev = very_small_value if mean == 0 else mean * very_small_value
+        return (data_point - mean) / (3.0 * stddev)
+
+    def country_row_with_row_normalisation(C):
+        return []
+
+    def country_row_with_column_normalisation(C, countries):
+        def all_countries_export_data(C):
+            return [data.export_data(year, C, D) for D in countries]
+
+        return [normalize(data.export_data(year, C, D), all_countries_export_data(D)) for D in countries]
+
+    if normalize_row_or_column == 'row':
+        return [country_row_with_row_normalisation(C) for C in countries]
+    elif normalize_row_or_column == 'column':
+        return [country_row_with_column_normalisation(C, countries) for C in countries]
+    else:
+        assert False
+
+
+@memoize
 def positives_and_negatives_matrix(data, definition, def_args, years, countries=DEFAULT_COUNTRIES_LIST,
                                    normalize_row_or_column='column'):
     def flatten(multilist):
@@ -117,7 +145,7 @@ def positives_and_negatives_matrix_matlab(data, definition, def_args, years, cou
 
 
 def matrix_py_matlab_with_name(var_name, matrix, only_first_row=False):
-    return "%s=[%s]" % (var_name, matrix_py_to_matlab(matrix, only_first_row))
+    return "%s=[%s]\n" % (var_name, matrix_py_to_matlab(matrix, only_first_row))
 
 
 def concat_countries(countries, years):

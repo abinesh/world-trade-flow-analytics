@@ -5,7 +5,7 @@ from project.countries import falklands_war_countries, falkland_related_war_coun
 from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
-from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, matrix_py_matlab_with_name, DEFAULT_COUNTRIES_LIST, concat_countries, matrix_py_to_matlab
+from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, matrix_py_matlab_with_name, DEFAULT_COUNTRIES_LIST, concat_countries, matrix_py_to_matlab, export_volume_matrix
 from project.util import transpose
 
 
@@ -203,6 +203,23 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
     f.close()
 
 
+def matlab_code_for_rcm_ordered_corr_coef_for_export_volume_matrix(data, normalize_row_or_column):
+    f = open(OUT_DIR.RCM_MATRIC + 'top50export.m', 'w')
+    all_countries = DEFAULT_COUNTRIES_LIST
+    allowed_countries = data.top_countries_by_export_all_year(50)
+    # all_countries = ['USA', 'UK', 'Australia', 'Greece']
+    # allowed_countries = ['Australia', 'Greece']
+    for year in data.all_years:
+        pn_matrix = export_volume_matrix(data, year, all_countries, normalize_row_or_column)
+        f.write(matrix_py_matlab_with_name('exportvolume', pn_matrix))
+        data_matrix = corrcoef(pn_matrix)
+        for threshold in [0]:
+            for line in adjacency_rcm_ordered(data_matrix, threshold, [all_countries, allowed_countries],
+                                              '%s' % (year)):
+                f.write("%s\n" % line)
+    f.close()
+
+
 def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
     f = open(OUT_DIR.RCM_MATRIC + 'top50adj.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
@@ -224,4 +241,5 @@ def write_adjacency_matrices(data, definition, def_args, countries_list=DEFAULT_
 # write_adjacency_matrices(data, definition, def_args)
 # matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
 # matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args, 'column')
-matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
+# matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args)
+matlab_code_for_rcm_ordered_corr_coef_for_export_volume_matrix(data, 'column')
