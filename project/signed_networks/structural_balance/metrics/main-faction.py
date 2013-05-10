@@ -6,7 +6,6 @@ from project.export_data.exportdata import ExportData
 from project.signed_networks.definitions import definition_C3, args_for_definition_C
 from project.signed_networks.structural_balance.metrics.config import OUT_DIR
 from project.signed_networks.structural_balance.metrics.faction import positives_and_negatives_matrix_matlab, adjacency_matrix_matlab, positives_and_negatives_matrix, adjacency_matrix, adjacency_matrix_row, matrix_py_matlab_with_name, DEFAULT_COUNTRIES_LIST, concat_countries, matrix_py_to_matlab, export_volume_matrix
-from project.util import transpose
 
 
 def detect_community(correlation, threshold):
@@ -182,9 +181,9 @@ def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition,
 
 def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data, definition, def_args,
                                                                            normalize_row_or_column):
-    f = open(OUT_DIR.RCM_MATRIC + 'top50pn.m', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'iraniraqpn.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
-    allowed_countries = data.top_countries_by_export_all_year(50)
+    allowed_countries = iran_iraq_countries
     # all_countries = ['USA', 'UK', 'Australia', 'Greece']
     # allowed_countries = ['Australia', 'Greece']
     window_size = 5
@@ -204,9 +203,9 @@ def matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix(data,
 
 
 def matlab_code_for_rcm_ordered_corr_coef_for_export_volume_matrix(data, normalize_row_or_column):
-    f = open(OUT_DIR.RCM_MATRIC + 'top50export.m', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'iraniraqexport.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
-    allowed_countries = data.top_countries_by_export_all_year(50)
+    allowed_countries = iran_iraq_countries
     # all_countries = ['USA', 'UK', 'Australia', 'Greece']
     # allowed_countries = ['Australia', 'Greece']
     for year in data.all_years:
@@ -221,9 +220,9 @@ def matlab_code_for_rcm_ordered_corr_coef_for_export_volume_matrix(data, normali
 
 
 def matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix(data, definition, def_args):
-    f = open(OUT_DIR.RCM_MATRIC + 'top50adj.m', 'w')
+    f = open(OUT_DIR.RCM_MATRIC + 'iraniraqadj.m', 'w')
     all_countries = DEFAULT_COUNTRIES_LIST
-    allowed_countries = data.top_countries_by_export_all_year(50)
+    allowed_countries = iran_iraq_countries
     for year in data.all_years:
         data_matrix = adjacency_matrix(data, definition, def_args, year, all_countries)
         for line in adjacency_rcm_ordered(data_matrix, 0, [all_countries, allowed_countries], '%s' % year):
