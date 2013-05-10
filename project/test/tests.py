@@ -1083,9 +1083,13 @@ class TestFunctions(unittest.TestCase):
         d = ExportData()
         d.load_file(f.name, should_read_world_datapoints=True)
 
-        self.assertEquals(1, count_of_bridge_configs(d, test_extension_def, {}, 1964, 1, '2+', is_new_edge))
-        self.assertEquals(3, count_of_bridge_configs(d, test_extension_def, {}, 1964, 1, '+-', is_new_edge))
-        self.assertEquals(1, count_of_bridge_configs(d, test_extension_def, {}, 1964, 1, '2-', is_new_edge))
+        y = 1964
+        self.assertEquals(0, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '2+', is_new_edge, POSITIVE_LINK))
+        self.assertEquals(0, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '+-', is_new_edge, POSITIVE_LINK))
+        self.assertEquals(0, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '2-', is_new_edge, POSITIVE_LINK))
+        self.assertEquals(1, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '2+', is_new_edge, NEGATIVE_LINK))
+        self.assertEquals(3, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '+-', is_new_edge, NEGATIVE_LINK))
+        self.assertEquals(1, count_of_bridge_configs(d, test_extension_def, {}, y, 1, '2-', is_new_edge, NEGATIVE_LINK))
 
 
 @memoize

@@ -118,19 +118,21 @@ def count_of_bridge_configs_between(data, definition, def_args, year, A, B):
 
 
 @memoize
-def _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year, edge_selection):
+def _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year, edge_selection, edge_sign):
     counts = {'2+': 0, '+-': 0, '2-': 0}
     for (A, B) in combinations(data.countries(), 2):
         if edge_selection(data, definition, def_args, year, A, B, look_back_duration):
-            (twoPlus, plusMinus, twoMinus) = count_of_bridge_configs_between(data, definition, def_args,
-                                                                             year - look_back_duration, A, B)
-            counts['2+'] += twoPlus
-            counts['+-'] += plusMinus
-            counts['2-'] += twoMinus
+            if definition(data, year, A, B, def_args) == edge_sign:
+                (twoPlus, plusMinus, twoMinus) = count_of_bridge_configs_between(data, definition, def_args,
+                                                                                 year - look_back_duration, A, B)
+                counts['2+'] += twoPlus
+                counts['+-'] += plusMinus
+                counts['2-'] += twoMinus
     return counts
 
 
-def count_of_bridge_configs(data, definition, def_args, year, look_back_duration, config, edge_selection):
-    counts = _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year, edge_selection)
+def count_of_bridge_configs(data, definition, def_args, year, look_back_duration, config, edge_selection, edge_sign):
+    counts = _memoize_count_of_bridge_configs(data, def_args, definition, look_back_duration, year, edge_selection,
+                                              edge_sign)
     return counts[config]
 
