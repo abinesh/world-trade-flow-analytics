@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/dataset/wtf-ordered" />
+      <excludeFolder url="file://$MODULE_DIR$/pip" />
+      <excludeFolder url="file://$MODULE_DIR$/project/signed_network.structural_balance/out" />
+      <excludeFolder url="file://$MODULE_DIR$/project/signed_network.structural_balance/plots/out" />
+      <excludeFolder url="file://$MODULE_DIR$/project/signed_networks/structural_balance/metrics/out" />
+      <excludeFolder url="file://$MODULE_DIR$/project/signed_networks/structural_balance/plots/out" />
+      <excludeFolder url="file://$MODULE_DIR$/project/temporal_link_stability/matlab/in" />
+      <excludeFolder url="file://$MODULE_DIR$/project/temporal_link_stability/matlab/in/wtf" />
+      <excludeFolder url="file://$MODULE_DIR$/project/temporal_link_stability/matlab/out" />
+      <excludeFolder url="file://$MODULE_DIR$/project/traids_vs_degree_plot/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+

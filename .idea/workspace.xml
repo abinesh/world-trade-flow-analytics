@@ -1,0 +1,2399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d3037965-7ca1-48a7-9d82-3a2ed584730c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/world-trade-flow-analytics.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/main-def_c3.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C3.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/other.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/sass_stdlib.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/test/tests.py" afterPath="$PROJECT_DIR$/project/test/tests.py" />
+    </list>
+    <list id="d49034df-6bcc-4f8e-8b35-fc192640bd5b" name="Don't checkin" comment="Don't checkin" />
+    <ignored path="world-trade-flow-analytics.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1370241776905" ignored="false" />
+    <file path="/main.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1362994064418" ignored="false" />
+    <file path="/tests.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1368654200343" ignored="false" />
+    <file path="/vertex.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364233417875" ignored="false" />
+    <file path="/main-vertex.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364233043855" ignored="false" />
+    <file path="/triad.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364026597825" ignored="false" />
+    <file path="/main-triad.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1366263420806" ignored="false" />
+    <file path="/config.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1366089443785" ignored="false" />
+    <file path="/def_C3_vertex case studies.txt" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1362988201844" ignored="false" />
+    <file path="/main-network.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1366237277390" ignored="false" />
+    <file path="/main-negatives-vs-positives.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1362994706350" ignored="false" />
+    <file path="/main-edge.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364023091795" ignored="false" />
+    <file path="/network.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1366237175689" ignored="false" />
+    <file path="$PROJECT_DIR$/../../cs685/class project/memcached/t1/tests.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1363249299961" ignored="false" />
+    <file path="$PROJECT_DIR$/../../cs685/class project/memcached/t1/lib.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1363249022651" ignored="false" />
+    <file path="/faction.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367826776080" ignored="false" />
+    <file path="/a.dummy" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367803428130" ignored="false" />
+    <file path="/fragment.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367481474775" ignored="false" />
+    <file path="/main-faction.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367866648834" ignored="false" />
+    <file path="/edge.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364022367246" ignored="false" />
+    <file path="/main_country_index.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1364369688381" ignored="false" />
+    <file path="/countries.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367866414102" ignored="false" />
+    <file path="/exportdata.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367138813567" ignored="false" />
+    <file path="/util.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367643135781" ignored="false" />
+    <file path="/__init__.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1365669990274" ignored="false" />
+    <file path="/background_metrics.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1368226433771" ignored="false" />
+    <file path="/link.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1368654351019" ignored="false" />
+    <file path="/first-data-point.txt" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367388586659" ignored="false" />
+    <file path="/*.regexp" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367810918618" ignored="false" />
+    <file path="/*.txt" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1367810921242" ignored="false" />
+    <file path="/main-definition_C3.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1370247237939" ignored="false" />
+    <file path="/main-definition_C.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1370246740868" ignored="false" />
+    <file path="/main-def_c3.py" changelist="d3037965-7ca1-48a7-9d82-3a2ed584730c" time="1370247909414" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="main-definition_C.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="0" selection-start="3291" selection-end="3291" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main-definition_C3.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="53" selection-start="0" selection-end="551" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main-def_c3.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/main-def_c3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.30746704">
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exportdata.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/export_data/exportdata.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="65" selection-start="38" selection-end="67" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/db/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="18" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/project/export_data/exportdata.py" />
+        <option value="$PROJECT_DIR$/project/traids_vs_degree_plot/matrix-helloworld.py" />
+        <option value="$PROJECT_DIR$/project/util.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/structural_balance/metrics/faction.py" />
+        <option value="$PROJECT_DIR$/project/data/top50-by-export.txt" />
+        <option value="$PROJECT_DIR$/project/data/first-data-point.txt" />
+        <option value="$PROJECT_DIR$/project/countries.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/structural_balance/metrics/main-faction.py" />
+        <option value="$PROJECT_DIR$/project/__init__.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/link_prediction/background_metrics.py" />
+        <option value="$PROJECT_DIR$/project/test/tests.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/link_prediction/link.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C.py" />
+        <option value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C3.py" />
+        <option value="$PROJECT_DIR$/project/main-def_c3.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="22" />
+    <option name="width" value="1440" />
+    <option name="height" value="829" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="world-trade-flow-analytics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="world-trade-flow-analytics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="world-trade-flow-analytics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="world-trade-flow-analytics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="world-trade-flow-analytics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="145" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="146" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="145" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cs599-newsql/projects/mem1/memcached" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="153" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="907" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="907" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="153" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="146" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FullScreen" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <PyConsoleSettings />
+    </option>
+    <option name="myDjangoConsoleState">
+      <PyConsoleSettings />
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/project/structural_balance/d3/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/project/signed_networks/structural_balance/metrics" />
+      <recent name="$PROJECT_DIR$/project/structural_balance/plots" />
+      <recent name="$PROJECT_DIR$/project/signed_networks" />
+      <recent name="$PROJECT_DIR$/project/structural_balance/plots/d3/example" />
+      <recent name="$PROJECT_DIR$/project" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main-def_c3">
+    <configuration default="false" name="background_metrics" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project/signed_networks/link_prediction" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/signed_networks/link_prediction/background_metrics.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Nosetest TestFunctions.test_definition_c3" type="tests" factoryName="Nosetests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/test/tests.py" />
+      <option name="CLASS_NAME" value="TestFunctions" />
+      <option name="METHOD_NAME" value="test_definition_c3" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main-definition_C3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C3.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main-definition_C" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main-def_c3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project/main-def_c3.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="world-trade-flow-analytics" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.background_metrics" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetest TestFunctions.test_definition_c3" />
+      <item index="2" class="java.lang.String" itemvalue="Python.main-definition_C3" />
+      <item index="3" class="java.lang.String" itemvalue="Python.main-definition_C" />
+      <item index="4" class="java.lang.String" itemvalue="Python.main-def_c3" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.main-def_c3" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main-definition_C3" />
+        <item index="2" class="java.lang.String" itemvalue="Python.main-definition_C" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetest TestFunctions.test_definition_c3" />
+        <item index="4" class="java.lang.String" itemvalue="Python.background_metrics" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3037965-7ca1-48a7-9d82-3a2ed584730c" name="Default" comment="updated .gitignore" />
+      <changelist id="d49034df-6bcc-4f8e-8b35-fc192640bd5b" name="Don't checkin" comment="" />
+      <created>1352678932577</created>
+      <updated>1352678932577</updated>
+    </task>
+    <task id="LOCAL-00001" summary="updated .gitignore">
+      <created>1352745481405</created>
+      <updated>1352745481405</updated>
+    </task>
+    <task id="LOCAL-00002" summary="moved countries.py out for reusing between modules">
+      <created>1352745711798</created>
+      <updated>1352745711798</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactored; generated matlab code to generate linear fit plot">
+      <created>1352758086179</created>
+      <updated>1352758086179</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed file path">
+      <created>1352759281285</created>
+      <updated>1352759281285</updated>
+    </task>
+    <task id="LOCAL-00005" summary="updated file name">
+      <created>1352759716496</created>
+      <updated>1352759716496</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated graph type so that matlab does not swallow a few points">
+      <created>1352760804103</created>
+      <updated>1352760804103</updated>
+    </task>
+    <task id="LOCAL-00007" summary="linear and quad fit graphs">
+      <created>1352761317427</created>
+      <updated>1352761317427</updated>
+    </task>
+    <task id="LOCAL-00008" summary="writing generated matlab code to a file, updated single graph matlab code">
+      <created>1352762647895</created>
+      <updated>1352762647895</updated>
+    </task>
+    <task id="LOCAL-00009" summary="writing generated matlab code to a file, updated single graph matlab code">
+      <created>1352762972852</created>
+      <updated>1352762972852</updated>
+    </task>
+    <task id="LOCAL-00010" summary="using a better file format interms of output file size">
+      <created>1352763617975</created>
+      <updated>1352763617975</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixed single graph generation">
+      <created>1352763849836</created>
+      <updated>1352763849836</updated>
+    </task>
+    <task id="LOCAL-00012" summary="python now generates a matlab code that uses forloop and two input files to generate all the graphs">
+      <created>1352948652819</created>
+      <updated>1352948652819</updated>
+    </task>
+    <task id="LOCAL-00013" summary="python now generates a matlab code that uses forloop and two input files to generate all the graphs">
+      <created>1352948694520</created>
+      <updated>1352948694520</updated>
+    </task>
+    <task id="LOCAL-00014" summary="grouping graphs into its own country folder">
+      <created>1352949504958</created>
+      <updated>1352949504958</updated>
+    </task>
+    <task id="LOCAL-00015" summary="grouping graphs into its own country folder">
+      <created>1352949520733</created>
+      <updated>1352949520733</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Including world as a separate country. matlab generates graphs in each country's folder">
+      <created>1353025450717</created>
+      <updated>1353025450717</updated>
+    </task>
+    <task id="LOCAL-00017" summary="compute-stddev.m created">
+      <created>1353026734919</created>
+      <updated>1353026734919</updated>
+    </task>
+    <task id="LOCAL-00018" summary="r2-and-slopes.txt file stores R squared and slope of linear regression for each country pair export data">
+      <created>1353053431935</created>
+      <updated>1353053431935</updated>
+    </task>
+    <task id="LOCAL-00019" summary="created regression_of_trade_data.py">
+      <created>1353054532952</created>
+      <updated>1353054532952</updated>
+    </task>
+    <task id="LOCAL-00020" summary="1.moved common functions to util&#10;2. moved read_file to load_export_data&#10;3. Created script that prints &quot;slope of linear fit&quot; and &quot;export quantity in the year 2000&quot; for each country pair for which trade relationship existed between 1963 and 2000">
+      <created>1353087796546</created>
+      <updated>1353087796547</updated>
+    </task>
+    <task id="LOCAL-00021" summary="writing slope-vs-export to files">
+      <created>1353088153032</created>
+      <updated>1353088153032</updated>
+    </task>
+    <task id="LOCAL-00022" summary="1. writing all countries list into a file&#10;2. Parameterized list of years for which export data needs to be loaded&#10;">
+      <created>1353088442967</created>
+      <updated>1353088442967</updated>
+    </task>
+    <task id="LOCAL-00023" summary="generating graph plotting matlab code">
+      <created>1353090843524</created>
+      <updated>1353090843524</updated>
+    </task>
+    <task id="LOCAL-00024" summary="generating graph plotting matlab code">
+      <created>1353090900822</created>
+      <updated>1353090900823</updated>
+    </task>
+    <task id="LOCAL-00025" summary="using log to base 1.1 scale for plotting export data to make slopes comparable">
+      <created>1353101163982</created>
+      <updated>1353101163982</updated>
+    </task>
+    <task id="LOCAL-00026" summary="natural log is sufficient; makes no difference actually">
+      <created>1353101400864</created>
+      <updated>1353101400864</updated>
+    </task>
+    <task id="LOCAL-00027" summary="should_include_world flag determines if world data is parsed or not">
+      <created>1353812856076</created>
+      <updated>1353812856076</updated>
+    </task>
+    <task id="LOCAL-00028" summary="1. Writing intermediate export data in terms of percentage of exports wrt to world export&#10;2. should_include_world flag determines if world data is parsed or not">
+      <created>1353812923414</created>
+      <updated>1353812923414</updated>
+    </task>
+    <task id="LOCAL-00029" summary="1. Writing intermediate files wrt percent in compute-stddev.m&#10;2. Created Readme that lists steps to be followed to generate different graphs">
+      <created>1353815315492</created>
+      <updated>1353815315492</updated>
+    </task>
+    <task id="LOCAL-00030" summary="1. compute-stddev.m does not use log scale to determine slope&#10;2. Including World as importer in regression_of_trade_data.py&#10;3. No logical change in export_in_2000_vs_slope_of_linear_fit.py. &#10;4. Updated readme">
+      <created>1353896235179</created>
+      <updated>1353896235179</updated>
+    </task>
+    <task id="LOCAL-00031" summary="A way of visualising diverging and closing trade difference. Linear fits for both way exports on same graph">
+      <created>1353912330660</created>
+      <updated>1353912330660</updated>
+    </task>
+    <task id="LOCAL-00032" summary="A way of visualising diverging and closing trade difference. Linear fits for both way exports on same graph">
+      <created>1353912451144</created>
+      <updated>1353912451144</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Including 5 year moving average in the plot of export overt time">
+      <created>1353913139568</created>
+      <updated>1353913139568</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Including 5 year moving average in the plot of export overt time">
+      <created>1353913160628</created>
+      <updated>1353913160628</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Storing data in db as this eliminates the burden of rewriting application code whenever different view of data is needed[1].&#10; &#10; 1. http://dl.acm.org/citation.cfm?id=1364797 &#10;&quot;Relational databases solved this problem in two ways&quot; &quot;Second, they used a declarative language to describe the data of interest in a particular query, rather than forcing the programmer to write a collection of function calls to fetch the data&quot; &quot;This transformation relieved programmers of the burden of rewriting application code whenever the database layout or organization changed.&quot;">
+      <created>1354179168525</created>
+      <updated>1354179168525</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Renamed WORLD_TRADE_FLOW_DATA_FILE to WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL.&#10;Data cleaning to remove duplicates of Yemen">
+      <created>1354181132590</created>
+      <updated>1354181132590</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Renamed WORLD_TRADE_FLOW_DATA_FILE to WORLD_TRADE_FLOW_DATA_FILE_ORIGINAL.&#10;Data cleaning to remove duplicates of Yemen">
+      <created>1354182183905</created>
+      <updated>1354182183905</updated>
+    </task>
+    <task id="LOCAL-00038" summary="updated readme">
+      <created>1354182191750</created>
+      <updated>1354182191750</updated>
+    </task>
+    <task id="LOCAL-00039" summary="added reading list">
+      <created>1354297510129</created>
+      <updated>1354297510129</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Started with structural balance">
+      <created>1354309345895</created>
+      <updated>1354309345895</updated>
+    </task>
+    <task id="LOCAL-00041" summary="D3 hello world">
+      <created>1354566516202</created>
+      <updated>1354566516202</updated>
+    </task>
+    <task id="LOCAL-00042" summary="D3 hello world">
+      <created>1354566627811</created>
+      <updated>1354566627811</updated>
+    </task>
+    <task id="LOCAL-00043" summary="generating paragraphs">
+      <created>1354570053914</created>
+      <updated>1354570053914</updated>
+    </task>
+    <task id="LOCAL-00044" summary="generating paragraphs">
+      <created>1354570083886</created>
+      <updated>1354570083886</updated>
+    </task>
+    <task id="LOCAL-00045" summary="histogram example">
+      <created>1354570474769</created>
+      <updated>1354570474769</updated>
+    </task>
+    <task id="LOCAL-00046" summary="histogram example">
+      <created>1354570527399</created>
+      <updated>1354570527399</updated>
+    </task>
+    <task id="LOCAL-00047" summary="svg circles example">
+      <created>1354570913499</created>
+      <updated>1354570913499</updated>
+    </task>
+    <task id="LOCAL-00048" summary="svg histogram example">
+      <created>1354571782547</created>
+      <updated>1354571782547</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Showing text inside svg">
+      <created>1354572296152</created>
+      <updated>1354572296152</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Showing text inside svg">
+      <created>1354572386952</created>
+      <updated>1354572386953</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Showing text inside svg">
+      <created>1354572401576</created>
+      <updated>1354572401576</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Using scales in scatter plot">
+      <created>1354573583016</created>
+      <updated>1354573583016</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Added padding so that scatter plot does not get cut off in the edges">
+      <created>1354574058014</created>
+      <updated>1354574058014</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Axes shown in scatter plot">
+      <created>1354574387492</created>
+      <updated>1354574387492</updated>
+    </task>
+    <task id="LOCAL-00055" summary="showing text conditionally">
+      <created>1354574502566</created>
+      <updated>1354574502566</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Modifying code from http://bl.ocks.org/1153292">
+      <created>1354576371840</created>
+      <updated>1354576371840</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Showing different factions">
+      <created>1354576999667</created>
+      <updated>1354576999667</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Showing different factions">
+      <created>1354577008134</created>
+      <updated>1354577008134</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Added a few country names">
+      <created>1354577285279</created>
+      <updated>1354577285279</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Some progress">
+      <created>1354578386877</created>
+      <updated>1354578386877</updated>
+    </task>
+    <task id="LOCAL-00061" summary="generating graph for 2000 country pairs in year 2000">
+      <created>1354578835992</created>
+      <updated>1354578835992</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Created a function to generate network graph data for structural balance">
+      <created>1354579579261</created>
+      <updated>1354579579261</updated>
+    </task>
+    <task id="LOCAL-00063" summary="First Set  of countries">
+      <created>1354580036196</created>
+      <updated>1354580036196</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Second Set  of countries">
+      <created>1354587207779</created>
+      <updated>1354587207779</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Updated style on graph">
+      <created>1354911673093</created>
+      <updated>1354911673093</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Updated readme with a query">
+      <created>1355447377565</created>
+      <updated>1355447377565</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Moved total_exports to export data">
+      <created>1355447716825</created>
+      <updated>1355447716825</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Refactored. Created ExportData class">
+      <created>1355448377667</created>
+      <updated>1355448377667</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Refactored. Created ExportData class">
+      <created>1355448549255</created>
+      <updated>1355448549255</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Refactored. Created ExportData class">
+      <created>1355448713645</created>
+      <updated>1355448713645</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Moved export_data as a separate module">
+      <created>1355448800911</created>
+      <updated>1355448800911</updated>
+    </task>
+    <task id="LOCAL-00072" summary="a_subset_of_countries moved to countries.py">
+      <created>1355449058195</created>
+      <updated>1355449058195</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Updated positive/negative link definition A">
+      <created>1355449178415</created>
+      <updated>1355449178415</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Created definitions.py for Positive/Negative links definitions">
+      <created>1355449357139</created>
+      <updated>1355449357139</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Updated suit to positive">
+      <created>1355449600720</created>
+      <updated>1355449600720</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Updated resolved to negative">
+      <created>1355450021313</created>
+      <updated>1355450021313</updated>
+    </task>
+    <task id="LOCAL-00077" summary="updated css styles">
+      <created>1355450148100</created>
+      <updated>1355450148100</updated>
+    </task>
+    <task id="LOCAL-00078" summary="updated css styles">
+      <created>1355450195174</created>
+      <updated>1355450195174</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Updated definition B">
+      <created>1355450858334</created>
+      <updated>1355450858334</updated>
+    </task>
+    <task id="LOCAL-00080" summary="updated css styles">
+      <created>1355450884612</created>
+      <updated>1355450884613</updated>
+    </task>
+    <task id="LOCAL-00081" summary="A bit of refactoring, polymorphism in link definitions">
+      <created>1355457780870</created>
+      <updated>1355457780870</updated>
+    </task>
+    <task id="LOCAL-00082" summary="definition_B completed with stub version of expected_export_range function">
+      <created>1355460154138</created>
+      <updated>1355460154138</updated>
+    </task>
+    <task id="LOCAL-00083" summary="stub version of expected_export_range function replaced with real one.&#10;Edge cases pending: Represent missing data point in ExportData, return (None,None) if 3 or more out of 5 export data is missing in sliding window">
+      <created>1355469595915</created>
+      <updated>1355469595916</updated>
+    </task>
+    <task id="LOCAL-00084" summary="missing_data_records_map is used in ExportData that denotes whether data is missing or not.">
+      <created>1355470846857</created>
+      <updated>1355470846858</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Trend not established when there are less than 3 meaningful points in given sliding window period">
+      <created>1355472721504</created>
+      <updated>1355472721504</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Not establishing trade_trend even if a single datapoint is missing">
+      <created>1355472982067</created>
+      <updated>1355472982068</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Updated definition_B with edge cases">
+      <created>1355474256192</created>
+      <updated>1355474256192</updated>
+    </task>
+    <task id="LOCAL-00088" summary="updated vocabulary for definition_B">
+      <created>1355474761002</created>
+      <updated>1355474761002</updated>
+    </task>
+    <task id="LOCAL-00089" summary="updated vocabulary for definition_B">
+      <created>1355474885454</created>
+      <updated>1355474885454</updated>
+    </task>
+    <task id="LOCAL-00090" summary="More granular trend types for better classification.">
+      <created>1355522019933</created>
+      <updated>1355522019933</updated>
+    </task>
+    <task id="LOCAL-00091" summary="More granular trend types for better classification.">
+      <created>1355522071106</created>
+      <updated>1355522071107</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Parameterized year ranges in ExportData. Not reading in all the data into memory anymore">
+      <created>1355522522004</created>
+      <updated>1355522522004</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Using percentage of exports rather than raw export quantity">
+      <created>1355523537378</created>
+      <updated>1355523537379</updated>
+    </task>
+    <task id="LOCAL-00094" summary="link type missing added in d3">
+      <created>1355525951006</created>
+      <updated>1355525951006</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Fixing bug. export_quantity was used instead of export_percentage for current year data point">
+      <created>1355526308673</created>
+      <updated>1355526308673</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Writing d3 html file directly from python&#10;">
+      <created>1355527172569</created>
+      <updated>1355527172570</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Updated definition_B&#10;Generating graphs for 1963 to 2000">
+      <created>1355531981543</created>
+      <updated>1355531981543</updated>
+    </task>
+    <task id="LOCAL-00098" summary="top 50 countries function">
+      <created>1356050311416</created>
+      <updated>1356050311416</updated>
+    </task>
+    <task id="LOCAL-00099" summary="top 50 countries function">
+      <created>1356051395579</created>
+      <updated>1356051395579</updated>
+    </task>
+    <task id="LOCAL-00100" summary="added d3.geom.js for offline viewing">
+      <created>1356652487281</created>
+      <updated>1356652487281</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Minor refactoring">
+      <created>1356652983112</created>
+      <updated>1356652983112</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Minor refactoring">
+      <created>1356654099355</created>
+      <updated>1356654099355</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Fixed bug that was introduced while refactoring. Missing data point implies absence of strong tie and false should be returned">
+      <created>1356678633486</created>
+      <updated>1356678633486</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Minor refactoring">
+      <created>1356684992752</created>
+      <updated>1356684992752</updated>
+    </task>
+    <task id="LOCAL-00105" summary="No. of positive links vs No. of negative links plot: Generating intermediate data for 2 years">
+      <created>1356691531708</created>
+      <updated>1356691531708</updated>
+    </task>
+    <task id="LOCAL-00106" summary="No. of positive links vs No. of negative links plot: Generating intermediate data for 2 years">
+      <created>1356692769338</created>
+      <updated>1356692769338</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Included matlab script, updated file_safe function">
+      <created>1356695121186</created>
+      <updated>1356695121186</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Included matlab script, updated file_safe function">
+      <created>1356835188244</created>
+      <updated>1356835188244</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Example adopted from http://bost.ocks.org/mike/nations">
+      <created>1356840925651</created>
+      <updated>1356840925651</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Example adopted from http://bost.ocks.org/mike/nations">
+      <created>1356841051934</created>
+      <updated>1356841051934</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Example adopted from http://bost.ocks.org/mike/nations">
+      <created>1356841162061</created>
+      <updated>1356841162061</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Example adopted from http://bost.ocks.org/mike/nations">
+      <created>1356841385516</created>
+      <updated>1356841385516</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: Generated json data">
+      <created>1356843277819</created>
+      <updated>1356843277819</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: Updated years range in d3 html">
+      <created>1356843982212</created>
+      <updated>1356843982212</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: Changed scale in d3">
+      <created>1356844817119</created>
+      <updated>1356844817119</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: Updated graph scales">
+      <created>1356918673578</created>
+      <updated>1356918673578</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Strucutral balance: Plots: config.py created">
+      <created>1356919263312</created>
+      <updated>1356919263312</updated>
+    </task>
+    <task id="LOCAL-00118" summary="export_data: Updated variable name">
+      <created>1356919481125</created>
+      <updated>1356919481132</updated>
+    </task>
+    <task id="LOCAL-00119" summary="exportdata: strongties.py: Created export_import_ratio method">
+      <created>1356921938994</created>
+      <updated>1356921938994</updated>
+    </task>
+    <task id="LOCAL-00120" summary="structural_balance : plots: relationship_types csv code done">
+      <created>1356921975244</created>
+      <updated>1356921975244</updated>
+    </task>
+    <task id="LOCAL-00122" summary="exportdata: strongties.py: Refactored matrix_for_year_method_B to accept any relationship_definition to generate the matrix">
+      <created>1356923947687</created>
+      <updated>1356923947688</updated>
+    </task>
+    <task id="LOCAL-00123" summary="structural_balance : plots: number_of_positive_traids per country done">
+      <created>1356929829082</created>
+      <updated>1356929829082</updated>
+    </task>
+    <task id="LOCAL-00124" summary="structural_balance : plots: number_of_positive_traids per country, consolidated_file written out">
+      <created>1356931591261</created>
+      <updated>1356931591261</updated>
+    </task>
+    <task id="LOCAL-00125" summary="structural_balance : plots: number_of_positive_traids per country, consolidated_file written out">
+      <created>1356933330451</created>
+      <updated>1356933330451</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Removed commented lines">
+      <created>1356933623802</created>
+      <updated>1356933623802</updated>
+    </task>
+    <task id="LOCAL-00127" summary="Removed commented lines">
+      <created>1356933632320</created>
+      <updated>1356933632320</updated>
+    </task>
+    <task id="LOCAL-00128" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: showing country names">
+      <created>1357595568524</created>
+      <updated>1357595568528</updated>
+    </task>
+    <task id="LOCAL-00129" summary="Temporal scatter plot in d3: Number of positive links vs number of negative links: showing country names">
+      <created>1357678231694</created>
+      <updated>1357678231694</updated>
+    </task>
+    <task id="LOCAL-00130" summary="structural_balance : network_graph: Weighted lengths, length based on export/import ratio now">
+      <created>1357758633055</created>
+      <updated>1357758633055</updated>
+    </task>
+    <task id="LOCAL-00131" summary="structural_balance : plots: Logging combinations of trends">
+      <created>1357758674660</created>
+      <updated>1357758674660</updated>
+    </task>
+    <task id="LOCAL-00132" summary="structural_balance : network_graph: Weighted lengths comments">
+      <created>1357758788191</created>
+      <updated>1357758788191</updated>
+    </task>
+    <task id="LOCAL-00133" summary="structural_balance : plots: Refactored logging combinations of trends">
+      <created>1357759395416</created>
+      <updated>1357759395416</updated>
+    </task>
+    <task id="LOCAL-00134" summary="structural_balance : Look for d3.js locally too, who would have thought we would have power failures and wifi would be cut off here">
+      <created>1357760159704</created>
+      <updated>1357760159704</updated>
+    </task>
+    <task id="LOCAL-00135" summary="structural_balance : Look for d3.js locally too, who would have thought we would have power failures and wifi would be cut off at ISI">
+      <created>1357782708577</created>
+      <updated>1357782708577</updated>
+    </task>
+    <task id="LOCAL-00136" summary="structural_balance : network graph: fixing NaN errors, showing only positive links">
+      <created>1357784957022</created>
+      <updated>1357784957022</updated>
+    </task>
+    <task id="LOCAL-00137" summary="structural_balance : network graph: Increased charge on negative side and decreased link length. better grouping of clusters">
+      <created>1357785481936</created>
+      <updated>1357785481936</updated>
+    </task>
+    <task id="LOCAL-00138" summary="structural_balance : network graph: Made slightly easier to switch on and off grouping">
+      <created>1357786125914</created>
+      <updated>1357786125914</updated>
+    </task>
+    <task id="LOCAL-00139" summary="structural_balance : network graph: Made html_header and html_footer as functions">
+      <created>1357786285995</created>
+      <updated>1357786285995</updated>
+    </task>
+    <task id="LOCAL-00140" summary="structural_balance : network graph: [Spike] Added cluster numbers for 1969 and 1999.">
+      <created>1357792083500</created>
+      <updated>1357792083500</updated>
+    </task>
+    <task id="LOCAL-00141" summary="structural_balance : network graph: [Spike] Added cluster numbers for 1969 and 1999.">
+      <created>1357792296120</created>
+      <updated>1357792296120</updated>
+    </task>
+    <task id="LOCAL-00142" summary="export_data: function export_data_inflation_adjusted written. Using random inflation percentages for now">
+      <created>1357794166343</created>
+      <updated>1357794166343</updated>
+    </task>
+    <task id="LOCAL-00143" summary="structural_balance : network graph: Updated charge, distance and intensity to show factions better&#10;http://stackoverflow.com/questions/13141124/d3js-how-to-gather-nodes-by-cluster-un-force-layout?rq=1">
+      <created>1357852303760</created>
+      <updated>1357852303760</updated>
+    </task>
+    <task id="LOCAL-00144" summary="export_data: Updated random inflation figures">
+      <created>1357852323371</created>
+      <updated>1357852323372</updated>
+    </task>
+    <task id="LOCAL-00145" summary="structural_balance : plots: New definitions, showing plots to reason about definition effectiveness">
+      <created>1358376112987</created>
+      <updated>1358376112987</updated>
+    </task>
+    <task id="LOCAL-00146" summary="export_data: Updated random inflation figures">
+      <created>1358376137694</created>
+      <updated>1358376137694</updated>
+    </task>
+    <task id="LOCAL-00147" summary="export_data: Removed unnecessary print statement">
+      <created>1358388863507</created>
+      <updated>1358388863507</updated>
+    </task>
+    <task id="LOCAL-00148" summary="structural_balance: updated readme with two more definitions">
+      <created>1358389632955</created>
+      <updated>1358389632955</updated>
+    </task>
+    <task id="LOCAL-00149" summary="structural_balance : plots: Pruning countries only after including ties in the positive links list">
+      <created>1358390455949</created>
+      <updated>1358390455949</updated>
+    </task>
+    <task id="LOCAL-00150" summary="structural_balance : plots: Pruning countries only after including ties in the positive links list">
+      <created>1358390663154</created>
+      <updated>1358390663154</updated>
+    </task>
+    <task id="LOCAL-00151" summary="structural_balance : plots: Extracted a few variables">
+      <created>1358390735931</created>
+      <updated>1358390735931</updated>
+    </task>
+    <task id="LOCAL-00152" summary="countries.py: country_pairs excludes world">
+      <created>1358391372003</created>
+      <updated>1358391372003</updated>
+    </task>
+    <task id="LOCAL-00153" summary="export_data.py: sorted_list_of_export_percentages function written">
+      <created>1358393347770</created>
+      <updated>1358393347770</updated>
+    </task>
+    <task id="LOCAL-00154" summary="structural_balance : plots: definition_D: print_graph_densities_for_different_thresholds">
+      <created>1358396174393</created>
+      <updated>1358396174393</updated>
+    </task>
+    <task id="LOCAL-00155" summary="structural_balance : plots: definition_D: updated definition_D to classify Missing or Negative based on whether the link is pruned before or after a positive link data point. Terribly inefficient, but good enough for prototype">
+      <created>1358403620707</created>
+      <updated>1358403620707</updated>
+    </task>
+    <task id="LOCAL-00156" summary="structural_balance : plots: definition_D: logging combinations of links of + and - that are merged to form undirected links">
+      <created>1358405843215</created>
+      <updated>1358405843215</updated>
+    </task>
+    <task id="LOCAL-00157" summary="structural_balance : plots: definition_C created">
+      <created>1358415250977</created>
+      <updated>1358415250977</updated>
+    </task>
+    <task id="LOCAL-00158" summary="structural_balance : plots: definition_C : pruning export quantity below 1000">
+      <created>1358457296260</created>
+      <updated>1358457296260</updated>
+    </task>
+    <task id="LOCAL-00159" summary="structural_balance : plots: definition_D : fixed bug, using float for percentages instead of integer">
+      <created>1358822277707</created>
+      <updated>1358822277707</updated>
+    </task>
+    <task id="LOCAL-00160" summary="structural_balance : plots: definition_C : varying min export threshold">
+      <created>1358822313031</created>
+      <updated>1358822313031</updated>
+    </task>
+    <task id="LOCAL-00161" summary="structural_balance : definitions: refactored">
+      <created>1358822498406</created>
+      <updated>1358822498406</updated>
+    </task>
+    <task id="LOCAL-00162" summary="structural_balance : plots: definition_C : Fixing bug&#10;1. 0 and Nan are considered as negative links instead of missing links.&#10;2. Rightly using total exports to prune links">
+      <created>1358823172111</created>
+      <updated>1358823172111</updated>
+    </task>
+    <task id="LOCAL-00163" summary="export_data: introduced memoization to speed up within a single run, could be refactored into a generic way of doing this">
+      <created>1358824634623</created>
+      <updated>1358824634623</updated>
+    </task>
+    <task id="LOCAL-00164" summary="export_data: moved first_positive_year method inside ExportData">
+      <created>1358826959696</created>
+      <updated>1358826959697</updated>
+    </task>
+    <task id="LOCAL-00165" summary="structural_balance : plots: definition_C : Considering more min-export-thresholds">
+      <created>1358826986271</created>
+      <updated>1358826986271</updated>
+    </task>
+    <task id="LOCAL-00166" summary="structural_balance : plots: definition_C : Temporal Nans used link sign. If Nan appears after first positive datapoint, link sign is negative else it is missing">
+      <created>1358827224203</created>
+      <updated>1358827224204</updated>
+    </task>
+    <task id="LOCAL-00167" summary="structural_balance : plots:  definition C and D: including 1988, 1990">
+      <created>1358838984793</created>
+      <updated>1358838984793</updated>
+    </task>
+    <task id="LOCAL-00168" summary="export_data: differentiating between Nan and missing data point">
+      <created>1358840432704</created>
+      <updated>1358840432704</updated>
+    </task>
+    <task id="LOCAL-00169" summary="structural_balance : plots: definition_C : if (A,B) pair doesn't show up in dataset file, it is considered missing point. Representing this as NO_LINK in definition_C">
+      <created>1358848201730</created>
+      <updated>1358848201730</updated>
+    </task>
+    <task id="LOCAL-00170" summary="structural_balance : plots: definitions: updated logging, passing in right threshold for defn_C for log statements">
+      <created>1358850330666</created>
+      <updated>1358850330666</updated>
+    </task>
+    <task id="LOCAL-00171" summary="structural_balance : plots: definitions: definition_C becomes def_C1, def_C2 variant documented">
+      <created>1358850770813</created>
+      <updated>1358850770813</updated>
+    </task>
+    <task id="LOCAL-00172" summary="structural_balance : plots: definitions: definition_C becomes def_C1, def_C2 variant documented">
+      <created>1358850814348</created>
+      <updated>1358850814348</updated>
+    </task>
+    <task id="LOCAL-00173" summary="structural_balance : plots: definitions: definition_C becomes def_C1, def_C2 variant documented">
+      <created>1358850838187</created>
+      <updated>1358850838188</updated>
+    </task>
+    <task id="LOCAL-00174" summary="structural_balance : plots: definitions: definition_C1 and definition_C2 implemented">
+      <created>1358882455562</created>
+      <updated>1358882455562</updated>
+    </task>
+    <task id="LOCAL-00175" summary="structural_balance : plots: definition_D: including tie-export values in top T percent exports">
+      <created>1358893173070</created>
+      <updated>1358893173070</updated>
+    </task>
+    <task id="LOCAL-00176" summary="structural_balance : plots: definition_D: minor refactoring">
+      <created>1358893404979</created>
+      <updated>1358893404979</updated>
+    </task>
+    <task id="LOCAL-00177" summary="export_data: data.countries() stores list of countries read in from data file">
+      <created>1358894704241</created>
+      <updated>1358894704241</updated>
+    </task>
+    <task id="LOCAL-00178" summary="export_data: updated data.countries to exclude 'World'">
+      <created>1358895795510</created>
+      <updated>1358895795510</updated>
+    </task>
+    <task id="LOCAL-00179" summary="export_data: renamed first_positive_year to first_trade_year">
+      <created>1358896482970</created>
+      <updated>1358896482970</updated>
+    </task>
+    <task id="LOCAL-00180" summary="Switchboard created">
+      <created>1358897909072</created>
+      <updated>1358897909072</updated>
+    </task>
+    <task id="LOCAL-00181" summary="exportdata: Fixed cache key for top_T_percent_exports&#10;Switchboard: Turned on memoization">
+      <created>1358898612883</created>
+      <updated>1358898612883</updated>
+    </task>
+    <task id="LOCAL-00182" summary="structural_balance : plots: definition_D: using the right code for first_postive_year">
+      <created>1358899767524</created>
+      <updated>1358899767524</updated>
+    </task>
+    <task id="LOCAL-00183" summary="exportdata: Using better memoization">
+      <created>1359173572523</created>
+      <updated>1359173572523</updated>
+    </task>
+    <task id="LOCAL-00184" summary="tests: helloworld test">
+      <created>1359173714410</created>
+      <updated>1359173714410</updated>
+    </task>
+    <task id="LOCAL-00185" summary="countries.py : using data.countries() instead of world_excluded_countries_list">
+      <created>1359253264581</created>
+      <updated>1359253264582</updated>
+    </task>
+    <task id="LOCAL-00186" summary="countries.py : using data.countries() instead of world_excluded_countries_list">
+      <created>1359253329074</created>
+      <updated>1359253329074</updated>
+    </task>
+    <task id="LOCAL-00187" summary="export_data.py: added a few comments">
+      <created>1359254388089</created>
+      <updated>1359254388089</updated>
+    </task>
+    <task id="LOCAL-00188" summary="export_data.py: added a few comments&#10;countries.py: minor refactoring">
+      <created>1359254710509</created>
+      <updated>1359254710509</updated>
+    </task>
+    <task id="LOCAL-00189" summary="export_data.py: minor refactoring, added a few comments&#10;countries.py: minor refactoring">
+      <created>1359254842857</created>
+      <updated>1359254842857</updated>
+    </task>
+    <task id="LOCAL-00190" summary="exportdata.py: test for _load_row">
+      <created>1359255784096</created>
+      <updated>1359255784096</updated>
+    </task>
+    <task id="LOCAL-00191" summary="exportdata.py: test for _load_row">
+      <created>1359255865968</created>
+      <updated>1359255865968</updated>
+    </task>
+    <task id="LOCAL-00192" summary="exportdata.py: test for _load_row">
+      <created>1359256015940</created>
+      <updated>1359256015940</updated>
+    </task>
+    <task id="LOCAL-00193" summary="export_data.py: renamed load_export_data to load_file. Wrote a basic test for it">
+      <created>1359257651951</created>
+      <updated>1359257651951</updated>
+    </task>
+    <task id="LOCAL-00194" summary="tests.py: refactored a bit">
+      <created>1359258322644</created>
+      <updated>1359258322644</updated>
+    </task>
+    <task id="LOCAL-00195" summary="tests.py: refactored a bit">
+      <created>1359258331075</created>
+      <updated>1359258331075</updated>
+    </task>
+    <task id="LOCAL-00196" summary="exportdata.py: test_exportdata_percentage">
+      <created>1359359706652</created>
+      <updated>1359359706652</updated>
+    </task>
+    <task id="LOCAL-00197" summary="exportdata.py: test_exportdata_total_exports_between_C1_andC2 written">
+      <created>1359407982261</created>
+      <updated>1359407982261</updated>
+    </task>
+    <task id="LOCAL-00198" summary="exportdata.py: renamed __data_exists to _is_nan">
+      <created>1359408764300</created>
+      <updated>1359408764300</updated>
+    </task>
+    <task id="LOCAL-00199" summary="exportdata.py: _trade_exists method created">
+      <created>1359409192209</created>
+      <updated>1359409192209</updated>
+    </task>
+    <task id="LOCAL-00200" summary="exportdata.py: _trade_exists method created">
+      <created>1359409217789</created>
+      <updated>1359409217789</updated>
+    </task>
+    <task id="LOCAL-00201" summary="exportdata.py: minor refactoring">
+      <created>1359409383102</created>
+      <updated>1359409383102</updated>
+    </task>
+    <task id="LOCAL-00202" summary="structural_balance : plots: definition_C1: beginning to write tests">
+      <created>1359410283951</created>
+      <updated>1359410283951</updated>
+    </task>
+    <task id="LOCAL-00203" summary="structural_balance : plots: definition_C1: beginning to write tests">
+      <created>1359410498034</created>
+      <updated>1359410498034</updated>
+    </task>
+    <task id="LOCAL-00204" summary="structural_balance : plots: definition_C1: a few more test cases">
+      <created>1359410863234</created>
+      <updated>1359410863234</updated>
+    </task>
+    <task id="LOCAL-00205" summary="exportdata.py: first_trade_year test">
+      <created>1359412895056</created>
+      <updated>1359412895056</updated>
+    </task>
+    <task id="LOCAL-00206" summary="exportdata.py: updated test for export_data and export_data_percentage">
+      <created>1359413773328</created>
+      <updated>1359413773328</updated>
+    </task>
+    <task id="LOCAL-00207" summary="exportdata.py: updated test for export_data and export_data_percentage">
+      <created>1359413967124</created>
+      <updated>1359413967124</updated>
+    </task>
+    <task id="LOCAL-00208" summary="exportdata.py: updated test for export_data and export_data_percentage">
+      <created>1359414413152</created>
+      <updated>1359414413153</updated>
+    </task>
+    <task id="LOCAL-00209" summary="structural_balance : plots: printing number of traid types">
+      <created>1359529938685</created>
+      <updated>1359529938685</updated>
+    </task>
+    <task id="LOCAL-00210" summary="structural_balance : plots: definition_C2: wrote tests">
+      <created>1359608386468</created>
+      <updated>1359608386468</updated>
+    </task>
+    <task id="LOCAL-00211" summary="structural_balance : plots: definition_D: wrote tests">
+      <created>1359611316788</created>
+      <updated>1359611316788</updated>
+    </task>
+    <task id="LOCAL-00212" summary="structural_balance : plots: definition_C and definition_D: for better comparison of density plots, using N=203 in all cases">
+      <created>1359612804582</created>
+      <updated>1359612804582</updated>
+    </task>
+    <task id="LOCAL-00213" summary="util: updated memoize to support functions that have dict as parameters">
+      <created>1359613339483</created>
+      <updated>1359613339483</updated>
+    </task>
+    <task id="LOCAL-00214" summary="structural_balance : plots: updated readme">
+      <created>1359616356213</created>
+      <updated>1359616356214</updated>
+    </task>
+    <task id="LOCAL-00215" summary="structural_balance : plots: fixed alignment in tests">
+      <created>1359622750273</created>
+      <updated>1359622750273</updated>
+    </task>
+    <task id="LOCAL-00216" summary="signed_networks: moved definitions.py from structural_balance to signed_networks">
+      <created>1359763240221</created>
+      <updated>1359763240221</updated>
+    </task>
+    <task id="LOCAL-00217" summary="signed_networks: Paper: beginning to implement tables computed in &quot;Signed Networks in Social Media&quot;(http://www.cs.cornell.edu/home/kleinber/chi10-signed.pdf) paper to compare if their findings hold true for our dataset">
+      <created>1359766009920</created>
+      <updated>1359766009920</updated>
+    </task>
+    <task id="LOCAL-00218" summary="signed_networks: Paper: table1: number_of_traids renamed to number_of_traids_for_a_country">
+      <created>1359766693823</created>
+      <updated>1359766693823</updated>
+    </task>
+    <task id="LOCAL-00219" summary="signed_networks: Paper: table1: number_of_traids function returns total number of traids in the network">
+      <created>1359771158912</created>
+      <updated>1359771158912</updated>
+    </task>
+    <task id="LOCAL-00220" summary="signed_networks: Paper: table1: number_of_traids function returns total number of traids in the network">
+      <created>1359771197224</created>
+      <updated>1359771197224</updated>
+    </task>
+    <task id="LOCAL-00221" summary="signed_networks: Paper: table1: updated tests">
+      <created>1359794422225</created>
+      <updated>1359794422225</updated>
+    </task>
+    <task id="LOCAL-00222" summary="signed_networks: Paper: table1: Fixed def_A traids count">
+      <created>1359795673201</created>
+      <updated>1359795673201</updated>
+    </task>
+    <task id="LOCAL-00223" summary="signed_networks: Paper: table2: table2 started">
+      <created>1359796766430</created>
+      <updated>1359796766430</updated>
+    </task>
+    <task id="LOCAL-00224" summary="signed_networks: Paper: table2: added p(Ti) column in table 2">
+      <created>1359797141348</created>
+      <updated>1359797141348</updated>
+    </task>
+    <task id="LOCAL-00225" summary="signed_networks: Paper: table2: Preparing to introduce random graph to determine which of the traids are overrepresented and underrepresented, not quite there yet.">
+      <created>1359800776057</created>
+      <updated>1359800776057</updated>
+    </task>
+    <task id="LOCAL-00226" summary="signed_networks: Paper: table2: Brute force randomization of a network">
+      <created>1359891579234</created>
+      <updated>1359891579234</updated>
+    </task>
+    <task id="LOCAL-00227" summary="signed_networks: Paper: table2: Randomization gives same link sign for (A,B) pair once assigned">
+      <created>1360013295904</created>
+      <updated>1360013295904</updated>
+    </task>
+    <task id="LOCAL-00228" summary="signed_networks: Paper: table2: Fixing distribution of random edges">
+      <created>1360014571334</created>
+      <updated>1360014571334</updated>
+    </task>
+    <task id="LOCAL-00229" summary="signed_networks: Paper: tables: pretty printing">
+      <created>1360091535163</created>
+      <updated>1360091535163</updated>
+    </task>
+    <task id="LOCAL-00230" summary="structural_balance : plots: definition_D: generating histogram for a few other countries">
+      <created>1360093780942</created>
+      <updated>1360093780942</updated>
+    </task>
+    <task id="LOCAL-00231" summary="structural_balance : plots: definition_D: export_data function call param updated">
+      <created>1360103117972</created>
+      <updated>1360103117972</updated>
+    </task>
+    <task id="LOCAL-00232" summary="structural_balance : plots: definition_D: printing text file of top countries list">
+      <created>1360568167837</created>
+      <updated>1360568167837</updated>
+    </task>
+    <task id="LOCAL-00233" summary="structural_balance : plots: definition_D: renamed a few functions">
+      <created>1360569425344</created>
+      <updated>1360569425344</updated>
+    </task>
+    <task id="LOCAL-00234" summary="structural_balance : plots: definition_C: refactoring">
+      <created>1360574526432</created>
+      <updated>1360574526433</updated>
+    </task>
+    <task id="LOCAL-00235" summary="structural_balance : plots: definition_C: refactoring">
+      <created>1360574617982</created>
+      <updated>1360574617983</updated>
+    </task>
+    <task id="LOCAL-00236" summary="structural_balance : plots: definition_C: def_C3 written">
+      <created>1360574950075</created>
+      <updated>1360574950075</updated>
+    </task>
+    <task id="LOCAL-00237" summary="structural_balance : plots: definition_C: def_C3 updated">
+      <created>1360618142223</created>
+      <updated>1360618142223</updated>
+    </task>
+    <task id="LOCAL-00238" summary="structural_balance : plots: definition_C: minor refactoring">
+      <created>1360741689145</created>
+      <updated>1360741689145</updated>
+    </task>
+    <task id="LOCAL-00239" summary="structural_balance : plots: definition_C: added mode(one-way or two-way) for def_C, logging traids combination">
+      <created>1360821112638</created>
+      <updated>1360821112638</updated>
+    </task>
+    <task id="LOCAL-00240" summary="structural_balance : plots: definition_D: refactoring">
+      <created>1361064900799</created>
+      <updated>1361064900800</updated>
+    </task>
+    <task id="LOCAL-00241" summary="exportdata: export_percentile_range method created">
+      <created>1361066924049</created>
+      <updated>1361066924049</updated>
+    </task>
+    <task id="LOCAL-00242" summary="structural_balance : plots: definition_D: writing out histogram as text">
+      <created>1361069574064</created>
+      <updated>1361069574064</updated>
+    </task>
+    <task id="LOCAL-00243" summary="structural_balance : plots: definition_C: def_C3 updated">
+      <created>1361069593145</created>
+      <updated>1361069593145</updated>
+    </task>
+    <task id="LOCAL-00244" summary="structural_balance : plots: definition_D: writing out histogram as text">
+      <created>1361069609989</created>
+      <updated>1361069609989</updated>
+    </task>
+    <task id="LOCAL-00245" summary="exportdata: export_percentile_range method test updated">
+      <created>1361069965372</created>
+      <updated>1361069965372</updated>
+    </task>
+    <task id="LOCAL-00246" summary="exportdata: top_T_percent_exports method: added another test case, refactored">
+      <created>1361137812563</created>
+      <updated>1361137812563</updated>
+    </task>
+    <task id="LOCAL-00247" summary="exportdata: export_percentile_range method updating test case and refactoring">
+      <created>1361138646608</created>
+      <updated>1361138646608</updated>
+    </task>
+    <task id="LOCAL-00248" summary="exportdata: export_percentile_range method updating test case and refactoring">
+      <created>1361140498632</created>
+      <updated>1361140498632</updated>
+    </task>
+    <task id="LOCAL-00249" summary="structural_balance : plots: definition_D: renamed log file names">
+      <created>1361141701591</created>
+      <updated>1361141701591</updated>
+    </task>
+    <task id="LOCAL-00250" summary="structural_balance : plots: definition_D: renamed log file names">
+      <created>1361142024439</created>
+      <updated>1361142024439</updated>
+    </task>
+    <task id="LOCAL-00251" summary="structural_balance : plots: definition_D: generating edgewise and countrywise histogram texts; minor refactoring">
+      <created>1361220471286</created>
+      <updated>1361220471286</updated>
+    </task>
+    <task id="LOCAL-00252" summary="structural_ balance: definitions: updated readme">
+      <created>1361308437718</created>
+      <updated>1361308437718</updated>
+    </task>
+    <task id="LOCAL-00253" summary="structural_balance : plots: definition_C: generating pairwise and traidwise configs for def_C2(def_C1 will look the same for USA,Iran,Iraq traid and USA,UK,Argentina traid as the only difference is pruning)">
+      <created>1361310997932</created>
+      <updated>1361310997932</updated>
+    </task>
+    <task id="LOCAL-00254" summary="structural_balance : plots: definition_B: minor refactoring">
+      <created>1361311385607</created>
+      <updated>1361311385607</updated>
+    </task>
+    <task id="LOCAL-00255" summary="signed_networks: Paper: tables: generating table1 and table 2 for defB,C1,C2,C3,D">
+      <created>1361315431685</created>
+      <updated>1361315431686</updated>
+    </task>
+    <task id="LOCAL-00256" summary="structural_balance : plots: all definitions: changes to print out relevant metrics for different definitions to compare them">
+      <created>1361758902859</created>
+      <updated>1361758902859</updated>
+    </task>
+    <task id="LOCAL-00257" summary="util: wrote std_dev">
+      <created>1361867632767</created>
+      <updated>1361867632767</updated>
+    </task>
+    <task id="LOCAL-00258" summary="signed_networks: Paper: table2: refactoring">
+      <created>1361988423621</created>
+      <updated>1361988423621</updated>
+    </task>
+    <task id="LOCAL-00259" summary="signed_networks: Paper: table2: refactoring">
+      <created>1361988436123</created>
+      <updated>1361988436123</updated>
+    </task>
+    <task id="LOCAL-00260" summary="signed_networks: Paper: table2: refactoring">
+      <created>1361988611931</created>
+      <updated>1361988611931</updated>
+    </task>
+    <task id="LOCAL-00261" summary="signed_networks: Paper: table2: running random sign assignment 5 times within table2">
+      <created>1361989351844</created>
+      <updated>1361989351844</updated>
+    </task>
+    <task id="LOCAL-00262" summary="signed_networks: Paper: table2: mean and standard deviation of random runs">
+      <created>1361989831456</created>
+      <updated>1361989831456</updated>
+    </task>
+    <task id="LOCAL-00263" summary="signed_networks: Paper: tables: updated main.py to print mean and std-dev column">
+      <created>1361990263201</created>
+      <updated>1361990263201</updated>
+    </task>
+    <task id="LOCAL-00264" summary="structural_balance : plots: definition_C: writing def_C3-nodes.txt for country wise analysis">
+      <created>1362001234423</created>
+      <updated>1362001234423</updated>
+    </task>
+    <task id="LOCAL-00265" summary="structural_balance : plots: definition_C: printing triangle type">
+      <created>1362184380279</created>
+      <updated>1362184380279</updated>
+    </task>
+    <task id="LOCAL-00266" summary="moved structural_balance to signed_networks">
+      <created>1362185188165</created>
+      <updated>1362185188165</updated>
+    </task>
+    <task id="LOCAL-00267" summary="signed_networks: structural_balance: metrics: network level">
+      <created>1362185503430</created>
+      <updated>1362185503430</updated>
+    </task>
+    <task id="LOCAL-00268" summary="signed_networks: structural_balance: metrics: network level">
+      <created>1362185612622</created>
+      <updated>1362185612622</updated>
+    </task>
+    <task id="LOCAL-00269" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: compute fraction method written">
+      <created>1362187066206</created>
+      <updated>1362187066206</updated>
+    </task>
+    <task id="LOCAL-00270" summary="tests.py: fixing compile error">
+      <created>1362187363018</created>
+      <updated>1362187363019</updated>
+    </task>
+    <task id="LOCAL-00271" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: compute fraction method uses a different map">
+      <created>1362189055352</created>
+      <updated>1362189055352</updated>
+    </task>
+    <task id="LOCAL-00272" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: compute_map method written">
+      <created>1362189472776</created>
+      <updated>1362189472776</updated>
+    </task>
+    <task id="LOCAL-00273" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: compute_map method written">
+      <created>1362189718644</created>
+      <updated>1362189718644</updated>
+    </task>
+    <task id="LOCAL-00274" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: fraction_of_embedded_positive_signs method written">
+      <created>1362189880269</created>
+      <updated>1362189880269</updated>
+    </task>
+    <task id="LOCAL-00275" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: fraction_of_embedded_positive_signs method written">
+      <created>1362189891614</created>
+      <updated>1362189891614</updated>
+    </task>
+    <task id="LOCAL-00276" summary="signed_networks: structural_balance: metrics: edge level: embeddedness: main procedure written">
+      <created>1362190223903</created>
+      <updated>1362190223903</updated>
+    </task>
+    <task id="LOCAL-00277" summary="signed_networks: structural_balance: metrics: RandomNetwork class created.">
+      <created>1362193683465</created>
+      <updated>1362193683465</updated>
+    </task>
+    <task id="LOCAL-00278" summary="signed_networks: structural_balance: metrics: edge: to-do added">
+      <created>1362194209021</created>
+      <updated>1362194209021</updated>
+    </task>
+    <task id="LOCAL-00279" summary="signed_networks: structural_balance: metrics: vertex">
+      <created>1362194447416</created>
+      <updated>1362194447416</updated>
+    </task>
+    <task id="LOCAL-00280" summary="signed_networks: structural_balance: metrics: edge: refactoring">
+      <created>1362275887944</created>
+      <updated>1362275887944</updated>
+    </task>
+    <task id="LOCAL-00281" summary="signed_networks: structural_balance: metrics: edge: refactoring">
+      <created>1362276058449</created>
+      <updated>1362276058449</updated>
+    </task>
+    <task id="LOCAL-00282" summary="signed_networks: structural_balance: metrics: edge: refactoring">
+      <created>1362276194811</created>
+      <updated>1362276194811</updated>
+    </task>
+    <task id="LOCAL-00283" summary="signed_networks: structural_balance: metrics: edge: traids_per_common_edge_count method completed">
+      <created>1362278025616</created>
+      <updated>1362278025616</updated>
+    </task>
+    <task id="LOCAL-00284" summary="signed_networks: structural_balance: metrics: edge: traids_per_common_edge_count main routine written">
+      <created>1362279008128</created>
+      <updated>1362279008128</updated>
+    </task>
+    <task id="LOCAL-00285" summary="signed_networks: structural_balance: metrics: edge: minor refactoring">
+      <created>1362280795352</created>
+      <updated>1362280795352</updated>
+    </task>
+    <task id="LOCAL-00286" summary="signed_networks: structural_balance: metrics: edge: removed to-do">
+      <created>1362381538903</created>
+      <updated>1362381538903</updated>
+    </task>
+    <task id="LOCAL-00287" summary="signed_networks: structural_balance: metrics: vertex: added test for degree_sum">
+      <created>1362386788068</created>
+      <updated>1362386788068</updated>
+    </task>
+    <task id="LOCAL-00288" summary="signed_networks: structural_balance: metrics: vertex: main method written; generates matlab code for plots">
+      <created>1362391109668</created>
+      <updated>1362391109668</updated>
+    </task>
+    <task id="LOCAL-00289" summary="signed_networks: structural_balance: metrics: vertex: degree_count written">
+      <created>1362511788319</created>
+      <updated>1362511788319</updated>
+    </task>
+    <task id="LOCAL-00290" summary="signed_networks: structural_balance: metrics: vertex: main method updated to include degree_count">
+      <created>1362511940147</created>
+      <updated>1362511940147</updated>
+    </task>
+    <task id="LOCAL-00291" summary="signed_networks: structural_balance: metrics: main: print_embeddedness_matlab_code method written">
+      <created>1362641521331</created>
+      <updated>1362641521331</updated>
+    </task>
+    <task id="LOCAL-00292" summary="signed_networks: structural_balance: metrics: main: embeddedness_vs_balanced_traids_over_time method written">
+      <created>1362644797602</created>
+      <updated>1362644797602</updated>
+    </task>
+    <task id="LOCAL-00293" summary="signed_networks: structural_balance: metrics: main: embeddedness_vs_individual_traids_over_time method written">
+      <created>1362686587987</created>
+      <updated>1362686587987</updated>
+    </task>
+    <task id="LOCAL-00294" summary="signed_networks: structural_balance: d3: fixed compile errors">
+      <created>1362729053174</created>
+      <updated>1362729053174</updated>
+    </task>
+    <task id="LOCAL-00295" summary="signed_networks: structural_balance: d3: using def_C3 with network plot">
+      <created>1362729431570</created>
+      <updated>1362729431570</updated>
+    </task>
+    <task id="LOCAL-00296" summary="signed_networks: structural_balance: d3: including positive and negative links in network graph">
+      <created>1362819036979</created>
+      <updated>1362819036979</updated>
+    </task>
+    <task id="LOCAL-00297" summary="signed_networks: structural_balance: metrics: vertex: graph includes more lines">
+      <created>1362821625276</created>
+      <updated>1362821625276</updated>
+    </task>
+    <task id="LOCAL-00298" summary="signed_networks: structural_balance: metrics: edge: renamed main file name">
+      <created>1362823272219</created>
+      <updated>1362823272219</updated>
+    </task>
+    <task id="LOCAL-00299" summary="signed_networks: structural_balance: metrics: triad: triad_type method written">
+      <created>1362823968424</created>
+      <updated>1362823968424</updated>
+    </task>
+    <task id="LOCAL-00300" summary="signed_networks: structural_balance: metrics: triad: main written">
+      <created>1362827134581</created>
+      <updated>1362827134581</updated>
+    </task>
+    <task id="LOCAL-00301" summary="signed_networks: structural_balance: metrics: triad: main written">
+      <created>1362828175184</created>
+      <updated>1362828175184</updated>
+    </task>
+    <task id="LOCAL-00302" summary="reformatting">
+      <created>1362985148461</created>
+      <updated>1362985148461</updated>
+    </task>
+    <task id="LOCAL-00303" summary="signed_networks: structural_balance: d3: edges are lines instead of arcs">
+      <created>1362990119857</created>
+      <updated>1362990119857</updated>
+    </task>
+    <task id="LOCAL-00304" summary="signed_networks: structural_balance: d3: fixing negative edge and positive edge weights">
+      <created>1362993777691</created>
+      <updated>1362993777691</updated>
+    </task>
+    <task id="LOCAL-00305" summary="signed_networks: structural_balance: metrics: network: main file added">
+      <created>1362993982255</created>
+      <updated>1362993982256</updated>
+    </task>
+    <task id="LOCAL-00306" summary="signed_networks: structural_balance: d3: temporal scatter plot: positives vs negatives plot uses def_C3(10,5000)">
+      <created>1362995306499</created>
+      <updated>1362995306499</updated>
+    </task>
+    <task id="LOCAL-00307" summary="signed_networks: structural_balance: generating plots of def_C3(10,1000)">
+      <created>1363129763776</created>
+      <updated>1363129763777</updated>
+    </task>
+    <task id="LOCAL-00308" summary="signed_networks: structural_balance: metrics: network: positive edge percentage over time">
+      <created>1363220844361</created>
+      <updated>1363220844361</updated>
+    </task>
+    <task id="LOCAL-00309" summary="signed_networks: structural_balance: metrics: network: positive edge percentage over time">
+      <created>1363221012899</created>
+      <updated>1363221012899</updated>
+    </task>
+    <task id="LOCAL-00310" summary="signed_networks: structural_balance: metrics: network: traid type percentage over time">
+      <created>1363221946218</created>
+      <updated>1363221946218</updated>
+    </task>
+    <task id="LOCAL-00311" summary="signed_networks: structural_balance: metrics: network: traid type percentage over time(fixing bug)">
+      <created>1363222940715</created>
+      <updated>1363222940715</updated>
+    </task>
+    <task id="LOCAL-00312" summary="signed_networks: structural_balance: metrics: vertex: generated plots for C3(10,1000)">
+      <created>1363222956763</created>
+      <updated>1363222956763</updated>
+    </task>
+    <task id="LOCAL-00313" summary="signed_networks: structural_balance: metrics: network: traids over time(storing plots in different files)">
+      <created>1363223102016</created>
+      <updated>1363223102016</updated>
+    </task>
+    <task id="LOCAL-00314" summary="signed_networks: structural_balance: metrics: vertex: method created">
+      <created>1363326470541</created>
+      <updated>1363326470541</updated>
+    </task>
+    <task id="LOCAL-00315" summary="signed_networks: structural_balance: metrics: vertex: function parameterized">
+      <created>1363627235147</created>
+      <updated>1363627235147</updated>
+    </task>
+    <task id="LOCAL-00316" summary="signed_networks: structural_balance: metrics: faction: beginning to write detect_factions_from_co_movements">
+      <created>1363628941785</created>
+      <updated>1363628941785</updated>
+    </task>
+    <task id="LOCAL-00317" summary="signed_networks: structural_balance: metrics: faction: more tests written">
+      <created>1363630680329</created>
+      <updated>1363630680330</updated>
+    </task>
+    <task id="LOCAL-00318" summary="signed_networks: structural_balance: metrics: faction: printing factions detected">
+      <created>1363635255600</created>
+      <updated>1363635255600</updated>
+    </task>
+    <task id="LOCAL-00319" summary="signed_networks: structural_balance: metrics: edge: splitting T1 and T2 into T1+, T1- and T2+,T2-">
+      <created>1364022475628</created>
+      <updated>1364022475628</updated>
+    </task>
+    <task id="LOCAL-00320" summary="signed_networks: structural_balance: metrics: edge: splitting T1 and T2 into T1+, T1- and T2+,T2-">
+      <created>1364024474862</created>
+      <updated>1364024474862</updated>
+    </task>
+    <task id="LOCAL-00321" summary="signed_networks: structural_balance: metrics: triad: function created">
+      <created>1364024784695</created>
+      <updated>1364024784695</updated>
+    </task>
+    <task id="LOCAL-00322" summary="signed_networks: structural_balance: metrics: triad: function created">
+      <created>1364024823549</created>
+      <updated>1364024823549</updated>
+    </task>
+    <task id="LOCAL-00323" summary="signed_networks: structural_balance: metrics: triad: traid transitions printed">
+      <created>1364028243113</created>
+      <updated>1364028243113</updated>
+    </task>
+    <task id="LOCAL-00324" summary="signed_networks: structural_balance: metrics: faction: falklands case study analysis">
+      <created>1364233258426</created>
+      <updated>1364233258426</updated>
+    </task>
+    <task id="LOCAL-00325" summary="signed_networks: structural_balance: metrics: faction: falklands case study analysis">
+      <created>1364233280022</created>
+      <updated>1364233280022</updated>
+    </task>
+    <task id="LOCAL-00326" summary="signed_networks: structural_balance: metrics: faction: falklands case study analysis">
+      <created>1364233758021</created>
+      <updated>1364233758021</updated>
+    </task>
+    <task id="LOCAL-00327" summary="signed_networks: structural_balance: metrics: faction: falklands case study analysis">
+      <created>1364234027791</created>
+      <updated>1364234027792</updated>
+    </task>
+    <task id="LOCAL-00328" summary="signed_networks: structural_balance: metrics: faction: falklands countries moved to countries.py">
+      <created>1364234744479</created>
+      <updated>1364234744479</updated>
+    </task>
+    <task id="LOCAL-00329" summary="signed_networks: structural_balance: metrics: faction: adjacency_matrix test written">
+      <created>1364237879969</created>
+      <updated>1364237879969</updated>
+    </task>
+    <task id="LOCAL-00330" summary="signed_networks: structural_balance: metrics: faction: positives_and_negatives_matrix test written">
+      <created>1364238323582</created>
+      <updated>1364238323583</updated>
+    </task>
+    <task id="LOCAL-00331" summary="signed_networks: structural_balance: metrics: faction: adjacency_matrix refactoring">
+      <created>1364250315254</created>
+      <updated>1364250315254</updated>
+    </task>
+    <task id="LOCAL-00332" summary="signed_networks: structural_balance: metrics: faction: adjacency_matrix refactoring">
+      <created>1364250535234</created>
+      <updated>1364250535234</updated>
+    </task>
+    <task id="LOCAL-00333" summary="signed_networks: structural_balance: metrics: faction: positives_and_negatives_matrix refactoring">
+      <created>1364251539477</created>
+      <updated>1364251539477</updated>
+    </task>
+    <task id="LOCAL-00334" summary="export_data: refactoring">
+      <created>1364251819161</created>
+      <updated>1364251819161</updated>
+    </task>
+    <task id="LOCAL-00335" summary="signed_networks: structural_balance: metrics: faction: positives_and_negatives_matrix_matlab refactoring">
+      <created>1364251987872</created>
+      <updated>1364251987872</updated>
+    </task>
+    <task id="LOCAL-00336" summary="signed_networks: structural_balance: metrics: faction: adjacency_matrix refactoring">
+      <created>1364252004402</created>
+      <updated>1364252004402</updated>
+    </task>
+    <task id="LOCAL-00337" summary="signed_networks: structural_balance: metrics: faction: main.py refactoring">
+      <created>1364252064175</created>
+      <updated>1364252064175</updated>
+    </task>
+    <task id="LOCAL-00338" summary="util: fixed matrix transpose method">
+      <created>1364253121524</created>
+      <updated>1364253121524</updated>
+    </task>
+    <task id="LOCAL-00339" summary="signed_networks: structural_balance: metrics: faction: main.py refactoring">
+      <created>1364253301432</created>
+      <updated>1364253301432</updated>
+    </task>
+    <task id="LOCAL-00340" summary="export_data: refactoring">
+      <created>1364255484706</created>
+      <updated>1364255484706</updated>
+    </task>
+    <task id="LOCAL-00341" summary="signed_networks: structural_balance: metrics: faction: matrix indices verified with countries.py list using falklands war case study in year 1982">
+      <created>1364256585574</created>
+      <updated>1364256585575</updated>
+    </task>
+    <task id="LOCAL-00342" summary="signed_networks: structural_balance: metrics: faction: detect_community function written">
+      <created>1364375341151</created>
+      <updated>1364375341151</updated>
+    </task>
+    <task id="LOCAL-00343" summary="signed_networks: structural_balance: metrics: faction: a bit of refactoring">
+      <created>1365402361611</created>
+      <updated>1365402361612</updated>
+    </task>
+    <task id="LOCAL-00344" summary="signed_networks: structural_balance: metrics: faction: correlation matrix">
+      <created>1365402453541</created>
+      <updated>1365402453542</updated>
+    </task>
+    <task id="LOCAL-00345" summary="signed_networks: structural_balance: metrics: faction: wrote correlation lists">
+      <created>1365403699000</created>
+      <updated>1365403699000</updated>
+    </task>
+    <task id="LOCAL-00346" summary="signed_networks: structural_balance: metrics: faction: reformat line">
+      <created>1365417524970</created>
+      <updated>1365417524970</updated>
+    </task>
+    <task id="LOCAL-00347" summary="signed_networks: structural_balance: metrics: faction: RCM matrix written">
+      <created>1365659198879</created>
+      <updated>1365659198879</updated>
+    </task>
+    <task id="LOCAL-00348" summary="signed_networks: structural_balance: metrics: traid: run lengths">
+      <created>1365670404886</created>
+      <updated>1365670404886</updated>
+    </task>
+    <task id="LOCAL-00349" summary="signed_networks: structural_balance: metrics: faction: case studies shown in heatmaps">
+      <created>1366011748906</created>
+      <updated>1366011748906</updated>
+    </task>
+    <task id="LOCAL-00350" summary="signed_networks: structural_balance: metrics: faction: case studies shown in heatmaps">
+      <created>1366013076791</created>
+      <updated>1366013076791</updated>
+    </task>
+    <task id="LOCAL-00351" summary="signed_networks: structural_balance: metrics: faction: country_only study started, code not complete">
+      <created>1366015263938</created>
+      <updated>1366015263938</updated>
+    </task>
+    <task id="LOCAL-00352" summary="signed_networks: structural_balance: metrics: traid: printing actual average traid_length">
+      <created>1366016574403</created>
+      <updated>1366016574403</updated>
+    </task>
+    <task id="LOCAL-00353" summary="signed_networks: structural_balance: metrics: triad: fixing avg. run length">
+      <created>1366057507395</created>
+      <updated>1366057507395</updated>
+    </task>
+    <task id="LOCAL-00354" summary="signed_networks: structural_balance: metrics: triad: fixing avg. run length">
+      <created>1366057994858</created>
+      <updated>1366057994858</updated>
+    </task>
+    <task id="LOCAL-00355" summary="signed_networks: structural_balance: metrics: reordered statements">
+      <created>1366090007153</created>
+      <updated>1366090007153</updated>
+    </task>
+    <task id="LOCAL-00356" summary="signed_networks: structural_balance: a few changes">
+      <created>1366237874421</created>
+      <updated>1366237874421</updated>
+    </task>
+    <task id="LOCAL-00357" summary="signed_networks: structural_balance: triad: fixed bug in run lengths">
+      <created>1366323111308</created>
+      <updated>1366323111308</updated>
+    </task>
+    <task id="LOCAL-00358" summary="signed_networks: structural_balance: faction: changes">
+      <created>1366495679223</created>
+      <updated>1366495679223</updated>
+    </task>
+    <task id="LOCAL-00359" summary="signed_networks: structural_balance: faction: refactored">
+      <created>1366495993452</created>
+      <updated>1366495993452</updated>
+    </task>
+    <task id="LOCAL-00360" summary="signed_networks: structural_balance: faction: showing heatmap ordered by rcm">
+      <created>1366498855141</created>
+      <updated>1366498855141</updated>
+    </task>
+    <task id="LOCAL-00361" summary="signed_networks: structural_balance: faction: showing heatmap ordered by rcm">
+      <created>1366502683057</created>
+      <updated>1366502683057</updated>
+    </task>
+    <task id="LOCAL-00362" summary="signed_networks: structural_balance: faction: matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix">
+      <created>1366508645304</created>
+      <updated>1366508645304</updated>
+    </task>
+    <task id="LOCAL-00363" summary="signed_networks: structural_balance: faction: matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix">
+      <created>1366511594593</created>
+      <updated>1366511594593</updated>
+    </task>
+    <task id="LOCAL-00364" summary="signed_networks: structural_balance: faction: matlab_code_for_rcm_ordered_corr_coef_for_sliding_window_degree_matrix, multiple thresholds">
+      <created>1366511813699</created>
+      <updated>1366511813699</updated>
+    </task>
+    <task id="LOCAL-00365" summary="signed_networks: structural_balance: faction: fixed bug">
+      <created>1366615566379</created>
+      <updated>1366615566379</updated>
+    </task>
+    <task id="LOCAL-00366" summary="signed_networks: structural_balance: faction: updated code to include pn_matrix">
+      <created>1366621037688</created>
+      <updated>1366621037688</updated>
+    </task>
+    <task id="LOCAL-00367" summary="signed_networks: structural_balance: faction: row normalisation of positive and negative degree count">
+      <created>1366938861508</created>
+      <updated>1366938861508</updated>
+    </task>
+    <task id="LOCAL-00368" summary="signed_networks: structural_balance: faction: row normalisation of positive and negative degree count">
+      <created>1366938955272</created>
+      <updated>1366938955272</updated>
+    </task>
+    <task id="LOCAL-00369" summary="signed_networks: structural_balance: faction: column normalisation of positive and negative degree count">
+      <created>1366952119396</created>
+      <updated>1366952119396</updated>
+    </task>
+    <task id="LOCAL-00370" summary="signed_networks: structural_balance: faction: column normalisation of positive and negative degree count">
+      <created>1366954207929</created>
+      <updated>1366954207929</updated>
+    </task>
+    <task id="LOCAL-00371" summary="signed_networks: structural_balance: faction: rcm matrix uses complete adjacency matrix but shows only top 50 countries">
+      <created>1367128088201</created>
+      <updated>1367128088201</updated>
+    </task>
+    <task id="LOCAL-00372" summary="signed_networks: structural_balance: faction: renamed variable name">
+      <created>1367130098235</created>
+      <updated>1367130098235</updated>
+    </task>
+    <task id="LOCAL-00373" summary="signed_networks: structural_balance: faction: refactoring">
+      <created>1367130616517</created>
+      <updated>1367130616517</updated>
+    </task>
+    <task id="LOCAL-00374" summary="signed_networks: structural_balance: faction: generating top-50pn row correlation matrix code">
+      <created>1367131093202</created>
+      <updated>1367131093202</updated>
+    </task>
+    <task id="LOCAL-00375" summary="signed_networks: structural_balance: faction: matlab_code_for_rcm_ordered_corr_coef_for_adjacency_matrix created">
+      <created>1367139392253</created>
+      <updated>1367139392253</updated>
+    </task>
+    <task id="LOCAL-00376" summary="signed_networks: structural_balance: faction: adjacency matrix cell value set to 1 if i==j">
+      <created>1367140015552</created>
+      <updated>1367140015552</updated>
+    </task>
+    <task id="LOCAL-00377" summary="signed_networks: structural_balance: faction: updated matlab code file names">
+      <created>1367141167578</created>
+      <updated>1367141167578</updated>
+    </task>
+    <task id="LOCAL-00378" summary="signed_networks: link_prediction: link.py: percentage_of_new_links written">
+      <created>1367370897931</created>
+      <updated>1367370897931</updated>
+    </task>
+    <task id="LOCAL-00379" summary="data: first_data_point.txt">
+      <created>1367388412775</created>
+      <updated>1367388412775</updated>
+    </task>
+    <task id="LOCAL-00380" summary="data: first_data_point.txt">
+      <created>1367388571296</created>
+      <updated>1367388571296</updated>
+    </task>
+    <task id="LOCAL-00381" summary="data: first_data_point.txt">
+      <created>1367388719355</created>
+      <updated>1367388719355</updated>
+    </task>
+    <task id="LOCAL-00382" summary="signed_networks: link_prediction: link.py: updated x and y axis labels">
+      <created>1367389979956</created>
+      <updated>1367389979956</updated>
+    </task>
+    <task id="LOCAL-00383" summary="signed_networks: link_prediction: link.py: look_back_duration coded in new_edge_over_time">
+      <created>1367390721692</created>
+      <updated>1367390721692</updated>
+    </task>
+    <task id="LOCAL-00384" summary="signed_networks: link_prediction: link.py: converted to a generic edge_proportion_over_time function">
+      <created>1367391194186</created>
+      <updated>1367391194186</updated>
+    </task>
+    <task id="LOCAL-00385" summary="signed_networks: link_prediction: link.py:  edge_sign_change_and_total_edges function written">
+      <created>1367391793507</created>
+      <updated>1367391793507</updated>
+    </task>
+    <task id="LOCAL-00386" summary="signed_networks: link_prediction: link.py: all curves in single plot">
+      <created>1367392244315</created>
+      <updated>1367392244315</updated>
+    </task>
+    <task id="LOCAL-00387" summary="signed_networks: link_prediction: link.py: updated axis labels">
+      <created>1367392561245</created>
+      <updated>1367392561245</updated>
+    </task>
+    <task id="LOCAL-00388" summary="signed_networks: link_prediction: link.py: wrote test and fixed bug">
+      <created>1367393014768</created>
+      <updated>1367393014769</updated>
+    </task>
+    <task id="LOCAL-00389" summary="signed_networks: link_prediction: link.py: wrote test and fixed bug">
+      <created>1367393149059</created>
+      <updated>1367393149059</updated>
+    </task>
+    <task id="LOCAL-00390" summary="signed_networks: link_prediction: link.py: template for number_of_hops_before_forming_edge written">
+      <created>1367395106760</created>
+      <updated>1367395106760</updated>
+    </task>
+    <task id="LOCAL-00391" summary="signed_networks: link_prediction: link.py: template for number_of_hops_before_forming_edge written">
+      <created>1367395153553</created>
+      <updated>1367395153553</updated>
+    </task>
+    <task id="LOCAL-00392" summary="signed_networks: link_prediction: link.py: template for number_of_hops_before_forming_edge written">
+      <created>1367397369233</created>
+      <updated>1367397369233</updated>
+    </task>
+    <task id="LOCAL-00393" summary="export_data: made all_countries private">
+      <created>1367397627371</created>
+      <updated>1367397627371</updated>
+    </task>
+    <task id="LOCAL-00394" summary="util: Counts class written">
+      <created>1367398088856</created>
+      <updated>1367398088856</updated>
+    </task>
+    <task id="LOCAL-00395" summary="util: Counts class updated">
+      <created>1367398966637</created>
+      <updated>1367398966637</updated>
+    </task>
+    <task id="LOCAL-00396" summary="signed_networks: link_prediction: link.py: hops_count_before_edge_vs_count updated">
+      <created>1367399249053</created>
+      <updated>1367399249053</updated>
+    </task>
+    <task id="LOCAL-00397" summary="signed_networks: link_prediction: link.py: count_hops written">
+      <created>1367475053954</created>
+      <updated>1367475053955</updated>
+    </task>
+    <task id="LOCAL-00398" summary="signed_networks: link_prediction: link.py: fixed bug in util.Counts">
+      <created>1367481575016</created>
+      <updated>1367481575016</updated>
+    </task>
+    <task id="LOCAL-00399" summary="signed_networks: link_prediction: link.py: util.Counts doesn't deal with infinite_hops value">
+      <created>1367483503110</created>
+      <updated>1367483503111</updated>
+    </task>
+    <task id="LOCAL-00400" summary="signed_networks: link_prediction: link.py: hops_count_before_edge_vs_count infinity is last value + 5 so that graph doesn't look bad">
+      <created>1367483939400</created>
+      <updated>1367483939401</updated>
+    </task>
+    <task id="LOCAL-00401" summary="signed_networks: link_prediction: link.py: memoizing matrix mult in hops_count_before_edge_vs_count">
+      <created>1367630466374</created>
+      <updated>1367630466374</updated>
+    </task>
+    <task id="LOCAL-00402" summary="signed_networks: link_prediction: link.py: inf_scale_adjust function written">
+      <created>1367639260742</created>
+      <updated>1367639260742</updated>
+    </task>
+    <task id="LOCAL-00403" summary="signed_networks: link_prediction: link.py: memoizing matrix mult in hops_count_before_edge_vs_count">
+      <created>1367639332196</created>
+      <updated>1367639332196</updated>
+    </task>
+    <task id="LOCAL-00404" summary="signed_networks: link_prediction: background_metrics.py: infinity value set in x axis">
+      <created>1367641940904</created>
+      <updated>1367641940904</updated>
+    </task>
+    <task id="LOCAL-00405" summary="utils.py: Counts: fixed an edge case when no counts are recorded">
+      <created>1367643624988</created>
+      <updated>1367643624988</updated>
+    </task>
+    <task id="LOCAL-00406" summary="signed_networks: link_prediction: link.py: count_hops tests updated">
+      <created>1367799612905</created>
+      <updated>1367799612905</updated>
+    </task>
+    <task id="LOCAL-00407" summary="signed_networks: link_prediction: list comprehension hell structure in place for bridge_type_before_edge_formation method.">
+      <created>1367803391048</created>
+      <updated>1367803391048</updated>
+    </task>
+    <task id="LOCAL-00408" summary="util.py: moved array_as_matlab_row to util">
+      <created>1367803589230</created>
+      <updated>1367803589230</updated>
+    </task>
+    <task id="LOCAL-00409" summary="signed_networks: link_prediction: bridge_type_before_edge_formation: count_of_bridge_configs function body written">
+      <created>1367807859021</created>
+      <updated>1367807859021</updated>
+    </task>
+    <task id="LOCAL-00410" summary="signed_networks: link_prediction: bridge_type_before_edge_formation: log scale">
+      <created>1367811914053</created>
+      <updated>1367811914053</updated>
+    </task>
+    <task id="LOCAL-00411" summary="signed_networks: link_prediction: bridge_type_before_edge_formation: minor refactoring">
+      <created>1367812848160</created>
+      <updated>1367812848161</updated>
+    </task>
+    <task id="LOCAL-00412" summary="signed_networks: link_prediction: background_metrics.py: count_of_bridge_configs takes edge_selection as parameter">
+      <created>1367813721527</created>
+      <updated>1367813721527</updated>
+    </task>
+    <task id="LOCAL-00413" summary="signed_networks: factions: export_data column normalization">
+      <created>1367828415666</created>
+      <updated>1367828415666</updated>
+    </task>
+    <task id="LOCAL-00414" summary="data: storing top 50 by export">
+      <created>1367866096599</created>
+      <updated>1367866096599</updated>
+    </task>
+    <task id="LOCAL-00415" summary="signed_networks: structural_balance: faction: iran-iraq exports">
+      <created>1368212977379</created>
+      <updated>1368212977379</updated>
+    </task>
+    <task id="LOCAL-00416" summary="signed_networks: structural_balance: faction: iran-iraq case study">
+      <created>1368212998127</created>
+      <updated>1368212998127</updated>
+    </task>
+    <task id="LOCAL-00417" summary="signed_networks: link_prediction: background_metrics.py: count_of_bridge_configs takes new_edge_sign also as parameter">
+      <created>1368226273177</created>
+      <updated>1368226273177</updated>
+    </task>
+    <option name="localTasksCounter" value="418" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="22" width="1440" height="829" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956153" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20731707" sideWeight="0.62447256" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49506348" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20731707" sideWeight="0.36568213" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32904148" sideWeight="0.500361" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37412095" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46262342" sideWeight="0.49458483" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5641749" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="signed_networks: link_prediction: background_metrics.py: count_of_bridge_configs takes new_edge_sign also as parameter" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: template for number_of_hops_before_forming_edge written" />
+    <MESSAGE value="export_data: made all_countries private" />
+    <MESSAGE value="util: Counts class written" />
+    <MESSAGE value="util: Counts class updated" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: hops_count_before_edge_vs_count updated" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: count_hops written" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: fixed bug in util.Counts" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: util.Counts doesn't deal with infinite_hops value" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: hops_count_before_edge_vs_count infinity is last value + 5 so that graph doesn't look bad" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: inf_scale_adjust function written" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: memoizing matrix mult in hops_count_before_edge_vs_count" />
+    <MESSAGE value="signed_networks: link_prediction: background_metrics.py: infinity value set in x axis" />
+    <MESSAGE value="utils.py: Counts: fixed an edge case when no counts are recorded" />
+    <MESSAGE value="signed_networks: link_prediction: link.py: count_hops tests updated" />
+    <MESSAGE value="signed_networks: link_prediction: list comprehension hell structure in place for bridge_type_before_edge_formation method." />
+    <MESSAGE value="util.py: moved array_as_matlab_row to util" />
+    <MESSAGE value="signed_networks: link_prediction: bridge_type_before_edge_formation: count_of_bridge_configs function body written" />
+    <MESSAGE value="signed_networks: link_prediction: bridge_type_before_edge_formation: log scale" />
+    <MESSAGE value="signed_networks: link_prediction: bridge_type_before_edge_formation: minor refactoring" />
+    <MESSAGE value="signed_networks: link_prediction: background_metrics.py: count_of_bridge_configs takes edge_selection as parameter" />
+    <MESSAGE value="signed_networks: factions: export_data column normalization" />
+    <MESSAGE value="data: storing top 50 by export" />
+    <MESSAGE value="signed_networks: structural_balance: faction: iran-iraq exports" />
+    <MESSAGE value="signed_networks: structural_balance: faction: iran-iraq case study" />
+    <MESSAGE value="signed_networks: link_prediction: background_metrics.py: count_of_bridge_configs takes new_edge_sign also as parameter" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="214" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/project/main_country_index.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/countries.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="279" column="26" selection-start="7402" selection-end="7402" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/metrics/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/metrics/main-network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="4" selection-start="650" selection-end="650" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/temporal_link_stability/regression_of_trade_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/traids_vs_degree_plot/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-negatives-vs-positives.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/db/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="18" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="0" selection-start="3291" selection-end="3291" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/signed_networks/structural_balance/plots/main-definition_C3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="53" selection-start="0" selection-end="551" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="65" selection-start="38" selection-end="67" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/export_data/exportdata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/main-def_c3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="531" selection-end="531" vertical-scroll-proportion="0.30746704">
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
